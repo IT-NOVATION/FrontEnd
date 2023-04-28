@@ -21,7 +21,7 @@ function Modal() {
             <S.Background onClick={handleModalClose}></S.Background>
             <S.Container
               initial={{ opacity: 0.2, x: 500 }}
-              transition={{ ease: "linear", duration: 0.3 }}
+              transition={{ ease: "easeInOut", duration: 0.5 }}
               animate={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0.2, x: 500 }}
             >
