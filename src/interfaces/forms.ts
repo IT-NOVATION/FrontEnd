@@ -7,3 +7,7 @@ export interface ISignupFormSecond {
   nick_name: string;
   introduction: string;
 }
+export interface ILoginForm {
+  email: string;
+  password: string;
+}
