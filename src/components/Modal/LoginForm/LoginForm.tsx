@@ -5,8 +5,8 @@ import { useForm } from "react-hook-form";
 
 export default function LoginForm() {
     const { register, handleSubmit, watch } = useForm<ILoginForm>();
-    const [isEntered, setIsEntered] = useState<Boolean>(false);
-    const [isShow, setIsShow] = useState<Boolean>(false);
+    const [isEntered, setIsEntered] = useState<boolean>(false);
+    const [isShow, setIsShow] = useState<boolean>(false);
     const handleShow = () => {
         setIsShow(prev => !prev);
     };
@@ -21,7 +21,11 @@ export default function LoginForm() {
 
     return (
         <S.Container>
-            <h1>로그인</h1>
+            <h1>It's MOVIE TIME에</h1>
+            <h1>오신 것을 환영합니다.</h1>
+            <br />
+            <h1>간단하게 무비타임에 참여해볼까요?</h1>
+
             <S.Form onSubmit={handleSubmit(onValid)} onChange={handleEnter}>
                 <div>
                     <label>이메일</label>
