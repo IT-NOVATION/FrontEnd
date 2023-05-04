@@ -2,6 +2,7 @@ import { useState } from "react";
 import { ISignupFormFirst, ISignupFormSecond } from "../../../interfaces/forms";
 import * as S from "./style";
 import { useForm } from "react-hook-form";
+import { postSignup } from "../../../apis/accountApi";
 function SignupForm({
   setIsSigningup,
 }: {
@@ -33,6 +34,12 @@ function SignupForm({
         message: "비밀번호가 일치하지 않습니다",
       });
     } else {
+      try {
+        const dto = { email: data.email, password: data.password };
+        postSignup(dto);
+      } catch (err) {
+        console.log(err);
+      }
       setIsFirstStage(false);
     }
   };

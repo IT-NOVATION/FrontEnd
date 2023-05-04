@@ -1,5 +1,29 @@
 import { createGlobalStyle } from "styled-components";
 const GlobalStyle = createGlobalStyle`
+@font-face {
+  font-family: 'Noto Sans KR';
+  font-weight: 300;
+  src: url('./assets/fonts/NotoSansKR-Light.otf') format('opentype'),
+
+}
+@font-face {
+  font-family: 'Noto Sans KR';
+  font-weight: 400;
+  src: url('./assets/fonts/NotoSansKR-Regular.otf') format('opentype'),
+
+}
+@font-face {
+  font-family: 'Noto Sans KR';
+  font-weight: 500;
+  src: url('./assets/fonts/NotoSansKR-Medium.otf') format('opentype');
+}
+@font-face {
+  font-family: 'Noto Sans KR';
+  font-weight: 700;
+  src: url('./assets/fonts/NotoSansKR-Bold.otf') format('opentype'),
+
+}
+
  html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 a, abbr, acronym, address, big, cite, code,
@@ -17,9 +41,7 @@ time, mark, audio, video {
 	padding: 0;
 	border: 0;
 	font-size: 100%;
-	font: inherit;
 	vertical-align: baseline;
-
 }
 /* HTML5 display-role reset for older browsers */
 article, aside, details, figcaption, figure, 
@@ -46,6 +68,7 @@ table {
 }
 *{
   box-sizing: border-box;
+
 }
 body{
 	width:100vw;
@@ -54,6 +77,9 @@ body{
 a{
   text-decoration:none;
   color:inherit;
+}
+*{
+	font-family: 'Noto Sans KR';
 }
 `;
 export default GlobalStyle;
