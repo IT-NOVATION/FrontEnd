@@ -22,9 +22,11 @@ function AddProfileForm() {
     },
   });
 
-  const onSecondValid = (data: IProfileForm) => {};
+  const onValid = (data: IProfileForm) => {
+    //서버에 프로필 정보 제출...
+  };
   return (
-    <S.Form onSubmit={handleSubmit(onSecondValid)}>
+    <S.Form onSubmit={handleSubmit(onValid)}>
       <FormInputSection>
         <FormInput
           {...register("nickname", {

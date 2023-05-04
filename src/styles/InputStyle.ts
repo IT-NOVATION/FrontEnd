@@ -2,14 +2,18 @@ import styled from "styled-components";
 import theme from "./theme";
 
 interface IFormInputStyle {
-  width: string;
-  height: string;
-  fontSize: string;
+  width?: string;
+  height?: string;
+  fontSize?: string;
   error?: boolean;
+  margin?: string;
 }
 
-export const FormInputSection = styled.section`
+export const FormInputSection = styled.section<IFormInputStyle>`
   position: relative;
+  margin: ${(props) => props.margin};
+  display: flex;
+  align-items: center;
 `;
 
 export const FormInput = styled.input<IFormInputStyle>`
@@ -44,4 +48,10 @@ export const EyeIcon = styled.div`
   top: 5px;
   right: 0;
   cursor: pointer;
+`;
+
+export const CheckBoxInput = styled.input`
+  width: 16px;
+  height: 16px;
+  margin-right: 11px;
 `;

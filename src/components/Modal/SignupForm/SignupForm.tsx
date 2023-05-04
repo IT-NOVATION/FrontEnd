@@ -15,12 +15,13 @@ import useShowPassword from "../../../hooks/useShowPassword";
 import { Body1, Body3 } from "../../../styles/TextStyle";
 import { FormButton } from "../../../styles/ButtonStyle";
 import theme from "../../../styles/theme";
+import TermsForm from "../TermsForm/TermsForm";
 function SignupForm({
   setIsSigningup,
 }: {
   setIsSigningup: React.Dispatch<React.SetStateAction<boolean>>;
 }) {
-  const [isFirstStage, setIsFirstStage] = useState<boolean>(true);
+  const [stepNumber, setStepNumber] = useState<number>(0);
   const {
     register,
     handleSubmit,
@@ -57,13 +58,15 @@ function SignupForm({
     } catch (err) {
       console.log(err);
     }
-    setIsFirstStage(false);
+    setStepNumber(2);
   };
 
   return (
     <S.Container>
       <Body1 margin="28px 0 40px 0 ">회원가입</Body1>
-      {isFirstStage ? (
+      {stepNumber === 0 ? (
+        <TermsForm setStepNumber={setStepNumber} />
+      ) : stepNumber === 1 ? (
         <S.Form onChange={handleEnter} onSubmit={handleSubmit(onValid)}>
           <FormInputSection>
             <FormInput
