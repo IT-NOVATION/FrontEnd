@@ -1,15 +1,23 @@
 import { useState } from "react";
-import { ISignupFormFirst, ISignupFormSecond } from "../../../interfaces/forms";
+import { ISignupFormFirst } from "../../../interfaces/forms";
 import * as S from "./style";
 import { useForm } from "react-hook-form";
 import { postSignup } from "../../../apis/accountApi";
+import {
+  ErrorMessage,
+  FormInput,
+  FormInputSection,
+  EyeIcon,
+} from "../../../styles/FormStyle";
+import AddProfileForm from "../AddProfileForm/AddProfileForm";
+import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
+import useShowPassword from "../../../hooks/useShowPassword";
 function SignupForm({
   setIsSigningup,
 }: {
   setIsSigningup: React.Dispatch<React.SetStateAction<boolean>>;
 }) {
   const [isFirstStage, setIsFirstStage] = useState<boolean>(true);
-  const handleGoBackClick = () => setIsSigningup(false);
   const {
     register: firstRegister,
     handleSubmit: firstHandleSubmit,
@@ -17,17 +25,10 @@ function SignupForm({
     trigger,
     setError,
   } = useForm<ISignupFormFirst>();
-  const {
-    register: secondRegister,
-    handleSubmit: secondHandleSubmit,
-    trigger: secondTrigger,
-    formState: { errors: secondErrors },
-  } = useForm<ISignupFormSecond>({
-    defaultValues: {
-      nick_name: "",
-      introduction: "",
-    },
-  });
+
+  const password = useShowPassword();
+  const verifyPassword = useShowPassword();
+
   const onFirstValid = (data: ISignupFormFirst) => {
     if (data.password !== data.verifyPassword) {
       setError("verifyPassword", {
@@ -44,15 +45,13 @@ function SignupForm({
     }
   };
 
-  const onSecondValid = (data: ISignupFormSecond) => {};
   return (
     <S.Container>
       <h1>회원가입</h1>
       {isFirstStage ? (
         <S.Form onSubmit={firstHandleSubmit(onFirstValid)}>
-          <div>
-            <label>이메일</label>
-            <input
+          <FormInputSection>
+            <FormInput
               {...firstRegister("email", {
                 required: "이메일을 입력해주세요",
                 pattern: {
@@ -63,13 +62,15 @@ function SignupForm({
               })}
               placeholder="이메일"
               type="text"
+              width="406px"
+              height="35px"
+              fontSize="16px"
+              error={!!errors.email}
             />
-            <button>중복검사</button>
-            <div>{errors.email?.message}</div>
-          </div>
-          <div>
-            <label>비밀번호</label>
-            <input
+            <ErrorMessage>{errors.email?.message}</ErrorMessage>
+          </FormInputSection>
+          <FormInputSection>
+            <FormInput
               {...firstRegister("password", {
                 required: "비밀번호를 입력해주세요",
                 pattern: {
@@ -78,53 +79,49 @@ function SignupForm({
                 },
                 onChange: () => trigger("password"),
               })}
-              placeholder="비밀번호"
-              type="password"
+              placeholder="비밀번호 (영문/숫자 조합 6~16자)"
+              type={`${password.type}`}
+              width="406px"
+              height="35px"
+              fontSize="16px"
+              error={!!errors.password}
             />
-            <div>{errors.password?.message}</div>
-          </div>
-          <div>
-            <label>비밀번호 확인</label>
-            <input
+            <ErrorMessage>{errors.password?.message}</ErrorMessage>
+            <EyeIcon onClick={password.toggleShow}>
+              {password.type === "password" ? (
+                <AiFillEye size="24" />
+              ) : (
+                <AiFillEyeInvisible size="24" />
+              )}
+            </EyeIcon>
+          </FormInputSection>
+          <FormInputSection>
+            <FormInput
               {...firstRegister("verifyPassword", {
                 required: "비밀번호를 입력해주세요",
                 onChange: () => trigger("verifyPassword"),
               })}
               placeholder="비밀번호 확인"
-              type="password"
+              type={`${verifyPassword.type}`}
+              width="406px"
+              height="35px"
+              fontSize="16px"
+              error={!!errors.verifyPassword}
             />
-            <div>{errors.verifyPassword?.message}</div>
-          </div>
+            <ErrorMessage>{errors.verifyPassword?.message}</ErrorMessage>
+            <EyeIcon onClick={verifyPassword.toggleShow}>
+              {verifyPassword.type === "password" ? (
+                <AiFillEye size="24" />
+              ) : (
+                <AiFillEyeInvisible size="24" />
+              )}
+            </EyeIcon>
+          </FormInputSection>
           <button>가입</button>
         </S.Form>
       ) : (
-        <S.Form onSubmit={secondHandleSubmit(onSecondValid)}>
-          <div>
-            <label>닉네임</label>
-            <input
-              {...secondRegister("nick_name", {
-                required: true,
-                minLength: 2,
-                maxLength: 10,
-
-                onChange: () => secondTrigger("nick_name"),
-              })}
-              placeholder="닉네임"
-              type="text"
-            />
-            <div>{secondErrors.nick_name?.message}</div>
-          </div>
-          <div>
-            <label>한줄소개</label>
-            <textarea
-              {...secondRegister("introduction")}
-              placeholder="한줄소개"
-            />
-          </div>
-          <button>제출</button>
-        </S.Form>
+        <AddProfileForm />
       )}
-      <button onClick={handleGoBackClick}>뒤로가기</button>
     </S.Container>
   );
 }
