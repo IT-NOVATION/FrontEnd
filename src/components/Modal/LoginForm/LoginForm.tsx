@@ -21,8 +21,6 @@ export default function LoginForm() {
 
   return (
     <S.Container>
-      <h1>It's MOVIE TIME에</h1>
-      <h1>오신 것을 환영합니다.</h1>
       <br />
       <h1>간단하게 무비타임에 참여해볼까요?</h1>
 

@@ -1,10 +1,10 @@
-export interface ISignupFormFirst {
+export interface ISignupForm {
   email: string;
   password: string;
   verifyPassword?: string;
 }
-export interface ISignupFormSecond {
-  nick_name: string;
+export interface IProfileForm {
+  nickname: string;
   introduction: string;
 }
 export interface ILoginForm {

@@ -5,7 +5,7 @@ interface IFormInputStyle {
   width: string;
   height: string;
   fontSize: string;
-  error: boolean;
+  error?: boolean;
 }
 
 export const FormInputSection = styled.section`

@@ -5,6 +5,8 @@ import { AnimatePresence } from "framer-motion";
 import { useState } from "react";
 import SignupForm from "./SignupForm/SignupForm";
 import LoginForm from "./LoginForm/LoginForm";
+import { Title3 } from "../../styles/TextStyle";
+import { CgClose } from "react-icons/cg";
 
 function Modal() {
   const [modalIsOpen, setModalIsOpen] =
@@ -27,7 +29,12 @@ function Modal() {
               animate={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0.2, x: 500 }}
             >
-              <button onClick={handleModalClose}>X</button>
+              <S.ExitBtn onClick={handleModalClose}>
+                <CgClose size="37" />
+              </S.ExitBtn>
+              <Title3 margin="87px 0 0 0">
+                It’s MOVIE TIME에{"\n"}오신 것을 환영합니다.
+              </Title3>
               {isSigningup ? (
                 <SignupForm setIsSigningup={setIsSigningup} />
               ) : (

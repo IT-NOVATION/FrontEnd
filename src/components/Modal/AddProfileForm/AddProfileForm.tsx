@@ -1,42 +1,63 @@
+import * as S from "./style";
 import { useForm } from "react-hook-form";
-import { ISignupFormSecond } from "../../../interfaces/forms";
+import { IProfileForm } from "../../../interfaces/forms";
+import {
+  ErrorMessage,
+  FormInput,
+  FormInputSection,
+} from "../../../styles/InputStyle";
+import { FormButton } from "../../../styles/ButtonStyle";
+import { error } from "console";
 
 function AddProfileForm() {
   const {
-    register: secondRegister,
-    handleSubmit: secondHandleSubmit,
-    trigger: secondTrigger,
-    formState: { errors: secondErrors },
-  } = useForm<ISignupFormSecond>({
+    register,
+    handleSubmit,
+    trigger,
+    formState: { errors },
+  } = useForm<IProfileForm>({
     defaultValues: {
-      nick_name: "",
+      nickname: "",
       introduction: "",
     },
   });
 
-  const onSecondValid = (data: ISignupFormSecond) => {};
+  const onSecondValid = (data: IProfileForm) => {};
   return (
-    <form onSubmit={secondHandleSubmit(onSecondValid)}>
-      <div>
-        <label>닉네임</label>
-        <input
-          {...secondRegister("nick_name", {
-            required: true,
-            minLength: 2,
-            maxLength: 10,
-            onChange: () => secondTrigger("nick_name"),
+    <S.Form onSubmit={handleSubmit(onSecondValid)}>
+      <FormInputSection>
+        <FormInput
+          {...register("nickname", {
+            required: "닉네임을 입력해주세요",
+            minLength: { value: 2, message: "닉네임이 너무 짧습니다" },
+            maxLength: { value: 10, message: "닉네임이 너무 깁니다" },
+            onChange: () => trigger("nickname"),
           })}
           placeholder="닉네임"
           type="text"
+          width="406px"
+          height="35px"
+          fontSize="16px"
+          error={!!errors.nickname}
         />
-        <div>{secondErrors.nick_name?.message}</div>
-      </div>
-      <div>
-        <label>한줄소개</label>
-        <textarea {...secondRegister("introduction")} placeholder="한줄소개" />
-      </div>
-      <button>제출</button>
-    </form>
+        <ErrorMessage>{errors.nickname?.message}</ErrorMessage>
+      </FormInputSection>
+      <FormInputSection>
+        <FormInput
+          {...register("introduction", {
+            maxLength: { value: 50, message: "한줄소개가 너무 깁니다" },
+            onChange: () => trigger("introduction"),
+          })}
+          placeholder="한줄 소개 (50자 이내)"
+          width="406px"
+          height="35px"
+          fontSize="16px"
+          error={!!errors.introduction}
+        />
+        <ErrorMessage>{errors.introduction?.message}</ErrorMessage>
+      </FormInputSection>
+      <FormButton margin="42px 0 21px 0">제출</FormButton>
+    </S.Form>
   );
 }
 export default AddProfileForm;

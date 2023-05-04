@@ -10,9 +10,15 @@ export const Background = styled.div`
   background-color: rgba(0, 0, 0, 0.2);
 `;
 export const Container = styled(motion.div)`
-  width: 500px;
+  width: 649px;
   height: 100vh;
   position: fixed;
   right: 0;
   background-color: whitesmoke;
+  padding-left: 84px;
+`;
+export const ExitBtn = styled.div`
+  position: absolute;
+  top: 45px;
+  right: 45px;
 `;

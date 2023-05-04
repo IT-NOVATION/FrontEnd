@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { ISignupFormFirst } from "../../../interfaces/forms";
+import { ISignupForm } from "../../../interfaces/forms";
 import * as S from "./style";
 import { useForm } from "react-hook-form";
 import { postSignup } from "../../../apis/accountApi";
@@ -8,10 +8,13 @@ import {
   FormInput,
   FormInputSection,
   EyeIcon,
-} from "../../../styles/FormStyle";
+} from "../../../styles/InputStyle";
 import AddProfileForm from "../AddProfileForm/AddProfileForm";
 import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
 import useShowPassword from "../../../hooks/useShowPassword";
+import { Body1, Body3 } from "../../../styles/TextStyle";
+import { FormButton } from "../../../styles/ButtonStyle";
+import theme from "../../../styles/theme";
 function SignupForm({
   setIsSigningup,
 }: {
@@ -19,40 +22,52 @@ function SignupForm({
 }) {
   const [isFirstStage, setIsFirstStage] = useState<boolean>(true);
   const {
-    register: firstRegister,
-    handleSubmit: firstHandleSubmit,
-    formState: { errors },
+    register,
+    handleSubmit,
+    formState: { errors, isValid },
     trigger,
     setError,
-  } = useForm<ISignupFormFirst>();
-
+    clearErrors,
+    watch,
+  } = useForm<ISignupForm>();
   const password = useShowPassword();
   const verifyPassword = useShowPassword();
+  const [isEntered, setIsEntered] = useState<boolean>(false);
 
-  const onFirstValid = (data: ISignupFormFirst) => {
-    if (data.password !== data.verifyPassword) {
-      setError("verifyPassword", {
-        message: "비밀번호가 일치하지 않습니다",
-      });
-    } else {
-      try {
-        const dto = { email: data.email, password: data.password };
-        postSignup(dto);
-      } catch (err) {
-        console.log(err);
-      }
-      setIsFirstStage(false);
+  const handleGoLogin = () => setIsSigningup(false);
+
+  const handleEnter = () => {
+    console.log(isValid);
+    if (
+      //모든 항목들이 입력됐고, 에러가 없을 때만 제출 가능
+      watch("email").length &&
+      watch("password").length &&
+      watch("verifyPassword")?.length &&
+      !errors.email?.message &&
+      !errors.password?.message &&
+      !errors.verifyPassword?.message
+    ) {
+      setIsEntered(true);
+    } else setIsEntered(false);
+  };
+  const onValid = (data: ISignupForm) => {
+    try {
+      // 서버에서 이메일 중복검사...
+      postSignup({ email: data.email, password: data.password });
+    } catch (err) {
+      console.log(err);
     }
+    setIsFirstStage(false);
   };
 
   return (
     <S.Container>
-      <h1>회원가입</h1>
+      <Body1 margin="28px 0 40px 0 ">회원가입</Body1>
       {isFirstStage ? (
-        <S.Form onSubmit={firstHandleSubmit(onFirstValid)}>
+        <S.Form onChange={handleEnter} onSubmit={handleSubmit(onValid)}>
           <FormInputSection>
             <FormInput
-              {...firstRegister("email", {
+              {...register("email", {
                 required: "이메일을 입력해주세요",
                 pattern: {
                   value: /^[a-zA-Z0-9+-_.]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$/,
@@ -71,10 +86,10 @@ function SignupForm({
           </FormInputSection>
           <FormInputSection>
             <FormInput
-              {...firstRegister("password", {
+              {...register("password", {
                 required: "비밀번호를 입력해주세요",
                 pattern: {
-                  value: /^[a-zA-Z0-9!@#$%^&*()?_~]{6,16}$/,
+                  value: /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,16}$/,
                   message: "비밀번호는 영문/숫자 조합 6~16자 입니다",
                 },
                 onChange: () => trigger("password"),
@@ -97,9 +112,18 @@ function SignupForm({
           </FormInputSection>
           <FormInputSection>
             <FormInput
-              {...firstRegister("verifyPassword", {
+              {...register("verifyPassword", {
                 required: "비밀번호를 입력해주세요",
-                onChange: () => trigger("verifyPassword"),
+                onChange: () => {
+                  if (watch("password") !== watch("verifyPassword")) {
+                    setError("verifyPassword", {
+                      message: "비밀번호가 일치하지 않습니다",
+                    });
+                  } else {
+                    clearErrors("verifyPassword");
+                    setIsEntered(true);
+                  }
+                },
               })}
               placeholder="비밀번호 확인"
               type={`${verifyPassword.type}`}
@@ -117,11 +141,17 @@ function SignupForm({
               )}
             </EyeIcon>
           </FormInputSection>
-          <button>가입</button>
+          <FormButton disabled={!isEntered} margin="42px 0 16px 0 ">
+            <Body1>회원가입</Body1>
+          </FormButton>
         </S.Form>
       ) : (
         <AddProfileForm />
       )}
+      <Body3 margin="0 9px 0 113px ">이미 가입하셨나요?</Body3>
+      <Body3 onClick={handleGoLogin} pointer color={`${theme.colors.main}`}>
+        로그인
+      </Body3>
     </S.Container>
   );
 }
