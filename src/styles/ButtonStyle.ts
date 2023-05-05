@@ -1,11 +1,11 @@
 import styled, { css } from "styled-components";
 import theme from "./theme";
 
-interface IFormButtonStyle {
+interface IButtonStyle {
   margin?: string;
 }
 
-export const FormButton = styled.button<IFormButtonStyle>`
+export const FormButton = styled.button<IButtonStyle>`
   display: flex;
   justify-content: center;
   align-items: center;

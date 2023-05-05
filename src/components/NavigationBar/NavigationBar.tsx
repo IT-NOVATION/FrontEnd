@@ -1,11 +1,10 @@
 import { useSetRecoilState } from "recoil";
 import * as S from "./styled";
-import { modalIsOpenAtom } from "../../recoil/atoms";
+import { modalStateAtom } from "../../recoil/atoms";
 function NaviationBar() {
-  const handleLoginClick = () => {
-    setModalIsOpen((prev) => !prev);
-  };
-  const setModalIsOpen = useSetRecoilState(modalIsOpenAtom);
+  const handleLoginClick = () => setModalState(1);
+
+  const setModalState = useSetRecoilState(modalStateAtom);
   return (
     <S.Nav>
       <button onClick={handleLoginClick}>로그인/회원가입</button>
