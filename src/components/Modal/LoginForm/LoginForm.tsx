@@ -2,7 +2,6 @@ import { useState } from "react";
 import { ILoginForm } from "../../../interfaces/forms";
 import * as S from "./style";
 import { useForm } from "react-hook-form";
-import { Margin, Text } from "../../../components/ui";
 
 export default function LoginForm() {
     const { register, handleSubmit, watch } = useForm<ILoginForm>();
@@ -22,31 +21,21 @@ export default function LoginForm() {
 
     return (
         <S.Container>
-            <Text.Title3>It's MOVIE TIME에</Text.Title3>
-            <Margin direction="column" size={10} />
-            <Text.Title3>오신 것을 환영합니다.</Text.Title3>
-            <Margin direction="column" size={40} />
-            <Text.Body1>간단하게 무비타임에 참여해볼까요?</Text.Body1>
-            <Margin direction="column" size={32} />
+            <h1>It's MOVIE TIME에</h1>
+            <h1>오신 것을 환영합니다.</h1>
+            <br />
+            <h1>간단하게 무비타임에 참여해볼까요?</h1>
             <S.Form onSubmit={handleSubmit(onValid)} onChange={handleEnter}>
-                <Margin direction="column" size={40} />
                 <div>
+                    <label>이메일</label>
                     <input {...register("email")} name="email" placeholder="이메일" />
                 </div>
-                <Margin direction="column" size={20} />
                 <div>
-                    <input
-                        {...register("password")}
-                        name="password"
-                        type={isShow ? "text" : "password"}
-                        placeholder="비밀번호"
-                    />
+                    <label>비밀번호</label>
+                    <input {...register("password")} name="password" />
                     <div onClick={handleShow}>눈</div>
                 </div>
-                <Margin direction="column" size={20} />
-                <S.Button disabled={isEntered ? false : true}>
-                    <Text.Body1>로그인</Text.Body1>
-                </S.Button>
+                <button disabled={isEntered ? false : true}>로그인</button>
             </S.Form>
         </S.Container>
     );

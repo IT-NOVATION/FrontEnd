@@ -16,9 +16,3 @@ export const Container = styled(motion.div)`
     right: 0;
     background-color: whitesmoke;
 `;
-
-export const SnsBox = styled.div`
-    width: 100%;
-    height: auto;
-    display: flex;
-`;
