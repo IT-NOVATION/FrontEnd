@@ -1,17 +1,10 @@
-import * as S from "./style";
 import { useForm } from "react-hook-form";
 import { IProfileForm } from "../../../interfaces/forms";
-import {
-  ErrorMessage,
-  FormInput,
-  FormInputSection,
-} from "../../../styles/InputStyle";
-import { FormButton } from "../../../styles/ButtonStyle";
-import { Body1, Body3 } from "../../../styles/TextStyle";
 import { useSetRecoilState } from "recoil";
 import { modalStateAtom } from "../../../recoil/atoms";
 import theme from "../../../styles/theme";
 import { useState } from "react";
+import { Block, Button, Input, Text } from "../../../styles/UI";
 
 function AddProfileForm() {
   const setModalState = useSetRecoilState(modalStateAtom);
@@ -39,11 +32,11 @@ function AddProfileForm() {
     //서버에 프로필 정보 제출...
   };
   return (
-    <S.Container>
-      <Body1 margin="28px 0 40px 0 ">회원가입</Body1>
-      <S.Form onChange={handleEnter} onSubmit={handleSubmit(onValid)}>
-        <FormInputSection>
-          <FormInput
+    <Block.FormWrapper>
+      <Text.Body1 margin="28px 0 40px 0 ">회원가입</Text.Body1>
+      <Block.Form onChange={handleEnter} onSubmit={handleSubmit(onValid)}>
+        <Block.FormInputSection>
+          <Input.FormInput
             {...register("nickname", {
               required: "닉네임을 입력해주세요",
               minLength: { value: 2, message: "닉네임이 너무 짧습니다" },
@@ -57,10 +50,14 @@ function AddProfileForm() {
             fontSize="16px"
             error={!!errors.nickname}
           />
-          <ErrorMessage>{errors.nickname?.message}</ErrorMessage>
-        </FormInputSection>
-        <FormInputSection>
-          <FormInput
+          <Block.ErrorMessage>
+            <Text.Body5 color={`${theme.colors.red}`}>
+              {errors.nickname?.message}
+            </Text.Body5>
+          </Block.ErrorMessage>
+        </Block.FormInputSection>
+        <Block.FormInputSection>
+          <Input.FormInput
             {...register("introduction", {
               maxLength: { value: 50, message: "한줄소개가 너무 깁니다" },
               onChange: () => trigger("introduction"),
@@ -71,17 +68,25 @@ function AddProfileForm() {
             fontSize="16px"
             error={!!errors.introduction}
           />
-          <ErrorMessage>{errors.introduction?.message}</ErrorMessage>
-        </FormInputSection>
-        <FormButton disabled={!isEntered} margin="20px 0 21px 0">
-          <Body3>제출</Body3>
-        </FormButton>
-      </S.Form>
-      <Body3 margin="0 9px 0 113px ">이미 가입하셨나요?</Body3>
-      <Body3 onClick={handleGoLogin} pointer color={`${theme.colors.main}`}>
+          <Block.ErrorMessage>
+            <Text.Body5 color={`${theme.colors.red}`}>
+              {errors.introduction?.message}
+            </Text.Body5>
+          </Block.ErrorMessage>
+        </Block.FormInputSection>
+        <Button.FormButton disabled={!isEntered} margin="20px 0 21px 0">
+          <Text.Body1>제출</Text.Body1>
+        </Button.FormButton>
+      </Block.Form>
+      <Text.Body3 margin="0 9px 0 113px ">이미 가입하셨나요?</Text.Body3>
+      <Text.Body3
+        onClick={handleGoLogin}
+        pointer
+        color={`${theme.colors.main}`}
+      >
         로그인
-      </Body3>
-    </S.Container>
+      </Text.Body3>
+    </Block.FormWrapper>
   );
 }
 export default AddProfileForm;

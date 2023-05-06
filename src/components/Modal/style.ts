@@ -6,19 +6,19 @@ export const Background = styled.div`
   height: 100vh;
   position: fixed;
   top: 0;
-  backdrop-filter: blur(4px);
-  background-color: rgba(0, 0, 0, 0.2);
+  background-color: rgba(0, 0, 0, 0.3);
 `;
 export const Container = styled(motion.div)`
   width: 649px;
   height: 100vh;
   position: fixed;
   right: 0;
-  background-color: whitesmoke;
+  background-color: white;
   padding-left: 84px;
 `;
 export const ExitBtn = styled.div`
   position: absolute;
   top: 45px;
   right: 45px;
+  cursor: pointer;
 `;

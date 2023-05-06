@@ -1,21 +1,13 @@
 import { useState } from "react";
 import { ISignupForm } from "../../../interfaces/forms";
-import * as S from "./style";
 import { useForm } from "react-hook-form";
 import { postSignup } from "../../../apis/accountApi";
-import {
-  ErrorMessage,
-  FormInput,
-  FormInputSection,
-  EyeIcon,
-} from "../../../styles/InputStyle";
 import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
 import useShowPassword from "../../../hooks/useShowPassword";
-import { Body1, Body3 } from "../../../styles/TextStyle";
-import { FormButton } from "../../../styles/ButtonStyle";
 import theme from "../../../styles/theme";
 import { useSetRecoilState } from "recoil";
 import { modalStateAtom } from "../../../recoil/atoms";
+import { Block, Button, Input, Text } from "../../../styles/UI";
 function SignupForm() {
   const setModalState = useSetRecoilState(modalStateAtom);
   const {
@@ -57,11 +49,11 @@ function SignupForm() {
   };
 
   return (
-    <S.Container>
-      <Body1 margin="28px 0 40px 0 ">회원가입</Body1>
-      <S.Form onChange={handleEnter} onSubmit={handleSubmit(onValid)}>
-        <FormInputSection>
-          <FormInput
+    <Block.FormWrapper>
+      <Text.Body1 margin="28px 0 40px 0 ">회원가입</Text.Body1>
+      <Block.Form onChange={handleEnter} onSubmit={handleSubmit(onValid)}>
+        <Block.FormInputSection>
+          <Input.FormInput
             {...register("email", {
               required: "이메일을 입력해주세요",
               pattern: {
@@ -77,10 +69,14 @@ function SignupForm() {
             fontSize="16px"
             error={!!errors.email}
           />
-          <ErrorMessage>{errors.email?.message}</ErrorMessage>
-        </FormInputSection>
-        <FormInputSection>
-          <FormInput
+          <Block.ErrorMessage>
+            <Text.Body5 color={`${theme.colors.red}`}>
+              {errors.email?.message}
+            </Text.Body5>
+          </Block.ErrorMessage>
+        </Block.FormInputSection>
+        <Block.FormInputSection>
+          <Input.FormInput
             {...register("password", {
               required: "비밀번호를 입력해주세요",
               pattern: {
@@ -96,17 +92,21 @@ function SignupForm() {
             fontSize="16px"
             error={!!errors.password}
           />
-          <ErrorMessage>{errors.password?.message}</ErrorMessage>
-          <EyeIcon onClick={password.toggleShow}>
+          <Block.ErrorMessage>
+            <Text.Body5 color={`${theme.colors.red}`}>
+              {errors.password?.message}
+            </Text.Body5>
+          </Block.ErrorMessage>
+          <Block.EyeIcon onClick={password.toggleShow}>
             {password.type === "password" ? (
               <AiFillEye size="24" />
             ) : (
               <AiFillEyeInvisible size="24" />
             )}
-          </EyeIcon>
-        </FormInputSection>
-        <FormInputSection>
-          <FormInput
+          </Block.EyeIcon>
+        </Block.FormInputSection>
+        <Block.FormInputSection>
+          <Input.FormInput
             {...register("verifyPassword", {
               required: "비밀번호를 입력해주세요",
               onChange: () => {
@@ -127,24 +127,32 @@ function SignupForm() {
             fontSize="16px"
             error={!!errors.verifyPassword}
           />
-          <ErrorMessage>{errors.verifyPassword?.message}</ErrorMessage>
-          <EyeIcon onClick={verifyPassword.toggleShow}>
+          <Block.ErrorMessage>
+            <Text.Body5 color={`${theme.colors.red}`}>
+              {errors.verifyPassword?.message}
+            </Text.Body5>
+          </Block.ErrorMessage>
+          <Block.EyeIcon onClick={verifyPassword.toggleShow}>
             {verifyPassword.type === "password" ? (
               <AiFillEye size="24" />
             ) : (
               <AiFillEyeInvisible size="24" />
             )}
-          </EyeIcon>
-        </FormInputSection>
-        <FormButton disabled={!isEntered} margin="20px 0 16px 0 ">
-          <Body1>회원가입</Body1>
-        </FormButton>
-      </S.Form>
-      <Body3 margin="0 9px 0 113px ">이미 가입하셨나요?</Body3>
-      <Body3 onClick={handleGoLogin} pointer color={`${theme.colors.main}`}>
+          </Block.EyeIcon>
+        </Block.FormInputSection>
+        <Button.FormButton disabled={!isEntered} margin="20px 0 16px 0">
+          <Text.Body1>회원가입</Text.Body1>
+        </Button.FormButton>
+      </Block.Form>
+      <Text.Body3 margin="0 9px 0 113px ">이미 가입하셨나요?</Text.Body3>
+      <Text.Body3
+        onClick={handleGoLogin}
+        pointer
+        color={`${theme.colors.main}`}
+      >
         로그인
-      </Body3>
-    </S.Container>
+      </Text.Body3>
+    </Block.FormWrapper>
   );
 }
 export default SignupForm;

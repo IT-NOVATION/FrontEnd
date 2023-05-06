@@ -2,15 +2,14 @@ import { useRecoilState } from "recoil";
 import * as S from "./style";
 import { modalStateAtom } from "../../recoil/atoms";
 import { AnimatePresence } from "framer-motion";
-import { useState } from "react";
 import SignupForm from "./SignupForm/SignupForm";
 import LoginForm from "./LoginForm/LoginForm";
-import { Title3 } from "../../styles/TextStyle";
 import { CgClose } from "react-icons/cg";
 import TermsForm from "./TermsForm/TermsForm";
 import AddProfileForm from "./AddProfileForm/AddProfileForm";
 import Terms from "./TermsForm/Terms/Terms";
 import Policy from "./TermsForm/Policy/Policy";
+import { Text } from "../../styles/UI";
 
 function Modal() {
   const [modalState, setModalState] = useRecoilState<number>(modalStateAtom);
@@ -32,9 +31,9 @@ function Modal() {
               <S.ExitBtn onClick={handleModalClose}>
                 <CgClose size="37" />
               </S.ExitBtn>
-              <Title3 lineHeight="41px" margin="87px 0 0 0">
+              <Text.Title3 lineHeight="41px" margin="87px 0 0 0">
                 It’s MOVIE TIME에{"\n"}오신 것을 환영합니다.
-              </Title3>
+              </Text.Title3>
               {modalState === 1 ? (
                 <>
                   <LoginForm />
@@ -59,22 +58,6 @@ function Modal() {
               ) : (
                 modalState === 6 && <Policy />
               )}
-              {/* {isSigningup ? (
-                <SignupForm setIsSigningup={setIsSigningup} />
-              ) : (
-                <>
-                  <LoginForm />
-                  <h3>비밀번호를 잊어버리셨나요?</h3>
-                  <h3>
-                    계정이 없으신가요?{" "}
-                    <button onClick={handleSignupClick}>회원가입</button>
-                  </h3>
-                  <hr />
-                  <img src={""} width="12" height="12" alt="구글" />
-                  <img src={""} width="12" height="12" alt="네이버" />
-                  <img src={""} width="12" height="12" alt="카카오톡" />
-                </>
-              )} */}
             </S.Container>
           </>
         )}

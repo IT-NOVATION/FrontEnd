@@ -1,11 +1,8 @@
-import * as S from "./style";
 import { useEffect, useState } from "react";
-import { CheckBoxInput, FormInputSection } from "../../../styles/InputStyle";
-import { FormButton } from "../../../styles/ButtonStyle";
-import { Body1, Body3 } from "../../../styles/TextStyle";
 import theme from "../../../styles/theme";
 import { useSetRecoilState } from "recoil";
 import { modalStateAtom } from "../../../recoil/atoms";
+import { Block, Button, Input, Text } from "../../../styles/UI";
 
 function TermsForm() {
   const setModalState = useSetRecoilState(modalStateAtom);
@@ -46,66 +43,72 @@ function TermsForm() {
   }, [termsAgreed, policyAgreed]);
 
   return (
-    <S.Container>
-      <S.Form>
-        <Body1 margin="28px 0 40px 0 ">회원가입</Body1>
-        <FormInputSection margin="0 0 8px 0">
-          <CheckBoxInput
+    <Block.FormWrapper>
+      <Block.Form>
+        <Text.Body3 margin="28px 0 40px 0 ">회원가입</Text.Body3>
+        <Block.FormInputSection margin="0 0 8px 0">
+          <Input.CheckBoxInput
             id="agreeAll"
             onChange={toggleAgreeAll}
             type="checkbox"
             checked={agreeAll}
           />
           <label htmlFor="agreeAll">
-            <Body3 color={`${theme.colors.darkGray}`}>전체 동의</Body3>
+            <Text.Body3 color={`${theme.colors.darkGray}`}>
+              전체 동의
+            </Text.Body3>
           </label>
-        </FormInputSection>
+        </Block.FormInputSection>
         <hr />
-        <FormInputSection margin="10px 0 0 0 ">
-          <CheckBoxInput
+        <Block.FormInputSection margin="10px 0 0 0 ">
+          <Input.CheckBoxInput
             id="termsAgreed"
             onChange={toggleTermsAgreed}
             type="checkbox"
             checked={termsAgreed}
           />
           <label htmlFor="termsAgreed">
-            <Body3 margin="0 7px 0 0 " color={`${theme.colors.darkGray}`}>
+            <Text.Body3 margin="0 7px 0 0 " color={`${theme.colors.darkGray}`}>
               이용약관 동의 (필수)
-            </Body3>
-            <Body3 pointer onClick={handleGoWatchTerms}>
+            </Text.Body3>
+            <Text.Body3 pointer onClick={handleGoWatchTerms}>
               {">"}
-            </Body3>
+            </Text.Body3>
           </label>
-        </FormInputSection>
-        <FormInputSection margin="4px 0 31px 0 ">
-          <CheckBoxInput
+        </Block.FormInputSection>
+        <Block.FormInputSection margin="4px 0 31px 0 ">
+          <Input.CheckBoxInput
             id="policyAgreed"
             onChange={togglePolicyAgreed}
             type="checkbox"
             checked={policyAgreed}
           />
           <label htmlFor="policyAgreed">
-            <Body3 margin="0 7px 0 0 " color={`${theme.colors.darkGray}`}>
+            <Text.Body3 margin="0 7px 0 0 " color={`${theme.colors.darkGray}`}>
               개인정보 처리방침 (필수)
-            </Body3>
-            <Body3 pointer onClick={handleGoWatchPolicy}>
+            </Text.Body3>
+            <Text.Body3 pointer onClick={handleGoWatchPolicy}>
               {">"}
-            </Body3>
+            </Text.Body3>
           </label>
-        </FormInputSection>
-        <FormButton
+        </Block.FormInputSection>
+        <Button.FormButton
           disabled={!isEnter}
           onClick={handleGoToNextStep}
           margin="42px 0 16px 0 "
         >
-          <Body1>다음</Body1>
-        </FormButton>
-      </S.Form>
-      <Body3 margin="0 9px 0 113px ">이미 가입하셨나요?</Body3>
-      <Body3 onClick={handleGoLogin} pointer color={`${theme.colors.main}`}>
+          <Text.Body1>다음</Text.Body1>
+        </Button.FormButton>
+      </Block.Form>
+      <Text.Body3 margin="0 9px 0 113px ">이미 가입하셨나요?</Text.Body3>
+      <Text.Body3
+        onClick={handleGoLogin}
+        pointer
+        color={`${theme.colors.main}`}
+      >
         로그인
-      </Body3>
-    </S.Container>
+      </Text.Body3>
+    </Block.FormWrapper>
   );
 }
 export default TermsForm;
