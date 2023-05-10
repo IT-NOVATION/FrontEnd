@@ -87,7 +87,9 @@ export default function LoginForm() {
                         </Block.ErrorMessage>
                     </Block.FormInputSection>
 
-                    <Button.FormButton disabled={isEntered && !!errors ? false : true}>로그인</Button.FormButton>
+                    <Button.FormButton disabled={isEntered && !!errors ? false : true}>
+                        <Text.Body1>로그인</Text.Body1>
+                    </Button.FormButton>
                 </Block.FormInputSection>
             </Block.Form>
             <Text.Body3
