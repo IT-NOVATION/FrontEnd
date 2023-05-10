@@ -1,15 +1,27 @@
 import { useState } from "react";
 import { ILoginForm } from "../../../interfaces/forms";
-import * as S from "./style";
 import { useForm } from "react-hook-form";
+import { Block, Button, Input, Text } from "../../../styles/UI";
+import theme from "../../../styles/theme";
+import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
+import React from "react";
+import useShowPassword from "../../../hooks/useShowPassword";
+import { useSetRecoilState } from "recoil";
+import { modalStateAtom } from "../../../recoil/atoms";
 
 export default function LoginForm() {
-    const { register, handleSubmit, watch } = useForm<ILoginForm>();
+    const {
+        register,
+        handleSubmit,
+        watch,
+        formState: { errors },
+        trigger,
+    } = useForm<ILoginForm>();
+
     const [isEntered, setIsEntered] = useState<boolean>(false);
-    const [isShow, setIsShow] = useState<boolean>(false);
-    const handleShow = () => {
-        setIsShow(prev => !prev);
-    };
+    const setModalState = useSetRecoilState(modalStateAtom);
+    const handleGoSignup = () => setModalState(3);
+    const password = useShowPassword();
 
     const handleEnter = () => {
         if (watch("email").length && watch("password").length) setIsEntered(true);
@@ -20,23 +32,86 @@ export default function LoginForm() {
     };
 
     return (
-        <S.Container>
-            <h1>It's MOVIE TIME에</h1>
-            <h1>오신 것을 환영합니다.</h1>
-            <br />
-            <h1>간단하게 무비타임에 참여해볼까요?</h1>
-            <S.Form onSubmit={handleSubmit(onValid)} onChange={handleEnter}>
-                <div>
-                    <label>이메일</label>
-                    <input {...register("email")} name="email" placeholder="이메일" />
-                </div>
-                <div>
-                    <label>비밀번호</label>
-                    <input {...register("password")} name="password" />
-                    <div onClick={handleShow}>눈</div>
-                </div>
-                <button disabled={isEntered ? false : true}>로그인</button>
-            </S.Form>
-        </S.Container>
+        <Block.FormWrapper>
+            <Text.Body1 margin="37px 0 32px 0">간단하게 무비타임에 참여해볼까요?</Text.Body1>
+            <Block.Form>
+                <Block.FormInputSection
+                    onSubmit={handleSubmit(onValid)}
+                    onChange={handleEnter}
+                    style={{ display: "flex", flexDirection: "column" }}
+                >
+                    <Input.FormInput
+                        {...register("email", {
+                            required: "이메일을 입력해주세요",
+                            pattern: {
+                                value: /^[a-zA-Z0-9+-_.]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$/,
+                                message: "정확하지 않은 이메일입니다",
+                            },
+                            onChange: () => trigger("email"),
+                        })}
+                        placeholder="이메일"
+                        type="text"
+                        width="406px"
+                        height="35px"
+                        fontSize="16px"
+                        error={!!errors.email}
+                    />
+                    <Block.ErrorMessage>
+                        <Text.Body5 color={`${theme.colors.red}`}>{errors.email?.message}</Text.Body5>
+                    </Block.ErrorMessage>
+
+                    <Block.FormInputSection>
+                        <Input.FormInput
+                            {...register("password", {
+                                required: "비밀번호를 입력해주세요",
+                                pattern: {
+                                    value: /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,16}$/,
+                                    message: "비밀번호는 영문/숫자 조합 6~16자 입니다",
+                                },
+                                onChange: () => trigger("password"),
+                            })}
+                            placeholder="비밀번호 (영문/숫자 조합 6~16자)"
+                            type={`${password.type}`}
+                            width="406px"
+                            height="35px"
+                            fontSize="16px"
+                            error={!!errors.password}
+                        />
+                        <Block.EyeIcon onClick={password.toggleShow}>
+                            {password.type === "password" ? <AiFillEye size="24" /> : <AiFillEyeInvisible size="24" />}
+                        </Block.EyeIcon>
+                        <Block.ErrorMessage>
+                            <Text.Body5 color={`${theme.colors.red}`}>{errors.password?.message}</Text.Body5>
+                        </Block.ErrorMessage>
+                    </Block.FormInputSection>
+
+                    <Button.FormButton disabled={isEntered ? false : true}>로그인</Button.FormButton>
+                </Block.FormInputSection>
+            </Block.Form>
+            <Text.Body3
+                margin="21px 9px 12px 113px"
+                pointer
+                color={`${theme.colors.main}`}
+                // onClick={비밀번호찾기}
+            >
+                비밀번호를 잊어버리셨나요?
+            </Text.Body3>
+            <Text.Body3 margin="0 9px 12px 113px" color={`${theme.colors.darkGray}`}>
+                계정이 없으신가요?
+                <Text.Body3 margin="0 0 0 9px" onClick={handleGoSignup} pointer color={`${theme.colors.main}`}>
+                    회원가입
+                </Text.Body3>
+            </Text.Body3>
+
+            <hr />
+
+            <Text.Body3
+                margin="17px 9px 0 113px"
+                color={`${theme.colors.black}`}
+                // onClick={비밀번호찾기}
+            >
+                간편하게 SNS 로그인
+            </Text.Body3>
+        </Block.FormWrapper>
     );
 }
