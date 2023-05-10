@@ -140,4 +140,17 @@ export const Block = {
         right: 0;
         cursor: pointer;
     `,
+    RowBox: styled.div<StyleBlock>`
+        width: 406px;
+        height: auto;
+        display: flex;
+    `,
+    ColumnBox: styled.div<StyleBlock>`
+        width: 406px;
+        height: auto;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    `,
 };

@@ -21,7 +21,13 @@ export default function LoginForm() {
     const [isEntered, setIsEntered] = useState<boolean>(false);
     const setModalState = useSetRecoilState(modalStateAtom);
     const handleGoSignup = () => setModalState(3);
+
     const password = useShowPassword();
+    const handleFindPassword = () => {}; // 비밀번호 찾기 링크 연결
+
+    const handleGoGoogleLogin = () => {}; // 구글로 로그인하기 링크 연결
+    const handleGoNaverLogin = () => {}; // 네이버로 로그인하기 링크 연결
+    const handleGoKakaoLogin = () => {}; // 카카오로 로그인하기 링크 연결
 
     const handleEnter = () => {
         if (watch("email").length && watch("password").length) setIsEntered(true);
@@ -64,13 +70,9 @@ export default function LoginForm() {
                         <Input.FormInput
                             {...register("password", {
                                 required: "비밀번호를 입력해주세요",
-                                pattern: {
-                                    value: /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,16}$/,
-                                    message: "비밀번호는 영문/숫자 조합 6~16자 입니다",
-                                },
                                 onChange: () => trigger("password"),
                             })}
-                            placeholder="비밀번호 (영문/숫자 조합 6~16자)"
+                            placeholder="비밀번호"
                             type={`${password.type}`}
                             width="406px"
                             height="35px"
@@ -85,14 +87,14 @@ export default function LoginForm() {
                         </Block.ErrorMessage>
                     </Block.FormInputSection>
 
-                    <Button.FormButton disabled={isEntered ? false : true}>로그인</Button.FormButton>
+                    <Button.FormButton disabled={isEntered && !!errors ? false : true}>로그인</Button.FormButton>
                 </Block.FormInputSection>
             </Block.Form>
             <Text.Body3
                 margin="21px 9px 12px 113px"
+                onClick={handleFindPassword}
                 pointer
                 color={`${theme.colors.main}`}
-                // onClick={비밀번호찾기}
             >
                 비밀번호를 잊어버리셨나요?
             </Text.Body3>
@@ -104,14 +106,26 @@ export default function LoginForm() {
             </Text.Body3>
 
             <hr />
+            <>
+                <Text.Body3 margin="17px 9px 19px 113px" color={`${theme.colors.black}`}>
+                    간편하게 SNS 로그인
+                </Text.Body3>
 
-            <Text.Body3
-                margin="17px 9px 0 113px"
-                color={`${theme.colors.black}`}
-                // onClick={비밀번호찾기}
-            >
-                간편하게 SNS 로그인
-            </Text.Body3>
+                <Block.RowBox>
+                    <Block.ColumnBox style={{ cursor: "pointer" }} onClick={handleGoGoogleLogin}>
+                        <img src="google.png" alt="google" width={70} />
+                        <Text.Body1 margin="10px 0 0 0">구글</Text.Body1>
+                    </Block.ColumnBox>
+                    <Block.ColumnBox style={{ cursor: "pointer" }} onClick={handleGoNaverLogin}>
+                        <img src="naver.png" alt="google" width={70} />
+                        <Text.Body1 margin="10px 0 0 0">네이버</Text.Body1>
+                    </Block.ColumnBox>
+                    <Block.ColumnBox style={{ cursor: "pointer" }} onClick={handleGoKakaoLogin}>
+                        <img src="kakao.png" alt="google" width={70} />
+                        <Text.Body1 margin="10px 0 0 0">카카오</Text.Body1>
+                    </Block.ColumnBox>
+                </Block.RowBox>
+            </>
         </Block.FormWrapper>
     );
 }

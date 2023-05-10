@@ -15,8 +15,6 @@ import React from "react";
 function Modal() {
     const [modalState, setModalState] = useRecoilState<number>(modalStateAtom);
     const handleModalClose = () => setModalState(0);
-
-    const handleSignupClick = () => setModalState(2);
     return (
         <>
             <AnimatePresence>
