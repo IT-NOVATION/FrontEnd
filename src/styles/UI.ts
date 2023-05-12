@@ -164,7 +164,7 @@ export const Block = {
         height: auto;
         cursor: ${props => props.pointer && "pointer"};
         display: flex;
-        flex-direction: ${props => props.direction};
+        flex-direction: column;
         justify-content: ${props => props.justifyContent};
         align-items: ${props => props.alignItems};
     `,
