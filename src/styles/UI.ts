@@ -1,10 +1,10 @@
-import styled, { css } from "styled-components";
+import styled, { DefaultThemeColorKey, css } from "styled-components";
 import theme from "./theme";
 
 //텍스트
 type StyleText = {
     margin?: string;
-    color?: string;
+    color?: DefaultThemeColorKey;
     pointer?: boolean;
     lineHeight?: string;
 };
@@ -16,7 +16,7 @@ export const Text = {
         white-space: pre-line;
         display: inline-block;
         margin: ${props => props.margin};
-        color: ${props => props.color};
+        color: ${({ color }) => (color ? theme.colors[color] : theme.colors)};
         line-height: ${props => props.lineHeight};
     `,
 
@@ -25,7 +25,7 @@ export const Text = {
         font-size: 20px;
         white-space: pre-line;
         margin: ${props => props.margin};
-        color: ${props => props.color};
+        color: ${({ color }) => (color ? theme.colors[color] : theme.colors)};
         display: inline-block;
         cursor: ${props => props.pointer && "pointer"};
     `,
@@ -35,7 +35,7 @@ export const Text = {
         font-size: 16px;
         white-space: pre-line;
         margin: ${props => props.margin};
-        color: ${props => props.color};
+        color: ${({ color }) => (color ? theme.colors[color] : theme.colors)};
         display: inline-block;
         cursor: ${props => props.pointer && "pointer"};
     `,
@@ -44,11 +44,12 @@ export const Text = {
         font-size: 12px;
         white-space: pre-line;
         margin: ${props => props.margin};
-        color: ${props => props.color};
+        color: ${({ color }) => (color ? theme.colors[color] : theme.colors)};
         display: inline-block;
         cursor: ${props => props.pointer && "pointer"};
     `,
 };
+//${({ color, theme }) => (color ? theme.colors[color] : theme.colors.black)};
 
 //버튼
 type StyleButton = {
@@ -111,6 +112,13 @@ export const Input = {
 //기타 재사용되는 블록들
 type StyleBlock = {
     margin?: string;
+    pointer?: boolean;
+    display?: string;
+    direction?: string;
+    justifyContent?: string;
+    alignItems?: string;
+    width?: string;
+    color?: DefaultThemeColorKey;
 };
 export const Block = {
     FormWrapper: styled.div<StyleBlock>`
@@ -125,6 +133,9 @@ export const Block = {
         position: relative;
         margin: ${props => props.margin};
         display: flex;
+        flex-direction: ${props => props.direction};
+        justify-content: ${props => props.justifyContent};
+        /* align-items: ${props => props.alignItems}; */
         align-items: center;
     `,
     ErrorMessage: styled.div<StyleBlock>`
@@ -141,16 +152,25 @@ export const Block = {
         cursor: pointer;
     `,
     RowBox: styled.div<StyleBlock>`
-        width: 406px;
+        width: 100%;
         height: auto;
+        cursor: ${props => props.pointer && "pointer"};
         display: flex;
+        justify-content: ${props => props.justifyContent};
+        align-items: ${props => props.alignItems};
     `,
     ColumnBox: styled.div<StyleBlock>`
-        width: 406px;
+        width: 100%;
         height: auto;
+        cursor: ${props => props.pointer && "pointer"};
         display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
+        flex-direction: ${props => props.direction};
+        justify-content: ${props => props.justifyContent};
+        align-items: ${props => props.alignItems};
+    `,
+    Bar: styled.div<StyleBlock>`
+        width: ${props => props.width};
+        height: 0.5px;
+        color: ${props => props.color};
     `,
 };

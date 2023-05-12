@@ -4,7 +4,6 @@ import { useForm } from "react-hook-form";
 import { postSignup } from "../../../apis/accountApi";
 import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
 import useShowPassword from "../../../hooks/useShowPassword";
-import theme from "../../../styles/theme";
 import { useSetRecoilState } from "recoil";
 import { modalStateAtom } from "../../../recoil/atoms";
 import { Block, Button, Input, Text } from "../../../styles/UI";
@@ -71,7 +70,7 @@ function SignupForm() {
                         error={!!errors.email}
                     />
                     <Block.ErrorMessage>
-                        <Text.Body5 color={`${theme.colors.red}`}>{errors.email?.message}</Text.Body5>
+                        <Text.Body5 color="red">{errors.email?.message}</Text.Body5>
                     </Block.ErrorMessage>
                 </Block.FormInputSection>
                 <Block.FormInputSection>
@@ -92,7 +91,7 @@ function SignupForm() {
                         error={!!errors.password}
                     />
                     <Block.ErrorMessage>
-                        <Text.Body5 color={`${theme.colors.red}`}>{errors.password?.message}</Text.Body5>
+                        <Text.Body5 color="red">{errors.password?.message}</Text.Body5>
                     </Block.ErrorMessage>
                     <Block.EyeIcon onClick={password.toggleShow}>
                         {password.type === "password" ? <AiFillEye size="24" /> : <AiFillEyeInvisible size="24" />}
@@ -121,7 +120,7 @@ function SignupForm() {
                         error={!!errors.verifyPassword}
                     />
                     <Block.ErrorMessage>
-                        <Text.Body5 color={`${theme.colors.red}`}>{errors.verifyPassword?.message}</Text.Body5>
+                        <Text.Body5 color="red">{errors.verifyPassword?.message}</Text.Body5>
                     </Block.ErrorMessage>
                     <Block.EyeIcon onClick={verifyPassword.toggleShow}>
                         {verifyPassword.type === "password" ? (
@@ -136,7 +135,7 @@ function SignupForm() {
                 </Button.FormButton>
             </Block.Form>
             <Text.Body3 margin="0 9px 0 113px ">이미 가입하셨나요?</Text.Body3>
-            <Text.Body3 onClick={handleGoLogin} pointer color={`${theme.colors.main}`}>
+            <Text.Body3 onClick={handleGoLogin} pointer color="main">
                 로그인
             </Text.Body3>
         </Block.FormWrapper>
