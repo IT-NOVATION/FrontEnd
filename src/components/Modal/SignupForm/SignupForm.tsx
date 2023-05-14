@@ -1,12 +1,12 @@
-import { IAccountInfo } from "@interfaces/forms";
+import { IAccountInfo } from "interfaces/forms";
 import { useForm } from "react-hook-form";
-import { postSignup } from "@apis/accountApi";
+import { postSignup } from "apis/accountApi";
 import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
-import useShowPassword from "@hooks/useShowPassword";
+import useShowPassword from "hooks/useShowPassword";
 import { useRecoilState } from "recoil";
-import { modalStateAtom } from "@recoil/atoms";
-import { Block, Button, Input, Text } from "@styles/UI";
-import useIsAbled from "@hooks/useIsAbled";
+import { modalStateAtom } from "recoil/atoms";
+import { Block, Button, Input, Text } from "styles/UI";
+import useIsAbled from "hooks/useIsAbled";
 function SignupForm() {
     const [modalState, setModalState] = useRecoilState(modalStateAtom);
     const {

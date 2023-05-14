@@ -1,11 +1,11 @@
-import { IAccountInfo } from "@interfaces/forms";
+import { IAccountInfo } from "interfaces/forms";
 import { useForm } from "react-hook-form";
-import { Block, Button, Input, Text } from "@styles/UI";
+import { Block, Button, Input, Text } from "styles/UI";
 import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
-import useShowPassword from "@hooks/useShowPassword";
+import useShowPassword from "hooks/useShowPassword";
 import { useRecoilState } from "recoil";
-import { modalStateAtom } from "@recoil/atoms";
-import useIsAbled from "@hooks/useIsAbled";
+import { modalStateAtom } from "recoil/atoms";
+import useIsAbled from "hooks/useIsAbled";
 
 export default function LoginForm() {
     const {

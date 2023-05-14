@@ -1,4 +1,4 @@
-import NavigationBar from "@components/NavigationBar/NavigationBar";
+import NavigationBar from "components/NavigationBar/NavigationBar";
 
 function Home() {
     return (
