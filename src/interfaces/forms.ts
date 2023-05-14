@@ -1,13 +1,7 @@
-export interface ISignupForm {
-  email: string;
-  password: string;
+export interface IAccountInfo {
+  email?: string;
+  password?: string;
   verifyPassword?: string;
-}
-export interface IProfileForm {
-  nickname: string;
-  introduction: string;
-}
-export interface ILoginForm {
-  email: string;
-  password: string;
+  nickname?: string;
+  introduction?: string;
 }
