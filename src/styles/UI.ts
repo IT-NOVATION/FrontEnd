@@ -132,11 +132,6 @@ export const Block = {
     FormInputSection: styled.section<StyleBlock>`
         position: relative;
         margin: ${props => props.margin};
-        display: flex;
-        flex-direction: ${props => props.direction};
-        justify-content: ${props => props.justifyContent};
-        /* align-items: ${props => props.alignItems}; */
-        align-items: center;
     `,
     ErrorMessage: styled.div<StyleBlock>`
         width: 100%;
