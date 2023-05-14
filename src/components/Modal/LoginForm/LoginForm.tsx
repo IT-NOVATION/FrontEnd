@@ -40,12 +40,7 @@ export default function LoginForm() {
         <Block.FormWrapper>
             <Text.Body1 margin="37px 0 32px 0">간단하게 무비타임에 참여해볼까요?</Text.Body1>
             <Block.Form>
-                <Block.FormInputSection
-                    onSubmit={handleSubmit(onValid)}
-                    onChange={handleEnter}
-                    // style={{ display: "flex", flexDirection: "column" }} // 기본 FormInputSection 정렬이 row라 설정이 따로 필요함
-                    direction="column"
-                >
+                <Block.FormInputSection onSubmit={handleSubmit(onValid)} onChange={handleEnter}>
                     <Input.FormInput
                         {...register("email", {
                             required: "이메일을 입력해주세요",
@@ -65,7 +60,9 @@ export default function LoginForm() {
                     <Block.ErrorMessage>
                         <Text.Body5 color="red">{errors.email?.message}</Text.Body5>
                     </Block.ErrorMessage>
+                </Block.FormInputSection>
 
+                <Block.FormInputSection onSubmit={handleSubmit(onValid)} onChange={handleEnter}>
                     <Input.FormInput
                         {...register("password", {
                             required: "비밀번호를 입력해주세요",
