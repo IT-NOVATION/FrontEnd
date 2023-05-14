@@ -1,45 +1,129 @@
 import { useState } from "react";
 import { ILoginForm } from "../../../interfaces/forms";
-import * as S from "./style";
 import { useForm } from "react-hook-form";
+import { Block, Button, Input, Text } from "../../../styles/UI";
+import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
+import React from "react";
+import useShowPassword from "../../../hooks/useShowPassword";
+import { useSetRecoilState } from "recoil";
+import { modalStateAtom } from "../../../recoil/atoms";
 
 export default function LoginForm() {
-  const { register, handleSubmit, watch } = useForm<ILoginForm>();
-  const [isEntered, setIsEntered] = useState<boolean>(false);
-  const [isShow, setIsShow] = useState<boolean>(false);
-  const handleShow = () => {
-    setIsShow((prev) => !prev);
-  };
+    const {
+        register,
+        handleSubmit,
+        watch,
+        formState: { errors },
+        trigger,
+    } = useForm<ILoginForm>();
 
-  const handleEnter = () => {
-    if (watch("email").length && watch("password").length) setIsEntered(true);
-    else setIsEntered(false);
-  };
-  const onValid = (data: ILoginForm) => {
-    console.log(data);
-  };
+    const [isEntered, setIsEntered] = useState<boolean>(false);
+    const setModalState = useSetRecoilState(modalStateAtom);
+    const handleGoSignup = () => setModalState(3);
 
-  return (
-    <S.Container>
-      <br />
-      <h1>간단하게 무비타임에 참여해볼까요?</h1>
+    const password = useShowPassword();
+    const handleFindPassword = () => {}; // 비밀번호 찾기 링크 연결
 
-      <S.Form onSubmit={handleSubmit(onValid)} onChange={handleEnter}>
-        <div>
-          <label>이메일</label>
-          <input {...register("email")} name="email" placeholder="이메일" />
-        </div>
-        <div>
-          <label>비밀번호</label>
-          <input
-            {...register("password")}
-            type={isShow ? "text" : "password"}
-            placeholder="비밀번호"
-          />
-          <div onClick={handleShow}>눈</div>
-        </div>
-        <button disabled={isEntered ? false : true}>로그인</button>
-      </S.Form>
-    </S.Container>
-  );
+    const handleGoGoogleLogin = () => {}; // 구글로 로그인하기 링크 연결
+    const handleGoNaverLogin = () => {}; // 네이버로 로그인하기 링크 연결
+    const handleGoKakaoLogin = () => {}; // 카카오로 로그인하기 링크 연결
+
+    const handleEnter = () => {
+        if (watch("email").length && watch("password").length) setIsEntered(true);
+        else setIsEntered(false);
+    };
+    const onValid = (data: ILoginForm) => {
+        console.log(data);
+    };
+
+    return (
+        <Block.FormWrapper>
+            <Text.Body1 margin="37px 0 32px 0">간단하게 무비타임에 참여해볼까요?</Text.Body1>
+            <Block.Form>
+                <Block.FormInputSection
+                    onSubmit={handleSubmit(onValid)}
+                    onChange={handleEnter}
+                    // style={{ display: "flex", flexDirection: "column" }} // 기본 FormInputSection 정렬이 row라 설정이 따로 필요함
+                    direction="column"
+                >
+                    <Input.FormInput
+                        {...register("email", {
+                            required: "이메일을 입력해주세요",
+                            pattern: {
+                                value: /^[a-zA-Z0-9+-_.]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$/,
+                                message: "정확하지 않은 이메일입니다",
+                            },
+                            onChange: () => trigger("email"),
+                        })}
+                        placeholder="이메일"
+                        type="text"
+                        width="406px"
+                        height="35px"
+                        fontSize="16px"
+                        error={!!errors.email}
+                    />
+                    <Block.ErrorMessage>
+                        <Text.Body5 color="red">{errors.email?.message}</Text.Body5>
+                    </Block.ErrorMessage>
+
+                    <Input.FormInput
+                        {...register("password", {
+                            required: "비밀번호를 입력해주세요",
+                            onChange: () => trigger("password"),
+                        })}
+                        placeholder="비밀번호"
+                        type={`${password.type}`}
+                        width="406px"
+                        height="35px"
+                        fontSize="16px"
+                        error={!!errors.password}
+                    />
+                    <Block.EyeIcon onClick={password.toggleShow}>
+                        {password.type === "password" ? <AiFillEye size="24" /> : <AiFillEyeInvisible size="24" />}
+                    </Block.EyeIcon>
+                    <Block.ErrorMessage>
+                        <Text.Body5 color="red">{errors.password?.message}</Text.Body5>
+                    </Block.ErrorMessage>
+
+                    <Button.FormButton disabled={isEntered && !!errors ? false : true}>
+                        <Text.Body1>로그인</Text.Body1>
+                    </Button.FormButton>
+                </Block.FormInputSection>
+            </Block.Form>
+
+            <Block.ColumnBox direction="column" alignItems="center">
+                <Text.Body3 margin="24px 0 12px 0" onClick={handleFindPassword} pointer color="main">
+                    비밀번호를 잊어버리셨나요?
+                </Text.Body3>
+                <Text.Body3 margin="0 0 25px 0" color="darkGray">
+                    계정이 없으신가요?
+                    <Text.Body3 margin="0 0 0 9px" onClick={handleGoSignup} pointer color="main">
+                        회원가입
+                    </Text.Body3>
+                </Text.Body3>
+            </Block.ColumnBox>
+
+            <Block.Bar width="406px" color="gray" />
+            <>
+                <Text.Body3 margin="17px 9px 19px 130px" color="black">
+                    간편하게 SNS 로그인
+                </Text.Body3>
+
+                <Block.RowBox>
+                    <Block.ColumnBox direction="column" alignItems="center" pointer onClick={handleGoGoogleLogin}>
+                        <img src="/images/google.png" alt="google" width={55} />
+                        <Text.Body1 margin="10px 0 0 0">구글</Text.Body1>
+                    </Block.ColumnBox>
+                    <Block.ColumnBox direction="column" alignItems="center" pointer onClick={handleGoNaverLogin}>
+                        <img src="/images/naver.png" alt="naver" width={55} />
+                        <Text.Body1 margin="10px 0 0 0">네이버</Text.Body1>
+                    </Block.ColumnBox>
+                    <Block.ColumnBox direction="column" alignItems="center" pointer onClick={handleGoKakaoLogin}>
+                        <img src="/images/kakao.png" alt="kakao" width={55} />
+                        <Text.Body1 margin="10px 0 0 0">카카오</Text.Body1>
+                    </Block.ColumnBox>
+                </Block.RowBox>
+            </>
+        </Block.FormWrapper>
+    );
 }
