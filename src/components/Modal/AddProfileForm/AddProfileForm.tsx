@@ -1,9 +1,9 @@
 import { useForm } from "react-hook-form";
-import { IAccountInfo } from "@interfaces/forms";
-import { modalStateAtom } from "@recoil/atoms";
-import { Block, Button, Input, Text } from "@styles/UI";
+import { IAccountInfo } from "interfaces/forms";
+import { modalStateAtom } from "recoil/atoms";
+import { Block, Button, Input, Text } from "styles/UI";
 import { useRecoilState } from "recoil";
-import useIsAbled from "@hooks/useIsAbled";
+import useIsAbled from "hooks/useIsAbled";
 
 function AddProfileForm() {
     const [modalState, setModalState] = useRecoilState(modalStateAtom);

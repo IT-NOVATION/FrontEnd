@@ -1,5 +1,5 @@
 import { useSetRecoilState } from "recoil";
-import { modalStateAtom } from "@recoil/atoms";
+import { modalStateAtom } from "recoil/atoms";
 
 function Terms() {
     const setModalState = useSetRecoilState(modalStateAtom);
