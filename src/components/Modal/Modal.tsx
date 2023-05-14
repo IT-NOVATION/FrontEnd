@@ -1,6 +1,6 @@
 import { useRecoilState } from "recoil";
 import * as S from "./style";
-import { modalStateAtom } from "../../recoil/atoms";
+import { modalStateAtom } from "@recoil/atoms";
 import { AnimatePresence } from "framer-motion";
 import SignupForm from "./SignupForm/SignupForm";
 import LoginForm from "./LoginForm/LoginForm";
@@ -9,8 +9,7 @@ import TermsForm from "./TermsForm/TermsForm";
 import AddProfileForm from "./AddProfileForm/AddProfileForm";
 import Terms from "./TermsForm/Terms/Terms";
 import Policy from "./TermsForm/Policy/Policy";
-import { Text } from "../../styles/UI";
-import React from "react";
+import { Text } from "@styles/UI";
 
 function Modal() {
     const [modalState, setModalState] = useRecoilState<number>(modalStateAtom);
