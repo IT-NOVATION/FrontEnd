@@ -21,3 +21,6 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+#테스트할때 사용할 로컬 데이터
+/public/testImages/
