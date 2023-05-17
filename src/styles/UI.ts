@@ -75,6 +75,15 @@ export const Text = {
     display: inline-block;
     cursor: ${(props) => props.pointer && "pointer"};
   `,
+  Body6: styled.div<StyleText>`
+    font-weight: 350;
+    font-size: 13px;
+    white-space: pre-line;
+    margin: ${(props) => props.margin};
+    color: ${({ color }) => (color ? theme.colors[color] : theme.colors)};
+    display: inline-block;
+    cursor: ${(props) => props.pointer && "pointer"};
+  `,
 };
 //${({ color, theme }) => (color ? theme.colors[color] : theme.colors.black)};
 
@@ -141,6 +150,7 @@ export const Input = {
 //기타 재사용되는 블록들
 type StyleBlock = {
   margin?: string;
+  padding?: string;
   pointer?: boolean;
   display?: string;
   direction?: string;
@@ -150,6 +160,8 @@ type StyleBlock = {
   height?: string;
   color?: DefaultThemeColorKey | string;
   bgColor?: DefaultThemeColorKey | string;
+  border?: string;
+  borderRadius?: string;
 };
 export const Block = {
   PageWrapper: styled.div<StyleBlock>`
@@ -195,7 +207,10 @@ export const Block = {
     justify-content: ${(props) => props.justifyContent};
     align-items: ${(props) => props.alignItems};
     margin: ${(props) => props.margin};
+    padding: ${(props) => props.padding};
     background-color: ${(props) => props.bgColor};
+    border: ${(props) => props.border};
+    border-radius: ${(props) => props.borderRadius};
   `,
   ColumnBox: styled.div<StyleBlock>`
     width: ${(props) => (props.width ? props.width : "100%")};
@@ -207,11 +222,14 @@ export const Block = {
     align-items: ${(props) => props.alignItems};
     background-color: ${(props) => props.bgColor};
     margin: ${(props) => props.margin};
+    border: ${(props) => props.border};
+    border-radius: ${(props) => props.borderRadius};
   `,
   Bar: styled.div<StyleBlock>`
     width: ${(props) => props.width};
     height: 0.5px;
-    color: ${(props) => props.color};
+    background-color: ${(props) => props.bgColor};
+    margin: ${(props) => props.margin};
   `,
 };
 
