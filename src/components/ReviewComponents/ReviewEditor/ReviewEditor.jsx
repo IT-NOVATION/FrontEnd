@@ -1,7 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import ReactQuill, { Quill } from "react-quill";
 import "react-quill/dist/quill.snow.css";
-import { createPost } from "apis/test";
 import { useNavigate } from "react-router-dom";
 import AWS from "aws-sdk";
 

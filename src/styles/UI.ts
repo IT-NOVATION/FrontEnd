@@ -89,7 +89,13 @@ export const Text = {
 
 //버튼
 type StyleButton = {
+  width?: string;
+  height?: string;
   margin?: string;
+  border?: string;
+  borderRadius?: string;
+  color?: DefaultThemeColorKey;
+  bgColor?: DefaultThemeColorKey;
 };
 
 export const Button = {
@@ -109,6 +115,20 @@ export const Button = {
       css`
         background-color: ${theme.colors.gray};
       `}
+    cursor: pointer;
+  `,
+  Button: styled.button<StyleButton>`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: ${(props) => props.width};
+    height: ${(props) => props.height};
+    background-color: ${({ bgColor }) =>
+      bgColor ? theme.colors[bgColor] : theme.colors};
+    color: ${({ color }) => (color ? theme.colors[color] : theme.colors)};
+    border: ${(props) => (props.border ? props.border : "none")};
+    border-radius: ${(props) => props.borderRadius};
+    margin: ${(props) => props.margin};
     cursor: pointer;
   `,
 };
