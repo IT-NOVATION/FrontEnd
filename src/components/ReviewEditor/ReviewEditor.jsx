@@ -1,4 +1,4 @@
-import { useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import ReactQuill, { Quill } from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import { createPost } from "apis/test";
@@ -12,27 +12,14 @@ const REGION = process.env.REACT_APP_AWS_S3_BUCKET_REGION;
 const ACCESS_KEY = process.env.REACT_APP_AWS_S3_BUCKET_ACCESS_KEY_ID;
 const SECRET_ACCESS_KEY = process.env.REACT_APP_AWS_S3_BUCKET_SECRET_ACCESS_KEY;
 
-function ReviewEditor() {
+function ReviewEditor({ setContent }) {
   const quillRef = useRef(null);
   const navigate = useNavigate();
   const [value, setValue] = useState("");
-  const [titleValue, setTitleValue] = useState("");
-  const handleTitleChange = (e) => {
-    setTitleValue(e.currentTarget.value);
-  };
-  const handleSubmit = async () => {
-    const date = new Date();
-    try {
-      await createPost({
-        title: titleValue,
-        content: value,
-        date,
-      }).then((res) => console.log(res));
-      navigate("/");
-    } catch (error) {
-      console.log(error);
-    }
-  };
+
+  useEffect(() => {
+    setContent(value);
+  }, [value]);
 
   const imageHandler = async () => {
     console.log("에디터에서 이미지 버튼을 클릭하면 이 핸들러가 시작됩니다!");
@@ -103,24 +90,20 @@ function ReviewEditor() {
     };
   }, []);
 
-  console.log(value);
   return (
-    <>
-      <h3>글 작성하기</h3>
-      <label htmlFor="title">제목</label>
-      <input id="title" type="text" onChange={handleTitleChange} />
-      <div>
-        <ReactQuill
-          ref={quillRef}
-          style={{ width: "800px", height: "1000px", margin: "0 0 100px 0" }}
-          theme="snow"
-          value={value}
-          onChange={setValue}
-          modules={modules}
-        />
-      </div>
-      <button onClick={handleSubmit}>제출</button>
-    </>
+    <ReactQuill
+      ref={quillRef}
+      style={{
+        width: "800px",
+        height: "1000px",
+        margin: "0 0 100px 0",
+        font: "inherit",
+      }}
+      theme="snow"
+      value={value}
+      onChange={setValue}
+      modules={modules}
+    />
   );
 }
 export default ReviewEditor;

@@ -10,6 +10,15 @@ type StyleText = {
 };
 
 export const Text = {
+  Title1: styled.div<StyleText>`
+    font-weight: 350;
+    font-size: 50px;
+    white-space: pre-line;
+    display: inline-block;
+    margin: ${(props) => props.margin};
+    color: ${({ color }) => (color ? theme.colors[color] : theme.colors)};
+    line-height: ${(props) => props.lineHeight};
+  `,
   Title3: styled.div<StyleText>`
     font-weight: 500;
     font-size: 28px;
@@ -22,6 +31,15 @@ export const Text = {
 
   Body1: styled.div<StyleText>`
     font-weight: 400;
+    font-size: 20px;
+    white-space: pre-line;
+    margin: ${(props) => props.margin};
+    color: ${({ color }) => (color ? theme.colors[color] : theme.colors)};
+    display: inline-block;
+    cursor: ${(props) => props.pointer && "pointer"};
+  `,
+  Body2: styled.div<StyleText>`
+    font-weight: 350;
     font-size: 20px;
     white-space: pre-line;
     margin: ${(props) => props.margin};
@@ -130,7 +148,8 @@ type StyleBlock = {
   alignItems?: string;
   width?: string;
   height?: string;
-  color?: DefaultThemeColorKey;
+  color?: DefaultThemeColorKey | string;
+  bgColor?: DefaultThemeColorKey | string;
 };
 export const Block = {
   PageWrapper: styled.div<StyleBlock>`
@@ -176,15 +195,18 @@ export const Block = {
     justify-content: ${(props) => props.justifyContent};
     align-items: ${(props) => props.alignItems};
     margin: ${(props) => props.margin};
+    background-color: ${(props) => props.bgColor};
   `,
   ColumnBox: styled.div<StyleBlock>`
-    width: 100%;
-    height: auto;
+    width: ${(props) => (props.width ? props.width : "100%")};
+    height: ${(props) => (props.width ? props.height : "auto")};
     cursor: ${(props) => props.pointer && "pointer"};
     display: flex;
     flex-direction: column;
     justify-content: ${(props) => props.justifyContent};
     align-items: ${(props) => props.alignItems};
+    background-color: ${(props) => props.bgColor};
+    margin: ${(props) => props.margin};
   `,
   Bar: styled.div<StyleBlock>`
     width: ${(props) => props.width};
