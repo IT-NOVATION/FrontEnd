@@ -24,3 +24,6 @@ yarn-error.log*
 
 #테스트할때 사용할 로컬 데이터
 /public/testImages/
+
+#환경변수 파일
+.env

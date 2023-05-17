@@ -39,6 +39,15 @@ export const Text = {
     display: inline-block;
     cursor: ${(props) => props.pointer && "pointer"};
   `,
+  Body4: styled.div<StyleText>`
+    font-weight: 400;
+    font-size: 15px;
+    white-space: pre-line;
+    margin: ${(props) => props.margin};
+    color: ${({ color }) => (color ? theme.colors[color] : theme.colors)};
+    display: inline-block;
+    cursor: ${(props) => props.pointer && "pointer"};
+  `,
   Body5: styled.div<StyleText>`
     font-weight: 400;
     font-size: 12px;
@@ -120,9 +129,20 @@ type StyleBlock = {
   justifyContent?: string;
   alignItems?: string;
   width?: string;
+  height?: string;
   color?: DefaultThemeColorKey;
 };
 export const Block = {
+  PageWrapper: styled.div<StyleBlock>`
+    width: 100vw;
+    height: auto;
+    display: flex;
+    justify-content: center;
+  `,
+  PageLayout: styled.div<StyleBlock>`
+    width: 900px;
+    height: auto;
+  `,
   FormWrapper: styled.div<StyleBlock>`
     width: 400px;
     height: auto;
@@ -149,12 +169,13 @@ export const Block = {
     cursor: pointer;
   `,
   RowBox: styled.div<StyleBlock>`
-    width: 100%;
-    height: auto;
+    width: ${(props) => (props.width ? props.width : "100%")};
+    height: ${(props) => (props.width ? props.height : "auto")};
     cursor: ${(props) => props.pointer && "pointer"};
     display: flex;
     justify-content: ${(props) => props.justifyContent};
     align-items: ${(props) => props.alignItems};
+    margin: ${(props) => props.margin};
   `,
   ColumnBox: styled.div<StyleBlock>`
     width: 100%;
@@ -169,5 +190,23 @@ export const Block = {
     width: ${(props) => props.width};
     height: 0.5px;
     color: ${(props) => props.color};
+  `,
+};
+
+//영화 포스터
+type StylePoster = {
+  margin?: string;
+  size?: string;
+};
+
+export const Poster = {
+  Poster: styled.img<StylePoster>`
+    ${(props) =>
+      props.size === "sm" &&
+      css`
+        width: 160px;
+        height: 233px;
+      `}
+    margin: ${(props) => props.margin};
   `,
 };

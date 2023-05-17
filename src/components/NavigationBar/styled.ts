@@ -1,7 +1,10 @@
 import styled from "styled-components";
 
-export const Nav = styled.nav`
+export const Nav = styled.nav<{ fixed: boolean; overflow: number }>`
   width: 100vw;
-  height: 70px;
-  border-bottom: 1px solid black;
+  height: ${(props) => `${props.overflow}px`};
+  max-height: 70px;
+  background-color: #f8f8f8;
+  position: ${(props) => props.fixed && "fixed"};
+  z-index: 100;
 `;
