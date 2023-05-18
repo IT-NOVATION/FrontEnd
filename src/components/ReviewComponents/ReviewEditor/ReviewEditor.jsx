@@ -3,8 +3,8 @@ import ReactQuill, { Quill } from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import { useNavigate } from "react-router-dom";
 import AWS from "aws-sdk";
-
 import ImageResize from "quill-image-resize";
+
 Quill.register("modules/ImageResize", ImageResize);
 
 const REGION = process.env.REACT_APP_AWS_S3_BUCKET_REGION;
@@ -98,6 +98,7 @@ function ReviewEditor({ setContent }) {
         margin: "0 0 100px 0",
         font: "inherit",
       }}
+      placeholder="인상깊은 내용/배우에 대해 글을 작성해주세요!"
       theme="snow"
       value={value}
       onChange={setValue}
