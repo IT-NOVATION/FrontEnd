@@ -5,6 +5,7 @@ export const StarDiv = styled.div`
   height: 32px;
   position: relative;
   display: flex;
+  cursor: pointer;
 `;
 export const Left = styled.div`
   width: 16px;

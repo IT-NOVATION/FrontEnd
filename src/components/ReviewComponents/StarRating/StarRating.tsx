@@ -11,18 +11,15 @@ function StarRating({
   const [score, setScore] = useState<number>(0);
   const [scoreFixed, setScoreFixed] = useState(score);
 
-  const handleLeftHalfEnter = (idx: number) => {
-    setScore(idx + 0.5);
-  };
-  const handleRightHalfEnter = (idx: number) => {
-    setScore(idx + 1);
-  };
+  const handleLeftHalfEnter = (idx: number) => setScore(idx + 0.5);
+
+  const handleRightHalfEnter = (idx: number) => setScore(idx + 1);
 
   const handleStarClick = () => {
     setScoreFixed(score);
   };
 
-  const handleStarLeave = (idx: number) => {
+  const handleStarLeave = () => {
     if (score !== scoreFixed) {
       setScore(scoreFixed);
     }
@@ -63,13 +60,13 @@ function StarRating({
             <S.Left
               key={idx + "left"}
               onMouseEnter={() => handleLeftHalfEnter(idx)}
-              onMouseLeave={() => handleStarLeave(idx)}
-            ></S.Left>
+              onMouseLeave={handleStarLeave}
+            />
             <S.Right
               key={idx + "right"}
               onMouseEnter={() => handleRightHalfEnter(idx)}
-              onMouseLeave={() => handleStarLeave(idx)}
-            ></S.Right>
+              onMouseLeave={handleStarLeave}
+            />
           </S.StarDiv>
         ))}
     </Block.RowBox>
