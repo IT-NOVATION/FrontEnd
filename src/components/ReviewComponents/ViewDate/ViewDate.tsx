@@ -1,6 +1,6 @@
 import * as S from "./style";
 import { useEffect, useState } from "react";
-import { Block, Text } from "styles/UI";
+import { Block, Text } from "@styles/UI";
 function ViewDate({
   setViewDate,
 }: {

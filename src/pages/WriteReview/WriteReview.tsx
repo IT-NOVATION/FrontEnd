@@ -1,12 +1,12 @@
 import * as S from "./style";
-import NaviationBar from "components/NavigationBar/NavigationBar";
-import { Block, Button, Poster, Text } from "styles/UI";
-import ReviewEditor from "components/ReviewComponents/ReviewEditor/ReviewEditor";
+import NaviationBar from "@components/NavigationBar/NavigationBar";
+import { Block, Button, Poster, Text } from "@styles/UI";
+import ReviewEditor from "@components/ReviewComponents/ReviewEditor/ReviewEditor";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import StarRating from "components/ReviewComponents/StarRating/StarRating";
-import Keywords from "components/ReviewComponents/Keywords/Keywords";
-import ViewDate from "components/ReviewComponents/ViewDate/ViewDate";
+import StarRating from "@components/ReviewComponents/StarRating/StarRating";
+import Keywords from "@components/ReviewComponents/Keywords/Keywords";
+import ViewDate from "@components/ReviewComponents/ViewDate/ViewDate";
 
 const MovieTestData = {
   //임시 더미 데이터
