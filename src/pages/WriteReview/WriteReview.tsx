@@ -43,7 +43,7 @@ function WriteReview() {
             {/* 헤더 */}
             <Block.ColumnBox width="100vw" height="200px" bgColor="#F8F8F8" alignItems="center">
                 <Block.ColumnBox width="887px" margin="70px 0 0 0">
-                    <Text.Title1 color="darkGray">
+                    <Text.Title1>
                         <S.TitleInput onChange={handleTitleChange} type="text" placeholder="리뷰 제목" />
                     </Text.Title1>
                     <Block.RowBox margin="22px 0 0 0">
