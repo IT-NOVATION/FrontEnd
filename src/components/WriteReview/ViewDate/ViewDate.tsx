@@ -30,13 +30,13 @@ function ViewDate({ setViewDate }: { setViewDate: React.Dispatch<React.SetStateA
             {!checked ? (
                 <>
                     <S.Select disabled={!checked}>
-                        <option value={year}>YYYY</option>
+                        <option value={year}>선택 안함</option>
                     </S.Select>
                     <S.Select disabled={!checked}>
-                        <option value={month}>MM</option>
+                        <option value={month}>선택 안함</option>
                     </S.Select>
                     <S.Select disabled={!checked}>
-                        <option value={day}>DD</option>
+                        <option value={day}>선택 안함</option>
                     </S.Select>
                 </>
             ) : (
