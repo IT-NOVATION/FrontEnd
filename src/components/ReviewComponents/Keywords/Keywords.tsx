@@ -1,4 +1,4 @@
-import { Block, Text } from "styles/UI";
+import { Block, Text } from "@styles/UI";
 import KeywordBox from "./KeywordBox/KeywordBox";
 import { useState } from "react";
 

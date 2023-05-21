@@ -1,4 +1,4 @@
-import { Block } from "styles/UI";
+import { Block } from "@styles/UI";
 import * as S from "./style";
 import { useEffect, useState } from "react";
 import { FaStar, FaStarHalfAlt } from "react-icons/fa";

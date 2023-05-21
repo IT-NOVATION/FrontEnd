@@ -1,7 +1,7 @@
-import { Block, Text } from "styles/UI";
+import { Block, Text } from "@styles/UI";
 import { RiFilmLine, RiCameraLine, RiMusicLine } from "react-icons/ri";
 import { BiFace } from "react-icons/bi";
-import theme from "styles/theme";
+import theme from "@styles/theme";
 type Props = {
   text: string;
   width: string;
