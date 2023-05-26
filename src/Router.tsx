@@ -3,6 +3,7 @@ import App from "./App";
 import Home from "pages/Home/Home";
 import NotFound from "pages/NotFound/NotFound";
 import WriteReview from "pages/WriteReview/WriteReview";
+import KakaoLoginRedirect from "pages/KakaoLoginRedirect/KakaoLoginRedirect";
 
 export const router = createBrowserRouter([
   {
@@ -16,6 +17,10 @@ export const router = createBrowserRouter([
       {
         path: "write-review",
         element: <WriteReview />,
+      },
+      {
+        path: "/kakao-redirect/:accessToken/:refreshToken",
+        element: <KakaoLoginRedirect />,
       },
     ],
     errorElement: <NotFound />,
