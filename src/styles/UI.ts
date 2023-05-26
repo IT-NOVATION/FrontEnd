@@ -179,7 +179,7 @@ type StyleBlock = {
   width?: string;
   height?: string;
   color?: DefaultThemeColorKey | string;
-  bgColor?: DefaultThemeColorKey | string;
+  bgColor?: DefaultThemeColorKey;
   border?: string;
   borderRadius?: string;
 };
@@ -228,7 +228,8 @@ export const Block = {
     align-items: ${(props) => props.alignItems};
     margin: ${(props) => props.margin};
     padding: ${(props) => props.padding};
-    background-color: ${(props) => props.bgColor};
+    background-color: ${({ bgColor }) =>
+      bgColor ? theme.colors[bgColor] : theme.colors};
     border: ${(props) => props.border};
     border-radius: ${(props) => props.borderRadius};
   `,
@@ -240,7 +241,8 @@ export const Block = {
     flex-direction: column;
     justify-content: ${(props) => props.justifyContent};
     align-items: ${(props) => props.alignItems};
-    background-color: ${(props) => props.bgColor};
+    background-color: ${({ bgColor }) =>
+      bgColor ? theme.colors[bgColor] : theme.colors};
     margin: ${(props) => props.margin};
     border: ${(props) => props.border};
     border-radius: ${(props) => props.borderRadius};
@@ -248,7 +250,8 @@ export const Block = {
   Bar: styled.div<StyleBlock>`
     width: ${(props) => props.width};
     height: 0.5px;
-    background-color: ${(props) => props.bgColor};
+    background-color: ${({ bgColor }) =>
+      bgColor ? theme.colors[bgColor] : theme.colors};
     margin: ${(props) => props.margin};
   `,
 };
