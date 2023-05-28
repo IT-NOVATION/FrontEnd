@@ -4,6 +4,7 @@ import { modalStateAtom } from "@recoil/atoms";
 import { Block, Button, Input, Text } from "@styles/UI";
 import { useRecoilState } from "recoil";
 import useIsAbled from "@hooks/useIsAbled";
+import { AccountApi } from "@apis/accountApi";
 
 function AddProfileForm() {
   const [modalState, setModalState] = useRecoilState(modalStateAtom);
@@ -24,8 +25,14 @@ function AddProfileForm() {
 
   const handleGoLogin = () => setModalState(1);
 
-  const onValid = (data: IAccountInfo) => {
-    //서버에 프로필 정보 제출...
+  const onValid = async (data: IAccountInfo) => {
+    try {
+      await AccountApi.addProfile(data).then((res) => console.log(res));
+      alert("It's Movie Time의 회원이 되신 걸 축하드립니다!");
+      setModalState(0);
+    } catch (error) {
+      console.log(error);
+    }
   };
   return (
     <Block.FormWrapper>
