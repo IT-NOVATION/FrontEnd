@@ -6,6 +6,7 @@ import { useRecoilState } from "recoil";
 import { modalStateAtom } from "@recoil/atoms";
 import { Block, Button, Input, Text } from "@styles/UI";
 import useIsAbled from "@hooks/useIsAbled";
+import { AccountApi } from "@apis/accountApi";
 function SignupForm() {
   const [modalState, setModalState] = useRecoilState(modalStateAtom);
   const {
@@ -27,9 +28,11 @@ function SignupForm() {
     modalState,
   });
 
-  const onValid = (data: IAccountInfo) => {
+  const onValid = async ({ email, password }: IAccountInfo) => {
     try {
-      // 서버에서 이메일 중복검사...
+      await AccountApi.signup({ email, password }).then((res) =>
+        console.log(res)
+      );
     } catch (err) {
       console.log(err);
     }
