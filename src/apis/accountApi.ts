@@ -11,9 +11,7 @@ export const AccountApi = {
   signup: async (signupForm: IAccountInfo) =>
     await baseApi.post(SIGNUP_URI, signupForm),
   login: async (loginForm: IAccountInfo) =>
-    await baseApi
-      .post(LOGIN_URI, loginForm)
-      .then((res) => console.log(res.data)),
+    await baseApi.post(LOGIN_URI, loginForm),
   kakaoRedirect: async (code: string) =>
     await baseApi.get(`/login/oauth2/code/kakao${code}`),
 };

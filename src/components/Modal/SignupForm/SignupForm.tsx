@@ -29,14 +29,17 @@ function SignupForm() {
   });
 
   const onValid = async ({ email, password }: IAccountInfo) => {
+    let success = true;
     try {
-      await AccountApi.signup({ email, password }).then((res) =>
-        console.log(res)
-      );
+      await AccountApi.signup({ email, password }).then((res) => {
+        success = res.data.success;
+      });
     } catch (err) {
+      success = false;
       console.log(err);
     }
-    setModalState(4);
+    if (success) setModalState(4);
+    else alert("이미 가입된 이메일입니다.");
   };
 
   return (
