@@ -1,6 +1,5 @@
 import { Outlet } from "react-router-dom";
-import Modal from "components/Modal/Modal";
-import { Block } from "styles/UI";
+import Modal from "@components/Modal/Modal";
 
 function App() {
   return (

@@ -1,6 +1,6 @@
 import { useSetRecoilState } from "recoil";
 import * as S from "./styled";
-import { modalStateAtom } from "recoil/atoms";
+import { modalStateAtom } from "@recoil/atoms";
 import { useEffect, useState } from "react";
 function NaviationBar() {
   const handleLoginClick = () => setModalState(1);

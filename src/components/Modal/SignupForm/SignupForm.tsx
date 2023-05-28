@@ -1,12 +1,11 @@
-import { IAccountInfo } from "interfaces/forms";
+import { IAccountInfo } from "@interfaces/forms";
 import { useForm } from "react-hook-form";
 import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
-import useShowPassword from "hooks/useShowPassword";
+import useShowPassword from "@hooks/useShowPassword";
 import { useRecoilState } from "recoil";
-import { modalStateAtom } from "recoil/atoms";
-import { Block, Button, Input, Text } from "styles/UI";
-import useIsAbled from "hooks/useIsAbled";
-import { AccountApi } from "apis/accountApi";
+import { modalStateAtom } from "@recoil/atoms";
+import { Block, Button, Input, Text } from "@styles/UI";
+import useIsAbled from "@hooks/useIsAbled";
 function SignupForm() {
   const [modalState, setModalState] = useRecoilState(modalStateAtom);
   const {
@@ -30,7 +29,7 @@ function SignupForm() {
 
   const onValid = (data: IAccountInfo) => {
     try {
-      AccountApi.postSignup({ email: data.email, password: data.password });
+      // 서버에서 이메일 중복검사...
     } catch (err) {
       console.log(err);
     }

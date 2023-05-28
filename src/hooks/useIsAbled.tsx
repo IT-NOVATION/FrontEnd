@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { FieldErrors, UseFormWatch } from "react-hook-form";
-import { IAccountInfo } from "interfaces/forms";
+import { IAccountInfo } from "@interfaces/forms";
 
 type Props = {
   watch: UseFormWatch<IAccountInfo>;

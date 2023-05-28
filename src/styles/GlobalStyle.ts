@@ -1,34 +1,6 @@
 import { createGlobalStyle } from "styled-components";
+
 const GlobalStyle = createGlobalStyle`
-@font-face {
-  font-family: 'Noto Sans KR';
-  font-weight: 300;
-  src: url('./assets/fonts/NotoSansKR-Light.otf') format('font-woff2'),
-
-}
-@font-face {
-  font-family: 'Noto Sans KR';
-  font-weight: 350;
-  src: url('./assets/fonts/NotoSansKR-DemiLight.otf') format('font-woff2'),
-
-}
-@font-face {
-  font-family: 'Noto Sans KR';
-  font-weight: 400;
-  src: url('./assets/fonts/NotoSansKR-Regular.otf') format('font-woff2'),
-
-}
-@font-face {
-  font-family: 'Noto Sans KR';
-  font-weight: 500;
-  src: url('./assets/fonts/NotoSansKR-Medium.otf') format('font-woff2');
-}
-@font-face {
-  font-family: 'Noto Sans KR';
-  font-weight: 700;
-  src: url('./assets/fonts/NotoSansKR-Bold.otf') format('font-woff2'),
-
-}
 
  html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
@@ -74,18 +46,18 @@ table {
 }
 *{
   box-sizing: border-box;
-
 }
 body{
 	width:100vw;
 	height:100vh;
+  overflow-x: hidden;
+  font-family: 'Noto Sans KR', sans-serif;
 }
 a{
   text-decoration:none;
   color:inherit;
 }
 *{
-	font-family: 'Noto Sans KR';
 }
 `;
 export default GlobalStyle;

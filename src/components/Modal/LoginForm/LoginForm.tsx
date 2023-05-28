@@ -1,12 +1,11 @@
-import { IAccountInfo } from "interfaces/forms";
+import { IAccountInfo } from "@interfaces/forms";
 import { useForm } from "react-hook-form";
-import { Block, Button, Input, Text } from "styles/UI";
+import { Block, Button, Input, Text } from "@styles/UI";
 import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
-import useShowPassword from "hooks/useShowPassword";
+import useShowPassword from "@hooks/useShowPassword";
 import { useRecoilState } from "recoil";
 import { modalStateAtom } from "recoil/atoms";
 import useIsAbled from "hooks/useIsAbled";
-import { AccountApi } from "apis/accountApi";
 
 export default function LoginForm() {
   const {
@@ -29,12 +28,7 @@ export default function LoginForm() {
   const { isAbled, handleIsAbled } = useIsAbled({ watch, errors, modalState });
 
   const onValid = (data: IAccountInfo) => {
-    try {
-      AccountApi.login({ email: data.email, password: data.password });
-    } catch (error) {
-      console.log(error);
-    }
-    console.log("??");
+    console.log(data);
   };
 
   return (
@@ -42,8 +36,11 @@ export default function LoginForm() {
       <Text.Body1 margin="37px 0 32px 0">
         간단하게 무비타임에 참여해볼까요?
       </Text.Body1>
-      <Block.Form onSubmit={handleSubmit(onValid)}>
-        <Block.FormInputSection onChange={handleIsAbled}>
+      <Block.Form>
+        <Block.FormInputSection
+          onSubmit={handleSubmit(onValid)}
+          onChange={handleIsAbled}
+        >
           <Input.FormInput
             {...register("email", {
               required: "이메일을 입력해주세요",
@@ -64,6 +61,7 @@ export default function LoginForm() {
             <Text.Body5 color="red">{errors.email?.message}</Text.Body5>
           </Block.ErrorMessage>
         </Block.FormInputSection>
+
         <Block.FormInputSection
           onSubmit={handleSubmit(onValid)}
           onChange={handleIsAbled}
@@ -142,9 +140,7 @@ export default function LoginForm() {
             onClick={handleGoNaverLogin}
           >
             <img src="/images/naver.png" alt="naver" width={55} />
-            <a href="http://localhost:8080/oauth2/authorization/naver">
-              <Text.Body1 margin="10px 0 0 0">네이버</Text.Body1>
-            </a>
+            <Text.Body1 margin="10px 0 0 0">네이버</Text.Body1>
           </Block.ColumnBox>
           <Block.ColumnBox
             direction="column"
@@ -153,9 +149,7 @@ export default function LoginForm() {
             onClick={handleGoKakaoLogin}
           >
             <img src="/images/kakao.png" alt="kakao" width={55} />
-            <a href="http://localhost:8080/oauth2/authorization/kakao">
-              <Text.Body1 margin="10px 0 0 0">카카오</Text.Body1>
-            </a>
+            <Text.Body1 margin="10px 0 0 0">카카오</Text.Body1>
           </Block.ColumnBox>
         </Block.RowBox>
       </>

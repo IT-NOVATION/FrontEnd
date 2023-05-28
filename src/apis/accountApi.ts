@@ -1,4 +1,4 @@
-import { IAccountInfo } from "interfaces/forms";
+import { IAccountInfo } from "@interfaces/forms";
 import { baseApi } from "./instance";
 
 const SIGNUP_URI = "/api/v1/signup";
@@ -7,6 +7,8 @@ const TEST_URI = "/api/v1/movies";
 const NAVER_LOGIN_URI = "/oauth2/authorization/naver";
 const KAKAO_LOGIN_URI = "/oauth2/authorization/kakao";
 
+export const postSignup = (signupFormFirst: IAccountInfo) =>
+  baseApi.post("/").then((res) => res.data);
 export const AccountApi = {
   postSignup: async (signupForm: IAccountInfo) =>
     await baseApi
