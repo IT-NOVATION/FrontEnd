@@ -8,7 +8,7 @@ function Home() {
       <Block.PageLayout>
         <Block.PageWrapper bgColor="black">
           <Banner></Banner>
-          <Posters></Posters>
+          <Posters />
         </Block.PageWrapper>
       </Block.PageLayout>
     </>
