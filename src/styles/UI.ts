@@ -189,6 +189,7 @@ export const Block = {
     height: auto;
     display: flex;
     justify-content: center;
+    background-color: ${(props) => props.bgColor};
   `,
   PageLayout: styled.div<StyleBlock>`
     width: 900px;
