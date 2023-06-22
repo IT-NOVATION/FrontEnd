@@ -3,10 +3,13 @@ import { baseApi } from "./instance";
 
 const SIGNUP_URI = "/api/v1/signup";
 const ADD_PROFILE_URI = "api/v1/profile";
-const LOGIN_URI = "/login";
-const TEST_URI = "/api/v1/movies";
-const NAVER_LOGIN_URI = "/oauth2/authorization/naver";
-const KAKAO_LOGIN_URI = "/oauth2/authorization/kakao";
+const LOGIN_URI = "api/v1/login";
+export const GOOGLE_LOGIN_URI =
+  "http://localhost:8080/oauth2/authorization/google";
+export const NAVER_LOGIN_URI =
+  "http://localhost:8080/oauth2/authorization/naver";
+export const KAKAO_LOGIN_URI =
+  "http://localhost:8080/oauth2/authorization/kakao";
 
 export const AccountApi = {
   signup: async (signupForm: IAccountInfo) =>
