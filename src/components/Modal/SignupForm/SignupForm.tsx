@@ -7,6 +7,7 @@ import { modalStateAtom } from "@recoil/atoms";
 import { Block, Button, Input, Text } from "@styles/UI";
 import useIsAbled from "@hooks/useIsAbled";
 import { AccountApi } from "@apis/accountApi";
+import { error } from "console";
 function SignupForm() {
   const [modalState, setModalState] = useRecoilState(modalStateAtom);
   const {
@@ -29,17 +30,13 @@ function SignupForm() {
   });
 
   const onValid = async ({ email, password }: IAccountInfo) => {
-    let success = true;
-    try {
-      await AccountApi.signup({ email, password }).then((res) => {
-        success = res.data.success;
+    await AccountApi.signup({ email, password })
+      .then((res) => {
+        if (res.data.success) setModalState(4);
+      })
+      .catch((error) => {
+        alert(error.response.data.response);
       });
-    } catch (err) {
-      success = false;
-      console.log(err);
-    }
-    if (success) setModalState(4);
-    else alert("이미 가입된 이메일입니다.");
   };
 
   return (
