@@ -3,7 +3,7 @@ import App from "./App";
 import Home from "@pages/Home/Home";
 import NotFound from "@pages/NotFound/NotFound";
 import WriteReview from "@pages/WriteReview/WriteReview";
-import KakaoLoginRedirect from "@pages/KakaoLoginRedirect/KakaoLoginRedirect";
+import KakaoLoginRedirect from "@pages/SocialLoginRedirect/SocialLoginRedirect";
 
 export const router = createBrowserRouter([
   {

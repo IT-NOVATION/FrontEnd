@@ -1,8 +1,7 @@
-import { AccountApi } from "apis/accountApi";
 import { useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 
-function KakaoLoginRedirect() {
+function SocialLoginRedirect() {
   const { accessToken, refreshToken } = useParams();
   const navigate = useNavigate();
   useEffect(() => {
@@ -14,4 +13,4 @@ function KakaoLoginRedirect() {
   }, []);
   return <></>;
 }
-export default KakaoLoginRedirect;
+export default SocialLoginRedirect;
