@@ -1,6 +1,6 @@
 import axios, { AxiosRequestConfig } from "axios";
 
-const BASE_URL = "http://localhost:8080";
+export const BASE_URL = "http://3.36.120.45:8080";
 
 const axiosConfig: AxiosRequestConfig = {
   baseURL: BASE_URL,

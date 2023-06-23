@@ -40,7 +40,13 @@ export default function LoginForm() {
   const { isAbled, handleIsAbled } = useIsAbled({ watch, errors, modalState });
 
   const onValid = async (data: IAccountInfo) => {
-    await AccountApi.login(data).then((res) => console.log(res));
+    await AccountApi.login(data)
+      .then(({ accessToken, refreshToken }) => {
+        localStorage.setItem("accessToken", accessToken);
+        localStorage.setItem("refreshToken", refreshToken);
+        setModalState(0);
+      })
+      .catch((error) => alert("이메일 혹은 비밀번호가 일치하지 않습니다."));
   };
 
   return (
