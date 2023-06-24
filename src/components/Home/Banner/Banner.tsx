@@ -10,11 +10,11 @@ const IMG = [
 
 const variants = {
     initial: (direction: number) => {
-        return { x: direction > 0 ? -200 : 200, opacity: 0 };
+        return { x: direction > 0 ? 200 : -200, opacity: 0 };
     },
     animate: { x: 0, opacity: 1 },
     exit: (direction: number) => {
-        return { x: direction > 0 ? 200 : -200, opacity: 0 };
+        return { x: direction > 0 ? -200 : 200, opacity: 0 };
     },
 };
 
@@ -23,12 +23,12 @@ export default function Banner() {
     const [direction, setDirection] = useState(0);
 
     const nextSlide = () => {
-        setDirection(-1);
+        setDirection(1);
         setSlide(slide === IMG.length - 1 ? 0 : slide + 1);
     };
 
     const prevSlide = () => {
-        setDirection(1);
+        setDirection(-1);
         setSlide(slide === 0 ? IMG.length - 1 : slide - 1);
     };
 
