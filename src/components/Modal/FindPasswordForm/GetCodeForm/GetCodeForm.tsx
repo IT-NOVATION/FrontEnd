@@ -1,5 +1,5 @@
 import useIsAbled from "@hooks/useIsAbled";
-import { IFindPassword } from "@interfaces/forms";
+import { IAccountInfo, IFindPassword } from "@interfaces/forms";
 import { modalStateAtom } from "@recoil/atoms";
 import { Block, Button, Input, Text } from "@styles/UI";
 import { useState } from "react";
@@ -28,8 +28,8 @@ function GetCodeForm() {
 
   return (
     <Block.FormWrapper>
-      <Text.Body1 margin="20px 0 7px 0">비밀번호를 잊어버리셨나요?</Text.Body1>
-      <Text.Body1 margin="0 0 20px 0">
+      <Text.Body1 margin="30px 0 7px 0">비밀번호를 잊어버리셨나요?</Text.Body1>
+      <Text.Body1 margin="0 0 35px 0">
         가입하신 이메일로 인증번호를 받아보세요
       </Text.Body1>
       <Block.Form onSubmit={handleSubmit(onValid)} onChange={handleIsAbled}>
