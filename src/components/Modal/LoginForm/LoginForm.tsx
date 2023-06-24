@@ -6,6 +6,12 @@ import useShowPassword from "@hooks/useShowPassword";
 import { useRecoilState } from "recoil";
 import { modalStateAtom } from "@recoil/atoms";
 import useIsAbled from "@hooks/useIsAbled";
+import {
+  AccountApi,
+  GOOGLE_LOGIN_URI,
+  KAKAO_LOGIN_URI,
+  NAVER_LOGIN_URI,
+} from "@apis/accountApi";
 
 export default function LoginForm() {
   const {
@@ -22,13 +28,25 @@ export default function LoginForm() {
   const password = useShowPassword();
   const handleFindPassword = () => {}; // 비밀번호 찾기 링크 연결
 
-  const handleGoGoogleLogin = () => {}; // 구글로 로그인하기 링크 연결
-  const handleGoNaverLogin = () => {}; // 네이버로 로그인하기 링크 연결
-  const handleGoKakaoLogin = () => {}; // 카카오로 로그인하기 링크 연결
+  const handleGoGoogleLogin = () => {
+    window.location.href = `${GOOGLE_LOGIN_URI}`;
+  }; // 구글로 로그인하기 링크 연결
+  const handleGoNaverLogin = () => {
+    window.location.href = `${NAVER_LOGIN_URI}`;
+  }; // 네이버로 로그인하기 링크 연결
+  const handleGoKakaoLogin = () => {
+    window.location.href = `${KAKAO_LOGIN_URI}`;
+  }; // 카카오로 로그인하기 링크 연결
   const { isAbled, handleIsAbled } = useIsAbled({ watch, errors, modalState });
 
-  const onValid = (data: IAccountInfo) => {
-    console.log(data);
+  const onValid = async (data: IAccountInfo) => {
+    await AccountApi.login(data)
+      .then(({ accessToken, refreshToken }) => {
+        localStorage.setItem("accessToken", accessToken);
+        localStorage.setItem("refreshToken", refreshToken);
+        setModalState(0);
+      })
+      .catch((error) => alert("이메일 혹은 비밀번호가 일치하지 않습니다."));
   };
 
   return (
@@ -36,11 +54,8 @@ export default function LoginForm() {
       <Text.Body1 margin="37px 0 32px 0">
         간단하게 무비타임에 참여해볼까요?
       </Text.Body1>
-      <Block.Form>
-        <Block.FormInputSection
-          onSubmit={handleSubmit(onValid)}
-          onChange={handleIsAbled}
-        >
+      <Block.Form onSubmit={handleSubmit(onValid)}>
+        <Block.FormInputSection onChange={handleIsAbled}>
           <Input.FormInput
             {...register("email", {
               required: "이메일을 입력해주세요",
@@ -62,10 +77,7 @@ export default function LoginForm() {
           </Block.ErrorMessage>
         </Block.FormInputSection>
 
-        <Block.FormInputSection
-          onSubmit={handleSubmit(onValid)}
-          onChange={handleIsAbled}
-        >
+        <Block.FormInputSection onChange={handleIsAbled}>
           <Input.FormInput
             {...register("password", {
               required: "비밀번호를 입력해주세요",
