@@ -10,6 +10,8 @@ import AddProfileForm from "./AddProfileForm/AddProfileForm";
 import Terms from "./TermsForm/Terms/Terms";
 import Policy from "./TermsForm/Policy/Policy";
 import { Text } from "@styles/UI";
+import GetCodeForm from "./FindPasswordForm/GetCodeForm/GetCodeForm";
+import SetPasswordForm from "./FindPasswordForm/SetPasswordForm/SetPasswordForm";
 
 function Modal() {
   const [modalState, setModalState] = useRecoilState<number>(modalStateAtom);
@@ -42,8 +44,12 @@ function Modal() {
                 <AddProfileForm />
               ) : modalState === 5 ? (
                 <Terms />
+              ) : modalState === 6 ? (
+                <Policy />
+              ) : modalState === 7 ? (
+                <GetCodeForm />
               ) : (
-                modalState === 6 && <Policy />
+                modalState === 8 && <SetPasswordForm />
               )}
             </S.Container>
           </>

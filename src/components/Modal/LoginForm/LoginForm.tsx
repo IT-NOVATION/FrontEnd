@@ -20,7 +20,9 @@ export default function LoginForm() {
   const handleGoSignup = () => setModalState(2);
 
   const password = useShowPassword();
-  const handleFindPassword = () => {}; // 비밀번호 찾기 링크 연결
+  const handleFindPassword = () => {
+    setModalState(7);
+  }; // 비밀번호 찾기 링크 연결
 
   const handleGoGoogleLogin = () => {}; // 구글로 로그인하기 링크 연결
   const handleGoNaverLogin = () => {}; // 네이버로 로그인하기 링크 연결
