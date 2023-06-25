@@ -182,6 +182,7 @@ type StyleBlock = {
   bgColor?: DefaultThemeColorKey;
   border?: string;
   borderRadius?: string;
+  background?: string;
 };
 export const Block = {
   PageWrapper: styled.div<StyleBlock>`
@@ -242,6 +243,9 @@ export const Block = {
     flex-direction: column;
     justify-content: ${(props) => props.justifyContent};
     align-items: ${(props) => props.alignItems};
+    background: ${(props) => props.background};
+    background-size: cover;
+    background-position: center;
     background-color: ${({ bgColor }) =>
       bgColor ? theme.colors[bgColor] : theme.colors};
     margin: ${(props) => props.margin};
@@ -254,6 +258,15 @@ export const Block = {
     background-color: ${({ bgColor }) =>
       bgColor ? theme.colors[bgColor] : theme.colors};
     margin: ${(props) => props.margin};
+  `,
+  ProfileImg: styled.div<StyleBlock>`
+    width: ${(props) => props.width};
+    height: ${(props) => props.height};
+    border-radius: 50%;
+    background: ${(props) => props.background};
+    background-size: cover;
+    position: absolute;
+    top: 50px;
   `,
 };
 

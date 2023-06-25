@@ -4,6 +4,7 @@ import Home from "@pages/Home/Home";
 import NotFound from "@pages/NotFound/NotFound";
 import WriteReview from "@pages/WriteReview/WriteReview";
 import KakaoLoginRedirect from "@pages/SocialLoginRedirect/SocialLoginRedirect";
+import MovieLog from "@pages/MovieLog/MovieLog";
 
 export const router = createBrowserRouter([
   {
@@ -13,6 +14,10 @@ export const router = createBrowserRouter([
       {
         path: "",
         element: <Home />,
+      },
+      {
+        path: "movieLog",
+        element: <MovieLog />,
       },
       {
         path: "write-review",
