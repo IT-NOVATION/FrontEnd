@@ -31,7 +31,7 @@ function MovieLog() {
             height="208px"
             background={`url(${User.profileImg})`}
           />
-          <Block.RowBox margin="85px 0 0 0" alignItems="flex-end">
+          <Block.RowBox width="900px" margin="85px 0 0 0" alignItems="flex-end">
             <Text.Title3 margin="0 16px 0 0">{User.nickname}</Text.Title3>
             <Text.Body1 margin="0 410px 0 0">{User.introduction}</Text.Body1>
             <Button.Button
@@ -44,7 +44,7 @@ function MovieLog() {
               프로필 수정
             </Button.Button>
           </Block.RowBox>
-          <Block.RowBox margin="30px 0 0 0" alignItems="center">
+          <Block.RowBox width="100%" margin="30px 0 0 0" alignItems="center">
             <Badge grade="VIP" />
             <Block.RowBox width="auto" margin="0 0 0 12px" alignItems="center">
               <Text.Body4 margin="0 4px 0 0">팔로워</Text.Body4>
