@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import * as S from "./style";
 import { AnimatePresence } from "framer-motion";
+import { Block } from "@styles/UI";
 
 const IMG = [
     "https://images.freeimages.com/images/large-previews/2b6/free-banner-background-1639360.jpg",
@@ -47,7 +48,7 @@ export default function Banner() {
 
     return (
         <S.Wrapper>
-            <S.Slide>
+            <Block.RowBox>
                 <AnimatePresence initial={false} custom={direction} mode="popLayout">
                     <S.SlideImg
                         variants={variants}
@@ -61,7 +62,7 @@ export default function Banner() {
                         custom={direction}
                     />
                 </AnimatePresence>
-            </S.Slide>
+            </Block.RowBox>
             {/* <S.LeftBtn onClick={prevSlide} />
             <S.RightBtn onClick={nextSlide} /> */}
             <S.Indicators>
