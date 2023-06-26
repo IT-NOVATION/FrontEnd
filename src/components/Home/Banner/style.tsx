@@ -8,34 +8,10 @@ export const Wrapper = styled.div`
     align-items: center;
 `;
 
-export const Slide = styled.div`
-    display: flex;
-    align-items: center;
-    justify-content: center;
-`;
-
 export const SlideImg = styled(motion.img)`
     width: 100vw;
     height: 526px;
 `;
-
-// export const LeftBtn = styled.button`
-//   position: absolute;
-//   left: 5vw;
-//   width: 2rem;
-//   height: 2rem;
-//   border: 1px solid red;
-//   cursor: pointer;
-// `;
-
-// export const RightBtn = styled.button`
-//   position: absolute;
-//   right: 5vw;
-//   width: 2rem;
-//   height: 2rem;
-//   border: 1px solid red;
-//   cursor: pointer;
-// `;
 
 export const Indicators = styled.span`
     display: flex;

@@ -23,16 +23,6 @@ export default function Banner() {
     const [slide, setSlide] = useState(0);
     const [direction, setDirection] = useState(1);
 
-    // const nextSlide = () => {
-    //     setDirection(1);
-    //     setSlide(slide === IMG.length - 1 ? 0 : slide + 1);
-    // };
-
-    // const prevSlide = () => {
-    //     setDirection(-1);
-    //     setSlide(slide === 0 ? IMG.length - 1 : slide - 1);
-    // };
-
     useEffect(() => {
         const timer = setInterval(() => {
             setSlide(prev => (prev === IMG.length - 1 ? 0 : prev + 1));
@@ -41,10 +31,6 @@ export default function Banner() {
             clearInterval(timer);
         };
     }, [slide]);
-
-    // useEffect(() => {
-    //     setDirection(1);
-    // }, [direction]);
 
     return (
         <S.Wrapper>
@@ -63,8 +49,7 @@ export default function Banner() {
                     />
                 </AnimatePresence>
             </Block.RowBox>
-            {/* <S.LeftBtn onClick={prevSlide} />
-            <S.RightBtn onClick={nextSlide} /> */}
+
             <S.Indicators>
                 {IMG.map((_, idx) => {
                     return (
