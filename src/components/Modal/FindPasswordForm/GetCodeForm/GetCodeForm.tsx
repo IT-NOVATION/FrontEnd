@@ -1,3 +1,4 @@
+import { AccountApi } from "@apis/accountApi";
 import useIsAbled from "@hooks/useIsAbled";
 import { IAccountInfo, IFindPassword } from "@interfaces/forms";
 import { modalStateAtom } from "@recoil/atoms";
@@ -20,10 +21,10 @@ function GetCodeForm() {
   const { isAbled, handleIsAbled } = useIsAbled({ watch, errors, modalState });
   const [emailSent, setEmailSent] = useState(false);
 
-  const onValid = (data: IFindPassword) => {
-    // 이메일로 인증 번호 요청 api..
-    // 인증번호 일치여부 확인 api...
-    emailSent ? setModalState(8) : setEmailSent(true);
+  const onValid = async (data: IFindPassword) => {
+    emailSent
+      ? await AccountApi.codeCheck(data).then(() => setModalState(8))
+      : await AccountApi.sendCode(data.email).then(() => setEmailSent(true));
   };
 
   return (

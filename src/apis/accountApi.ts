@@ -1,9 +1,11 @@
-import { IAccountInfo } from "@interfaces/forms";
+import { IAccountInfo, IFindPassword } from "@interfaces/forms";
 import { BASE_URL, baseApi } from "./instance";
 
 const SIGNUP_URI = "/api/v1/signup";
 const ADD_PROFILE_URI = "api/v1/profile";
 const LOGIN_URI = "api/v1/login";
+const SEND_CODE_URI = "/passwordfind/emailSend";
+const CODE_CHECK_URI = "/passwordfind/finalCheck";
 export const GOOGLE_LOGIN_URI =
   "http://localhost:8080/oauth2/authorization/google";
 export const NAVER_LOGIN_URI =
@@ -19,4 +21,10 @@ export const AccountApi = {
     await baseApi.post(LOGIN_URI, loginForm).then((res) => res.data),
   kakaoRedirect: async (code: string) =>
     await baseApi.get(`/login/oauth2/code/kakao${code}`),
+  sendCode: async (email: string) =>
+    await baseApi.post(SEND_CODE_URI, { email }).then((res) => res.data),
+  codeCheck: async (findPasswordForm: IFindPassword) =>
+    await baseApi
+      .post(CODE_CHECK_URI, findPasswordForm)
+      .then((res) => res.data),
 };
