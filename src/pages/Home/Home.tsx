@@ -3,15 +3,15 @@ import Posters from "@components/Home/Posters/Posters";
 import { Block } from "@styles/UI";
 
 function Home() {
-    return (
-        <>
-            <Block.PageLayout>
-                <Block.PageWrapper bgColor="black">
-                    <Banner />
-                    <Posters></Posters>
-                </Block.PageWrapper>
-            </Block.PageLayout>
-        </>
-    );
+  return (
+    <>
+      <Block.PageLayout>
+        <Block.PageWrapper bgColor="black">
+          <Banner />
+          <Posters></Posters>
+        </Block.PageWrapper>
+      </Block.PageLayout>
+    </>
+  );
 }
 export default Home;
