@@ -1,9 +1,9 @@
 import { IAccountInfo, IFindPassword } from "@interfaces/forms";
 import { BASE_URL, baseApi } from "./instance";
 
-const SIGNUP_URI = "/api/v1/signup";
-const ADD_PROFILE_URI = "api/v1/profile";
-const LOGIN_URI = "api/v1/login";
+const SIGNUP_URI = "/signup";
+const ADD_PROFILE_URI = "/userProfileInfo";
+const LOGIN_URI = "/login";
 const SEND_CODE_URI = "/passwordfind/emailSend";
 const CODE_CHECK_URI = "/passwordfind/finalCheck";
 export const GOOGLE_LOGIN_URI =
