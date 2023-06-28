@@ -38,7 +38,7 @@ function WriteReview() {
 
     return (
         <>
-            <NaviationBar />
+            <NaviationBar isMain />
 
             {/* 헤더 */}
             <Block.ColumnBox width="100vw" height="200px" bgColor="darkWhite" alignItems="center">
