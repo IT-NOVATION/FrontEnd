@@ -1,10 +1,10 @@
 import styled from "styled-components";
 
-export const Nav = styled.div<{ fixed: boolean; overflow: number; isMain: boolean }>`
+export const Nav = styled.div<{ isVisible: boolean; isMain: boolean }>`
     width: 100vw;
-    /* height: ${props => `${props.overflow}px`}; */
-    /* position: ${props => props.fixed && "fixed"}; */
-    height: 85px;
+
+    /* height: 85px; */
+    height: ${({ isVisible }) => (isVisible ? "85px" : "-188px")};
     z-index: 100;
     padding: 20px 23px;
 
@@ -15,6 +15,7 @@ export const Nav = styled.div<{ fixed: boolean; overflow: number; isMain: boolea
     display: flex;
     justify-content: space-between;
     background-color: ${({ isMain }) => (isMain ? "transparent" : "white")};
+    color: ${({ isMain }) => (isMain ? "white" : "black")};
 `;
 
 export const HomeLogo = styled.img`

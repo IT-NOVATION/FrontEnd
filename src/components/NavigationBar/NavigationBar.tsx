@@ -5,32 +5,23 @@ import { useEffect, useState } from "react";
 import { Block, Button, Text } from "@styles/UI";
 import { useNavigate } from "react-router-dom";
 
-function NavigationBar() {
+export default function NavigationBar() {
+    const navigate = useNavigate();
     const handleLoginClick = () => setModalState(1);
-    const [fixed, setFixed] = useState(false);
-    const [overflow, setOverflow] = useState<number>(0);
-    window.addEventListener("scroll", e => {
-        if (window.scrollY > 0) {
-            setFixed(true);
-            setOverflow(window.scrollY - 150);
-        } else {
-            setFixed(false);
-        }
-    });
-
     const setModalState = useSetRecoilState(modalStateAtom);
 
-    //
+    const [isLogin, setIsLogin] = useState(true); // 로그인 됐을 때만 알람 표시 보이도록 => 추후에 데이터 받아올 수 있을 때 수정
 
-    const [isLogin, setIsLogin] = useState(true); // 로그인 됐을 때만 알람 표시 보이도록
-
-    const navigate = useNavigate();
+    const [isMain, setIsMain] = useState(false);
+    const [position, setPosition] = useState(window.scrollY);
+    const [isVisible, setIsVisible] = useState<boolean>(true);
 
     const goToMain = () => {
+        setIsMain(true); // 기본 false라서 홈 눌렀을때 바로 투명배경 적용 안됨 -> 수정해야함
         navigate("/");
     };
 
-    const goToFilm = () => {
+    const goToFilm = async () => {
         navigate("/Film");
     };
 
@@ -42,15 +33,29 @@ function NavigationBar() {
         navigate("/MovieLog");
     };
 
+    useEffect(() => {
+        const handleScroll = () => {
+            const moving = window.scrollY;
+            setIsVisible(position > moving);
+            setPosition(moving);
+
+            console.log("scroll");
+        };
+        window.addEventListener("scroll", handleScroll);
+        return () => {
+            window.removeEventListener("scroll", handleScroll);
+        };
+    }, [position]);
+
     return (
         <>
-            <S.Nav fixed={fixed} overflow={overflow} isMain>
+            <S.Nav isVisible={isVisible} isMain={isMain}>
                 <Block.RowBox width="426px" justifyContent="space-between" alignItems="center">
                     <S.HomeLogo onClick={goToMain} src="/icons/logo.svg" alt="home-logo" />
-                    <Text.Body1 onClick={goToFilm} color="white" pointer>
+                    <Text.Body1 onClick={goToFilm} color={isMain ? "white" : "black"} pointer>
                         영화
                     </Text.Body1>
-                    <Text.Body1 onClick={goToMovieTalk} color="white" pointer>
+                    <Text.Body1 onClick={goToMovieTalk} color={isMain ? "white" : "black"} pointer>
                         무비토크
                     </Text.Body1>
                 </Block.RowBox>
@@ -89,4 +94,3 @@ function NavigationBar() {
         </>
     );
 }
-export default NavigationBar;

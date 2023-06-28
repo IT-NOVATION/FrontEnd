@@ -1,3 +1,10 @@
+import NavigationBar from "@components/NavigationBar/NavigationBar";
+
 export default function Film() {
-    return <>영화</>;
+    return (
+        <>
+            <NavigationBar />
+            영화
+        </>
+    );
 }
