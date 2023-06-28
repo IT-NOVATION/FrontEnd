@@ -25,10 +25,12 @@ export const HomeLogo = styled.img`
 export const Profile = styled.img`
     width: 31px;
     border-radius: 100px;
+    cursor: pointer;
 `;
 
 export const Icons = styled.img`
     width: 31px;
     border-radius: 100px;
+    color: aqua;
     cursor: pointer;
 `;

@@ -6,6 +6,7 @@ import WriteReview from "@pages/WriteReview/WriteReview";
 import KakaoLoginRedirect from "@pages/SocialLoginRedirect/SocialLoginRedirect";
 import Film from "@pages/Film/Film";
 import MovieTalk from "@pages/MovieTalk/MovieTalk";
+import MovieLog from "@pages/MovieLog/MovieLog";
 
 export const router = createBrowserRouter([
     {
@@ -26,6 +27,7 @@ export const router = createBrowserRouter([
             },
             { path: "film", element: <Film /> },
             { path: "movietalk", element: <MovieTalk /> },
+            { path: "movielog", element: <MovieLog /> },
         ],
         errorElement: <NotFound />,
     },
