@@ -17,6 +17,11 @@ export const Nav = styled.div<{ fixed: boolean; overflow: number; isMain: boolea
     background-color: ${({ isMain }) => (isMain ? "transparent" : "white")};
 `;
 
+export const HomeLogo = styled.img`
+    width: 185px;
+    cursor: pointer;
+`;
+
 export const Profile = styled.img`
     width: 31px;
     border-radius: 100px;

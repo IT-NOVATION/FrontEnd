@@ -3,6 +3,7 @@ import * as S from "./styled";
 import { modalStateAtom } from "@recoil/atoms";
 import { useEffect, useState } from "react";
 import { Block, Button, Text } from "@styles/UI";
+import { useNavigate } from "react-router-dom";
 
 type Props = {
     isMain: boolean;
@@ -27,15 +28,29 @@ function NaviationBar({ isMain }: Props) {
 
     const [isLogin, setIsLogin] = useState(false); // 로그인 됐을 때만 알람 표시 보이도록
 
+    const navigate = useNavigate();
+
+    const goToMain = () => {
+        navigate("/");
+    };
+
+    const goToFilm = () => {
+        navigate("/Film");
+    };
+
+    const goToMovieTalk = () => {
+        navigate("/MovieTalk");
+    };
+
     return (
         <>
             <S.Nav fixed={fixed} overflow={overflow} isMain>
                 <Block.RowBox width="426px" justifyContent="space-between" alignItems="center">
-                    <img src="/icons/logo.svg" alt="logo" width={185} />
-                    <Text.Body1 color={isMain ? "white" : "black"} pointer>
+                    <S.HomeLogo onClick={goToMain} src="/icons/logo.svg" alt="home-logo" />
+                    <Text.Body1 onClick={goToFilm} color={isMain ? "white" : "black"} pointer>
                         영화
                     </Text.Body1>
-                    <Text.Body1 color={isMain ? "white" : "black"} pointer>
+                    <Text.Body1 onClick={goToMovieTalk} color={isMain ? "white" : "black"} pointer>
                         무비토크
                     </Text.Body1>
                 </Block.RowBox>
