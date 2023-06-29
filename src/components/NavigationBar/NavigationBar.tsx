@@ -11,7 +11,7 @@ export default function NavigationBar() {
     const navigate = useNavigate();
     const handleLoginClick = () => setModalState(1);
     const setModalState = useSetRecoilState(modalStateAtom);
-    const [isMain, setIsMain] = useState(true);
+    const [isMain, setIsMain] = useState(false);
     const { pathname } = useLocation();
     const [position, setPosition] = useState(window.scrollY);
     const [isVisible, setIsVisible] = useState<boolean>(false);
@@ -51,8 +51,8 @@ export default function NavigationBar() {
     }, [position]);
 
     useEffect(() => {
-        if (pathname !== "/home") {
-            setIsMain(false);
+        if (pathname === "/home") {
+            setIsMain(true);
         }
     }, []);
 
