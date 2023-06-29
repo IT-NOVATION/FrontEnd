@@ -1,17 +1,16 @@
 import { motion } from "framer-motion";
 import styled from "styled-components";
 
-export const Nav = styled(motion.div)<{ isVisible: boolean; isMain: boolean; isScrollDown: boolean }>`
+export const Nav = styled(motion.div)<{ isMain: boolean }>`
     width: 100vw;
     min-width: 900px;
     height: 85px;
     z-index: 100;
     padding: 20px 50px;
-    position: ${({ isVisible }) => isVisible && "fixed"};
+    position: fixed;
     display: flex;
     justify-content: space-between;
     background-color: ${({ isMain }) => (isMain ? "rgba(154, 154, 154, 0.40)" : "white")};
-    /* animation: ${({ isScrollDown }) => (isScrollDown ? "normal" : "reverse")}; */
 `;
 
 export const HomeLogo = styled.img`
@@ -33,6 +32,7 @@ export const Icons = styled.img<{ isMain: boolean }>`
 `;
 
 export const variants = {
-    // animate: { y: [100, 0] },
-    // animate: { y: [0, -100] },
+    animate: { y: 0, opacity: 1 },
+    initial: { y: -80, opacity: 0.5 },
+    exit: { y: -80, opacity: 0.5 },
 };
