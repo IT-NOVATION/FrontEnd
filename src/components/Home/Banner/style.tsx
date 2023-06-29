@@ -13,6 +13,16 @@ export const SlideImg = styled(motion.img)`
     height: 526px;
 `;
 
+export const variants = {
+    initial: (direction: number) => {
+        return { x: direction > 0 ? "100%" : "-100%", opacity: 1 };
+    },
+    animate: { x: 0, opacity: 1 },
+    exit: (direction: number) => {
+        return { x: direction > 0 ? "-100%" : "100%", opacity: 1 };
+    },
+};
+
 export const Indicators = styled.span`
     display: flex;
     position: absolute;

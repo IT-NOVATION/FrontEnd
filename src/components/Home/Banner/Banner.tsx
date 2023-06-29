@@ -9,21 +9,29 @@ const IMG = [
     "https://images.freeimages.com/images/large-previews/f2e/free-banner-background-1639356.jpg",
 ];
 
-const variants = {
-    initial: (direction: number) => {
-        return { x: direction > 0 ? 1920 : -1920, opacity: 1 };
-    },
-    animate: { x: 0, opacity: 1 },
-    exit: (direction: number) => {
-        return { x: direction > 0 ? -1920 : 1920, opacity: 1 };
-    },
-};
-
 export default function Banner() {
     const [slide, setSlide] = useState(0);
     const [direction, setDirection] = useState(1);
 
+    const handleIndicatorClick = (idx: number) => {
+        const prev = slide;
+        if (prev === 0) {
+            if (idx === 1) setDirection(1);
+            if (idx === 2) setDirection(-1);
+        }
+        if (prev === 1) {
+            if (idx === 0) setDirection(-1);
+            if (idx === 2) setDirection(1);
+        }
+        if (prev === 2) {
+            if (idx === 0) setDirection(1);
+            if (idx === 1) setDirection(-1);
+        }
+        setSlide(idx);
+    };
+
     useEffect(() => {
+        setDirection(1);
         const timer = setInterval(() => {
             setSlide(prev => (prev === IMG.length - 1 ? 0 : prev + 1));
         }, 3000);
@@ -37,7 +45,7 @@ export default function Banner() {
             <Block.RowBox>
                 <AnimatePresence initial={false} custom={direction} mode="popLayout">
                     <S.SlideImg
-                        variants={variants}
+                        variants={S.variants}
                         animate="animate"
                         initial="initial"
                         transition={{ type: "linear", duration: 0.5 }}
@@ -55,9 +63,9 @@ export default function Banner() {
                     return (
                         <>
                             {slide === idx ? (
-                                <S.IndicatorOn key={idx} onClick={() => setSlide(idx)} />
+                                <S.IndicatorOn key={idx} onClick={() => handleIndicatorClick(idx)} />
                             ) : (
-                                <S.IndicatorOff key={idx} onClick={() => setSlide(idx)} />
+                                <S.IndicatorOff key={idx} onClick={() => handleIndicatorClick(idx)} />
                             )}
                         </>
                     );
