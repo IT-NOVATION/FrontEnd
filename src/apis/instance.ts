@@ -1,8 +1,11 @@
 import axios, { AxiosRequestConfig } from "axios";
 
-export const BASE_URL = "http://3.36.120.45:8080";
+export const BASE_URL = "http://localhost:8080";
 
 const axiosConfig: AxiosRequestConfig = {
   baseURL: BASE_URL,
+  headers: {
+    Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+  },
 };
 export const baseApi = axios.create(axiosConfig);

@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { FieldErrors, UseFormWatch } from "react-hook-form";
-import { IAccountInfo } from "@interfaces/forms";
+import { IAccountInfo, IFindPassword } from "@interfaces/forms";
 
 type Props = {
-  watch: UseFormWatch<IAccountInfo>;
+  watch: UseFormWatch<any>;
   errors: FieldErrors<IAccountInfo>;
   modalState: number;
 };
@@ -35,6 +35,11 @@ function useIsAbled({ watch, errors, modalState }: Props) {
     }
     if (modalState === 4) {
       if (watch("nickname")?.length && !errors.nickname?.message) {
+        setIsAbled(true);
+      } else setIsAbled(false);
+    }
+    if (modalState === 7) {
+      if (watch("email")?.length && !errors.email?.message) {
         setIsAbled(true);
       } else setIsAbled(false);
     }

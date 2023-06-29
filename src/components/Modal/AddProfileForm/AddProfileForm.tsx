@@ -25,13 +25,19 @@ function AddProfileForm() {
 
   const handleGoLogin = () => setModalState(1);
 
-  const onValid = async (data: IAccountInfo) => {
+  const onValid = async ({ nickname, introduction }: IAccountInfo) => {
+    const email = localStorage.getItem("signup-email"); // 이전 회원가입 단계에서 입력했던 이메일 가져오기
+    if (!email) throw Error("no email");
     try {
-      await AccountApi.addProfile(data).then((res) => console.log(res));
+      await AccountApi.addProfile({
+        email,
+        nickname,
+        introduction,
+      });
       alert("It's Movie Time의 회원이 되신 걸 축하드립니다!");
       setModalState(0);
     } catch (error) {
-      console.log(error);
+      alert("이미 사용중인 닉네임입니다.");
     }
   };
   return (
