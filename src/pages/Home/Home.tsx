@@ -4,17 +4,17 @@ import NavigationBar from "@components/NavigationBar/NavigationBar";
 import { Block } from "@styles/UI";
 
 function Home() {
-  return (
-    <>
-      <Block.PageLayout>
-        <Block.PageWrapper bgColor="black">
-          <NavigationBar />
-          <Banner></Banner>
-          <Posters></Posters>
-          <div style={{ height: "1000vh" }} />
-        </Block.PageWrapper>
-      </Block.PageLayout>
-    </>
-  );
+    return (
+        <>
+            <Block.PageLayout>
+                <Block.PageWrapper bgColor="black">
+                    <NavigationBar />
+                    <Banner></Banner>
+                    <Posters></Posters>
+                    <div style={{ height: "1000vh" }} /> {/* 스크롤 확인용 */}
+                </Block.PageWrapper>
+            </Block.PageLayout>
+        </>
+    );
 }
 export default Home;
