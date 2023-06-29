@@ -13,7 +13,7 @@ export default function NavigationBar() {
     const [isMain, setIsMain] = useState(false);
     const { pathname } = useLocation();
     const [position, setPosition] = useState(window.scrollY);
-    const [isVisible, setIsVisible] = useState<boolean>(false);
+    const [isVisible, setIsVisible] = useState<boolean>(true);
 
     const [isLogin, setIsLogin] = useState(true); // 로그인 됐을 때만 알람 표시 보이도록 => 추후에 데이터 받아올 수 있을 때 수정
 
@@ -54,7 +54,7 @@ export default function NavigationBar() {
 
     return (
         <>
-            <AnimatePresence>
+            <AnimatePresence initial={false}>
                 {isVisible && (
                     <S.Nav
                         isMain={isMain}
