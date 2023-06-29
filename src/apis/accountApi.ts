@@ -6,11 +6,12 @@ const ADD_PROFILE_URI = "/userProfileInfo";
 const LOGIN_URI = "/login";
 const SEND_CODE_URI = "/passwordfind/emailSend";
 const CODE_CHECK_URI = "/passwordfind/finalCheck";
+const CHANGE_PW_URI = "/passwordfind/rewritePw";
 export const GOOGLE_LOGIN_URI =
   "http://localhost:8080/oauth2/authorization/google";
 export const NAVER_LOGIN_URI =
   "http://localhost:8080/oauth2/authorization/naver";
-export const KAKAO_LOGIN_URI = `${BASE_URL}/oauth2/authorization/kakao`;
+export const KAKAO_LOGIN_URI = `http://localhost:8080/oauth2/authorization/kakao`;
 
 export const AccountApi = {
   signup: async (signupForm: IAccountInfo) =>
@@ -27,4 +28,6 @@ export const AccountApi = {
     await baseApi
       .post(CODE_CHECK_URI, findPasswordForm)
       .then((res) => res.data),
+  changePassword: async (data: IAccountInfo) =>
+    await baseApi.post(CHANGE_PW_URI, data).then((res) => res.data),
 };

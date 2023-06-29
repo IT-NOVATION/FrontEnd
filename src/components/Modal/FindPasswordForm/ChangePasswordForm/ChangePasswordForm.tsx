@@ -1,3 +1,4 @@
+import { AccountApi } from "@apis/accountApi";
 import useIsAbled from "@hooks/useIsAbled";
 import useShowPassword from "@hooks/useShowPassword";
 import { IAccountInfo } from "@interfaces/forms";
@@ -7,7 +8,7 @@ import { useForm } from "react-hook-form";
 import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
 import { useRecoilState } from "recoil";
 
-function SetPasswordForm() {
+function ChangePasswordForm() {
   const [modalState, setModalState] = useRecoilState(modalStateAtom);
   const {
     register,
@@ -25,8 +26,18 @@ function SetPasswordForm() {
   });
   const password = useShowPassword();
   const verifyPassword = useShowPassword();
-  const onValid = (data: IAccountInfo) => {
-    //변경된 비밀번호 전송 api...
+  const onValid = async ({ password }: IAccountInfo) => {
+    const email = localStorage.getItem("passwordFind-email");
+    if (!email) throw Error("no email");
+    try {
+      await AccountApi.changePassword({ email, password }).then((res) =>
+        console.log(res)
+      );
+      alert("새 비밀번호 설정이 완료되었습니다!");
+      setModalState(1);
+    } catch (err) {
+      console.log(err);
+    }
   };
   return (
     <Block.FormWrapper>
@@ -104,4 +115,4 @@ function SetPasswordForm() {
     </Block.FormWrapper>
   );
 }
-export default SetPasswordForm;
+export default ChangePasswordForm;

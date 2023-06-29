@@ -23,7 +23,10 @@ function GetCodeForm() {
 
   const onValid = async (data: IFindPassword) => {
     emailSent
-      ? await AccountApi.codeCheck(data).then(() => setModalState(8))
+      ? await AccountApi.codeCheck(data).then(() => {
+          localStorage.setItem("passwordFind-email", data.email);
+          setModalState(8);
+        })
       : await AccountApi.sendCode(data.email).then(() => setEmailSent(true));
   };
 
