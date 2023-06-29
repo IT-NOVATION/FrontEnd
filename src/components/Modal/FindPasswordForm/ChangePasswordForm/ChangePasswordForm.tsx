@@ -1,13 +1,14 @@
+import { AccountApi } from "@apis/accountApi";
+import useIsAbled from "@hooks/useIsAbled";
+import useShowPassword from "@hooks/useShowPassword";
 import { IAccountInfo } from "@interfaces/forms";
+import { modalStateAtom } from "@recoil/atoms";
+import { Block, Text, Input, Button } from "@styles/UI";
 import { useForm } from "react-hook-form";
 import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
-import useShowPassword from "@hooks/useShowPassword";
 import { useRecoilState } from "recoil";
-import { modalStateAtom } from "@recoil/atoms";
-import { Block, Button, Input, Text } from "@styles/UI";
-import useIsAbled from "@hooks/useIsAbled";
-import { AccountApi } from "@apis/accountApi";
-function SignupForm() {
+
+function ChangePasswordForm() {
   const [modalState, setModalState] = useRecoilState(modalStateAtom);
   const {
     register,
@@ -18,51 +19,31 @@ function SignupForm() {
     clearErrors,
     watch,
   } = useForm<IAccountInfo>();
-  const password = useShowPassword();
-  const verifyPassword = useShowPassword();
-
-  const handleGoLogin = () => setModalState(1);
   const { isAbled, setIsAbled, handleIsAbled } = useIsAbled({
     watch,
     errors,
     modalState,
   });
-
-  const onValid = async ({ email, password }: IAccountInfo) => {
+  const password = useShowPassword();
+  const verifyPassword = useShowPassword();
+  const onValid = async ({ password }: IAccountInfo) => {
+    const email = localStorage.getItem("passwordFind-email");
+    if (!email) throw Error("no email");
     try {
-      await AccountApi.signup({ email, password });
-      email && localStorage.setItem("signup-email", email);
-      setModalState(4);
+      await AccountApi.changePassword({ email, password }).then((res) =>
+        console.log(res)
+      );
+      alert("새 비밀번호 설정이 완료되었습니다!");
+      setModalState(1);
     } catch (err) {
-      alert("이미 가입된 이메일입니다.");
+      console.log(err);
     }
   };
-
   return (
     <Block.FormWrapper>
-      <Text.Body1 margin="28px 0 40px 0 ">회원가입</Text.Body1>
-      <Block.Form onChange={handleIsAbled} onSubmit={handleSubmit(onValid)}>
-        <Block.FormInputSection>
-          <Input.FormInput
-            {...register("email", {
-              required: "이메일을 입력해주세요",
-              pattern: {
-                value: /^[a-zA-Z0-9+-_.]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$/,
-                message: "정확하지 않은 이메일입니다",
-              },
-              onChange: () => trigger("email"),
-            })}
-            placeholder="이메일"
-            type="text"
-            width="406px"
-            height="35px"
-            fontSize="16px"
-            error={!!errors.email}
-          />
-          <Block.ErrorMessage>
-            <Text.Body5 color="red">{errors.email?.message}</Text.Body5>
-          </Block.ErrorMessage>
-        </Block.FormInputSection>
+      <Text.Body1 margin="30px 0 35px 0">새 비밀번호를 설정해주세요</Text.Body1>
+
+      <Block.Form onSubmit={handleSubmit(onValid)} onChange={handleIsAbled}>
         <Block.FormInputSection>
           <Input.FormInput
             {...register("password", {
@@ -91,6 +72,7 @@ function SignupForm() {
             )}
           </Block.EyeIcon>
         </Block.FormInputSection>
+
         <Block.FormInputSection>
           <Input.FormInput
             {...register("verifyPassword", {
@@ -125,16 +107,12 @@ function SignupForm() {
               <AiFillEyeInvisible size="24" />
             )}
           </Block.EyeIcon>
+          <Button.FormButton disabled={!isAbled}>
+            <Text.Body1>확인</Text.Body1>
+          </Button.FormButton>
         </Block.FormInputSection>
-        <Button.FormButton disabled={!isAbled} margin="20px 0 16px 0">
-          <Text.Body1>회원가입</Text.Body1>
-        </Button.FormButton>
       </Block.Form>
-      <Text.Body3 margin="0 9px 0 113px ">이미 가입하셨나요?</Text.Body3>
-      <Text.Body3 onClick={handleGoLogin} pointer color="main">
-        로그인
-      </Text.Body3>
     </Block.FormWrapper>
   );
 }
-export default SignupForm;
+export default ChangePasswordForm;
