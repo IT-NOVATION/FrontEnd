@@ -7,12 +7,13 @@ function Home() {
   return (
     <>
       <Block.PageLayout>
-        <Block.PageWrapper bgColor="black">
+        <Block.PageWrapper>
           <NavigationBar />
-          <Banner></Banner>
+          <Banner />
           <Posters></Posters>
-          <div style={{ height: "1000vh" }} /> {/* 스크롤 확인용 */}
+          {/* 스크롤 확인용 */}
         </Block.PageWrapper>
+        <div style={{ height: "1000vh" }}></div>
       </Block.PageLayout>
     </>
   );
