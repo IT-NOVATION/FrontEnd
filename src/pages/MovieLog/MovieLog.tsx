@@ -1,4 +1,4 @@
-import Badge from "@components/Profile/Badge/Badge";
+import Badge from "@components/User/Badge/Badge";
 import { Block, Text, Button } from "@styles/UI";
 
 const User = {
@@ -45,7 +45,8 @@ function MovieLog() {
             </Button.Button>
           </Block.RowBox>
           <Block.RowBox width="100%" margin="30px 0 0 0" alignItems="center">
-            <Badge grade="VIP" />
+            <Badge grade="STANDARD" size="29px" />
+            {/* <Badge grade="VIP" /> */}
             <Block.RowBox width="auto" margin="0 0 0 12px" alignItems="center">
               <Text.Body4 margin="0 4px 0 0">팔로워</Text.Body4>
               <Text.Body1 margin="0 4px 0 0">{User.followers}</Text.Body1>
