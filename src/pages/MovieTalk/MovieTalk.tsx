@@ -1,10 +1,3 @@
-import NavigationBar from "@components/NavigationBar/NavigationBar";
-
 export default function MovieTalk() {
-    return (
-        <>
-            <NavigationBar />
-            무비토크
-        </>
-    );
+    return <>무비토크</>;
 }

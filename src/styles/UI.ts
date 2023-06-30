@@ -19,6 +19,15 @@ export const Text = {
         color: ${({ color }) => (color ? theme.colors[color] : theme.colors)};
         line-height: ${props => props.lineHeight};
     `,
+    Title2: styled.div<StyleText>`
+        font-weight: 400;
+        font-size: 30px;
+        white-space: pre-line;
+        display: inline-block;
+        margin: ${props => props.margin};
+        color: ${({ color }) => (color ? theme.colors[color] : theme.colors)};
+        line-height: ${props => props.lineHeight};
+    `,
     Title3: styled.div<StyleText>`
         font-weight: 500;
         font-size: 28px;
@@ -28,7 +37,15 @@ export const Text = {
         color: ${({ color }) => (color ? theme.colors[color] : theme.colors)};
         line-height: ${props => props.lineHeight};
     `,
-
+    Title4: styled.div<StyleText>`
+        font-weight: 500;
+        font-size: 24px;
+        white-space: pre-line;
+        display: inline-block;
+        margin: ${props => props.margin};
+        color: ${({ color }) => (color ? theme.colors[color] : theme.colors)};
+        line-height: ${props => props.lineHeight};
+    `,
     Body1: styled.div<StyleText>`
         font-weight: 400;
         font-size: 20px;

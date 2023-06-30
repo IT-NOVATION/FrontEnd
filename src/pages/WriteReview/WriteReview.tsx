@@ -1,5 +1,4 @@
 import * as S from "./style";
-import NavigationBar from "@components/NavigationBar/NavigationBar";
 import { Block, Button, Poster, Text } from "@styles/UI";
 import ReviewEditor from "@components/WriteReview/ReviewEditor/ReviewEditor";
 import React, { useState } from "react";
@@ -38,8 +37,6 @@ function WriteReview() {
 
     return (
         <>
-            <NavigationBar />
-
             {/* 헤더 */}
             <Block.ColumnBox width="100vw" height="200px" bgColor="darkWhite" alignItems="center">
                 <Block.ColumnBox width="887px" margin="70px 0 0 0">

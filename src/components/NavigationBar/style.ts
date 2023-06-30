@@ -10,7 +10,8 @@ export const Nav = styled(motion.div)<{ isMain: boolean }>`
     position: fixed;
     display: flex;
     justify-content: space-between;
-    background-color: ${({ isMain }) => (isMain ? "rgba(154, 154, 154, 0.40)" : "white")};
+    background-color: ${({ isMain }) => (isMain ? "black" : "white")};
+    border: 1px solid red;
 `;
 
 export const HomeLogo = styled.img`
