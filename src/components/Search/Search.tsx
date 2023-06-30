@@ -5,7 +5,7 @@ export default function Search() {
     return (
         <>
             <Block.ColumnBox width="100%" height="200px" alignItems="center">
-                <Block.RowBox width="900px" height="62px">
+                <Block.RowBox width="900px" height="62px" margin="0">
                     <Block.RowBox width="152px" justifyContent="space-evenly" alignItems="center" pointer>
                         <Text.Title2 pointer>유저</Text.Title2>
                         <S.DropdownImg src="/icons/dropdown-arrow.svg" alt="dropdown-icon" />
@@ -23,7 +23,10 @@ export default function Search() {
                         <S.Icons src="/icons/search.svg" alt="search" />
                     </Block.RowBox>
                 </Block.RowBox>
-                <Block.Bar width="900px" height="1px" bgColor="black" margin="0 0 33px 0" />
+
+                {/* 수정 */}
+                <Block.Bar width="900px" height="0px" bgColor="black" margin="0 0 33px 0" />
+                {/* 길게 할까 말까 */}
 
                 <Block.RowBox width="900px" height="148px" justifyContent="center">
                     <Block.RowBox

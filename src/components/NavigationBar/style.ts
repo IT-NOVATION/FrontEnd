@@ -34,8 +34,3 @@ export const variants = {
     initial: { y: -80, opacity: 0.5 },
     exit: { y: -80, opacity: 0.5 },
 };
-
-export const DropdownImg = styled.img`
-    width: 28px;
-    cursor: pointer;
-`;

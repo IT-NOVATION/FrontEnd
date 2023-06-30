@@ -3,12 +3,13 @@ import * as S from "./style";
 import { modalStateAtom } from "@recoil/atoms";
 import { useEffect, useState } from "react";
 import { Block, Button, Text } from "@styles/UI";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { AnimatePresence } from "framer-motion";
 import Search from "@components/Search/Search";
 
 export default function NavigationBar() {
     const navigate = useNavigate();
+    const { pathname } = useLocation();
     const handleLoginClick = () => setModalState(1);
     const setModalState = useSetRecoilState(modalStateAtom);
     const [position, setPosition] = useState(window.scrollY);
@@ -17,7 +18,7 @@ export default function NavigationBar() {
 
     const handleSearchBtnClick = () => {
         setIsSearchClick(prev => !prev);
-        console.log(isSearchClick);
+        // console.log(isSearchClick);
     };
 
     const [isLogin, setIsLogin] = useState(false); // 로그인 됐을 때만 알람 표시 보이도록 => 추후에 데이터 받아올 수 있을 때 수정
@@ -74,6 +75,7 @@ export default function NavigationBar() {
                                     무비토크
                                 </Text.Title3>
                             </Block.RowBox>
+
                             <Block.RowBox width="228px" justifyContent="space-between" alignItems="center">
                                 {isSearchClick ? (
                                     <>
@@ -118,6 +120,7 @@ export default function NavigationBar() {
                                 )}
                             </Block.RowBox>
                         </Block.RowBox>
+
                         <Block.Bar width="100%" height="0.5px" bgColor="gray" margin="21px 0" />
                         <Block.RowBox>{isSearchClick && <Search />}</Block.RowBox>
                     </S.Nav>
