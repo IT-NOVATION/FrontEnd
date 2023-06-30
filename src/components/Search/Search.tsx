@@ -2,6 +2,15 @@ import { Block, Text, Input } from "@styles/UI";
 import * as S from "./style";
 import { useNavigate } from "react-router-dom";
 
+const Keywords = [
+    { idx: 1, title: "엘리멘탈" },
+    { idx: 2, title: "범죄도시3" },
+    { idx: 3, title: "인어공주" },
+    { idx: 4, title: "리바운드" },
+    { idx: 5, title: "스즈메의 문단속" },
+    { idx: 6, title: "더 퍼스트 슬램덩크" },
+];
+
 export default function Search() {
     const navigate = useNavigate();
 
@@ -34,7 +43,7 @@ export default function Search() {
                 <Block.Bar width="900px" height="0px" bgColor="black" margin="0 0 33px 0" />
                 {/* 길게 할까 말까 */}
 
-                <Block.RowBox width="900px" height="148px" justifyContent="center">
+                <Block.RowBox width="850px" height="148px">
                     <Block.RowBox
                         width="120px"
                         height="39px"
@@ -45,9 +54,17 @@ export default function Search() {
                     >
                         인기 검색어
                     </Block.RowBox>
-                    <Block.RowBox width="450px" padding="11px 23px">
-                        #결과
-                    </Block.RowBox>
+                    <S.KeywordsWrapper>
+                        {Keywords.map((e, idx) => {
+                            return (
+                                <S.Keyword>
+                                    <Text.Body2 key={idx} color="darkGray">
+                                        # {e.title}
+                                    </Text.Body2>
+                                </S.Keyword>
+                            );
+                        })}
+                    </S.KeywordsWrapper>
                 </Block.RowBox>
             </Block.ColumnBox>
         </>
