@@ -89,8 +89,7 @@ export default function NavigationBar() {
                                         width="122px"
                                         height="43px"
                                         borderRadius="15px"
-                                        border="1px solid black"
-                                        bgColor="white"
+                                        border=" 1px solid rgba(0, 0, 0, 0.61)"
                                         justifyContent="space-evenly"
                                         alignItems="center"
                                         pointer

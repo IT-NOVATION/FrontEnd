@@ -11,7 +11,7 @@ export const Nav = styled(motion.div)`
     display: flex;
     justify-content: space-between;
     background-color: white;
-    border-bottom: 1px solid gray;
+    border-bottom: 1px solid #cccccc;
 `;
 
 export const HomeLogo = styled.img`
