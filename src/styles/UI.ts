@@ -266,7 +266,7 @@ export const Block = {
     `,
     Bar: styled.div<StyleBlock>`
         width: ${props => props.width};
-        height: 0.5px;
+        height: ${props => props.height};
         background-color: ${({ bgColor }) => (bgColor ? theme.colors[bgColor] : theme.colors)};
         margin: ${props => props.margin};
     `,
