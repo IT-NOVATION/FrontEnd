@@ -1,7 +1,13 @@
 import { Block, Text, Input } from "@styles/UI";
 import * as S from "./style";
+import { useNavigate } from "react-router-dom";
 
 export default function Search() {
+    const navigate = useNavigate();
+
+    const handleSearch = () => {
+        navigate("/search-result");
+    };
     return (
         <>
             <Block.ColumnBox width="100%" height="200px" alignItems="center">
@@ -20,7 +26,7 @@ export default function Search() {
                     />
 
                     <Block.RowBox width="48px" justifyContent="center" alignItems="center">
-                        <S.Icons src="/icons/search.svg" alt="search" />
+                        <S.Icons src="/icons/search.svg" alt="search" onClick={handleSearch} />
                     </Block.RowBox>
                 </Block.RowBox>
 

@@ -18,7 +18,6 @@ export default function NavigationBar() {
 
     const handleSearchBtnClick = () => {
         setIsSearchClick(prev => !prev);
-        // console.log(isSearchClick);
     };
 
     const [isLogin, setIsLogin] = useState(false); // 로그인 됐을 때만 알람 표시 보이도록 => 추후에 데이터 받아올 수 있을 때 수정
@@ -76,14 +75,26 @@ export default function NavigationBar() {
                                 </Text.Title3>
                             </Block.RowBox>
 
-                            <Block.RowBox width="228px" justifyContent="space-between" alignItems="center">
-                                {isSearchClick ? (
+                            <Block.RowBox width="228px" justifyContent="flex-end" alignItems="center">
+                                {pathname !== "/search-result" && (
                                     <>
-                                        <S.Icons src="/icons/close.svg" alt="close" onClick={handleSearchBtnClick} />
-                                    </>
-                                ) : (
-                                    <>
-                                        <S.Icons src="/icons/search.svg" alt="search" onClick={handleSearchBtnClick} />
+                                        {isSearchClick ? (
+                                            <>
+                                                <S.Icons
+                                                    src="/icons/close.svg"
+                                                    alt="close"
+                                                    onClick={handleSearchBtnClick}
+                                                />
+                                            </>
+                                        ) : (
+                                            <>
+                                                <S.Icons
+                                                    src="/icons/search.svg"
+                                                    alt="search"
+                                                    onClick={handleSearchBtnClick}
+                                                />
+                                            </>
+                                        )}
                                     </>
                                 )}
 

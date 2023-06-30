@@ -6,7 +6,7 @@ export default function SearchResult() {
         <>
             <Block.ColumnBox width="100vw" height="100vh" bgColor="white" alignItems="center">
                 <Block.RowBox width="900px" height="300px" padding="106px 0" bgColor="white">
-                    {/* <Search /> */}
+                    <Search />
                 </Block.RowBox>
 
                 <Block.RowBox>
