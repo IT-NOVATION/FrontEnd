@@ -46,7 +46,7 @@ export default function Search() {
                         인기 검색어
                     </Block.RowBox>
                     <Block.RowBox width="450px" padding="11px 23px">
-                        결과
+                        #결과
                     </Block.RowBox>
                 </Block.RowBox>
             </Block.ColumnBox>
