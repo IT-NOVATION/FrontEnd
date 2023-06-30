@@ -27,7 +27,7 @@ export const Icons = styled.img`
     border-radius: 100px;
     cursor: pointer;
     filter: invert(60%);
-    margin-right: 10px;
+    margin-right: 20px;
 `;
 
 export const variants = {
