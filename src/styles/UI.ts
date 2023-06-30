@@ -18,6 +18,7 @@ export const Text = {
         margin: ${props => props.margin};
         color: ${({ color }) => (color ? theme.colors[color] : theme.colors)};
         line-height: ${props => props.lineHeight};
+        cursor: ${props => props.pointer && "pointer"};
     `,
     Title2: styled.div<StyleText>`
         font-weight: 400;
@@ -27,6 +28,7 @@ export const Text = {
         margin: ${props => props.margin};
         color: ${({ color }) => (color ? theme.colors[color] : theme.colors)};
         line-height: ${props => props.lineHeight};
+        cursor: ${props => props.pointer && "pointer"};
     `,
     Title3: styled.div<StyleText>`
         font-weight: 500;
@@ -36,6 +38,7 @@ export const Text = {
         margin: ${props => props.margin};
         color: ${({ color }) => (color ? theme.colors[color] : theme.colors)};
         line-height: ${props => props.lineHeight};
+        cursor: ${props => props.pointer && "pointer"};
     `,
     Title4: styled.div<StyleText>`
         font-weight: 500;
@@ -45,6 +48,7 @@ export const Text = {
         margin: ${props => props.margin};
         color: ${({ color }) => (color ? theme.colors[color] : theme.colors)};
         line-height: ${props => props.lineHeight};
+        cursor: ${props => props.pointer && "pointer"};
     `,
     Body1: styled.div<StyleText>`
         font-weight: 400;

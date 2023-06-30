@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import styled from "styled-components";
 
-export const Nav = styled(motion.div)<{ isMain: boolean }>`
+export const Nav = styled(motion.div)`
     width: 100vw;
     min-width: 900px;
     height: 85px;
@@ -10,8 +10,8 @@ export const Nav = styled(motion.div)<{ isMain: boolean }>`
     position: fixed;
     display: flex;
     justify-content: space-between;
-    background-color: ${({ isMain }) => (isMain ? "black" : "white")};
-    border: 1px solid red;
+    background-color: white;
+    border-bottom: 1px solid gray;
 `;
 
 export const HomeLogo = styled.img`
@@ -25,11 +25,11 @@ export const Profile = styled.img`
     cursor: pointer;
 `;
 
-export const Icons = styled.img<{ isMain: boolean }>`
+export const Icons = styled.img`
     width: 31px;
     border-radius: 100px;
     cursor: pointer;
-    filter: ${({ isMain }) => (isMain ? "invert(0%)" : "invert(60%)")};
+    filter: invert(60%);
 `;
 
 export const variants = {
