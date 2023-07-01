@@ -54,6 +54,7 @@ export const Text = {
     margin: ${(props) => props.margin};
     color: ${({ color }) => (color ? theme.colors[color] : theme.colors)};
     display: inline-block;
+    line-height: ${(props) => props.lineHeight};
     cursor: ${(props) => props.pointer && "pointer"};
   `,
   Body2: styled.div<StyleText>`
@@ -63,6 +64,7 @@ export const Text = {
     margin: ${(props) => props.margin};
     color: ${({ color }) => (color ? theme.colors[color] : theme.colors)};
     display: inline-block;
+    line-height: ${(props) => props.lineHeight};
     cursor: ${(props) => props.pointer && "pointer"};
   `,
 
@@ -73,6 +75,7 @@ export const Text = {
     margin: ${(props) => props.margin};
     color: ${({ color }) => (color ? theme.colors[color] : theme.colors)};
     display: inline-block;
+    line-height: ${(props) => props.lineHeight};
     cursor: ${(props) => props.pointer && "pointer"};
   `,
   Body4: styled.div<StyleText>`
@@ -82,6 +85,7 @@ export const Text = {
     margin: ${(props) => props.margin};
     color: ${({ color }) => (color ? theme.colors[color] : theme.colors)};
     display: inline-block;
+    line-height: ${(props) => props.lineHeight};
     cursor: ${(props) => props.pointer && "pointer"};
   `,
   Body5: styled.div<StyleText>`
@@ -91,6 +95,7 @@ export const Text = {
     margin: ${(props) => props.margin};
     color: ${({ color }) => (color ? theme.colors[color] : theme.colors)};
     display: inline-block;
+    line-height: ${(props) => props.lineHeight};
     cursor: ${(props) => props.pointer && "pointer"};
   `,
   Body6: styled.div<StyleText>`
@@ -100,6 +105,7 @@ export const Text = {
     margin: ${(props) => props.margin};
     color: ${({ color }) => (color ? theme.colors[color] : theme.colors)};
     display: inline-block;
+    line-height: ${(props) => props.lineHeight};
     cursor: ${(props) => props.pointer && "pointer"};
   `,
 };
@@ -200,6 +206,12 @@ type StyleBlock = {
   bgColor?: DefaultThemeColorKey;
   border?: string;
   borderRadius?: string;
+  background?: string;
+  top?: string;
+  right?: string;
+  bottom?: string;
+  left?: string;
+  relative?: boolean;
 };
 export const Block = {
   PageWrapper: styled.div<StyleBlock>`
@@ -251,6 +263,7 @@ export const Block = {
       bgColor ? theme.colors[bgColor] : theme.colors};
     border: ${(props) => props.border};
     border-radius: ${(props) => props.borderRadius};
+    position: ${(props) => props.relative && "relative"};
   `,
   ColumnBox: styled.div<StyleBlock>`
     width: ${(props) => (props.width ? props.width : "100%")};
@@ -263,8 +276,21 @@ export const Block = {
     background-color: ${({ bgColor }) =>
       bgColor ? theme.colors[bgColor] : theme.colors};
     margin: ${(props) => props.margin};
+    background: ${(props) => props.background};
+    background-size: cover;
+    background-position: center;
     border: ${(props) => props.border};
     border-radius: ${(props) => props.borderRadius};
+  `,
+  AbsoluteBox: styled.div<StyleBlock>`
+    width: ${(props) => (props.width ? props.width : "100%")};
+    height: ${(props) => (props.width ? props.height : "auto")};
+    cursor: ${(props) => props.pointer && "pointer"};
+    position: absolute;
+    top: ${(props) => props.top};
+    right: ${(props) => props.right};
+    bottom: ${(props) => props.bottom};
+    left: ${(props) => props.left};
   `,
   Bar: styled.div<StyleBlock>`
     width: ${(props) => props.width};

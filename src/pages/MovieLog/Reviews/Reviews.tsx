@@ -5,8 +5,9 @@ import { Block } from "@styles/UI";
 function Reviews({ reviews }: { reviews: IReview[] }) {
   return (
     <Block.ColumnBox margin="30px 0 34px 0">
-      <Review review={reviews[0]} />
-      <Review review={reviews[1]} />
+      {reviews.map((v) => (
+        <Review review={v} />
+      ))}
     </Block.ColumnBox>
   );
 }
