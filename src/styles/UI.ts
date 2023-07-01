@@ -28,6 +28,24 @@ export const Text = {
     color: ${({ color }) => (color ? theme.colors[color] : theme.colors)};
     line-height: ${(props) => props.lineHeight};
   `,
+  Title4: styled.div<StyleText>`
+    font-weight: 500;
+    font-size: 24px;
+    white-space: pre-line;
+    display: inline-block;
+    margin: ${(props) => props.margin};
+    color: ${({ color }) => (color ? theme.colors[color] : theme.colors)};
+    line-height: ${(props) => props.lineHeight};
+  `,
+  Title5: styled.div<StyleText>`
+    font-weight: 500;
+    font-size: 20px;
+    white-space: pre-line;
+    display: inline-block;
+    margin: ${(props) => props.margin};
+    color: ${({ color }) => (color ? theme.colors[color] : theme.colors)};
+    line-height: ${(props) => props.lineHeight};
+  `,
 
   Body1: styled.div<StyleText>`
     font-weight: 400;
@@ -183,6 +201,10 @@ type StyleBlock = {
   border?: string;
   borderRadius?: string;
   background?: string;
+  top?: string;
+  right?: string;
+  bottom?: string;
+  left?: string;
 };
 export const Block = {
   PageWrapper: styled.div<StyleBlock>`
@@ -252,21 +274,22 @@ export const Block = {
     border: ${(props) => props.border};
     border-radius: ${(props) => props.borderRadius};
   `,
+  AbsoluteBox: styled.div<StyleBlock>`
+    width: ${(props) => (props.width ? props.width : "100%")};
+    height: ${(props) => (props.width ? props.height : "auto")};
+    cursor: ${(props) => props.pointer && "pointer"};
+    position: absolute;
+    top: ${(props) => props.top};
+    right: ${(props) => props.right};
+    bottom: ${(props) => props.bottom};
+    left: ${(props) => props.left};
+  `,
   Bar: styled.div<StyleBlock>`
     width: ${(props) => props.width};
     height: 0.5px;
     background-color: ${({ bgColor }) =>
       bgColor ? theme.colors[bgColor] : theme.colors};
     margin: ${(props) => props.margin};
-  `,
-  ProfileImg: styled.div<StyleBlock>`
-    width: ${(props) => props.width};
-    height: ${(props) => props.height};
-    border-radius: 50%;
-    background: ${(props) => props.background};
-    background-size: cover;
-    position: absolute;
-    top: 50px;
   `,
 };
 
