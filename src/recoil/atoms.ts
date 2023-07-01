@@ -15,5 +15,6 @@ export const modalStateAtom = atom<number>({
 4 : 프로필 정보 등록 (닉네임, 한줄 소개)
 5 : 이용약관 
 6 : 개인정보 처리 방침 
+7 : 비밀번호 찾기 페이지 - 인증번호 받기
 */
 }

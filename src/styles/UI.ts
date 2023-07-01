@@ -200,11 +200,6 @@ type StyleBlock = {
   bgColor?: DefaultThemeColorKey;
   border?: string;
   borderRadius?: string;
-  background?: string;
-  top?: string;
-  right?: string;
-  bottom?: string;
-  left?: string;
 };
 export const Block = {
   PageWrapper: styled.div<StyleBlock>`
@@ -265,24 +260,11 @@ export const Block = {
     flex-direction: column;
     justify-content: ${(props) => props.justifyContent};
     align-items: ${(props) => props.alignItems};
-    background: ${(props) => props.background};
-    background-size: cover;
-    background-position: center;
     background-color: ${({ bgColor }) =>
       bgColor ? theme.colors[bgColor] : theme.colors};
     margin: ${(props) => props.margin};
     border: ${(props) => props.border};
     border-radius: ${(props) => props.borderRadius};
-  `,
-  AbsoluteBox: styled.div<StyleBlock>`
-    width: ${(props) => (props.width ? props.width : "100%")};
-    height: ${(props) => (props.width ? props.height : "auto")};
-    cursor: ${(props) => props.pointer && "pointer"};
-    position: absolute;
-    top: ${(props) => props.top};
-    right: ${(props) => props.right};
-    bottom: ${(props) => props.bottom};
-    left: ${(props) => props.left};
   `,
   Bar: styled.div<StyleBlock>`
     width: ${(props) => props.width};
