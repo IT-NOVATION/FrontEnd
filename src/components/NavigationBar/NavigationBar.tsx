@@ -15,7 +15,7 @@ export default function NavigationBar() {
   const [position, setPosition] = useState(window.scrollY);
   const [isVisible, setIsVisible] = useState<boolean>(true);
 
-  const [isLogin, setIsLogin] = useState(true); // 로그인 됐을 때만 알람 표시 보이도록 => 추후에 데이터 받아올 수 있을 때 수정
+  const [isLogin, setIsLogin] = useState(false); // 로그인 됐을 때만 알람 표시 보이도록 => 추후에 데이터 받아올 수 있을 때 수정
 
   const goToMain = () => {
     navigate("/home");
