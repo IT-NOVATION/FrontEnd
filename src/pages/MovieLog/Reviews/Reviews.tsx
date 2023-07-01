@@ -6,7 +6,7 @@ function Reviews({ reviews }: { reviews: IReview[] }) {
   return (
     <Block.ColumnBox margin="30px 0 34px 0">
       {reviews.map((v) => (
-        <Review review={v} />
+        <Review review={v} key={v.reviewId} />
       ))}
     </Block.ColumnBox>
   );

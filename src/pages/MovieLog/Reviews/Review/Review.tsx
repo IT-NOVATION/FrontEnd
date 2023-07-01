@@ -23,7 +23,11 @@ function Review({ review }: { review: IReview }) {
           </Block.RowBox>
         </Block.RowBox>
         <Block.RowBox margin="10px 0 0 0">
-          <Text.Body4 lineHeight="1.3" margin="0 20px 0 0">
+          <Text.Body4
+            // style={{ color: theme.colors.lightBlack }}
+            lineHeight="1.3"
+            margin="0 20px 0 0"
+          >
             {useCutReviewText(review.text)}
           </Text.Body4>
         </Block.RowBox>
