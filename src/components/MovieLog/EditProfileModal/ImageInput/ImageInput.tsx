@@ -1,20 +1,25 @@
 import ProfileImg from "@components/User/ProfileImg/ProfileImg";
 import { Block } from "@styles/UI";
 import theme from "@styles/theme";
-import AWS from "aws-sdk";
 import * as S from "./style";
 import useUploadImg from "@hooks/useUploadImg";
+import BgImg from "@components/User/BgImg/BgImg";
 
 type Props = {
+  type: "profileImg" | "bgImg";
   img: string;
   setImg: React.Dispatch<React.SetStateAction<string>>;
 };
 
-function ImageInput({ img, setImg }: Props) {
+function ImageInput({ type, img, setImg }: Props) {
   const uploadImg = useUploadImg(setImg);
   return (
     <Block.ColumnBox width="auto" position="relative">
-      <ProfileImg img={img} size="70px" />
+      {type === "profileImg" ? (
+        <ProfileImg img={img} size="70px" />
+      ) : (
+        <BgImg img={img} />
+      )}
       <S.Label htmlFor={img}>
         <Block.ColumnBox
           width="23px"

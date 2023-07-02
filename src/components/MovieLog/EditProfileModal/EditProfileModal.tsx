@@ -60,7 +60,11 @@ function EditProfileModal({ userProfile, setIsEditing }: Props) {
               alignItems="center"
             >
               <Text.Body4 margin="0 0 6px 0">프로필</Text.Body4>
-              <ImageInput img={profileImg} setImg={setProfileImg} />
+              <ImageInput
+                type="profileImg"
+                img={profileImg}
+                setImg={setProfileImg}
+              />
             </Block.ColumnBox>
             <Block.ColumnBox
               width="50%"
@@ -68,7 +72,7 @@ function EditProfileModal({ userProfile, setIsEditing }: Props) {
               alignItems="center"
             >
               <Text.Body4 margin="0 0 6px 0">커버</Text.Body4>
-              <ImageInput img={bgImg} setImg={setBgImg} />
+              <ImageInput type="bgImg" img={bgImg} setImg={setBgImg} />
             </Block.ColumnBox>
           </Block.RowBox>
           <Block.RowBox margin="28px 0 0 0">
