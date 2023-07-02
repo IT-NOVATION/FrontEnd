@@ -276,6 +276,7 @@ export const Block = {
     background-color: ${({ bgColor }) =>
       bgColor ? theme.colors[bgColor] : theme.colors};
     margin: ${(props) => props.margin};
+    padding: ${(props) => props.padding};
     background: ${(props) => props.background};
     background-size: cover;
     background-position: center;

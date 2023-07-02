@@ -3,20 +3,23 @@ import ProfileImg from "@components/User/ProfileImg/ProfileImg";
 import { Block, Text, Button } from "@styles/UI";
 import { useState } from "react";
 import * as S from "./style";
-import Reviews from "./Reviews/Reviews";
-import Movies from "./Movies/Movies";
+import Reviews from "../../components/MovieLog/Reviews/Reviews";
+import Movies from "../../components/MovieLog/Movies/Movies";
+import EditProfileModal from "@components/MovieLog/EditProfileModal/EditProfileModal";
 
 const User = {
-  userId: 1,
-  background:
-    "https://cdn.pixabay.com/photo/2015/09/21/14/46/banner-949931_1280.jpg",
-  nickname: "삼동맘",
-  introduction: "퇴근 후 삼동이랑 영화보는 일상",
-  grade: "VIP",
-  profileImg:
-    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQmG0E8umwlZItAYhIZcffLgFcUkDIr7WiicQ&usqp=CAU",
-  followers: 231,
-  following: 111,
+  userProfile: {
+    userId: 1,
+    background:
+      "https://cdn.pixabay.com/photo/2015/09/21/14/46/banner-949931_1280.jpg",
+    nickname: "삼동맘",
+    introduction: "퇴근 후 삼동이랑 영화보는 일상",
+    grade: "VIP",
+    profileImg:
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQmG0E8umwlZItAYhIZcffLgFcUkDIr7WiicQ&usqp=CAU",
+    followers: 231,
+    following: 111,
+  },
   reviews: [
     {
       reviewId: 1,
@@ -70,6 +73,10 @@ const User = {
 function MovieLog() {
   // parameter에 담긴 유저 아이디를 통해 유저의 무비로그 서버에 요청..
 
+  // 본인 무비로그인지 여부
+  const [isOwnProfile, setIsOwnProfile] = useState(true);
+  const [isEditing, setIsEditing] = useState(false);
+
   const [contents, setContents] = useState<"Reviews" | "InterestedMovies">(
     "Reviews"
   );
@@ -77,12 +84,23 @@ function MovieLog() {
   const handleChangeContent = (to: "Reviews" | "InterestedMovies") => {
     setContents(to);
   };
+  const handleFollow = () => {};
+  const handleButtonClick = () => {
+    isOwnProfile ? setIsEditing(true) : handleFollow();
+  };
 
   return (
     <>
+      {/* 프로필 편집 모달 */}
+      {isEditing && (
+        <EditProfileModal
+          setIsEditing={setIsEditing}
+          userProfile={User.userProfile}
+        />
+      )}
       {/* 커버 */}
       <Block.ColumnBox
-        background={`url(${User.background})`}
+        background={`url(${User.userProfile.background})`}
         width="100vw"
         height="196px"
       ></Block.ColumnBox>
@@ -90,31 +108,44 @@ function MovieLog() {
       <Block.PageWrapper>
         <Block.PageLayout>
           <Block.AbsoluteBox top="50px">
-            <ProfileImg size="208px" img={User.profileImg} />
+            <ProfileImg size="208px" img={User.userProfile.profileImg} />
           </Block.AbsoluteBox>
           <Block.RowBox width="900px" margin="85px 0 0 0" alignItems="flex-end">
-            <Text.Title3 margin="0 16px 0 0">{User.nickname}</Text.Title3>
-            <Text.Body1 margin="0 410px 0 0">{User.introduction}</Text.Body1>
+            <Text.Title3 color="lightBlack" margin="0 16px 0 0">
+              {User.userProfile.nickname}
+            </Text.Title3>
+            <Text.Body1 color="lightBlack" margin="0 410px 0 0">
+              {User.userProfile.introduction}
+            </Text.Body1>
             <Button.Button
               width="94px"
               height="33px"
               border=" 1px solid #CCC"
               borderRadius="16.5px"
               bgColor="white"
+              onClick={handleButtonClick}
             >
-              프로필 수정
+              {isOwnProfile ? "프로필 편집" : "팔로우 하기"}
             </Button.Button>
           </Block.RowBox>
           <Block.RowBox width="100%" margin="30px 0 0 0" alignItems="center">
             <Badge grade="VIP" size="29px" />
             {/* <Badge grade="VIP" /> */}
             <Block.RowBox width="auto" margin="0 0 0 12px" alignItems="center">
-              <Text.Body4 margin="0 4px 0 0">팔로워</Text.Body4>
-              <Text.Body1 margin="0 4px 0 0">{User.followers}</Text.Body1>
+              <Text.Body4 color="lightBlack" margin="0 4px 0 0">
+                팔로워
+              </Text.Body4>
+              <Text.Body1 color="lightBlack" margin="0 4px 0 0">
+                {User.userProfile.followers}
+              </Text.Body1>
             </Block.RowBox>
             <Block.RowBox width="auto" margin="0 0 0 25px" alignItems="center">
-              <Text.Body4 margin="0 4px 0 0">팔로잉</Text.Body4>
-              <Text.Body1 margin="0 4px 0 0">{User.following}</Text.Body1>
+              <Text.Body4 color="lightBlack" margin="0 4px 0 0">
+                팔로잉
+              </Text.Body4>
+              <Text.Body1 color="lightBlack" margin="0 4px 0 0">
+                {User.userProfile.following}
+              </Text.Body1>
             </Block.RowBox>
           </Block.RowBox>
 
@@ -124,15 +155,19 @@ function MovieLog() {
               onClick={() => handleChangeContent("Reviews")}
               selected={contents === "Reviews"}
             >
-              <Text.Body1>리뷰</Text.Body1>
-              <Text.Body1 margin="4px">17</Text.Body1>
+              <Text.Body1 color="lightBlack">리뷰</Text.Body1>
+              <Text.Body1 color="lightBlack" margin="4px">
+                17
+              </Text.Body1>
             </S.ContentLabel>
             <S.ContentLabel
               onClick={() => handleChangeContent("InterestedMovies")}
               selected={contents === "InterestedMovies"}
             >
-              <Text.Body1>관심영화</Text.Body1>
-              <Text.Body1 margin="4px">30</Text.Body1>
+              <Text.Body1 color="lightBlack">관심영화</Text.Body1>
+              <Text.Body1 color="lightBlack" margin="4px">
+                30
+              </Text.Body1>
             </S.ContentLabel>
           </Block.RowBox>
           {contents === "Reviews" ? (
