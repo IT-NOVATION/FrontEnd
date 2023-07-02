@@ -23,5 +23,6 @@ export const Background = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  opacity: 0;
   z-index: 1;
 `;

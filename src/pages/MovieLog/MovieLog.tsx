@@ -103,10 +103,7 @@ function MovieLog() {
           bgColor="bgColor"
           zIndex="2"
         >
-          <S.Background
-            style={{ opacity: 0 }}
-            onClick={handleBgClick}
-          ></S.Background>
+          <S.Background onClick={handleBgClick}></S.Background>
           <EditProfileModal
             setIsEditing={setIsEditing}
             userProfile={User.userProfile}
