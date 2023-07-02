@@ -3,8 +3,8 @@ import ProfileImg from "@components/User/ProfileImg/ProfileImg";
 import { Block, Text, Button } from "@styles/UI";
 import { useState } from "react";
 import * as S from "./style";
-import Reviews from "../../components/MovieLog/Reviews/Reviews";
-import Movies from "../../components/MovieLog/Movies/Movies";
+import Reviews from "@components/MovieLog/Reviews/Reviews";
+import Movies from "@components/MovieLog/Movies/Movies";
 import EditProfileModal from "@components/MovieLog/EditProfileModal/EditProfileModal";
 
 const User = {
