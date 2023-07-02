@@ -9,7 +9,8 @@ declare module "styled-components" {
     | "lightBlack"
     | "darkGray"
     | "red"
-    | "darkWhite";
+    | "darkWhite"
+    | "bgColor";
 
   export interface DefaultTheme {
     colors: {

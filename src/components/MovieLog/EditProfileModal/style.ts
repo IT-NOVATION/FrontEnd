@@ -1,15 +1,22 @@
 import theme from "@styles/theme";
 import styled from "styled-components";
 
-export const Background = styled.div`
-  width: 100vw;
-  height: 100vh;
-  position: fixed;
-  background-color: rgba(50, 50, 50, 0.56);
-  top: 0;
-  right: 0;
+export const Input = styled.input<{ error?: boolean }>`
+  font-weight: 400;
+  border: none;
+  border-bottom: 1px solid
+    ${(props) => (props.error ? `${theme.colors.red}` : `${theme.colors.gray}`)};
+  outline: none;
+  background: inherit;
   display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 1;
+  justify-content: flex-end;
+  padding: 0;
+`;
+
+export const Textarea = styled.textarea`
+  width: 100%;
+  height: 58px;
+  margin-top: 15px;
+  border: 0.7px solid ${theme.colors.gray};
+  resize: none;
 `;

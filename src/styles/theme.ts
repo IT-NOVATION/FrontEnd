@@ -9,6 +9,7 @@ const colors = {
   gray: "#CCCCCC",
   darkGray: "#5F5F5F",
   red: "#FF5047",
+  bgColor: "rgba(50, 50, 50, 0.56)",
 };
 
 const theme: DefaultTheme = {

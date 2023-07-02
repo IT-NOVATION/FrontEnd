@@ -84,6 +84,7 @@ function MovieLog() {
   const handleChangeContent = (to: "Reviews" | "InterestedMovies") => {
     setContents(to);
   };
+  const handleBgClick = () => setIsEditing(false);
   const handleFollow = () => {};
   const handleButtonClick = () => {
     isOwnProfile ? setIsEditing(true) : handleFollow();
@@ -93,10 +94,24 @@ function MovieLog() {
     <>
       {/* 프로필 편집 모달 */}
       {isEditing && (
-        <EditProfileModal
-          setIsEditing={setIsEditing}
-          userProfile={User.userProfile}
-        />
+        <Block.ColumnBox
+          width="100vw"
+          height="100vh"
+          position="fixed"
+          justifyContent="center"
+          alignItems="center"
+          bgColor="bgColor"
+          zIndex="2"
+        >
+          <S.Background
+            style={{ opacity: 0 }}
+            onClick={handleBgClick}
+          ></S.Background>
+          <EditProfileModal
+            setIsEditing={setIsEditing}
+            userProfile={User.userProfile}
+          />
+        </Block.ColumnBox>
       )}
       {/* 커버 */}
       <Block.ColumnBox

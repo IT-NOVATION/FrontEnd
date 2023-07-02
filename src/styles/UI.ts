@@ -212,6 +212,8 @@ type StyleBlock = {
   bottom?: string;
   left?: string;
   relative?: boolean;
+  zIndex?: string;
+  position?: string;
 };
 export const Block = {
   PageWrapper: styled.div<StyleBlock>`
@@ -260,10 +262,12 @@ export const Block = {
     margin: ${(props) => props.margin};
     padding: ${(props) => props.padding};
     background-color: ${({ bgColor }) =>
-      bgColor ? theme.colors[bgColor] : theme.colors};
+      bgColor ? theme.colors[bgColor] : bgColor};
     border: ${(props) => props.border};
     border-radius: ${(props) => props.borderRadius};
     position: ${(props) => props.relative && "relative"};
+    z-index: ${(props) => props.zIndex};
+    position: ${(props) => props.position};
   `,
   ColumnBox: styled.div<StyleBlock>`
     width: ${(props) => (props.width ? props.width : "100%")};
@@ -282,6 +286,8 @@ export const Block = {
     background-position: center;
     border: ${(props) => props.border};
     border-radius: ${(props) => props.borderRadius};
+    z-index: ${(props) => props.zIndex};
+    position: ${(props) => props.position};
   `,
   AbsoluteBox: styled.div<StyleBlock>`
     width: ${(props) => (props.width ? props.width : "100%")};
@@ -292,6 +298,7 @@ export const Block = {
     right: ${(props) => props.right};
     bottom: ${(props) => props.bottom};
     left: ${(props) => props.left};
+    z-index: ${(props) => props.zIndex};
   `,
   Bar: styled.div<StyleBlock>`
     width: ${(props) => props.width};
