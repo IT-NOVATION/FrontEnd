@@ -4,6 +4,7 @@ import { IUserProfile } from "@interfaces/userProfile";
 import ProfileImg from "@components/User/ProfileImg/ProfileImg";
 import { useState } from "react";
 import theme from "@styles/theme";
+import ImageInput from "./ImageInput/ImageInput";
 
 type Props = {
   userProfile: IUserProfile;
@@ -14,6 +15,8 @@ function EditProfileModal({ userProfile, setIsEditing }: Props) {
   const [nickname, setNickName] = useState(userProfile.nickname);
   const [nicknameErrorMsg, setNicknameErrorMsg] = useState(true);
   const [introduction, setIntroduction] = useState(userProfile.introduction);
+  const [profileImg, setProfileImg] = useState(userProfile.profileImg);
+  const [bgImg, setBgImg] = useState(userProfile.background);
 
   const handleNicknameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setNickName(e.currentTarget.value);
@@ -57,7 +60,7 @@ function EditProfileModal({ userProfile, setIsEditing }: Props) {
               alignItems="center"
             >
               <Text.Body4 margin="0 0 6px 0">프로필</Text.Body4>
-              <ProfileImg img={userProfile.profileImg} size="70px" />
+              <ImageInput img={profileImg} setImg={setProfileImg} />
             </Block.ColumnBox>
             <Block.ColumnBox
               width="50%"
@@ -65,7 +68,7 @@ function EditProfileModal({ userProfile, setIsEditing }: Props) {
               alignItems="center"
             >
               <Text.Body4 margin="0 0 6px 0">커버</Text.Body4>
-              <ProfileImg img={userProfile.background} size="70px" />
+              <ImageInput img={bgImg} setImg={setBgImg} />
             </Block.ColumnBox>
           </Block.RowBox>
           <Block.RowBox margin="28px 0 0 0">
