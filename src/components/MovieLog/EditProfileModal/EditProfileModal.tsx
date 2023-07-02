@@ -26,7 +26,6 @@ function EditProfileModal({ userProfile, setIsEditing }: Props) {
   const handleCancelClick = () => {
     setIsEditing(false);
   };
-
   const handleProfileSubmit = () => {
     // 서버에 전송...
     // 서버에서 닉네임 중복여부 체크해야
