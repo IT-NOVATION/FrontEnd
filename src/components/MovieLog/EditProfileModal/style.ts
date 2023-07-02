@@ -10,7 +10,7 @@ export const Input = styled.input<{ error?: boolean }>`
   background: inherit;
   display: flex;
   justify-content: flex-end;
-  padding: 0;
+  padding-left: 1px;
 `;
 
 export const Textarea = styled.textarea`
@@ -18,5 +18,6 @@ export const Textarea = styled.textarea`
   height: 58px;
   margin-top: 15px;
   border: 0.7px solid ${theme.colors.gray};
+  padding: 5px;
   resize: none;
 `;

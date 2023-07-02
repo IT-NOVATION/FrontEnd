@@ -31,7 +31,7 @@ function EditProfileModal({ userProfile, setIsEditing }: Props) {
   };
   const handleProfileSubmit = () => {
     // 서버에 전송...
-    // 서버에서 닉네임 중복여부 체크해야
+    // 닉네임 중복시 에러 메시지 띄우기
   };
   return (
     <>
