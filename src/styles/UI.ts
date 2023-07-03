@@ -214,6 +214,7 @@ type StyleBlock = {
   relative?: boolean;
   zIndex?: string;
   position?: string;
+  boxShadow?: string;
 };
 export const Block = {
   PageWrapper: styled.div<StyleBlock>`
@@ -268,6 +269,7 @@ export const Block = {
     position: ${(props) => props.relative && "relative"};
     z-index: ${(props) => props.zIndex};
     position: ${(props) => props.position};
+    box-shadow: ${(props) => props.boxShadow};
   `,
   ColumnBox: styled.div<StyleBlock>`
     width: ${(props) => (props.width ? props.width : "100%")};
@@ -288,6 +290,7 @@ export const Block = {
     border-radius: ${(props) => props.borderRadius};
     z-index: ${(props) => props.zIndex};
     position: ${(props) => props.position};
+    box-shadow: ${(props) => props.boxShadow};
   `,
   AbsoluteBox: styled.div<StyleBlock>`
     width: ${(props) => (props.width ? props.width : "100%")};

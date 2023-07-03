@@ -1,10 +1,12 @@
-export interface IUserProfile {
+import { IFollowUser } from "./followUser";
+
+export interface IUserProfile_EditProfileModal {
   userId: number;
-  background: string;
   nickname: string;
+  profileImg: string;
+  background: string;
   introduction: string;
   grade: string;
-  profileImg: string;
-  followers: number;
-  following: number;
+  followers: IFollowUser[];
+  following: IFollowUser[];
 }

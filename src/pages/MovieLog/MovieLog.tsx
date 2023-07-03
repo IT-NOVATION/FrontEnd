@@ -6,6 +6,8 @@ import * as S from "./style";
 import Reviews from "@components/MovieLog/Reviews/Reviews";
 import Movies from "@components/MovieLog/Movies/Movies";
 import EditProfileModal from "@components/MovieLog/EditProfileModal/EditProfileModal";
+import FollowModal from "@components/MovieLog/FollowModal/FollowModal";
+import { IFollowUser } from "@interfaces/followUser";
 
 const User = {
   userProfile: {
@@ -17,8 +19,118 @@ const User = {
     grade: "VIP",
     profileImg:
       "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQmG0E8umwlZItAYhIZcffLgFcUkDIr7WiicQ&usqp=CAU",
-    followers: 231,
-    following: 111,
+    followers: [
+      {
+        userId: 2,
+        nickname: "스탁벅스",
+        profileImg:
+          "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQmG0E8umwlZItAYhIZcffLgFcUkDIr7WiicQ&usqp=CAU",
+      },
+      {
+        userId: 3,
+        nickname: "stakbucks",
+        profileImg:
+          "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQmG0E8umwlZItAYhIZcffLgFcUkDIr7WiicQ&usqp=CAU",
+      },
+      {
+        userId: 2,
+        nickname: "스탁벅스",
+        profileImg:
+          "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQmG0E8umwlZItAYhIZcffLgFcUkDIr7WiicQ&usqp=CAU",
+      },
+      {
+        userId: 3,
+        nickname: "stakbucks",
+        profileImg:
+          "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQmG0E8umwlZItAYhIZcffLgFcUkDIr7WiicQ&usqp=CAU",
+      },
+      {
+        userId: 2,
+        nickname: "스탁벅스",
+        profileImg:
+          "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQmG0E8umwlZItAYhIZcffLgFcUkDIr7WiicQ&usqp=CAU",
+      },
+      {
+        userId: 3,
+        nickname: "stakbucks",
+        profileImg:
+          "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQmG0E8umwlZItAYhIZcffLgFcUkDIr7WiicQ&usqp=CAU",
+      },
+      {
+        userId: 2,
+        nickname: "스탁벅스",
+        profileImg:
+          "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQmG0E8umwlZItAYhIZcffLgFcUkDIr7WiicQ&usqp=CAU",
+      },
+      {
+        userId: 3,
+        nickname: "stakbucks",
+        profileImg:
+          "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQmG0E8umwlZItAYhIZcffLgFcUkDIr7WiicQ&usqp=CAU",
+      },
+      {
+        userId: 2,
+        nickname: "스탁벅스",
+        profileImg:
+          "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQmG0E8umwlZItAYhIZcffLgFcUkDIr7WiicQ&usqp=CAU",
+      },
+      {
+        userId: 3,
+        nickname: "stakbucks",
+        profileImg:
+          "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQmG0E8umwlZItAYhIZcffLgFcUkDIr7WiicQ&usqp=CAU",
+      },
+      {
+        userId: 2,
+        nickname: "스탁벅스",
+        profileImg:
+          "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQmG0E8umwlZItAYhIZcffLgFcUkDIr7WiicQ&usqp=CAU",
+      },
+      {
+        userId: 3,
+        nickname: "stakbucks",
+        profileImg:
+          "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQmG0E8umwlZItAYhIZcffLgFcUkDIr7WiicQ&usqp=CAU",
+      },
+      {
+        userId: 2,
+        nickname: "스탁벅스",
+        profileImg:
+          "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQmG0E8umwlZItAYhIZcffLgFcUkDIr7WiicQ&usqp=CAU",
+      },
+      {
+        userId: 3,
+        nickname: "stakbucks",
+        profileImg:
+          "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQmG0E8umwlZItAYhIZcffLgFcUkDIr7WiicQ&usqp=CAU",
+      },
+      {
+        userId: 2,
+        nickname: "스탁벅스",
+        profileImg:
+          "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQmG0E8umwlZItAYhIZcffLgFcUkDIr7WiicQ&usqp=CAU",
+      },
+      {
+        userId: 3,
+        nickname: "stakbucks",
+        profileImg:
+          "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQmG0E8umwlZItAYhIZcffLgFcUkDIr7WiicQ&usqp=CAU",
+      },
+    ],
+    following: [
+      {
+        userId: 2,
+        nickname: "스탁벅스",
+        profileImg:
+          "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQmG0E8umwlZItAYhIZcffLgFcUkDIr7WiicQ&usqp=CAU",
+      },
+      {
+        userId: 3,
+        nickname: "stakbucks",
+        profileImg:
+          "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQmG0E8umwlZItAYhIZcffLgFcUkDIr7WiicQ&usqp=CAU",
+      },
+    ],
   },
   reviews: [
     {
@@ -54,7 +166,63 @@ const User = {
       },
     },
     {
-      reviewId: 1,
+      reviewId: 2,
+      title: "기쁨은 공포보다 강하다",
+      star: 4.5,
+      text: `<p><img src="https://itsmovietime.s3.ap-northeast-2.amazonaws.com/reviewImgs/1688122269834"></p><p>안녕하세요!</p><p>이번 영화는...</p>`,
+      date: "2023.03.15",
+      likes: 12,
+      comments: 10,
+      movie: {
+        movieId: 1,
+        movieImg:
+          "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSpJLtBFePzhjLi7WrGTU61siaVQ6TsbWxVJA&usqp=CAU",
+      },
+    },
+    {
+      reviewId: 3,
+      title: "기쁨은 공포보다 강하다",
+      star: 4.5,
+      text: `<p><img src="https://itsmovietime.s3.ap-northeast-2.amazonaws.com/reviewImgs/1688122269834"></p><p>안녕하세요!</p><p>이번 영화는...</p>`,
+      date: "2023.03.15",
+      likes: 12,
+      comments: 10,
+      movie: {
+        movieId: 1,
+        movieImg:
+          "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSpJLtBFePzhjLi7WrGTU61siaVQ6TsbWxVJA&usqp=CAU",
+      },
+    },
+    {
+      reviewId: 4,
+      title: "기쁨은 공포보다 강하다",
+      star: 4.5,
+      text: `<p><img src="https://itsmovietime.s3.ap-northeast-2.amazonaws.com/reviewImgs/1688122269834"></p><p>안녕하세요!</p><p>이번 영화는...</p>`,
+      date: "2023.03.15",
+      likes: 12,
+      comments: 10,
+      movie: {
+        movieId: 1,
+        movieImg:
+          "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSpJLtBFePzhjLi7WrGTU61siaVQ6TsbWxVJA&usqp=CAU",
+      },
+    },
+    {
+      reviewId: 5,
+      title: "기쁨은 공포보다 강하다",
+      star: 4.5,
+      text: `<p><img src="https://itsmovietime.s3.ap-northeast-2.amazonaws.com/reviewImgs/1688122269834"></p><p>안녕하세요!</p><p>이번 영화는...</p>`,
+      date: "2023.03.15",
+      likes: 12,
+      comments: 10,
+      movie: {
+        movieId: 1,
+        movieImg:
+          "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSpJLtBFePzhjLi7WrGTU61siaVQ6TsbWxVJA&usqp=CAU",
+      },
+    },
+    {
+      reviewId: 6,
       title: "기쁨은 공포보다 강하다",
       star: 4.5,
       text: `<p><img src="https://itsmovietime.s3.ap-northeast-2.amazonaws.com/reviewImgs/1688122269834"></p><p>안녕하세요!</p><p>이번 영화는...</p>`,
@@ -70,28 +238,54 @@ const User = {
   ],
 };
 
+type ContentType = "Reviews" | "InterestedMovies";
+export type FollowModalType = null | IFollowUser[];
+
 function MovieLog() {
   // parameter에 담긴 유저 아이디를 통해 유저의 무비로그 서버에 요청..
 
   // 본인 무비로그인지 여부
   const [isOwnProfile, setIsOwnProfile] = useState(true);
   const [isEditing, setIsEditing] = useState(false);
+  const [followModal, setFollowModal] = useState<FollowModalType>(null);
 
-  const [contents, setContents] = useState<"Reviews" | "InterestedMovies">(
-    "Reviews"
-  );
+  const [contents, setContents] = useState<ContentType>("Reviews");
 
-  const handleChangeContent = (to: "Reviews" | "InterestedMovies") => {
+  const handleChangeContent = (to: ContentType) => {
     setContents(to);
   };
-  const handleBgClick = () => setIsEditing(false);
+  const handleBgClick = () => {
+    setIsEditing(false);
+    setFollowModal(null);
+  };
   const handleFollow = () => {};
   const handleButtonClick = () => {
     isOwnProfile ? setIsEditing(true) : handleFollow();
   };
+  const handleFollowersClick = () => setFollowModal(User.userProfile.followers);
+  const handleFollowingClick = () => setFollowModal(User.userProfile.following);
 
   return (
     <>
+      {/* 팔로우/팔로잉 모달 */}
+      {followModal && (
+        <Block.ColumnBox
+          width="100vw"
+          height="100vh"
+          position="fixed"
+          justifyContent="center"
+          alignItems="center"
+          zIndex="2"
+        >
+          <S.Background onClick={handleBgClick}></S.Background>
+          <FollowModal
+            initialState={followModal}
+            setFollowModal={setFollowModal}
+            followers={User.userProfile.followers}
+            following={User.userProfile.following}
+          />
+        </Block.ColumnBox>
+      )}
       {/* 프로필 편집 모달 */}
       {isEditing && (
         <Block.ColumnBox
@@ -142,25 +336,35 @@ function MovieLog() {
           </Block.RowBox>
           <Block.RowBox width="100%" margin="30px 0 0 0" alignItems="center">
             <Badge grade="VIP" size="29px" />
-            {/* <Badge grade="VIP" /> */}
-            <Block.RowBox width="auto" margin="0 0 0 12px" alignItems="center">
+            <Block.RowBox
+              width="auto"
+              margin="0 0 0 12px"
+              alignItems="center"
+              pointer
+              onClick={handleFollowersClick}
+            >
               <Text.Body4 color="lightBlack" margin="0 4px 0 0">
                 팔로워
               </Text.Body4>
               <Text.Body1 color="lightBlack" margin="0 4px 0 0">
-                {User.userProfile.followers}
+                {User.userProfile.followers.length}
               </Text.Body1>
             </Block.RowBox>
-            <Block.RowBox width="auto" margin="0 0 0 25px" alignItems="center">
+            <Block.RowBox
+              width="auto"
+              margin="0 0 0 25px"
+              alignItems="center"
+              pointer
+              onClick={handleFollowingClick}
+            >
               <Text.Body4 color="lightBlack" margin="0 4px 0 0">
                 팔로잉
               </Text.Body4>
               <Text.Body1 color="lightBlack" margin="0 4px 0 0">
-                {User.userProfile.following}
+                {User.userProfile.following.length}
               </Text.Body1>
             </Block.RowBox>
           </Block.RowBox>
-
           {/* 리뷰 or 관심영화 */}
           <Block.RowBox width="900px" margin="70px 0 0 0">
             <S.ContentLabel

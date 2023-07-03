@@ -7,6 +7,7 @@ declare module "styled-components" {
     | "main"
     | "gray"
     | "lightBlack"
+    | "lightGray"
     | "darkGray"
     | "red"
     | "darkWhite"
