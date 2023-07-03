@@ -19,6 +19,13 @@ function FollowModal({
   setFollowModal,
 }: Props) {
   const [selected, setSelected] = useState<FollowModalType>(initialState);
+  const setColor = (clicked: FollowModalType) => {
+    if (selected === clicked) {
+      return "lightBlack";
+    } else {
+      return "lightGray";
+    }
+  };
   const handleExitClick = () => {
     setFollowModal(null);
   };
@@ -50,15 +57,10 @@ function FollowModal({
           onClick={handleFollowersClick}
           selected={selected === followers}
         >
-          <Text.Body4
-            margin="0 7px 0 0 "
-            color={selected === followers ? "lightBlack" : "lightGray"}
-          >
+          <Text.Body4 margin="0 7px 0 0 " color={setColor(followers)}>
             팔로워
           </Text.Body4>
-          <Text.Body4
-            color={selected === followers ? "lightBlack" : "lightGray"}
-          >
+          <Text.Body4 color={setColor(followers)}>
             {followers.length}
           </Text.Body4>
         </S.Label>
@@ -66,15 +68,10 @@ function FollowModal({
           onClick={handleFollowingClick}
           selected={selected === following}
         >
-          <Text.Body4
-            margin="0 7px 0 0 "
-            color={selected === following ? "lightBlack" : "lightGray"}
-          >
+          <Text.Body4 margin="0 7px 0 0 " color={setColor(following)}>
             팔로잉
           </Text.Body4>
-          <Text.Body4
-            color={selected === following ? "lightBlack" : "lightGray"}
-          >
+          <Text.Body4 color={setColor(following)}>
             {following.length}
           </Text.Body4>
         </S.Label>
