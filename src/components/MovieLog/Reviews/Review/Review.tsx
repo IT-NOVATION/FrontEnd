@@ -1,8 +1,8 @@
-import useCutReviewText from "@hooks/useCutReviewText";
 import * as S from "./style";
 import { IReview } from "@interfaces/review";
 import { Block, Text } from "@styles/UI";
 import theme from "@styles/theme";
+import cutReviewText from "@utils/cutReviewText";
 function Review({ review }: { review: IReview }) {
   return (
     <Block.RowBox relative width="900px" margin="0 0 23px 0">
@@ -26,7 +26,7 @@ function Review({ review }: { review: IReview }) {
         </Block.RowBox>
         <Block.RowBox margin="10px 0 0 0">
           <Text.Body4 color="lightBlack" lineHeight="1.3" margin="0 20px 0 0">
-            {useCutReviewText(review.text)}
+            {cutReviewText(review.text)}
           </Text.Body4>
         </Block.RowBox>
         <Block.AbsoluteBox bottom="0">
