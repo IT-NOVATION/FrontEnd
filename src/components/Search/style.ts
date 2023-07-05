@@ -1,3 +1,4 @@
+import { Block, Input } from "@styles/UI";
 import styled from "styled-components";
 
 export const Icons = styled.img`
@@ -23,4 +24,12 @@ export const Keyword = styled.span`
     width: auto;
     height: auto;
     margin-right: 43px;
+`;
+
+export const SearchBox = styled(Block.RowBox)`
+    border-bottom: 2px solid black;
+`;
+
+export const SearchInput = styled(Input.FormInput)`
+    border-bottom: 0px;
 `;
