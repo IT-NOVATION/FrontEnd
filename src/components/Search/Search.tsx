@@ -28,14 +28,6 @@ export default function Search() {
         // 검색 word 넘기기
     };
 
-    const handleOptionClick: React.MouseEventHandler<HTMLDivElement> = event => {
-        if ((event.target as HTMLDivElement).id === "user") {
-            console.log("유저에 따른 결과");
-        } else if ((event.target as HTMLDivElement).id === "movie") {
-            console.log("영화에 따른 결과");
-        }
-    };
-
     return (
         <>
             <Block.ColumnBox width="100%" height="200px" alignItems="center">
