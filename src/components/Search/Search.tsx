@@ -1,7 +1,8 @@
 import { Block, Text } from "@styles/UI";
 import * as S from "./style";
 import { useNavigate } from "react-router-dom";
-import { ChangeEvent, KeyboardEvent, useRef, useState } from "react";
+import SelectOption from "./SelectOption";
+import { useState } from "react";
 
 const Keywords = [
     { idx: 1, title: "엘리멘탈" },
@@ -15,13 +16,8 @@ const Keywords = [
 export default function Search() {
     const navigate = useNavigate();
     const [word, setWord] = useState<string>("");
-    const inputRef = useRef<HTMLInputElement>(null);
 
-    const onChange = (e: ChangeEvent<HTMLInputElement>) => {
-        setWord(e.target.value);
-    };
-
-    const handleSearch = () => {
+    const handleInputSearch = () => {
         navigate("/search-result");
         if (word === "") {
             console.log(word);
@@ -32,9 +28,11 @@ export default function Search() {
         // 검색 word 넘기기
     };
 
-    const handleKeyPress = (e: KeyboardEvent<HTMLInputElement>) => {
-        if (e.key === "Enter") {
-            handleSearch();
+    const handleOptionClick: React.MouseEventHandler<HTMLDivElement> = event => {
+        if ((event.target as HTMLDivElement).id === "user") {
+            console.log("유저에 따른 결과");
+        } else if ((event.target as HTMLDivElement).id === "movie") {
+            console.log("영화에 따른 결과");
         }
     };
 
@@ -42,23 +40,10 @@ export default function Search() {
         <>
             <Block.ColumnBox width="100%" height="200px" alignItems="center">
                 <S.SearchBox width="900px" height="62px" margin="0">
-                    <Block.RowBox width="152px" justifyContent="space-evenly" alignItems="center" pointer>
-                        <Text.Title2 pointer>유저</Text.Title2>
-                        <S.DropdownImg src="/icons/dropdown-arrow.svg" alt="dropdown-icon" />
-                    </Block.RowBox>
-                    <S.SearchInput
-                        width="704px"
-                        height="100%"
-                        fontSize="30px"
-                        color="black"
-                        placeholder="닉네임을 입력해보세요."
-                        onChange={onChange}
-                        ref={inputRef}
-                        onKeyUp={handleKeyPress}
-                    />
+                    <SelectOption word={word} setWord={setWord} />
 
                     <Block.RowBox width="48px" justifyContent="center" alignItems="center">
-                        <S.Icons src="/icons/search.svg" alt="search" onClick={handleSearch} />
+                        <S.Icons src="/icons/search.svg" alt="search" onClick={handleInputSearch} />
                     </Block.RowBox>
                 </S.SearchBox>
 
