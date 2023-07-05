@@ -54,7 +54,7 @@ export default function Search() {
                         placeholder="닉네임을 입력해보세요."
                         onChange={onChange}
                         ref={inputRef}
-                        onKeyPress={handleKeyPress}
+                        onKeyUp={handleKeyPress}
                     />
 
                     <Block.RowBox width="48px" justifyContent="center" alignItems="center">
