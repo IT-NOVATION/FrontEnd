@@ -62,7 +62,7 @@ export default function Search() {
                     </Block.RowBox>
                 </S.SearchBox>
 
-                <Block.RowBox width="850px" height="148px">
+                <Block.RowBox width="850px" height="148px" margin="20px 0 0 0">
                     <Block.RowBox
                         width="120px"
                         height="39px"
