@@ -62,10 +62,6 @@ export default function Search() {
                     </Block.RowBox>
                 </S.SearchBox>
 
-                {/* 수정 */}
-                <Block.Bar width="900px" height="0px" bgColor="black" margin="0 0 33px 0" />
-                {/* 길게 할까 말까 */}
-
                 <Block.RowBox width="850px" height="148px">
                     <Block.RowBox
                         width="120px"
