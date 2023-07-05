@@ -36,3 +36,20 @@ export const variants = {
     initial: { y: -80, opacity: 0.5 },
     exit: { y: -80, opacity: 0.5 },
 };
+
+export const Background = styled.div`
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    right: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    z-index: 1;
+`;
+
+export const NotificationWrapper = styled.div`
+    position: relative;
+`;
