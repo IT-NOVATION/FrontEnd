@@ -1,17 +1,14 @@
 import { motion } from "framer-motion";
 import styled from "styled-components";
 
-export const Nav = styled(motion.div)<{ isMain: boolean }>`
+export const Nav = styled(motion.div)<{ isSearchClick: boolean }>`
   width: 100vw;
   min-width: 900px;
-  height: 85px;
+  height: ${({ isSearchClick }) => (isSearchClick ? "351px" : "85px")};
   z-index: 100;
   padding: 20px 50px;
   position: fixed;
-  display: flex;
-  justify-content: space-between;
-  background-color: ${({ isMain }) =>
-    isMain ? "rgba(154, 154, 154, 0.40)" : "white"};
+  background-color: white;
 `;
 
 export const HomeLogo = styled.img`
@@ -25,11 +22,12 @@ export const Profile = styled.img`
   cursor: pointer;
 `;
 
-export const Icons = styled.img<{ isMain: boolean }>`
-  width: 31px;
+export const Icons = styled.img`
+  width: 28px;
   border-radius: 100px;
   cursor: pointer;
-  filter: ${({ isMain }) => (isMain ? "invert(0%)" : "invert(60%)")};
+  filter: invert(60%);
+  margin-right: 20px;
 `;
 
 export const variants = {

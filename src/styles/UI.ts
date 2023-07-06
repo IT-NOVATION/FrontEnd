@@ -18,6 +18,17 @@ export const Text = {
     margin: ${(props) => props.margin};
     color: ${({ color }) => (color ? theme.colors[color] : theme.colors)};
     line-height: ${(props) => props.lineHeight};
+    cursor: ${(props) => props.pointer && "pointer"};
+  `,
+  Title2: styled.div<StyleText>`
+    font-weight: 400;
+    font-size: 30px;
+    white-space: pre-line;
+    display: inline-block;
+    margin: ${(props) => props.margin};
+    color: ${({ color }) => (color ? theme.colors[color] : theme.colors)};
+    line-height: ${(props) => props.lineHeight};
+    cursor: ${(props) => props.pointer && "pointer"};
   `,
   Title3: styled.div<StyleText>`
     font-weight: 500;
@@ -36,6 +47,7 @@ export const Text = {
     margin: ${(props) => props.margin};
     color: ${({ color }) => (color ? theme.colors[color] : theme.colors)};
     line-height: ${(props) => props.lineHeight};
+    cursor: ${(props) => props.pointer && "pointer"};
   `,
   Title5: styled.div<StyleText>`
     font-weight: 500;
@@ -46,7 +58,6 @@ export const Text = {
     color: ${({ color }) => (color ? theme.colors[color] : theme.colors)};
     line-height: ${(props) => props.lineHeight};
   `,
-
   Body1: styled.div<StyleText>`
     font-weight: 400;
     font-size: 20px;
@@ -54,7 +65,6 @@ export const Text = {
     margin: ${(props) => props.margin};
     color: ${({ color }) => (color ? theme.colors[color] : theme.colors)};
     display: inline-block;
-    line-height: ${(props) => props.lineHeight};
     cursor: ${(props) => props.pointer && "pointer"};
   `,
   Body2: styled.div<StyleText>`
@@ -64,7 +74,6 @@ export const Text = {
     margin: ${(props) => props.margin};
     color: ${({ color }) => (color ? theme.colors[color] : theme.colors)};
     display: inline-block;
-    line-height: ${(props) => props.lineHeight};
     cursor: ${(props) => props.pointer && "pointer"};
   `,
 
@@ -263,12 +272,13 @@ export const Block = {
     margin: ${(props) => props.margin};
     padding: ${(props) => props.padding};
     background-color: ${({ bgColor }) =>
-      bgColor ? theme.colors[bgColor] : bgColor};
+      bgColor ? theme.colors[bgColor] : theme.colors};
     border: ${(props) => props.border};
     border-radius: ${(props) => props.borderRadius};
     position: ${(props) => props.relative && "relative"};
     z-index: ${(props) => props.zIndex};
     position: ${(props) => props.position};
+    padding: ${(props) => props.padding};
     box-shadow: ${(props) => props.boxShadow};
   `,
   ColumnBox: styled.div<StyleBlock>`
@@ -282,15 +292,15 @@ export const Block = {
     background-color: ${({ bgColor }) =>
       bgColor ? theme.colors[bgColor] : theme.colors};
     margin: ${(props) => props.margin};
-    padding: ${(props) => props.padding};
+    border: ${(props) => props.border};
+    border-radius: ${(props) => props.borderRadius};
     background: ${(props) => props.background};
     background-size: cover;
     background-position: center;
-    border: ${(props) => props.border};
-    border-radius: ${(props) => props.borderRadius};
     z-index: ${(props) => props.zIndex};
     position: ${(props) => props.position};
     box-shadow: ${(props) => props.boxShadow};
+    padding: ${(props) => props.padding};
   `,
   AbsoluteBox: styled.div<StyleBlock>`
     width: ${(props) => (props.width ? props.width : "100%")};
@@ -305,7 +315,7 @@ export const Block = {
   `,
   Bar: styled.div<StyleBlock>`
     width: ${(props) => props.width};
-    height: 0.5px;
+    height: ${(props) => props.height};
     background-color: ${({ bgColor }) =>
       bgColor ? theme.colors[bgColor] : theme.colors};
     margin: ${(props) => props.margin};

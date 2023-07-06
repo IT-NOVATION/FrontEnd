@@ -4,9 +4,9 @@ import { AnimatePresence } from "framer-motion";
 import { Block } from "@styles/UI";
 
 const IMG = [
-    "https://images.freeimages.com/images/large-previews/2b6/free-banner-background-1639360.jpg",
-    "https://images.freeimages.com/images/large-previews/76a/close-up-blue-violet-flower-macro-1641717.jpg",
-    "https://images.freeimages.com/images/large-previews/f2e/free-banner-background-1639356.jpg",
+    "https://c.wallhere.com/photos/46/cd/playa_beach_costa_shore_agua_water_olas_waves-583605.jpg!d",
+    "https://c.wallhere.com/photos/76/71/bridge_canon_michael_long_exposure_5d_boyet_1740mml-619369.jpg!d",
+    "https://c.wallhere.com/photos/fe/a6/lugo_galicia_espa_a_spain_marina_seascape_mar_airelibre-528469.jpg!d",
 ];
 
 export default function Banner() {
