@@ -73,7 +73,7 @@ export default function MovieTalk() {
             NEW 업데이트
           </S.ContentLabel>
         </Block.RowBox>
-        <Block.ColumnBox margin="60px 0 0 ">
+        <Block.ColumnBox margin="60px 0 0 0">
           {contents === "BestReviews" ? (
             <BestReviews />
           ) : contents === "TopFollowers" ? (
