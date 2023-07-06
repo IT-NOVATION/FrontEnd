@@ -77,25 +77,10 @@ export default function NavigationBar() {
 
                             <Block.RowBox width="228px" justifyContent="flex-end" alignItems="center">
                                 {pathname !== "/search-result" && (
-                                    <>
-                                        {isSearchClick ? (
-                                            <>
-                                                <S.Icons
-                                                    src="/icons/close.svg"
-                                                    alt="close"
-                                                    onClick={handleSearchBtnClick}
-                                                />
-                                            </>
-                                        ) : (
-                                            <>
-                                                <S.Icons
-                                                    src="/icons/search.svg"
-                                                    alt="search"
-                                                    onClick={handleSearchBtnClick}
-                                                />
-                                            </>
-                                        )}
-                                    </>
+                                    <S.Icons
+                                        alt="close"
+                                        src={isSearchClick ? "/icons/close.svg" : "/icons/search.svg"}
+                                    />
                                 )}
 
                                 {isLogin ? (

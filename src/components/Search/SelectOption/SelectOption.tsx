@@ -1,7 +1,8 @@
 import { Block, Text } from "@styles/UI";
 import { ChangeEvent, KeyboardEvent, useRef, useState } from "react";
-import * as S from "./style";
+import * as S from "../style";
 import { useNavigate } from "react-router-dom";
+import useHovered from "@hooks/useHovered";
 
 type Props = {
     setWord: React.Dispatch<React.SetStateAction<string>>;
@@ -12,27 +13,14 @@ type SearchType = "USER" | "MOVIE";
 
 export default function SelectOption({ word, setWord }: Props) {
     const navigate = useNavigate();
-    const [isUserHovered, setIsUserHovered] = useState(false);
-    const handleUserHover = () => {
-        setIsUserHovered(true);
-    };
-    const handleUserLeave = () => {
-        setIsUserHovered(false);
-    };
 
-    const [isMovieHovered, setIsMovieHovered] = useState(false);
-    const handleMovieHover = () => {
-        setIsMovieHovered(true);
-    };
-    const handleMovieLeave = () => {
-        setIsMovieHovered(false);
-    };
+    const { isHovered: isUserHovered, handleHover: handleUserHover, handleLeave: handleUserLeave } = useHovered();
+    const { isHovered: isMovieHovered, handleHover: handleMovieHover, handleLeave: handleMovieLeave } = useHovered();
 
     const [isSelected, setIsSelected] = useState<SearchType>("USER");
     const [isOpen, setIsOpen] = useState<boolean>(false);
 
     const handleShowDropdownMenu = () => {
-        console.log(isOpen);
         setIsOpen(prev => !prev);
     };
 
@@ -42,15 +30,22 @@ export default function SelectOption({ word, setWord }: Props) {
 
     const inputRef = useRef<HTMLInputElement>(null);
 
+    const handleInputEmpty = () => {
+        alert("검색어를 입력해주세요.");
+    };
+
     const handleInputSearch = () => {
         navigate("/search-result");
         if (word === "") {
-            console.log(word);
-            return alert("검색어를 입력해주세요.");
+            handleInputEmpty();
         } else {
+            if (isSelected === "USER") {
+                console.log("검색기준 유저일때 검색어 넘기기");
+            } else if (isSelected === "MOVIE") {
+                console.log("검색기준 영화일때 검색어 넘기기");
+            }
             console.log(word);
         }
-        // 검색 word 넘기기
     };
 
     const handleKeyPress = (e: KeyboardEvent<HTMLInputElement>) => {

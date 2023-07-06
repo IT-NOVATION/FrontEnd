@@ -1,7 +1,7 @@
 import { Block, Text } from "@styles/UI";
 import * as S from "./style";
 import { useNavigate } from "react-router-dom";
-import SelectOption from "./SelectOption";
+import SelectOption from "./SelectOption/SelectOption";
 import { useState } from "react";
 
 const Keywords = [
