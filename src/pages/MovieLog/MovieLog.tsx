@@ -236,6 +236,48 @@ const User = {
       },
     },
   ],
+  interestedMovies: [
+    {
+      movieId: 1,
+      movieImg:
+        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSpJLtBFePzhjLi7WrGTU61siaVQ6TsbWxVJA&usqp=CAU",
+      star: 2.7,
+      title: "가디언즈 오브 갤럭시 5",
+      hasReviewed: false,
+    },
+    {
+      movieId: 2,
+      movieImg:
+        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSpJLtBFePzhjLi7WrGTU61siaVQ6TsbWxVJA&usqp=CAU",
+      star: 2.31,
+      title: "가디언즈 오브 갤럭시 5",
+      hasReviewed: false,
+    },
+    {
+      movieId: 3,
+      movieImg:
+        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSpJLtBFePzhjLi7WrGTU61siaVQ6TsbWxVJA&usqp=CAU",
+      star: 2.3,
+      title: "가디언즈 오브 갤럭시 5",
+      hasReviewed: false,
+    },
+    {
+      movieId: 4,
+      movieImg:
+        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSpJLtBFePzhjLi7WrGTU61siaVQ6TsbWxVJA&usqp=CAU",
+      star: 2.3,
+      title: "가디언즈 오브 갤럭시 5",
+      hasReviewed: false,
+    },
+    {
+      movieId: 5,
+      movieImg:
+        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSpJLtBFePzhjLi7WrGTU61siaVQ6TsbWxVJA&usqp=CAU",
+      star: 2.3,
+      title: "가디언즈 오브 갤럭시 5",
+      hasReviewed: false,
+    },
+  ],
 };
 
 type ContentType = "Reviews" | "InterestedMovies";
@@ -243,7 +285,6 @@ export type FollowModalType = null | IFollowUser[];
 
 function MovieLog() {
   // parameter에 담긴 유저 아이디를 통해 유저의 무비로그 서버에 요청..
-
   // 본인 무비로그인지 여부
   const [isOwnProfile, setIsOwnProfile] = useState(true);
   const [isEditing, setIsEditing] = useState(false);
@@ -389,7 +430,13 @@ function MovieLog() {
           {contents === "Reviews" ? (
             <Reviews reviews={User.reviews} />
           ) : (
-            <Movies />
+            <Block.RowBox
+              margin="35px 0 70px 0"
+              justifyContent="center"
+              alignItems="center"
+            >
+              <Movies movies={User.interestedMovies} />
+            </Block.RowBox>
           )}
         </Block.PageLayout>
       </Block.PageWrapper>
