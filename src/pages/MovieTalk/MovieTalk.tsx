@@ -24,7 +24,7 @@ export default function MovieTalk() {
   return (
     <Block.PageWrapper>
       <Block.PageLayout>
-        <Block.RowBox margin="57px 0 0 0">
+        <Block.RowBox margin="117px 0 0 0">
           <S.PageTitle>오늘의 무비토크</S.PageTitle>
         </Block.RowBox>
         <Block.RowBox margin="22px 0 0 0 ">
