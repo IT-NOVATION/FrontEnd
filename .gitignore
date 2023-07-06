@@ -26,5 +26,5 @@ yarn-error.log*
 /public/testImages/
 /src/apis/test.ts
 
-#환경변수 파일
-# .env
+환경변수 파일
+.env

@@ -46,12 +46,13 @@ table {
 }
 *{
   box-sizing: border-box;
+  font-family: "Pretendard";
+
 }
 body{
 	width:100vw;
 	height:100vh;
   overflow-x: hidden;
-  font-family: 'Noto Sans KR', sans-serif;
 }
 a{
   text-decoration:none;
