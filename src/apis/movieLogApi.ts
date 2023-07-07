@@ -1,6 +1,6 @@
 import { BASE_URL, baseApi } from "./instance";
 
-const SIGNUP_URI = "/push/follow";
+const FOLLOW_URI = "/push/follow";
 
 type FollowType = {
   pushUserId: number;
@@ -9,7 +9,7 @@ type FollowType = {
 
 export const MovieLogApi = {
   follow: async ({ pushUserId, targetUserId }: FollowType) =>
-    await baseApi.get(SIGNUP_URI, {
+    await baseApi.get(FOLLOW_URI, {
       params: {
         pushUserId,
         targetUserId,
