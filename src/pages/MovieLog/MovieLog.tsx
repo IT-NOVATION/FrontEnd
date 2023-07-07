@@ -345,6 +345,11 @@ function MovieLog() {
           />
         </Block.ColumnBox>
       )}
+      <Block.ColumnBox
+        bgColor="white"
+        width="100vw"
+        height="85px"
+      ></Block.ColumnBox>
       {/* 커버 */}
       <Block.ColumnBox
         background={`url(${User.userProfile.background})`}
@@ -354,7 +359,7 @@ function MovieLog() {
 
       <Block.PageWrapper>
         <Block.PageLayout>
-          <Block.AbsoluteBox top="50px">
+          <Block.AbsoluteBox top="135px">
             <ProfileImg size="208px" img={User.userProfile.profileImg} />
           </Block.AbsoluteBox>
           <Block.RowBox width="900px" margin="85px 0 0 0" alignItems="flex-end">
