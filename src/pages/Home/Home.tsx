@@ -6,9 +6,9 @@ function Home() {
   return (
     <>
       <Block.PageLayout>
-        <Block.PageWrapper bgColor="black">
-          <Banner></Banner>
-          <Posters />
+        <Block.PageWrapper>
+          <Banner />
+          <Posters></Posters>
         </Block.PageWrapper>
       </Block.PageLayout>
     </>

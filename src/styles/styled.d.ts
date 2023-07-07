@@ -4,12 +4,14 @@ declare module "styled-components" {
   export type DefaultThemeColorKey =
     | "black"
     | "white"
-    | "lightBlack"
     | "main"
     | "gray"
+    | "lightBlack"
+    | "lightGray"
     | "darkGray"
     | "red"
-    | "darkWhite";
+    | "darkWhite"
+    | "bgColor";
 
   export interface DefaultTheme {
     colors: {

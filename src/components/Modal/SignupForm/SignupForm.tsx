@@ -1,12 +1,12 @@
 import { IAccountInfo } from "@interfaces/forms";
 import { useForm } from "react-hook-form";
-import { postSignup } from "@apis/accountApi";
 import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
 import useShowPassword from "@hooks/useShowPassword";
 import { useRecoilState } from "recoil";
 import { modalStateAtom } from "@recoil/atoms";
 import { Block, Button, Input, Text } from "@styles/UI";
 import useIsAbled from "@hooks/useIsAbled";
+import { AccountApi } from "@apis/accountApi";
 function SignupForm() {
   const [modalState, setModalState] = useRecoilState(modalStateAtom);
   const {
@@ -28,14 +28,14 @@ function SignupForm() {
     modalState,
   });
 
-  const onValid = (data: IAccountInfo) => {
+  const onValid = async ({ email, password }: IAccountInfo) => {
     try {
-      // 서버에서 이메일 중복검사...
-      postSignup({ email: data.email, password: data.password });
+      await AccountApi.signup({ email, password });
+      email && localStorage.setItem("signup-email", email);
+      setModalState(4);
     } catch (err) {
-      console.log(err);
+      alert("이미 가입된 이메일입니다.");
     }
-    setModalState(4);
   };
 
   return (

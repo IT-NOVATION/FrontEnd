@@ -20,6 +20,17 @@ export const Text = {
     margin: ${(props) => props.margin};
     color: ${({ color }) => (color ? theme.colors[color] : theme.colors)};
     line-height: ${(props) => props.lineHeight};
+    cursor: ${(props) => props.pointer && "pointer"};
+  `,
+  Title2: styled.div<StyleText>`
+    font-weight: 400;
+    font-size: 30px;
+    white-space: pre-line;
+    display: inline-block;
+    margin: ${(props) => props.margin};
+    color: ${({ color }) => (color ? theme.colors[color] : theme.colors)};
+    line-height: ${(props) => props.lineHeight};
+    cursor: ${(props) => props.pointer && "pointer"};
   `,
   Title3: styled.div<StyleText>`
     font-weight: 500;
@@ -30,7 +41,7 @@ export const Text = {
     color: ${({ color }) => (color ? theme.colors[color] : theme.colors)};
     line-height: ${(props) => props.lineHeight};
   `,
-  Title5: styled.div<StyleText>`
+  Title4: styled.div<StyleText>`
     font-weight: 500;
     font-size: 24px;
     white-space: pre-line;
@@ -38,8 +49,17 @@ export const Text = {
     margin: ${(props) => props.margin};
     color: ${({ color }) => (color ? theme.colors[color] : theme.colors)};
     line-height: ${(props) => props.lineHeight};
+    cursor: ${(props) => props.pointer && "pointer"};
   `,
-
+  Title5: styled.div<StyleText>`
+    font-weight: 500;
+    font-size: 20px;
+    white-space: pre-line;
+    display: inline-block;
+    margin: ${(props) => props.margin};
+    color: ${({ color }) => (color ? theme.colors[color] : theme.colors)};
+    line-height: ${(props) => props.lineHeight};
+  `,
   Body1: styled.div<StyleText>`
     font-weight: 400;
     font-size: 20px;
@@ -67,6 +87,7 @@ export const Text = {
     margin: ${(props) => props.margin};
     color: ${({ color }) => (color ? theme.colors[color] : theme.colors)};
     display: inline-block;
+    line-height: ${(props) => props.lineHeight};
     cursor: ${(props) => props.pointer && "pointer"};
   `,
   Body4: styled.div<StyleText>`
@@ -76,6 +97,7 @@ export const Text = {
     margin: ${(props) => props.margin};
     color: ${({ color }) => (color ? theme.colors[color] : theme.colors)};
     display: inline-block;
+    line-height: ${(props) => props.lineHeight};
     cursor: ${(props) => props.pointer && "pointer"};
   `,
   Body5: styled.div<StyleText>`
@@ -85,6 +107,7 @@ export const Text = {
     margin: ${(props) => props.margin};
     color: ${({ color }) => (color ? theme.colors[color] : theme.colors)};
     display: inline-block;
+    line-height: ${(props) => props.lineHeight};
     cursor: ${(props) => props.pointer && "pointer"};
   `,
   Body6: styled.div<StyleText>`
@@ -94,6 +117,7 @@ export const Text = {
     margin: ${(props) => props.margin};
     color: ${({ color }) => (color ? theme.colors[color] : theme.colors)};
     display: inline-block;
+    line-height: ${(props) => props.lineHeight};
     cursor: ${(props) => props.pointer && "pointer"};
   `,
 };
@@ -202,6 +226,14 @@ type StyleBlock = {
   bgSize?: string;
   gap?: string;
   position?: string;
+  background?: string;
+  top?: string;
+  right?: string;
+  bottom?: string;
+  left?: string;
+  relative?: boolean;
+  zIndex?: string;
+  boxShadow?: string;
 };
 export const Block = {
   PageWrapper: styled.div<StyleBlock>`
@@ -253,7 +285,11 @@ export const Block = {
       bgColor ? theme.colors[bgColor] : theme.colors};
     border: ${(props) => props.border};
     border-radius: ${(props) => props.borderRadius};
-    gap: ${(props) => props.gap};
+    position: ${(props) => props.relative && "relative"};
+    z-index: ${(props) => props.zIndex};
+    position: ${(props) => props.position};
+    padding: ${(props) => props.padding};
+    box-shadow: ${(props) => props.boxShadow};
   `,
   ColumnBox: styled(motion.div)<StyleBlock>`
     width: ${(props) => (props.width ? props.width : "100%")};
@@ -271,10 +307,28 @@ export const Block = {
     background-image: ${(props) => props.bgImg};
     background-size: ${(props) => props.bgSize};
     position: ${(props) => props.position};
+    background: ${(props) => props.background};
+    background-size: cover;
+    background-position: center;
+    z-index: ${(props) => props.zIndex};
+    position: ${(props) => props.position};
+    box-shadow: ${(props) => props.boxShadow};
+    padding: ${(props) => props.padding};
+  `,
+  AbsoluteBox: styled.div<StyleBlock>`
+    width: ${(props) => (props.width ? props.width : "100%")};
+    height: ${(props) => (props.width ? props.height : "auto")};
+    cursor: ${(props) => props.pointer && "pointer"};
+    position: absolute;
+    top: ${(props) => props.top};
+    right: ${(props) => props.right};
+    bottom: ${(props) => props.bottom};
+    left: ${(props) => props.left};
+    z-index: ${(props) => props.zIndex};
   `,
   Bar: styled.div<StyleBlock>`
     width: ${(props) => props.width};
-    height: 0.5px;
+    height: ${(props) => props.height};
     background-color: ${({ bgColor }) =>
       bgColor ? theme.colors[bgColor] : theme.colors};
     margin: ${(props) => props.margin};
