@@ -1,10 +1,12 @@
 import { Block, Text } from "@styles/UI";
 import Poster from "./Poster/Poster";
-import { useEffect, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 import * as S from "./style";
 import { BsArrowLeftCircle, BsArrowRightCircle } from "react-icons/bs";
 import { AnimatePresence, motion } from "framer-motion";
-import { waitForAll } from "recoil";
+import { useQuery } from "@tanstack/react-query";
+import { MainPageApi } from "@apis/mainPageApi";
+import { IMainPageMovie } from "@interfaces/movies";
 
 const PopularMovies = [
   {
@@ -171,6 +173,11 @@ const variants = {
 };
 
 function Posters() {
+  const { data: movies } = useQuery<IMainPageMovie>({
+    queryKey: ["mainPage", "movies"],
+    queryFn: MainPageApi.getMovies,
+    suspense: true,
+  });
   const [showPopular, setShowPopular] = useState(true);
   const [[page, direction], setPage] = useState([0, 0]);
   const [animate, setAnimate] = useState(false);
@@ -238,26 +245,24 @@ function Posters() {
               justifyContent="center"
             >
               {showPopular
-                ? PopularMovies.slice(
-                    Math.abs(page % 2) * 5,
-                    Math.abs(page % 2) * 5 + 5
-                  ).map((movie, idx) => (
-                    <Poster
-                      key={movie.id}
-                      poster={movie}
-                      rank={idx + 1 + Math.abs(page % 2) * 5}
-                    />
-                  ))
-                : RecommendedMovies.slice(
-                    Math.abs(page % 2) * 5,
-                    Math.abs(page % 2) * 5 + 5
-                  ).map((movie, idx) => (
-                    <Poster
-                      key={movie.id}
-                      poster={movie}
-                      rank={idx + 1 + Math.abs(page % 2) * 5}
-                    />
-                  ))}
+                ? movies?.popular
+                    .slice(Math.abs(page % 2) * 5, Math.abs(page % 2) * 5 + 5)
+                    .map((movie, idx) => (
+                      <Poster
+                        key={movie.movieId}
+                        movie={movie}
+                        rank={idx + 1 + Math.abs(page % 2) * 5}
+                      />
+                    ))
+                : movies?.recommended
+                    .slice(Math.abs(page % 2) * 5, Math.abs(page % 2) * 5 + 5)
+                    .map((movie, idx) => (
+                      <Poster
+                        key={movie.movieId}
+                        movie={movie}
+                        rank={idx + 1 + Math.abs(page % 2) * 5}
+                      />
+                    ))}
             </Block.RowBox>
           </AnimatePresence>
           <BsArrowRightCircle

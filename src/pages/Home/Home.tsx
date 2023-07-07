@@ -1,6 +1,7 @@
 import Banner from "@components/Home/Banner/Banner";
 import Posters from "@components/Home/Posters/Posters";
 import { Block } from "@styles/UI";
+import { Suspense } from "react";
 
 function Home() {
   return (
@@ -11,7 +12,9 @@ function Home() {
             <Banner />
           </Block.RowBox>
           <Block.RowBox>
-            <Posters></Posters>
+            <Suspense fallback={<div>Loading...</div>}>
+              <Posters />
+            </Suspense>
           </Block.RowBox>
         </Block.PageWrapper>
       </Block.PageLayout>
