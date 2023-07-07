@@ -8,6 +8,8 @@ import Movies from "@components/MovieLog/Movies/Movies";
 import EditProfileModal from "@components/MovieLog/EditProfileModal/EditProfileModal";
 import FollowModal from "@components/MovieLog/FollowModal/FollowModal";
 import { IFollowUser } from "@interfaces/followUser";
+import { MovieLogApi } from "@apis/movieLogApi";
+import { useParams } from "react-router-dom";
 
 const User = {
   userProfile: {
@@ -286,7 +288,8 @@ export type FollowModalType = null | IFollowUser[];
 function MovieLog() {
   // parameter에 담긴 유저 아이디를 통해 유저의 무비로그 서버에 요청..
   // 본인 무비로그인지 여부
-  const [isOwnProfile, setIsOwnProfile] = useState(true);
+  const { userId } = useParams();
+  const [isOwnProfile, setIsOwnProfile] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
   const [followModal, setFollowModal] = useState<FollowModalType>(null);
 
@@ -299,9 +302,15 @@ function MovieLog() {
     setIsEditing(false);
     setFollowModal(null);
   };
-  const handleFollow = () => {};
-  const handleButtonClick = () => {
-    isOwnProfile ? setIsEditing(true) : handleFollow();
+  const handleFollow = async () => {
+    const response = await MovieLogApi.follow({
+      pushUserId: 1,
+      targetUserId: Number(userId),
+    });
+    console.log(response);
+  };
+  const handleButtonClick = async () => {
+    isOwnProfile ? setIsEditing(true) : await handleFollow();
   };
   const handleFollowersClick = () => setFollowModal(User.userProfile.followers);
   const handleFollowingClick = () => setFollowModal(User.userProfile.following);
