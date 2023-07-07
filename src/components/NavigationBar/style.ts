@@ -9,7 +9,7 @@ export const Nav = styled(motion.div)<{
   width: 100vw;
   min-width: 900px;
   height: ${({ isSearchClick }) => (isSearchClick ? "351px" : "85px")};
-  z-index: 100;
+  z-index: 90;
   padding: 20px 50px;
   position: fixed;
   background-color: ${({ isHome, isSearchClick }) =>
