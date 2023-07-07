@@ -196,7 +196,7 @@ function Posters() {
   };
 
   return (
-    <Block.ColumnBox margin="0 0 100px 0">
+    <Block.ColumnBox padding="0 0 100px 0" bgColor="black">
       <Block.RowBox justifyContent="center" margin="25px 0 75px 0">
         <S.PosterTitle
           onClick={handlePopularClick}

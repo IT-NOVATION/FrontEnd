@@ -7,8 +7,12 @@ function Home() {
     <>
       <Block.PageLayout>
         <Block.PageWrapper>
-          <Banner />
-          <Posters></Posters>
+          <Block.RowBox>
+            <Banner />
+          </Block.RowBox>
+          <Block.RowBox>
+            <Posters></Posters>
+          </Block.RowBox>
         </Block.PageWrapper>
       </Block.PageLayout>
     </>

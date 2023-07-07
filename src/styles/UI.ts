@@ -240,7 +240,8 @@ export const Block = {
     width: 100vw;
     height: auto;
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    align-items: center;
     background-color: ${(props) => props.bgColor};
   `,
   PageLayout: styled.div<StyleBlock>`
