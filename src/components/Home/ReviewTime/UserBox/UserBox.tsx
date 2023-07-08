@@ -3,6 +3,7 @@ import * as S from "./style";
 import { IReviewTimeUser } from "@interfaces/user";
 import ProfileImg from "@components/User/ProfileImg/ProfileImg";
 import Badge from "@components/User/Badge/Badge";
+import ReviewPreviews from "@components/ReviewPreviews/ReviewPreviews";
 
 function UserBox({ user }: { user: IReviewTimeUser }) {
   return (
@@ -47,6 +48,9 @@ function UserBox({ user }: { user: IReviewTimeUser }) {
             <Text.Body5>팔로우 하기</Text.Body5>
           </Button.Button>
         </Block.RowBox>
+      </Block.ColumnBox>
+      <Block.ColumnBox width="840px" margin="37px 0 0 36px">
+        <ReviewPreviews reviews={user.reviews} width="840px" />
       </Block.ColumnBox>
     </S.Box>
   );
