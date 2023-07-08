@@ -8,29 +8,6 @@ import { useQuery } from "@tanstack/react-query";
 import { MainPageApi } from "@apis/mainPageApi";
 import { IMainPageMovie } from "@interfaces/movies";
 
-const variants = {
-  enter: ({ direction }: { direction: number }) => {
-    return {
-      x: direction > 0 ? 1000 : -1000,
-      opacity: 0,
-    };
-  },
-  center: {
-    zIndex: 1,
-    x: 0,
-    opacity: 1,
-  },
-  exit: ({ direction, animate }: { direction: number; animate: boolean }) => {
-    return {
-      x: direction < 0 ? 1000 : -1000,
-      opacity: 0,
-      transition: {
-        duration: animate ? 0.5 : 0,
-      },
-    };
-  },
-};
-
 function Posters() {
   const { data: movies } = useQuery<IMainPageMovie>({
     queryKey: ["mainPage", "movies"],
@@ -62,8 +39,17 @@ function Posters() {
   };
 
   return (
-    <Block.ColumnBox padding="0 0 100px 0" bgColor="white">
-      <Block.RowBox justifyContent="center" margin="25px 0 75px 0">
+    <Block.ColumnBox padding="0 0 100px 0" bgColor="white" alignItems="center">
+      <Block.RowBox
+        width="277px"
+        justifyContent="center"
+        margin="70px 0 0 0"
+        position="relative"
+      >
+        <S.Ellipse src="/icons/MainPage/ellipse.svg" />
+        <S.MovieTimeTitle>MOVIE TIME</S.MovieTimeTitle>
+      </Block.RowBox>
+      <Block.RowBox justifyContent="center" margin="25px 0 50px 0">
         <S.PosterTitle
           onClick={handlePopularClick}
           color="lightBlack"
@@ -87,14 +73,14 @@ function Posters() {
         <Block.RowBox alignItems="center" justifyContent="center">
           <S.Icon
             onClick={handlePrevClick}
-            style={{ marginRight: "20px", cursor: "pointer", zIndex: "1000" }}
+            style={{ marginRight: "20px", cursor: "pointer", zIndex: "2" }}
             src="/icons/MainPage/left_arrow.svg"
           />
           <AnimatePresence custom={{ direction, animate }} mode="popLayout">
             <Block.RowBox
               custom={{ direction, animate }}
               key={page}
-              variants={variants}
+              variants={S.variants}
               initial="enter"
               animate="center"
               exit="exit"
@@ -125,7 +111,7 @@ function Posters() {
           </AnimatePresence>
           <S.Icon
             onClick={handleNextClick}
-            style={{ marginLeft: "20px", cursor: "pointer", zIndex: "1000" }}
+            style={{ marginLeft: "20px", cursor: "pointer", zIndex: "2" }}
             src="/icons/MainPage/right_arrow.svg"
           />
         </Block.RowBox>
