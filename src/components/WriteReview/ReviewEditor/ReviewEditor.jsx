@@ -15,7 +15,7 @@ function ReviewEditor({ setContent }) {
   const quillRef = useRef(null);
   const navigate = useNavigate();
   const [value, setValue] = useState("");
-
+  console.log(value);
   useEffect(() => {
     setContent(value);
   }, [value]);

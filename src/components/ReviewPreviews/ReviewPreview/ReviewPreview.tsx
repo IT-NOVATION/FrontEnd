@@ -1,8 +1,9 @@
 import * as S from "./style";
-import { IReview, IReviewPreview } from "@interfaces/review";
+import { IReviewPreview } from "@interfaces/review";
 import { Block, Text } from "@styles/UI";
 import theme from "@styles/theme";
 import cutReviewText from "@utils/cutReviewText";
+import { cutDateString } from "../../../utils/cutDateString";
 function ReviewPreview({ review }: { review: IReviewPreview }) {
   return (
     <Block.RowBox relative margin="0 0 23px 0">
@@ -24,7 +25,7 @@ function ReviewPreview({ review }: { review: IReviewPreview }) {
             <Text.Body5 margin="0 0 0 3px">4.5</Text.Body5>
           </Block.RowBox>
         </Block.RowBox>
-        <Block.RowBox margin="10px 0 0 0">
+        <Block.RowBox margin="5px 0 0 0">
           <Text.Body4 color="lightBlack" lineHeight="1.3" margin="0 20px 0 0">
             {cutReviewText(review.reviewMainText)}
           </Text.Body4>
@@ -35,7 +36,9 @@ function ReviewPreview({ review }: { review: IReviewPreview }) {
             justifyContent="flex-start"
             alignItems="center"
           >
-            <Text.Body5 color="lightBlack">{review.createdDate}</Text.Body5>
+            <Text.Body5 color="lightBlack">
+              {cutDateString(review.createdDate)}
+            </Text.Body5>
             <Block.RowBox width="auto" margin="0 0 0 12px">
               <img src="/icons/heart_purple.svg" />
               <Text.Body5 color="lightBlack" margin="0 0 0 3px">

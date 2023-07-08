@@ -50,7 +50,7 @@ function UserBox({ user }: { user: IReviewTimeUser }) {
         </Block.RowBox>
       </Block.ColumnBox>
       <Block.ColumnBox width="840px" margin="37px 0 0 36px">
-        <ReviewPreviews reviews={user.reviews} width="840px" />
+        <ReviewPreviews reviews={user.reviews} width="820px" />
       </Block.ColumnBox>
     </S.Box>
   );
