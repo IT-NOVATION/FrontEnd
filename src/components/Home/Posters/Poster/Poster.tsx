@@ -3,6 +3,7 @@ import * as S from "./style";
 import { Suspense, useState } from "react";
 import { AiFillStar } from "react-icons/ai";
 import { IPopularMovie, IRecommendedMovie } from "@interfaces/movies";
+import cutMovieTitle from "@utils/cutMovieTitle";
 
 function Poster({
   movie,
@@ -34,7 +35,7 @@ function Poster({
         {hovered && (
           <S.HoveredPoster alignItems="center">
             <Text.Title5 margin="40px 0 0 0" color="white">
-              {movie.movieTitle}
+              {cutMovieTitle(movie.movieTitle)}
             </Text.Title5>
             <Block.RowBox
               width="105px"

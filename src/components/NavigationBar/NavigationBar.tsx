@@ -99,7 +99,9 @@ export default function NavigationBar() {
                   <S.Icons
                     alt="close"
                     src={
-                      isSearchClick ? "/icons/close.svg" : "/icons/search.svg"
+                      isSearchClick
+                        ? "/icons/close.svg"
+                        : `/icons/search_dark.svg`
                     }
                     onClick={handleSearchBtnClick}
                   />
