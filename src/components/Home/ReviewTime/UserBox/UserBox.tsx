@@ -4,6 +4,7 @@ import { IReviewTimeUser } from "@interfaces/user";
 import ProfileImg from "@components/User/ProfileImg/ProfileImg";
 import Badge from "@components/User/Badge/Badge";
 import ReviewPreviews from "@components/ReviewPreviews/ReviewPreviews";
+import { cutIntroText } from "../../../../utils/cutIntroText";
 
 function UserBox({ user }: { user: IReviewTimeUser }) {
   return (
@@ -25,7 +26,9 @@ function UserBox({ user }: { user: IReviewTimeUser }) {
           </Block.AbsoluteBox>
         </Block.RowBox>
         <Block.RowBox margin="13px 0 0 0" justifyContent="center">
-          <Text.Body4 color="lightBlack">{user.introduction}</Text.Body4>
+          <Text.Body4 color="lightBlack">
+            {cutIntroText(user.introduction)}
+          </Text.Body4>
         </Block.RowBox>
         <Block.RowBox margin="42px 0 0 0" justifyContent="center">
           <Block.ColumnBox alignItems="center">
