@@ -203,11 +203,11 @@ function Posters() {
   };
 
   return (
-    <Block.ColumnBox padding="0 0 100px 0" bgColor="black">
+    <Block.ColumnBox padding="0 0 100px 0" bgColor="white">
       <Block.RowBox justifyContent="center" margin="25px 0 75px 0">
         <S.PosterTitle
           onClick={handlePopularClick}
-          color="white"
+          color="lightBlack"
           margin="0 40px 0 0"
           pointer
           selected={showPopular}
@@ -216,7 +216,7 @@ function Posters() {
         </S.PosterTitle>
         <S.PosterTitle
           onClick={handleRecommendedClick}
-          color="white"
+          color="lightBlack"
           margin="0 0 0 40px"
           pointer
           selected={!showPopular}
