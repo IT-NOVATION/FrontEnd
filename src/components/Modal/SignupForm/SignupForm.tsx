@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form";
 import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
 import useShowPassword from "@hooks/useShowPassword";
 import { useRecoilState } from "recoil";
-import { modalStateAtom } from "@recoil/atoms";
+import { ModalState, modalStateAtom } from "@recoil/atoms";
 import { Block, Button, Input, Text } from "@styles/UI";
 import useIsAbled from "@hooks/useIsAbled";
 import { AccountApi } from "@apis/accountApi";
@@ -21,7 +21,7 @@ function SignupForm() {
   const password = useShowPassword();
   const verifyPassword = useShowPassword();
 
-  const handleGoLogin = () => setModalState(1);
+  const handleGoLogin = () => setModalState(ModalState.LoginForm);
   const { isAbled, setIsAbled, handleIsAbled } = useIsAbled({
     watch,
     errors,
@@ -32,7 +32,7 @@ function SignupForm() {
     try {
       await AccountApi.signup({ email, password });
       email && localStorage.setItem("signup-email", email);
-      setModalState(4);
+      setModalState(ModalState.AddProfileForm);
     } catch (err) {
       alert("이미 가입된 이메일입니다.");
     }

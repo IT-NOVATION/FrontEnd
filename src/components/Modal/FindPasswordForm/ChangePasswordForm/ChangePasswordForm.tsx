@@ -2,7 +2,7 @@ import { AccountApi } from "@apis/accountApi";
 import useIsAbled from "@hooks/useIsAbled";
 import useShowPassword from "@hooks/useShowPassword";
 import { IAccountInfo } from "@interfaces/forms";
-import { modalStateAtom } from "@recoil/atoms";
+import { ModalState, modalStateAtom } from "@recoil/atoms";
 import { Block, Text, Input, Button } from "@styles/UI";
 import { useForm } from "react-hook-form";
 import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
@@ -34,7 +34,7 @@ function ChangePasswordForm() {
         console.log(res)
       );
       alert("새 비밀번호 설정이 완료되었습니다!");
-      setModalState(1);
+      setModalState(ModalState.LoginForm);
     } catch (err) {
       console.log(err);
     }

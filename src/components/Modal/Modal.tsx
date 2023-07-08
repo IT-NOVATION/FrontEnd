@@ -1,6 +1,6 @@
 import { useRecoilState } from "recoil";
 import * as S from "./style";
-import { modalStateAtom } from "@recoil/atoms";
+import { ModalState, modalStateAtom } from "@recoil/atoms";
 import { AnimatePresence } from "framer-motion";
 import SignupForm from "./SignupForm/SignupForm";
 import LoginForm from "./LoginForm/LoginForm";
@@ -15,8 +15,9 @@ import SetPasswordForm from "./FindPasswordForm/ChangePasswordForm/ChangePasswor
 import ChangePasswordForm from "./FindPasswordForm/ChangePasswordForm/ChangePasswordForm";
 
 function Modal() {
-  const [modalState, setModalState] = useRecoilState<number>(modalStateAtom);
-  const handleModalClose = () => setModalState(0);
+  const [modalState, setModalState] =
+    useRecoilState<ModalState>(modalStateAtom);
+  const handleModalClose = () => setModalState(ModalState.Off);
   return (
     <>
       <AnimatePresence>
@@ -35,22 +36,24 @@ function Modal() {
               <Text.Title3 lineHeight="41px" margin="87px 0 0 0">
                 It’s MOVIE TIME에{"\n"}오신 것을 환영합니다.
               </Text.Title3>
-              {modalState === 1 ? (
+              {modalState === ModalState.LoginForm ? (
                 <LoginForm />
-              ) : modalState === 2 ? (
+              ) : modalState === ModalState.TermsForm ? (
                 <TermsForm />
-              ) : modalState === 3 ? (
+              ) : modalState === ModalState.SignupForm ? (
                 <SignupForm />
-              ) : modalState === 4 ? (
+              ) : modalState === ModalState.AddProfileForm ? (
                 <AddProfileForm />
-              ) : modalState === 5 ? (
+              ) : modalState === ModalState.Terms ? (
                 <Terms />
-              ) : modalState === 6 ? (
+              ) : modalState === ModalState.Policy ? (
                 <Policy />
-              ) : modalState === 7 ? (
+              ) : modalState === ModalState.GetCodeForm ? (
                 <GetCodeForm />
               ) : (
-                modalState === 8 && <ChangePasswordForm />
+                modalState === ModalState.ChangePasswordForm && (
+                  <ChangePasswordForm />
+                )
               )}
             </S.Container>
           </>
