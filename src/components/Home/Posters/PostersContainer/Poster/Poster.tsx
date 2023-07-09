@@ -4,13 +4,22 @@ import { Suspense, useState } from "react";
 import { AiFillStar } from "react-icons/ai";
 import { IPopularMovie, IRecommendedMovie } from "@interfaces/movies";
 import cutMovieTitle from "@utils/cutMovieTitle";
+import { LazyLoadImage } from "react-lazy-load-image-component";
+import "react-lazy-load-image-component/src/effects/blur.css";
+import React from "react";
 
 function Poster({
   movie,
   rank,
+  idx,
+  setIsLoading,
+  loadingFinished,
 }: {
   movie: IPopularMovie | IRecommendedMovie;
   rank: number;
+  idx: number;
+  setIsLoading: React.Dispatch<React.SetStateAction<any[]>>;
+  loadingFinished: boolean;
 }) {
   const [hovered, setHovered] = useState(false);
   const handleMouseEnter = () => {
@@ -19,19 +28,25 @@ function Poster({
   const handleMouseLeave = () => {
     setHovered(false);
   };
+  const handleLoaded = () => {
+    setIsLoading((prev) => {
+      const temp = [...prev];
+      temp[idx] = false;
+      return temp;
+    });
+  };
   return (
-    <Suspense fallback={<div>Loading...</div>}>
-      <Block.ColumnBox
-        margin="0px 10px 0 10px"
-        width="200px"
-        height="280px"
-        bgImg={`url(${movie.movieImg})`}
-        bgSize="cover"
-        borderRadius="10px"
-        position="relative"
+    <>
+      <S.PosterContainer
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
+        loadingFinished={loadingFinished}
       >
+        <S.Image
+          key={movie.movieId}
+          src={movie.movieImg}
+          onLoad={handleLoaded}
+        />
         {hovered && (
           <S.HoveredPoster alignItems="center">
             <Text.Title5 margin="40px 0 0 0" color="white">
@@ -63,8 +78,8 @@ function Poster({
           </S.HoveredPoster>
         )}
         <S.Rank>{rank}</S.Rank>
-      </Block.ColumnBox>
-    </Suspense>
+      </S.PosterContainer>
+    </>
   );
 }
 export default Poster;

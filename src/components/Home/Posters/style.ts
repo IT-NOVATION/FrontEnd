@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { Block, Text } from "@styles/UI";
 import theme from "../../../styles/theme";
+import { animate } from "framer-motion";
 
 export const MovieTimeTitle = styled.div`
   font-size: 50px;
@@ -21,10 +22,10 @@ export const PosterTitle = styled(Text.Body1)<{ selected: boolean }>`
 `;
 export const Icon = styled.img``;
 export const variants = {
-  enter: ({ direction }: { direction: number }) => {
+  enter: ({ direction, animate }: { direction: number; animate: boolean }) => {
     return {
-      x: direction > 0 ? 1000 : -1000,
-      opacity: 0,
+      x: animate ? (direction > 0 ? 1000 : -1000) : 0,
+      opacity: animate ? 0 : 1,
     };
   },
   center: {
@@ -34,7 +35,7 @@ export const variants = {
   },
   exit: ({ direction, animate }: { direction: number; animate: boolean }) => {
     return {
-      x: direction < 0 ? 1000 : -1000,
+      x: animate && direction < 0 ? 1000 : -1000,
       opacity: 0,
       transition: {
         duration: animate ? 0.5 : 0,

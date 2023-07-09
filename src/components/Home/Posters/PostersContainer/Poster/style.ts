@@ -1,5 +1,14 @@
-import styled, { css } from "styled-components";
+import styled, { keyframes } from "styled-components";
 import { Block } from "@styles/UI";
+
+export const PosterContainer = styled.div<{ loadingFinished: boolean }>`
+  margin: 0 10px 0 10px;
+  width: 200px;
+  height: 280px;
+  border-radius: 10px;
+  position: relative;
+  display: ${({ loadingFinished }) => (loadingFinished ? "" : "none")};
+`;
 
 export const HoveredPoster = styled(Block.ColumnBox)`
   position: absolute;
@@ -24,4 +33,12 @@ export const Rank = styled(Block.ColumnBox)`
   font-size: 18px;
   color: white;
   border-radius: 10px 0 0 0;
+`;
+export const Image = styled.img`
+  position: absolute;
+  width: 200px;
+  height: 280px;
+  top: 0;
+  left: 0;
+  border-radius: 10px;
 `;

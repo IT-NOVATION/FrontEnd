@@ -8,21 +8,21 @@ import { Suspense } from "react";
 function Home() {
   return (
     <>
-      <Block.PageLayout>
-        <Block.PageWrapper>
-          <Block.RowBox>
+      <Suspense>
+        <Block.PageLayout>
+          <Block.PageWrapper>
+            {/* <Block.RowBox>
             <Banner />
-          </Block.RowBox>
-          <Block.RowBox>
-            <Suspense fallback={<div>Loading...</div>}>
+          </Block.RowBox> */}
+            <Block.RowBox>
               <Posters />
-            </Suspense>
-          </Block.RowBox>
-          <Block.RowBox>
-            <ReviewTime />
-          </Block.RowBox>
-        </Block.PageWrapper>
-      </Block.PageLayout>
+            </Block.RowBox>
+            <Block.RowBox>
+              <ReviewTime />
+            </Block.RowBox>
+          </Block.PageWrapper>
+        </Block.PageLayout>
+      </Suspense>
     </>
   );
 }

@@ -1,5 +1,5 @@
 import { Block, Text } from "@styles/UI";
-import Poster from "./Poster/Poster";
+import Poster from "./PostersContainer/Poster/Poster";
 import { Suspense, useEffect, useState } from "react";
 import * as S from "./style";
 import { BsArrowLeftCircle, BsArrowRightCircle } from "react-icons/bs";
@@ -7,6 +7,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { useQuery } from "@tanstack/react-query";
 import { MainPageApi } from "@apis/mainPageApi";
 import { IMainPageMovie } from "@interfaces/movies";
+import PostersContainer from "./PostersContainer/PostersContainer";
 
 function Posters() {
   const { data: movies } = useQuery<IMainPageMovie>({
@@ -37,9 +38,16 @@ function Posters() {
   const handlePrevClick = () => {
     paginate(-1);
   };
-
+  useEffect(() => {
+    console.log(animate);
+  }, []);
   return (
-    <Block.ColumnBox padding="0 0 100px 0" bgColor="white" alignItems="center">
+    <Block.ColumnBox
+      height="500px"
+      padding="0 0 100px 0"
+      bgColor="white"
+      alignItems="center"
+    >
       <Block.RowBox
         width="277px"
         justifyContent="center"
@@ -76,7 +84,11 @@ function Posters() {
             style={{ marginRight: "20px", cursor: "pointer", zIndex: "2" }}
             src="/icons/MainPage/left_arrow.svg"
           />
-          <AnimatePresence custom={{ direction, animate }} mode="popLayout">
+          <AnimatePresence
+            custom={{ direction, animate }}
+            mode="popLayout"
+            initial={false}
+          >
             <Block.RowBox
               custom={{ direction, animate }}
               key={page}
@@ -86,9 +98,31 @@ function Posters() {
               exit="exit"
               transition={{ type: "linear", duration: animate ? 0.5 : 0 }}
               width="1100px"
+              height="300px"
               justifyContent="center"
             >
               {showPopular
+                ? movies && (
+                    <PostersContainer
+                      key={page + "popular"}
+                      movies={movies.popular.slice(
+                        Math.abs(page % 2) * 5,
+                        Math.abs(page % 2) * 5 + 5
+                      )}
+                      page={page}
+                    />
+                  )
+                : movies && (
+                    <PostersContainer
+                      key={page + "recommended"}
+                      movies={movies.recommended.slice(
+                        Math.abs(page % 2) * 5,
+                        Math.abs(page % 2) * 5 + 5
+                      )}
+                      page={page}
+                    />
+                  )}
+              {/* {showPopular
                 ? movies?.popular
                     .slice(Math.abs(page % 2) * 5, Math.abs(page % 2) * 5 + 5)
                     .map((movie, idx) => (
@@ -106,7 +140,7 @@ function Posters() {
                         movie={movie}
                         rank={idx + 1 + Math.abs(page % 2) * 5}
                       />
-                    ))}
+                    ))} */}
             </Block.RowBox>
           </AnimatePresence>
           <S.Icon
