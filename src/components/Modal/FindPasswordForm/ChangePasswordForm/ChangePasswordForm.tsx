@@ -2,7 +2,7 @@ import { AccountApi } from "@apis/accountApi";
 import useIsAbled from "@hooks/useIsAbled";
 import useShowPassword from "@hooks/useShowPassword";
 import { IAccountInfo } from "@interfaces/forms";
-import { ModalState, modalStateAtom } from "@recoil/atoms";
+import { ModalState, modalStateAtom } from "@recoil/modalAtom";
 import { Block, Text, Input, Button } from "@styles/UI";
 import { useForm } from "react-hook-form";
 import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";

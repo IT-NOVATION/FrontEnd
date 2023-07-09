@@ -1,7 +1,7 @@
 import { AccountApi } from "@apis/accountApi";
 import useIsAbled from "@hooks/useIsAbled";
 import { IAccountInfo, IFindPassword } from "@interfaces/forms";
-import { ModalState, modalStateAtom } from "@recoil/atoms";
+import { ModalState, modalStateAtom } from "@recoil/modalAtom";
 import { Block, Button, Input, Text } from "@styles/UI";
 import { useState } from "react";
 import { useForm } from "react-hook-form";

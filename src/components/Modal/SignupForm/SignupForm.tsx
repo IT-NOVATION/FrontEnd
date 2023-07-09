@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form";
 import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
 import useShowPassword from "@hooks/useShowPassword";
 import { useRecoilState } from "recoil";
-import { ModalState, modalStateAtom } from "@recoil/atoms";
+import { ModalState, modalStateAtom } from "@recoil/modalAtom";
 import { Block, Button, Input, Text } from "@styles/UI";
 import useIsAbled from "@hooks/useIsAbled";
 import { AccountApi } from "@apis/accountApi";

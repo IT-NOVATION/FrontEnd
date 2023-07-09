@@ -1,6 +1,6 @@
 import { useRecoilState } from "recoil";
 import * as S from "./style";
-import { ModalState, modalStateAtom } from "@recoil/atoms";
+import { ModalState, modalStateAtom } from "@recoil/modalAtom";
 import { AnimatePresence } from "framer-motion";
 import SignupForm from "./SignupForm/SignupForm";
 import LoginForm from "./LoginForm/LoginForm";

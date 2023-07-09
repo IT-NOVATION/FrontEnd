@@ -4,7 +4,7 @@ import { Block, Button, Input, Text } from "@styles/UI";
 import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
 import useShowPassword from "@hooks/useShowPassword";
 import { useRecoilState } from "recoil";
-import { ModalState, modalStateAtom } from "@recoil/atoms";
+import { ModalState, modalStateAtom } from "@recoil/modalAtom";
 import useIsAbled from "@hooks/useIsAbled";
 import {
   AccountApi,
@@ -12,8 +12,10 @@ import {
   KAKAO_LOGIN_URI,
   NAVER_LOGIN_URI,
 } from "@apis/accountApi";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 
 export default function LoginForm() {
+  const queryClient = useQueryClient();
   const {
     register,
     handleSubmit,
@@ -42,13 +44,15 @@ export default function LoginForm() {
   const { isAbled, handleIsAbled } = useIsAbled({ watch, errors, modalState });
 
   const onValid = async (data: IAccountInfo) => {
-    await AccountApi.login(data)
-      .then(({ accessToken, refreshToken }) => {
-        localStorage.setItem("accessToken", accessToken);
-        localStorage.setItem("refreshToken", refreshToken);
-        setModalState(ModalState.Off);
-      })
-      .catch((error) => alert("이메일 혹은 비밀번호가 일치하지 않습니다."));
+    try {
+      const { accessToken, refreshToken } = await AccountApi.login(data);
+      localStorage.setItem("accessToken", accessToken);
+      localStorage.setItem("refreshToken", refreshToken);
+      queryClient.invalidateQueries(["loginState"]);
+      setModalState(ModalState.Off);
+    } catch (err) {
+      alert("이메일 혹은 비밀번호가 일치하지 않습니다.");
+    }
   };
 
   return (

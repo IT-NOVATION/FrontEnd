@@ -1,6 +1,6 @@
 import { useForm } from "react-hook-form";
 import { IAccountInfo } from "@interfaces/forms";
-import { ModalState, modalStateAtom } from "@recoil/atoms";
+import { ModalState, modalStateAtom } from "@recoil/modalAtom";
 import { Block, Button, Input, Text } from "@styles/UI";
 import { useRecoilState } from "recoil";
 import useIsAbled from "@hooks/useIsAbled";

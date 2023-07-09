@@ -1,6 +1,6 @@
 import { useSetRecoilState } from "recoil";
 import * as S from "./style";
-import { modalStateAtom } from "@recoil/atoms";
+import { modalStateAtom } from "@recoil/modalAtom";
 import { useEffect, useState } from "react";
 import { Block, Button, Text } from "@styles/UI";
 import { useNavigate, useLocation } from "react-router-dom";

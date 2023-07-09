@@ -32,5 +32,11 @@ export const AccountApi = {
   changePassword: async (data: IAccountInfo) =>
     await baseApi.post(CHANGE_PW_URI, data).then((res) => res.data),
   loginState: async () =>
-    await baseApi.get(LOGIN_STATE_URI).then((res) => res.data),
+    await baseApi
+      .get(LOGIN_STATE_URI, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+        },
+      })
+      .then((res) => res.data),
 };
