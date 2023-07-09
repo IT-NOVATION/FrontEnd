@@ -8,32 +8,20 @@ import { LazyLoadImage } from "react-lazy-load-image-component";
 import "react-lazy-load-image-component/src/effects/blur.css";
 import React from "react";
 
-function Poster({
-  movie,
-  rank,
-  idx,
-  setIsLoading,
-  loadingFinished,
-}: {
+type Props = {
   movie: IPopularMovie | IRecommendedMovie;
   rank: number;
-  idx: number;
-  setIsLoading: React.Dispatch<React.SetStateAction<any[]>>;
   loadingFinished: boolean;
-}) {
+  onLoad: React.ReactEventHandler<HTMLImageElement>;
+};
+
+function Poster({ movie, rank, loadingFinished, onLoad }: Props) {
   const [hovered, setHovered] = useState(false);
   const handleMouseEnter = () => {
     setHovered(true);
   };
   const handleMouseLeave = () => {
     setHovered(false);
-  };
-  const handleLoaded = () => {
-    setIsLoading((prev) => {
-      const temp = [...prev];
-      temp[idx] = false;
-      return temp;
-    });
   };
   return (
     <>
@@ -42,11 +30,7 @@ function Poster({
         onMouseLeave={handleMouseLeave}
         loadingFinished={loadingFinished}
       >
-        <S.Image
-          key={movie.movieId}
-          src={movie.movieImg}
-          onLoad={handleLoaded}
-        />
+        <S.Image key={movie.movieId} src={movie.movieImg} onLoad={onLoad} />
         {hovered && (
           <S.HoveredPoster alignItems="center">
             <Text.Title5 margin="40px 0 0 0" color="white">
