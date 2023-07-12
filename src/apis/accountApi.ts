@@ -7,6 +7,7 @@ const LOGIN_URI = "/login";
 const SEND_CODE_URI = "/passwordfind/emailSend";
 const CODE_CHECK_URI = "/passwordfind/finalCheck";
 const CHANGE_PW_URI = "/passwordfind/rewritePw";
+const LOGIN_STATE_URI = "/loginState";
 export const GOOGLE_LOGIN_URI =
   "http://localhost:8080/oauth2/authorization/google";
 export const NAVER_LOGIN_URI =
@@ -30,4 +31,12 @@ export const AccountApi = {
       .then((res) => res.data),
   changePassword: async (data: IAccountInfo) =>
     await baseApi.post(CHANGE_PW_URI, data).then((res) => res.data),
+  loginState: async () =>
+    await baseApi
+      .get(LOGIN_STATE_URI, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+        },
+      })
+      .then((res) => res.data),
 };

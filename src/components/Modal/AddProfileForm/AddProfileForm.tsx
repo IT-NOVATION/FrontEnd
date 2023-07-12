@@ -1,6 +1,6 @@
 import { useForm } from "react-hook-form";
 import { IAccountInfo } from "@interfaces/forms";
-import { modalStateAtom } from "@recoil/atoms";
+import { ModalState, modalStateAtom } from "@recoil/modalAtom";
 import { Block, Button, Input, Text } from "@styles/UI";
 import { useRecoilState } from "recoil";
 import useIsAbled from "@hooks/useIsAbled";
@@ -23,7 +23,7 @@ function AddProfileForm() {
 
   const { isAbled, handleIsAbled } = useIsAbled({ watch, errors, modalState });
 
-  const handleGoLogin = () => setModalState(1);
+  const handleGoLogin = () => setModalState(ModalState.LoginForm);
 
   const onValid = async ({ nickname, introduction }: IAccountInfo) => {
     const email = localStorage.getItem("signup-email"); // 이전 회원가입 단계에서 입력했던 이메일 가져오기
@@ -35,7 +35,7 @@ function AddProfileForm() {
         introduction,
       });
       alert("It's Movie Time의 회원이 되신 걸 축하드립니다!");
-      setModalState(0);
+      setModalState(ModalState.Off);
     } catch (error) {
       alert("이미 사용중인 닉네임입니다.");
     }
