@@ -10,21 +10,11 @@ import { useMutation, useQuery } from "@tanstack/react-query";
 import { WriteReviewApi } from "@apis/writeReviewApi";
 import { IWriteReviewMovie } from "@interfaces/movies";
 
-const MovieTestData = {
-  //임시 더미 데이터
-  imageUrl:
-    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSpJLtBFePzhjLi7WrGTU61siaVQ6TsbWxVJA&usqp=CAU",
-  title: "가디언즈 오브 갤럭시 3",
-  date: "2023.05.16",
-};
-
 function WriteReview() {
   const { movieId } = useParams();
-  const { data: movieInfo } = useQuery({
-    queryKey: ["movie", movieId],
-    queryFn: async () => {
-      await WriteReviewApi.movieInfo(Number(movieId));
-    },
+  const { data: movieInfo } = useQuery<IWriteReviewMovie>({
+    queryKey: ["movie"],
+    queryFn: async () => await WriteReviewApi.movieInfo(Number(movieId)),
   });
   const navigate = useNavigate();
   const [title, setTitle] = useState(""); //제목
@@ -67,9 +57,9 @@ function WriteReview() {
           </Text.Title1>
           <Block.RowBox margin="22px 0 0 0">
             <Text.Body3 color="darkGray" margin="0 27px 0 0 ">
-              {MovieTestData.title}
+              {movieInfo?.title}
             </Text.Body3>
-            <Text.Body3 color="darkGray">{MovieTestData.date}</Text.Body3>
+            <Text.Body3 color="darkGray">2023.05.16</Text.Body3>
           </Block.RowBox>
         </Block.ColumnBox>
       </Block.ColumnBox>
@@ -77,7 +67,7 @@ function WriteReview() {
       <Block.PageWrapper>
         <Block.PageLayout>
           <Block.RowBox width="887px" height="233px" margin="40px 25px 50px 0">
-            <Poster.Poster src={MovieTestData.imageUrl} size="sm" />
+            <Poster.Poster src={movieInfo?.movieImg} size="sm" />
             <Block.ColumnBox margin="0 0 0 25px">
               <Block.ColumnBox>
                 <Text.Body4 margin="0 0 3px 0">별점</Text.Body4>
