@@ -6,6 +6,7 @@ import { Block, Button, Text } from "@styles/UI";
 import { useNavigate, useLocation } from "react-router-dom";
 import { AnimatePresence } from "framer-motion";
 import Search from "@components/Search/Search";
+import { DefaultThemeColorKey } from "styled-components";
 import { loginStateAtom } from "@recoil/loginStateAtom";
 import ProfileImg from "@components/User/ProfileImg/ProfileImg";
 
@@ -19,6 +20,7 @@ export default function NavigationBar() {
   const [position, setPosition] = useState(window.scrollY);
   const [isVisible, setIsVisible] = useState<boolean>(true);
   const [isSearchClick, setIsSearchClick] = useState<boolean>(false);
+  const [textColor, setTextColor] = useState<DefaultThemeColorKey>("black");
 
   const handleSearchBtnClick = () => {
     setIsSearchClick((prev) => !prev);
@@ -53,6 +55,10 @@ export default function NavigationBar() {
     });
   }, [position]);
 
+  useEffect(() => {
+    setTextColor(pathname === "/home" && !isSearchClick ? "white" : "black");
+  }, [pathname, isSearchClick]);
+
   return (
     <>
       <AnimatePresence initial={false}>
@@ -65,6 +71,7 @@ export default function NavigationBar() {
             key="nav"
             transition={{ type: "linear", duration: 0.5 }}
             isSearchClick={isSearchClick}
+            isHome={pathname === "/home"}
           >
             <Block.RowBox justifyContent="space-between">
               <Block.RowBox
@@ -77,10 +84,10 @@ export default function NavigationBar() {
                   src="/icons/logo.svg"
                   alt="home-logo"
                 />
-                <Text.Title3 onClick={goToFilm} color="black" pointer>
+                <Text.Title3 onClick={goToFilm} color={textColor} pointer>
                   영화
                 </Text.Title3>
-                <Text.Title3 onClick={goToMovieTalk} color="black" pointer>
+                <Text.Title3 onClick={goToMovieTalk} color={textColor} pointer>
                   무비토크
                 </Text.Title3>
               </Block.RowBox>
@@ -94,7 +101,9 @@ export default function NavigationBar() {
                   <S.Icons
                     alt="close"
                     src={
-                      isSearchClick ? "/icons/close.svg" : "/icons/search.svg"
+                      isSearchClick
+                        ? "/icons/close.svg"
+                        : `/icons/search_dark.svg`
                     }
                     onClick={handleSearchBtnClick}
                   />
@@ -141,12 +150,6 @@ export default function NavigationBar() {
               </Block.RowBox>
             </Block.RowBox>
 
-            <Block.Bar
-              width="100%"
-              height="0.5px"
-              bgColor="gray"
-              margin="21px 0"
-            />
             <Block.RowBox>{isSearchClick && <Search />}</Block.RowBox>
           </S.Nav>
         )}

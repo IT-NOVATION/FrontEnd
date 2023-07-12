@@ -1,11 +1,10 @@
-export interface IReview {
+export interface IReviewPreview {
   reviewId: number;
-  title: string;
+  reviewTitle: string;
   star: number;
-  text: string;
-  date: string;
-  likes: number;
-  comments: number;
+  reviewMainText: string;
+  createdDate: string;
+  reviewLikeCount: number;
   movie: {
     movieId: number;
     movieImg: string;

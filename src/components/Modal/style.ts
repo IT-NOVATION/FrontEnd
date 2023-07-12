@@ -7,6 +7,7 @@ export const Background = styled.div`
   position: fixed;
   top: 0;
   background-color: rgba(0, 0, 0, 0.3);
+  z-index: 99;
 `;
 export const Container = styled(motion.div)`
   width: 649px;
