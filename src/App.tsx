@@ -6,25 +6,28 @@ import { AccountApi } from "@apis/accountApi";
 import { ILoginState } from "@interfaces/loginState";
 import { useSetRecoilState } from "recoil";
 import { loginStateAtom } from "@recoil/loginStateAtom";
+import IndividualMovie from "@pages/IndividualMovie/IndividualMovie";
 
 function App() {
-  const setLoginState = useSetRecoilState(loginStateAtom);
-  useQuery<ILoginState>({
-    queryKey: ["loginState"],
-    queryFn: async () => {
-      const data = await AccountApi.loginState();
-      setLoginState(data);
-      return data;
-    },
-  });
+    const setLoginState = useSetRecoilState(loginStateAtom);
+    useQuery<ILoginState>({
+        queryKey: ["loginState"],
+        queryFn: async () => {
+            const data = await AccountApi.loginState();
+            setLoginState(data);
+            return data;
+        },
+    });
 
-  return (
-    <>
-      <NavigationBar />
-      <Modal />
-      <Outlet />
-    </>
-  );
+    return (
+        <>
+            <NavigationBar />
+            <Modal />
+            <Outlet />
+
+            <IndividualMovie />
+        </>
+    );
 }
 
 export default App;
