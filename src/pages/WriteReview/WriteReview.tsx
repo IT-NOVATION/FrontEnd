@@ -52,9 +52,10 @@ function WriteReview() {
       {/* 헤더 */}
       <Block.ColumnBox
         width="100vw"
-        height="200px"
+        height="285px"
         bgColor="darkWhite"
         alignItems="center"
+        padding="85px 0 0 0"
       >
         <Block.ColumnBox width="887px" margin="70px 0 0 0">
           <Text.Title1>
