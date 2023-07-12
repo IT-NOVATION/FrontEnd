@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useSetRecoilState } from "recoil";
-import { modalStateAtom } from "@recoil/atoms";
+import { modalStateAtom } from "@recoil/modalAtom";
 import { Block, Button, Input, Text } from "@styles/UI";
 
 function TermsForm() {

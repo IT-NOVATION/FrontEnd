@@ -1,14 +1,18 @@
-import { useSetRecoilState } from "recoil";
+import { useRecoilValue, useSetRecoilState } from "recoil";
 import * as S from "./style";
-import { modalStateAtom } from "@recoil/atoms";
+import { modalStateAtom } from "@recoil/modalAtom";
 import { useEffect, useState } from "react";
 import { Block, Button, Text } from "@styles/UI";
 import { useNavigate, useLocation } from "react-router-dom";
 import { AnimatePresence } from "framer-motion";
 import Search from "@components/Search/Search";
 import { DefaultThemeColorKey } from "styled-components";
+import { loginStateAtom } from "@recoil/loginStateAtom";
+import ProfileImg from "@components/User/ProfileImg/ProfileImg";
 
 export default function NavigationBar() {
+  const { loginState, userId, nickname, profileImg } =
+    useRecoilValue(loginStateAtom);
   const navigate = useNavigate();
   const { pathname } = useLocation();
   const handleLoginClick = () => setModalState(1);
@@ -21,8 +25,6 @@ export default function NavigationBar() {
   const handleSearchBtnClick = () => {
     setIsSearchClick((prev) => !prev);
   };
-
-  const [isLogin, setIsLogin] = useState(false); // 로그인 됐을 때만 알람 표시 보이도록 => 추후에 데이터 받아올 수 있을 때 수정
 
   const goToMain = () => {
     navigate("/home");
@@ -37,7 +39,7 @@ export default function NavigationBar() {
   };
 
   const goToMovieLog = () => {
-    navigate("/movieLog");
+    navigate("/movieLog/" + userId);
   };
 
   useEffect(() => {
@@ -107,7 +109,7 @@ export default function NavigationBar() {
                   />
                 )}
 
-                {isLogin ? (
+                {loginState ? (
                   <>
                     <S.Icons src="/icons/alarm.svg" alt="alarm" />
                     <Block.RowBox
@@ -123,7 +125,14 @@ export default function NavigationBar() {
                       <Text.Body3 color="black" pointer>
                         무비로그
                       </Text.Body3>
-                      <S.Profile src="/icons/default-profile.svg" alt="logo" />
+                      <ProfileImg
+                        img={
+                          profileImg
+                            ? profileImg
+                            : "/images/default_profile.png "
+                        }
+                        size="31px"
+                      />
                     </Block.RowBox>
                   </>
                 ) : (
