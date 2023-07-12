@@ -122,25 +122,6 @@ function Posters() {
                       page={page}
                     />
                   )}
-              {/* {showPopular
-                ? movies?.popular
-                    .slice(Math.abs(page % 2) * 5, Math.abs(page % 2) * 5 + 5)
-                    .map((movie, idx) => (
-                      <Poster
-                        key={movie.movieId}
-                        movie={movie}
-                        rank={idx + 1 + Math.abs(page % 2) * 5}
-                      />
-                    ))
-                : movies?.recommended
-                    .slice(Math.abs(page % 2) * 5, Math.abs(page % 2) * 5 + 5)
-                    .map((movie, idx) => (
-                      <Poster
-                        key={movie.movieId}
-                        movie={movie}
-                        rank={idx + 1 + Math.abs(page % 2) * 5}
-                      />
-                    ))} */}
             </Block.RowBox>
           </AnimatePresence>
           <S.Icon

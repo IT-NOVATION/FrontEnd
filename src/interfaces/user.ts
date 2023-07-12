@@ -6,7 +6,7 @@ export interface IUserBase {
 export interface IReviewTimeUser extends IUserBase {
   profileImg: string;
   nickName: string;
-  introduction: string;
+  introduction?: string;
   grade: string;
   followers: number;
   followings: number;

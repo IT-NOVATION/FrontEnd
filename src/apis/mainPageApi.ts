@@ -1,6 +1,6 @@
 import { baseApi } from "./instance";
 
-const GET_MOVIES_URI = "/test/api/v1/movies/popularAndRecommend";
+const GET_MOVIES_URI = "/movies/popularAndRecommend";
 const TODAY_REVIEWER_URI = "/today/topUser";
 export const MainPageApi = {
   getMovies: async () =>

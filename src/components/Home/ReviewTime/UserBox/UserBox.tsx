@@ -27,7 +27,7 @@ function UserBox({ user }: { user: IReviewTimeUser }) {
         </Block.RowBox>
         <Block.RowBox margin="13px 0 0 0" justifyContent="center">
           <Text.Body4 color="lightBlack">
-            {cutIntroText(user.introduction)}
+            {user.introduction && cutIntroText(user.introduction)}
           </Text.Body4>
         </Block.RowBox>
         <Block.RowBox margin="42px 0 0 0" justifyContent="center">

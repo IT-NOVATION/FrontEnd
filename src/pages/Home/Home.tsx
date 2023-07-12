@@ -11,9 +11,9 @@ function Home() {
       <Suspense>
         <Block.PageLayout>
           <Block.PageWrapper>
-            {/* <Block.RowBox>
-            <Banner />
-          </Block.RowBox> */}
+            <Block.RowBox>
+              <Banner />
+            </Block.RowBox>
             <Block.RowBox>
               <Posters />
             </Block.RowBox>
