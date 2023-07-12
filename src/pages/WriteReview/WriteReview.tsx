@@ -9,12 +9,33 @@ import ViewDate from "@components/WriteReview/ViewDate/ViewDate";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { WriteReviewApi } from "@apis/writeReviewApi";
 import { IWriteReviewMovie } from "@interfaces/movies";
+import { convertDateToString } from "@utils/convertDateToString";
 
 function WriteReview() {
   const { movieId } = useParams();
   const { data: movieInfo } = useQuery<IWriteReviewMovie>({
     queryKey: ["movie"],
     queryFn: async () => await WriteReviewApi.movieInfo(Number(movieId)),
+  });
+  const { mutateAsync: mutateReview } = useMutation(() => {
+    return WriteReviewApi.mutateReview({
+      movieId: Number(movieId),
+      star: score,
+      reviewTitle: title,
+      reviewMainText: content,
+      hasGoodStory: keywords[0],
+      hasGoodProduction: keywords[1],
+      hasGoodScenario: keywords[2],
+      hasGoodDirecting: keywords[3],
+      hasGoodOst: keywords[4],
+      hasGoodVisual: keywords[5],
+      hasGoodActing: keywords[6],
+      hasGoodCharterCharming: keywords[7],
+      hasGoodDiction: keywords[8],
+      hasCheckDate: keywords[9],
+      hasSpoiler: spoilerChecked,
+      watchDate: convertDateToString(viewDate),
+    });
   });
   const navigate = useNavigate();
   const [title, setTitle] = useState(""); //제목
@@ -31,8 +52,12 @@ function WriteReview() {
   const handleSubmit = async () => {
     //서버에 제출
     try {
-      navigate("/");
+      if (!score) throw new Error("별점을 매겨주세요.");
+      if (!content.length) throw new Error("내용을 입력해주세요.");
+      await mutateReview();
+      navigate(-1);
     } catch (error) {
+      alert(String(error).split(":")[1]);
       console.log(error);
     }
   };
@@ -45,7 +70,7 @@ function WriteReview() {
         height="285px"
         bgColor="darkWhite"
         alignItems="center"
-        padding="85px 0 0 0"
+        padding="60px 0 0 0"
       >
         <Block.ColumnBox width="887px" margin="70px 0 0 0">
           <Text.Title1>
@@ -119,6 +144,7 @@ function WriteReview() {
               color="white"
               bgColor="main"
               borderRadius="4px"
+              onClick={handleSubmit}
             >
               <Text.Body4>저장</Text.Body4>
             </Button.Button>
