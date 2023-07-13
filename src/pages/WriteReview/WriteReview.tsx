@@ -32,8 +32,8 @@ function WriteReview() {
       hasGoodActing: keywords[6],
       hasGoodCharterCharming: keywords[7],
       hasGoodDiction: keywords[8],
-      hasCheckDate: keywords[9],
       hasSpoiler: spoilerChecked,
+      hasCheckDate: viewDate[0] !== 0,
       watchDate: convertDateToString(viewDate),
     });
   });
