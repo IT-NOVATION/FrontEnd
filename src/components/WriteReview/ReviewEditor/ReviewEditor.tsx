@@ -37,7 +37,7 @@ function ReviewEditor() {
       console.log("온체인지");
       const file = input.files?.[0];
       const formData = new FormData();
-      formData.append("img", file);
+      formData.append("img", file as any);
       try {
         AWS.config.update({
           region: REGION,
@@ -54,8 +54,8 @@ function ReviewEditor() {
           },
         });
         const IMG_URL = await upload.promise().then((res) => res.Location); //저장과 동시에 저장된 url을 가져온다
-        const editor = quillRef.current.getEditor(); // 에디터 객체 가져오기
-        console.log(editor);
+        const current = quillRef.current as any;
+        const editor = current.getEditor(); // 에디터 객체 가져오기
         // 1. 에디터 root의 innerHTML을 수정해주기
         // editor의 root는 에디터 컨텐츠들이 담겨있다. 거기에 img태그를 추가해준다.
         // 이미지를 업로드하면 -> 멀터에서 이미지 경로 URL을 받아와 -> 이미지 요소로 만들어 에디터 안에 넣어준다.
