@@ -1,9 +1,9 @@
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useContext, useEffect, useMemo, useRef, useState } from "react";
 import ReactQuill, { Quill } from "react-quill";
 import "react-quill/dist/quill.snow.css";
-import { useNavigate } from "react-router-dom";
 import AWS from "aws-sdk";
 import ImageResize from "quill-image-resize";
+import { ReviewDataContext } from "@pages/WriteReview/WriteReview";
 
 Quill.register("modules/ImageResize", ImageResize);
 
@@ -11,13 +11,14 @@ const REGION = process.env.REACT_APP_AWS_S3_BUCKET_REGION;
 const ACCESS_KEY = process.env.REACT_APP_AWS_S3_BUCKET_ACCESS_KEY_ID;
 const SECRET_ACCESS_KEY = process.env.REACT_APP_AWS_S3_BUCKET_SECRET_ACCESS_KEY;
 
-function ReviewEditor({ setContent }) {
+function ReviewEditor() {
+  const reviewDataContext = useContext(ReviewDataContext);
   const quillRef = useRef(null);
-  const navigate = useNavigate();
   const [value, setValue] = useState("");
-  console.log(value);
   useEffect(() => {
-    setContent(value);
+    reviewDataContext?.setReviewData((prev) => {
+      return { ...prev, reviewMainText: value };
+    });
   }, [value]);
 
   const imageHandler = async () => {
