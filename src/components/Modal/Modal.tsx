@@ -25,10 +25,10 @@ function Modal() {
           <>
             <S.Background onClick={handleModalClose}></S.Background>
             <S.Container
-              initial={{ opacity: 0.2, x: 500 }}
+              initial={{ opacity: 1, x: 700 }}
               transition={{ ease: "easeInOut", duration: 0.5 }}
               animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0.2, x: 500 }}
+              exit={{ opacity: 1, x: 700 }}
             >
               <S.ExitBtn onClick={handleModalClose}>
                 <CgClose size="37" />

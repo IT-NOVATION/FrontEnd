@@ -1,3 +1,4 @@
+import { useQueryClient } from "@tanstack/react-query";
 import * as S from "./style";
 import { Block, Text } from "@styles/UI";
 
@@ -6,7 +7,15 @@ export default function Dropdown({
 }: {
   setDropdownOn: React.Dispatch<React.SetStateAction<boolean>>;
 }) {
+  const queryClient = useQueryClient();
   const handleBackgroundClick = () => setDropdownOn(false);
+  const handleLogout = async () => {
+    // 로그아웃 api 추가하기...
+    localStorage.removeItem("accessToken");
+    localStorage.removeItem("refreshToken");
+    await queryClient.invalidateQueries(["loginState"]);
+    setDropdownOn(false);
+  };
   return (
     <>
       <S.Background onClick={handleBackgroundClick} />
@@ -18,6 +27,7 @@ export default function Dropdown({
             alignItems="center"
             height="31px"
             pointer
+            onClick={handleLogout}
           >
             <S.Icon src="/icons/NavigationBar/logout.svg" />
             <Text.Body4 margin="0 0 0 6px">로그아웃</Text.Body4>
