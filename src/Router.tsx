@@ -19,7 +19,7 @@ export const router = createBrowserRouter([
         element: <Home />,
       },
       {
-        path: "write-review",
+        path: "write-review/:movieId",
         element: <WriteReview />,
       },
       {

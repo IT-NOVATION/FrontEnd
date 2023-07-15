@@ -23,3 +23,8 @@ export interface IMainPageMovie {
   popular: IPopularMovie[];
   recommended: IRecommendedMovie[];
 }
+
+export interface IWriteReviewMovie extends IMovieBase {
+  title: string;
+  movieImg: string;
+}
