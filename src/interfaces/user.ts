@@ -12,3 +12,10 @@ export interface IReviewTimeUser extends IUserBase {
   followings: number;
   reviews: IReviewPreview[];
 }
+export interface IReadReviewUser extends IUserBase {
+  bgImg: string;
+  nickname: string;
+  grade: string;
+  introduction: string;
+  profileImg: string;
+}

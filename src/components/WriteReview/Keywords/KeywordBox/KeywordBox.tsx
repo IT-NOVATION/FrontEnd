@@ -7,15 +7,16 @@ type Props = {
   width: string;
   index: number;
   selected: boolean;
-  setSelected: React.Dispatch<React.SetStateAction<any[]>>;
+  setSelected?: React.Dispatch<React.SetStateAction<any[]>>;
 };
 function KeywordBox({ text, width, index, selected, setSelected }: Props) {
   const toggleSelected = () => {
-    setSelected((prev) => {
-      const temp = [...prev];
-      temp[index] = !prev[index];
-      return temp;
-    });
+    setSelected &&
+      setSelected((prev) => {
+        const temp = [...prev];
+        temp[index] = !prev[index];
+        return temp;
+      });
   };
   return (
     <Block.RowBox
