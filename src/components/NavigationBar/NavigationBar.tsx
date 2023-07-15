@@ -9,6 +9,7 @@ import Search from "@components/Search/Search";
 import { DefaultThemeColorKey } from "styled-components";
 import { loginStateAtom } from "@recoil/loginStateAtom";
 import ProfileImg from "@components/User/ProfileImg/ProfileImg";
+import Dropdown from "./Dropdown/Dropdown";
 
 export default function NavigationBar() {
   const { loginState, userId, nickname, profileImg } =
@@ -18,13 +19,18 @@ export default function NavigationBar() {
   const handleLoginClick = () => setModalState(1);
   const setModalState = useSetRecoilState(modalStateAtom);
   const [position, setPosition] = useState(window.scrollY);
+  const [navTheme, setNavTheme] = useState<"white" | "dark">("dark");
   const [isVisible, setIsVisible] = useState<boolean>(true);
   const [isSearchClick, setIsSearchClick] = useState<boolean>(false);
   const [textColor, setTextColor] = useState<DefaultThemeColorKey>("black");
+  const [movieLogHovered, setMovieLogHovered] = useState(false);
+  const [dropdownOn, setDropdownOn] = useState(false);
 
   const handleSearchBtnClick = () => {
     setIsSearchClick((prev) => !prev);
   };
+  const handleMovieLogMouseEnter = () => setMovieLogHovered(true);
+  const handleMovieLogMouseLeave = () => setMovieLogHovered(false);
 
   const goToMain = () => {
     navigate("/home");
@@ -41,6 +47,12 @@ export default function NavigationBar() {
   const goToMovieLog = () => {
     navigate("/movieLog/" + userId);
   };
+  const handleProfileClick = () => setDropdownOn(true);
+
+  useEffect(() => {
+    setNavTheme(pathname === "/home" && !isSearchClick ? "dark" : "white");
+    setTextColor(pathname === "/home" && !isSearchClick ? "white" : "black");
+  }, [isSearchClick, pathname]);
 
   useEffect(() => {
     const prev = position;
@@ -55,103 +67,122 @@ export default function NavigationBar() {
     });
   }, [position]);
 
-  useEffect(() => {
-    setTextColor(pathname === "/home" && !isSearchClick ? "white" : "black");
-  }, [pathname, isSearchClick]);
-
   return (
     <>
       <AnimatePresence initial={false}>
         {isVisible && (
-          <S.Nav
-            variants={S.variants}
-            initial="initial"
-            exit="exit"
-            animate="animate"
-            key="nav"
-            transition={{ type: "linear", duration: 0.5 }}
-            isSearchClick={isSearchClick}
-            isHome={pathname === "/home"}
-          >
-            <Block.RowBox justifyContent="space-between">
-              <Block.RowBox
-                width="426px"
-                justifyContent="space-between"
-                alignItems="center"
-              >
-                <S.HomeLogo
-                  onClick={goToMain}
-                  src="/icons/logo.svg"
-                  alt="home-logo"
-                />
-                <Text.Title3 onClick={goToFilm} color={textColor} pointer>
-                  영화
-                </Text.Title3>
-                <Text.Title3 onClick={goToMovieTalk} color={textColor} pointer>
-                  무비토크
-                </Text.Title3>
-              </Block.RowBox>
-
-              <Block.RowBox
-                width="228px"
-                justifyContent="flex-end"
-                alignItems="center"
-              >
-                {pathname !== "/search-result" && (
-                  <S.Icons
-                    alt="close"
-                    src={
-                      isSearchClick
-                        ? "/icons/close.svg"
-                        : `/icons/search_dark.svg`
-                    }
-                    onClick={handleSearchBtnClick}
+          <>
+            <S.Nav
+              variants={S.variants}
+              initial="initial"
+              exit="exit"
+              animate="animate"
+              key="nav"
+              transition={{ type: "linear", duration: 0.5 }}
+              isSearchClick={isSearchClick}
+              navTheme={navTheme}
+            >
+              {dropdownOn && <Dropdown setDropdownOn={setDropdownOn} />}
+              <Block.RowBox>
+                <Block.RowBox gap="70px" alignItems="center" height="43px">
+                  <S.HomeLogo
+                    onClick={goToMain}
+                    src="/icons/logo.svg"
+                    alt="home-logo"
                   />
-                )}
+                  <Text.Title5 onClick={goToFilm} color={textColor} pointer>
+                    무비서치
+                  </Text.Title5>
+                  <Text.Title5
+                    onClick={goToMovieTalk}
+                    color={textColor}
+                    pointer
+                  >
+                    무비토크
+                  </Text.Title5>
+                </Block.RowBox>
 
-                {loginState ? (
-                  <>
-                    <S.Icons src="/icons/alarm.svg" alt="alarm" />
-                    <Block.RowBox
-                      width="122px"
-                      height="43px"
-                      borderRadius="15px"
-                      border=" 1px solid rgba(0, 0, 0, 0.61)"
-                      justifyContent="space-evenly"
-                      alignItems="center"
-                      pointer
-                      onClick={goToMovieLog}
-                    >
-                      <Text.Body3 color="black" pointer>
-                        무비로그
-                      </Text.Body3>
-                      <ProfileImg
-                        img={
-                          profileImg
-                            ? profileImg
-                            : "/images/default_profile.png "
+                <Block.RowBox
+                  alignItems="center"
+                  justifyContent="flex-end"
+                  height="43px"
+                >
+                  {pathname !== "/search-result" && (
+                    <S.SearchLogo
+                      alt="close"
+                      src={
+                        isSearchClick
+                          ? "/icons/close.svg"
+                          : navTheme === "white"
+                          ? "/icons/search_dark.svg"
+                          : "/icons/search_white.svg"
+                      }
+                      onClick={handleSearchBtnClick}
+                    />
+                  )}
+
+                  {loginState ? (
+                    <>
+                      <S.AlarmLogo
+                        src={
+                          navTheme === "white"
+                            ? "/icons/alarm_dark.svg"
+                            : "/icons/alarm_white.svg"
                         }
-                        size="31px"
+                        alt="alarm"
                       />
-                    </Block.RowBox>
-                  </>
-                ) : (
-                  <>
-                    <Button.Button
-                      onClick={handleLoginClick}
-                      width="170px"
-                      height="43px"
-                      borderRadius="15px"
-                    >
-                      <Text.Body3 color="black">로그인 / 회원가입</Text.Body3>
-                    </Button.Button>
-                  </>
-                )}
+                      <S.MovieLogBtn
+                        width="107px"
+                        height="43px"
+                        borderRadius="15px"
+                        bgColor="white"
+                        onClick={goToMovieLog}
+                        margin="0 15px 0 0"
+                        onMouseEnter={handleMovieLogMouseEnter}
+                        onMouseLeave={handleMovieLogMouseLeave}
+                        hovered={movieLogHovered}
+                        navTheme={navTheme}
+                      >
+                        <Text.Body3 color="black" pointer>
+                          무비로그
+                        </Text.Body3>
+                      </S.MovieLogBtn>
+                      <Block.RowBox
+                        width="auto"
+                        pointer
+                        onClick={handleProfileClick}
+                      >
+                        <ProfileImg
+                          img={
+                            profileImg
+                              ? profileImg
+                              : "/images/default_profile.png "
+                          }
+                          size="42px"
+                        />
+                      </Block.RowBox>
+                    </>
+                  ) : (
+                    <>
+                      <Button.Button
+                        onClick={handleLoginClick}
+                        width="170px"
+                        height="43px"
+                        borderRadius="15px"
+                      >
+                        <Text.Body3 color="black">로그인 / 회원가입</Text.Body3>
+                      </Button.Button>
+                    </>
+                  )}
+                </Block.RowBox>
               </Block.RowBox>
-            </Block.RowBox>
-
-            <Block.RowBox>{isSearchClick && <Search />}</Block.RowBox>
-          </S.Nav>
+              {isSearchClick && (
+                <Block.RowBox margin="40px 0 0 0">
+                  <Search />
+                </Block.RowBox>
+              )}
+            </S.Nav>
+          </>
         )}
       </AnimatePresence>
     </>
