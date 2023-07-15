@@ -1,13 +1,26 @@
 import styled from "styled-components";
 
+export const Layout = styled.div`
+  width: 100vw;
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
 export const Background = styled.div`
   width: 100vw;
   height: 100vh;
   z-index: 99;
   position: fixed;
+  top: 0;
+  left: 0;
 `;
 export const Bubble = styled.div`
-  /* border: 1px solid #5f5f5f; */
   border-radius: 20px;
   display: flex;
   flex-direction: column;
@@ -47,3 +60,22 @@ export const Bubble = styled.div`
   }
 `;
 export const Icon = styled.img``;
+export const Modal = styled.div`
+  background-color: white;
+  width: 543px;
+  height: auto;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  padding: 20px 25px;
+  border: 1px solid #5f5f5f;
+  z-index: 100;
+  position: relative;
+`;
+export const ServiceIntroText = styled.div`
+  text-align: center;
+  font-size: 15px;
+  font-weight: 500;
+  white-space: pre-line;
+  line-height: 23px;
+`;

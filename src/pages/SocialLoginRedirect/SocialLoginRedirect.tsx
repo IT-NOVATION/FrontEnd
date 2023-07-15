@@ -11,7 +11,7 @@ function SocialLoginRedirect() {
       localStorage.setItem("accessToken", accessToken);
       localStorage.setItem("refreshToken", refreshToken);
     }
-    queryClient.invalidateQueries(["loginState"]);
+    queryClient.invalidateQueries();
     navigate("/");
   }, []);
   return <></>;
