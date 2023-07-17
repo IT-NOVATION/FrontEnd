@@ -4,12 +4,14 @@ import { IReadReview } from "@interfaces/review";
 import { Block, Text } from "@styles/UI";
 import { useQuery } from "@tanstack/react-query";
 import { useParams } from "react-router-dom";
-import { FaStar, FaStarHalfAlt, FaStarHalf } from "react-icons/fa";
+import { FaStar, FaStarHalfAlt } from "react-icons/fa";
 import useCalcStar from "@hooks/useCalcStar";
 import theme from "@styles/theme";
 import KeywordBox from "@components/WriteReview/Keywords/KeywordBox/KeywordBox";
 import { KeywordsEnum } from "@components/WriteReview/Keywords/Keywords";
 import DOMPurify from "dompurify";
+import Like from "@components/ReadReview/Like/Like";
+import UserInfo from "@components/ReadReview/UserInfo/UserInfo";
 
 export default function ReadReview() {
   const { reviewId } = useParams();
@@ -20,7 +22,7 @@ export default function ReadReview() {
   });
   const { fullStar, halfStar } = useCalcStar(reviewData?.review.star as number);
   return (
-    <Block.PageWrapper>
+    <Block.PageWrapper position="relative">
       <Block.PageLayout>
         {reviewData && (
           <>
@@ -140,6 +142,8 @@ export default function ReadReview() {
                 ),
               }}
             />
+            <Like reviewId={Number(reviewId)} />
+            <UserInfo user={reviewData.user} />
           </>
         )}
       </Block.PageLayout>

@@ -34,7 +34,11 @@ export const Bar = styled.div`
 `;
 export const ReviewMainText = styled.div`
   width: 100%;
+  color: #323232;
   line-height: 25px;
   margin-top: 30px;
   margin-bottom: 110px;
+  font-size: 20px;
+  font-weight: 300;
+  line-height: 32px;
 `;

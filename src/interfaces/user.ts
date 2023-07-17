@@ -18,4 +18,10 @@ export interface IReadReviewUser extends IUserBase {
   grade: string;
   introduction: string;
   profileImg: string;
+  folllowerNum: number;
+  followingNum: number;
+}
+export interface IReadReviewLoginUser {
+  pushedFollow: boolean;
+  pushedReviewLike?: boolean;
 }
