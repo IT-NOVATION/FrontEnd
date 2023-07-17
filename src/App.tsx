@@ -6,7 +6,6 @@ import { AccountApi } from "@apis/accountApi";
 import { ILoginState } from "@interfaces/loginState";
 import { useSetRecoilState } from "recoil";
 import { loginStateAtom } from "@recoil/loginStateAtom";
-import IndividualMovie from "@pages/IndividualMovie/IndividualMovie";
 
 function App() {
     const setLoginState = useSetRecoilState(loginStateAtom);
@@ -24,8 +23,6 @@ function App() {
             <NavigationBar />
             <Modal />
             <Outlet />
-
-            <IndividualMovie />
         </>
     );
 }

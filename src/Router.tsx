@@ -8,6 +8,7 @@ import MovieLog from "@pages/MovieLog/MovieLog";
 import EntireMovie from "@pages/EntireMovie/EntireMovie";
 import MovieTalk from "@pages/MovieTalk/MovieTalk";
 import SearchResult from "@pages/Search/SearchResult";
+import SingleMovie from "@pages/SingleMovie/SingleMovie";
 
 export const router = createBrowserRouter([
     {
@@ -26,13 +27,14 @@ export const router = createBrowserRouter([
                 path: "/kakao-redirect/:accessToken/:refreshToken",
                 element: <KakaoLoginRedirect />,
             },
-            { path: "film", element: <EntireMovie /> },
+            { path: "entireMovie", element: <EntireMovie /> },
             { path: "movietalk", element: <MovieTalk /> },
             {
                 path: "movieLog/:userId",
                 element: <MovieLog />,
             },
             { path: "/search-result", element: <SearchResult /> },
+            { path: "singleMovie/:movieId", element: <SingleMovie /> },
         ],
         errorElement: <NotFound />,
     },
