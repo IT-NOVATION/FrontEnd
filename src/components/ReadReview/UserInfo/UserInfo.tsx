@@ -2,6 +2,7 @@ import ProfileImg from "@components/User/ProfileImg/ProfileImg";
 import * as S from "./style";
 import { IReadReviewUser } from "@interfaces/user";
 import { Block, Text } from "@styles/UI";
+import Badge from "@components/User/Badge/Badge";
 
 export default function UserInfo({ user }: { user: IReadReviewUser }) {
   return (
@@ -11,11 +12,11 @@ export default function UserInfo({ user }: { user: IReadReviewUser }) {
           <Block.AbsoluteBox width="auto" top="-38px" right="0">
             <ProfileImg img={user.profileImg} size="130px" />
           </Block.AbsoluteBox>
-          <Block.RowBox>
-            <Text.Title2 color="lightBlack" margin="45px 0 0 0">
+          <Block.RowBox margin="45px 0 0 0" alignItems="center">
+            <Text.Title2 margin="0 20px 0 0" color="lightBlack">
               {user.nickname}
             </Text.Title2>
-            {/* 여기에 등급뱃지 추가 */}
+            <Badge grade={user.grade} />
           </Block.RowBox>
           <Block.RowBox margin="12px 0 0 0">
             <Text.Body4 margin="0 0 0 5px" color="lightBlack">

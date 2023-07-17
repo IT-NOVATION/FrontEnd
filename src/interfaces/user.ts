@@ -7,7 +7,7 @@ export interface IReviewTimeUser extends IUserBase {
   profileImg: string;
   nickName: string;
   introduction?: string;
-  grade: string;
+  grade: Grade;
   followers: number;
   followings: number;
   reviews: IReviewPreview[];
@@ -15,7 +15,7 @@ export interface IReviewTimeUser extends IUserBase {
 export interface IReadReviewUser extends IUserBase {
   bgImg: string;
   nickname: string;
-  grade: string;
+  grade: Grade;
   introduction: string;
   profileImg: string;
   folllowerNum: number;
@@ -24,4 +24,11 @@ export interface IReadReviewUser extends IUserBase {
 export interface IReadReviewLoginUser {
   pushedFollow: boolean;
   pushedReviewLike?: boolean;
+}
+
+export enum Grade {
+  "STANDARD",
+  "PREMIUM",
+  "VIP",
+  "SPECIAL",
 }

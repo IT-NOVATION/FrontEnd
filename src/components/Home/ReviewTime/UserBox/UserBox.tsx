@@ -21,9 +21,12 @@ function UserBox({ user }: { user: IReviewTimeUser }) {
           position="relative"
         >
           <Text.Title5>{user.nickName}</Text.Title5>
-          <Block.AbsoluteBox width="auto" top="-7px" right="20px">
-            <Badge grade="VIP" size="29px" />
-          </Block.AbsoluteBox>
+          <Badge grade={user.grade} />
+          <Block.AbsoluteBox
+            width="auto"
+            top="-7px"
+            right="20px"
+          ></Block.AbsoluteBox>
         </Block.RowBox>
         <Block.RowBox margin="13px 0 0 0" justifyContent="center">
           <Text.Body4 color="lightBlack">
