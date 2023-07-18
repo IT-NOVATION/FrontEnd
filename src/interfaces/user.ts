@@ -18,7 +18,7 @@ export interface IReadReviewUser extends IUserBase {
   grade: Grade;
   introduction: string;
   profileImg: string;
-  folllowerNum: number;
+  followerNum: number;
   followingNum: number;
 }
 export interface IReadReviewLoginUser {

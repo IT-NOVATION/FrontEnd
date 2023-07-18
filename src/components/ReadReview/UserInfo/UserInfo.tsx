@@ -28,7 +28,7 @@ export default function UserInfo({ user }: { user: IReadReviewUser }) {
               팔로워
             </Text.Body4>
             <Text.Body1 color="lightBlack" margin="0 19px 0 0">
-              {user.folllowerNum}
+              {user.followerNum}
             </Text.Body1>
             <Text.Body4 color="lightBlack" margin="0 6px 0 0">
               팔로잉

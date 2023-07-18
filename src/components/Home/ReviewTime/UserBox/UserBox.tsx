@@ -4,7 +4,7 @@ import { IReviewTimeUser } from "@interfaces/user";
 import ProfileImg from "@components/User/ProfileImg/ProfileImg";
 import Badge from "@components/User/Badge/Badge";
 import ReviewPreviews from "@components/ReviewPreviews/ReviewPreviews";
-import { cutIntroText } from "../../../../utils/cutIntroText";
+import { cutIntroText } from "@utils/cutIntroText";
 
 function UserBox({ user }: { user: IReviewTimeUser }) {
   return (
