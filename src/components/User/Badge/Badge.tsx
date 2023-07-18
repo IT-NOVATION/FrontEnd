@@ -1,15 +1,8 @@
+import { Grade } from "@interfaces/user";
 import * as S from "./style";
 
-export type Props = {
-  grade: "STANDARD" | "PREMIUM" | "VIP" | "SPECIAL";
-  size: string;
-};
-function Badge({ grade, size }: Props) {
-  return (
-    <S.BadgeContainer grade={grade} size={size}>
-      <S.BadgeText>{grade}</S.BadgeText>
-    </S.BadgeContainer>
-  );
+function Badge({ grade }: { grade: Grade }) {
+  return <S.BadgeContainer src={`/icons/Badge/${grade}.svg`} />;
 }
 
 export default Badge;
