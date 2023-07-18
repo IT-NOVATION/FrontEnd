@@ -160,14 +160,14 @@ export default function SingleMovie() {
                                 <Text.Body1 color="white">리뷰작성</Text.Body1>
                             </S.Button>
                         </Block.RowBox>
-
+                        {/* 
                         {singleMovie.reviewAndUserInfoList.length === 0 ? (
                             <>리뷰가 없어요</>
                         ) : (
                             singleMovie.reviewAndUserInfoList.map((item, i) => (
                                 <ReviewAndUserInfo reviewAndInfo={singleMovie.reviewAndUserInfoList[i]} />
                             ))
-                        )}
+                        )} */}
                     </Block.ColumnBox>
                 </>
             )}

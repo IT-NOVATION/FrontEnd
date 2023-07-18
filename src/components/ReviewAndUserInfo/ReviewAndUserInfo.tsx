@@ -14,14 +14,14 @@ export function ReviewAndUserInfo({ reviewAndInfo }: Props) {
                         <img src={reviewAndInfo.user.userProfileImg} alt="프로필" />
                     </Block.RowBox>
                     <Block.RowBox border="1px solid red" justifyContent="center" margin="5px 0 0 0">
-                        <Text.Body2 color="black">{reviewAndInfo.user.nickname}닉네임</Text.Body2>
+                        <Text.Body2 color="black">{reviewAndInfo.user.nickname}</Text.Body2>
                     </Block.RowBox>
                 </Block.ColumnBox>
 
                 <Block.ColumnBox padding="0 0 23px 0" justifyContent="space-between">
                     <Block.RowBox justifyContent="space-between" alignItems="center">
                         <Block.RowBox width="500px">
-                            <Text.Title5 color="black">{reviewAndInfo.review.reviewTitle}제목</Text.Title5>
+                            <Text.Title5 color="black">{reviewAndInfo.review.reviewTitle}</Text.Title5>
                         </Block.RowBox>
                         <Block.RowBox
                             width="56px"
@@ -31,8 +31,10 @@ export function ReviewAndUserInfo({ reviewAndInfo }: Props) {
                             justifyContent="center"
                             alignItems="center"
                         >
-                            <img src="/icons/MovieLog/purple_star.svg" width={15} alt="별점" /> 4.5
-                            {reviewAndInfo.review.starScore}
+                            <img src="/icons/MovieLog/purple_star.svg" width={16} alt="별점" />
+                            <Block.RowBox width="20px" padding="0 0 0 3px">
+                                {reviewAndInfo.review.starScore}
+                            </Block.RowBox>
                         </Block.RowBox>
                     </Block.RowBox>
                     <Block.RowBox width="100%" height="56px" border="1px solid red">
