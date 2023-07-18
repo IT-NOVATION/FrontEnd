@@ -9,3 +9,10 @@ export const Box = styled.div`
   display: flex;
   margin: 70px 20px 0 20px;
 `;
+export const NicknameBox = styled.div`
+  position: relative;
+  width: auto;
+  font-weight: 500;
+  font-size: 20px;
+  text-align: center;
+`;

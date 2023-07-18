@@ -1,3 +1,6 @@
+import { IReadReviewMovie } from "./movies";
+import { IReadReviewLoginUser, IReadReviewUser } from "./user";
+
 export interface IReviewPreview {
   reviewId: number;
   reviewTitle: string;
@@ -28,4 +31,29 @@ export interface IMutateReview {
   hasCheckDate: boolean;
   hasSpoiler: boolean;
   watchDate: string;
+}
+
+export interface IReadReview {
+  review: {
+    reviewId: number;
+    reviewTitle: string;
+    reviewMainText: string;
+    hasGoodStory: boolean;
+    hasGoodProduction: boolean;
+    hasGoodScenario: boolean;
+    hasGoodDirecting: boolean;
+    hasGoodOst: boolean;
+    hasGoodVisual: boolean;
+    hasGoodActing: boolean;
+    hasGoodCharterCharming: boolean;
+    hasGoodDiction: boolean;
+    hasCheckDate: boolean;
+    hasSpoiler: boolean;
+    watchDate: string;
+    star: number;
+    reviewLikeNum: number;
+  };
+  movie: IReadReviewMovie;
+  user: IReadReviewUser;
+  loginUser: IReadReviewLoginUser;
 }
