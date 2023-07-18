@@ -2,7 +2,7 @@ import { Block, Text } from "@styles/UI";
 import KeywordBox from "./KeywordBox/KeywordBox";
 import { useState } from "react";
 
-enum KeywordsEnum {
+export enum KeywordsEnum {
   "스토리가 좋아요",
   "작품성이 높아요",
   "시나리오 소재가 참신해요",

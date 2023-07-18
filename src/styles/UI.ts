@@ -240,6 +240,7 @@ export const Block = {
         flex-direction: column;
         align-items: center;
         background-color: ${props => props.bgColor};
+        position: ${props => props.position};
     `,
     PageLayout: styled.div<StyleBlock>`
         width: 900px;
@@ -287,6 +288,7 @@ export const Block = {
         position: ${props => props.position};
         padding: ${props => props.padding};
         box-shadow: ${props => props.boxShadow};
+        gap: ${props => props.gap};
     `,
     ColumnBox: styled(motion.div)<StyleBlock>`
         width: ${props => (props.width ? props.width : "100%")};
@@ -321,10 +323,6 @@ export const Block = {
         bottom: ${props => props.bottom};
         left: ${props => props.left};
         z-index: ${props => props.zIndex};
-        border: ${props => props.border};
-        background: ${props => props.background};
-        border-radius: ${props => props.borderRadius};
-        box-shadow: ${props => props.boxShadow};
     `,
     Bar: styled.div<StyleBlock>`
         width: ${props => props.width};

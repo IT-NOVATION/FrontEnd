@@ -26,6 +26,7 @@ function useCalcStar(star: number) {
     setHalfStar(Array(0).fill(0));
     if (decimal === 0.5) setHalfStar(Array(1).fill(0));
   }, []);
+
   return { fullStar, halfStar };
 }
 export default useCalcStar;

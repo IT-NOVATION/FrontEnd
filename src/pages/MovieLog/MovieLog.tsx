@@ -366,7 +366,7 @@ function MovieLog() {
                         </Button.Button>
                     </Block.RowBox>
                     <Block.RowBox width="100%" margin="30px 0 0 0" alignItems="center">
-                        <Badge grade="VIP" size="29px" />
+                        {/* <Badge grade={User.grade} /> */}
                         <Block.RowBox
                             width="auto"
                             margin="0 0 0 12px"

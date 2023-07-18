@@ -8,6 +8,7 @@ import MovieLog from "@pages/MovieLog/MovieLog";
 import EntireMovie from "@pages/EntireMovie/EntireMovie";
 import MovieTalk from "@pages/MovieTalk/MovieTalk";
 import SearchResult from "@pages/Search/SearchResult";
+import ReadReview from "@pages/ReadReview/ReadReview";
 import SingleMovie from "@pages/SingleMovie/SingleMovie";
 
 export const router = createBrowserRouter([
@@ -20,7 +21,7 @@ export const router = createBrowserRouter([
                 element: <Home />,
             },
             {
-                path: "write-review",
+                path: "write-review/:movieId",
                 element: <WriteReview />,
             },
             {
@@ -32,6 +33,10 @@ export const router = createBrowserRouter([
             {
                 path: "movieLog/:userId",
                 element: <MovieLog />,
+            },
+            {
+                path: "review/:reviewId",
+                element: <ReadReview />,
             },
             { path: "/search-result", element: <SearchResult /> },
             { path: "singleMovie/:movieId", element: <SingleMovie /> },

@@ -4,7 +4,7 @@ import { IReviewTimeUser } from "@interfaces/user";
 import ProfileImg from "@components/User/ProfileImg/ProfileImg";
 import Badge from "@components/User/Badge/Badge";
 import ReviewPreviews from "@components/ReviewPreviews/ReviewPreviews";
-import { cutIntroText } from "../../../../utils/cutIntroText";
+import { cutIntroText } from "@utils/cutIntroText";
 
 function UserBox({ user }: { user: IReviewTimeUser }) {
   return (
@@ -20,10 +20,12 @@ function UserBox({ user }: { user: IReviewTimeUser }) {
           justifyContent="center"
           position="relative"
         >
-          <Text.Title5>{user.nickName}</Text.Title5>
-          <Block.AbsoluteBox width="auto" top="-7px" right="20px">
-            <Badge grade="VIP" size="29px" />
-          </Block.AbsoluteBox>
+          <S.NicknameBox>
+            {user.nickName}
+            <Block.AbsoluteBox width="auto" top="-7px" right="-39px">
+              <Badge grade={user.grade} />
+            </Block.AbsoluteBox>
+          </S.NicknameBox>
         </Block.RowBox>
         <Block.RowBox margin="13px 0 0 0" justifyContent="center">
           <Text.Body4 color="lightBlack">
