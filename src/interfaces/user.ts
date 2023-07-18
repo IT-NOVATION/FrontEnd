@@ -1,5 +1,12 @@
 import { IReviewPreview } from "./review";
 
+export enum Grade {
+  "STANDARD",
+  "PREMIUM",
+  "VIP",
+  "SPECIAL",
+}
+
 export interface IUserBase {
   userId: number;
 }
@@ -25,10 +32,11 @@ export interface IReadReviewLoginUser {
   pushedFollow: boolean;
   pushedReviewLike?: boolean;
 }
-
-export enum Grade {
-  "STANDARD",
-  "PREMIUM",
-  "VIP",
-  "SPECIAL",
+export interface IMovieLogUser {
+  userId: number;
+  bgImg?: string;
+  nickname: string;
+  introduction?: string;
+  grade: Grade;
+  profileImg?: string;
 }

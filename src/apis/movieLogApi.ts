@@ -10,7 +10,7 @@ type FollowType = {
 
 export const MovieLogApi = {
   getMovieLog: async (userId: number) =>
-    await baseApi.get(GET_MOVIELOG_URI + "/" + userId).then((res) => res.data),
+    await baseApi.get(GET_MOVIELOG_URI).then((res) => res.data),
   follow: async ({ pushUserId, targetUserId }: FollowType) =>
     await baseApi.get(FOLLOW_URI, {
       params: {
