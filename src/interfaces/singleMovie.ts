@@ -1,46 +1,35 @@
-export interface ISingleMovie extends IMovieInformation {
-    movie: IMovieInformation[];
-    movieLikeCount: number;
-    avgStarScore: number;
+export interface ISingleMovie {
+    movie: IMovieInformation;
+    reviewAndUserInfoList: IReviewAndUserInfo[];
 }
 
-export interface IMovieInformation extends ITop3HasFeature {
+export interface IMovieInformation {
     movieImg?: string;
     title: string;
     movieBgImg: string;
     movieGenre: string;
     movieReleasedate: string;
-    movieRunningTime: number;
-    movieActor: string;
-    movieOverview: []; // 확인 필요
-    movieDirector: string;
     movieDetail: string;
-    top3HasFeature: {
-        top1feature: string;
-        top2feature: string;
-        top3feature: string;
-    };
+    movieActor: string;
+    movieDirector: string;
+    movieAge: string;
+    movieRunningTime: number;
+    top3HasFeature: { topKeywordList: string[] };
+    movieLikeCount: number;
+    avgStarScore: number;
 }
 
-export interface ITop3HasFeature {
-    top1feature: string;
-    top2feature: string;
-    top3feature: string;
+export interface IReviewAndUserInfo {
+    review: ISingleMoviePageReview;
+    user: IUser;
 }
 
-//
-
-export interface IReviewAndUserInfoList extends IReview, IUser {
-    review: IReview[];
-    user: IUser[];
-}
-
-export interface IReview {
+export interface ISingleMoviePageReview {
     reviewId: number;
     hasSpoiler: boolean;
     reviewTitle: string;
     reviewMainText: string;
-    createdDate: Date;
+    createdDate: string;
     starScore: number;
     reviewLikeCount: number;
 }
@@ -50,8 +39,6 @@ export interface IUser {
     nickname: string;
     userProfileImg: string;
 }
-
-//
 
 export interface IReviewCount {
     reviewCount: number;

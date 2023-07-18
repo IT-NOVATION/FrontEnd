@@ -5,7 +5,10 @@ const GET_REVIEW_COUNT_URI = "/single/movie/reviewCount";
 const GET_TOP_FEATURES_URI = "/top/moviekeyword";
 
 export const SingleMovieApi = {
-    getSinglelMovie: async () => await baseApi.get(GET_Single_MOVIE_URI).then(res => res.data),
-    getReviewCount: async () => await baseApi.get(GET_REVIEW_COUNT_URI).then(res => res.data),
-    getTop3HasFeature: async () => await baseApi.get(GET_TOP_FEATURES_URI).then(res => res.data),
+    getSinglelMovie: async (movieId: number) =>
+        await baseApi.get(GET_Single_MOVIE_URI + "/" + movieId).then(res => res.data),
+    getReviewCount: async (movieId: number) =>
+        await baseApi.get(GET_REVIEW_COUNT_URI + "/" + movieId).then(res => res.data),
+    getTop3HasFeature: async (movieId: number) =>
+        await baseApi.get(GET_TOP_FEATURES_URI + "/" + movieId).then(res => res.data),
 };

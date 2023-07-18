@@ -1,33 +1,22 @@
 import { Block, Text } from "@styles/UI";
 import * as S from "./style";
-import { IReviewAndUserInfoList, IReviewCount, ISingleMovie, ITop3HasFeature } from "@interfaces/singleMovie";
+import { ISingleMovie } from "@interfaces/singleMovie";
 import { useQuery } from "@tanstack/react-query";
 import { SingleMovieApi } from "@apis/singleMovieApi";
 import useHovered from "@hooks/useHovered";
 import StarRating from "@components/WriteReview/StarRating/StarRating";
 import { useState } from "react";
-import { Review } from "@components/Review.tsx/Review";
-
-// type Props = {
-//     reviewList: IReviewAndUserInfoList[];
-// };
+import { useParams } from "react-router-dom";
+import { ReviewAndUserInfo } from "@components/ReviewAndUserInfo/ReviewAndUserInfo";
 
 export default function SingleMovie() {
     const [score, setScore] = useState<number>(0);
 
-    const { data: singleMovie } = useQuery<ISingleMovie, IReviewAndUserInfoList>({
-        queryKey: ["movie", "reviewAndUserInfoList"],
-        queryFn: SingleMovieApi.getSinglelMovie,
-    });
+    const { movieId } = useParams();
 
-    const { data: reviewCount } = useQuery<IReviewCount>({
-        queryKey: ["reviewCount"],
-        queryFn: SingleMovieApi.getReviewCount,
-    });
-
-    const { data: top3HasFeature } = useQuery<ITop3HasFeature>({
-        queryKey: ["top3HasFeature"],
-        queryFn: SingleMovieApi.getTop3HasFeature,
+    const { data: singleMovie } = useQuery<ISingleMovie>({
+        queryKey: ["movie", movieId],
+        queryFn: () => SingleMovieApi.getSinglelMovie(Number(movieId)),
     });
 
     const infoList = ["장르", "개요", "개봉", "감독", "출연", "줄거리"];
@@ -36,45 +25,45 @@ export default function SingleMovie() {
     const { isHovered: isBtnHovered, handleHover: handleBtnHover, handleLeave: handleBtnLeave } = useHovered();
 
     return (
-        // 만약 /singleMovie/:movieId 에서
         <Block.ColumnBox width="100vw" alignItems="center">
             {/* 영화 정보 */}
 
             {singleMovie && (
                 <>
-                    <Block.RowBox width="100%" padding="85px 0 0 0 " bgColor="gray" justifyContent="center">
+                    <Block.RowBox width="100%" padding="85px 0 0 0 " bgColor="gray" justifyContent="center" relative>
+                        <Block.AbsoluteBox width="1286px" height="450px" border="1px solid black">
+                            <img src={singleMovie.movie.movieBgImg} alt="배경" />
+                        </Block.AbsoluteBox>
                         <Block.RowBox width="882px" padding="30px 0">
                             <Block.ColumnBox width="272px" height="389px">
-                                <img src={singleMovie.movieImg} alt="포스터" width="272px" height="389px" />
+                                <img src={singleMovie.movie.movieImg} alt="포스터" width="272px" height="389px" />
                             </Block.ColumnBox>
 
                             <Block.ColumnBox padding="0 0 0 30px" justifyContent="space-between">
                                 <Block.ColumnBox width="100%" height="90px" justifyContent="space-between">
-                                    <Text.Title1 color="white">{singleMovie.title}</Text.Title1>
+                                    <Text.Title1 color="white">{singleMovie.movie.title}</Text.Title1>
                                     <Block.RowBox width="191px" justifyContent="space-between">
                                         <Block.RowBox
                                             width="91px"
                                             height="29px"
                                             border="1px solid #fff"
                                             borderRadius="5px"
-                                            padding="0 16px"
-                                            justifyContent="space-between"
+                                            justifyContent="center"
                                             alignItems="center"
                                         >
                                             <img src="/icons/empty_heart.svg" alt="하트" />
-                                            <Text.Body3 color="white"> 1.9K</Text.Body3>
+                                            <Text.Body3 color="white">{singleMovie.movie.movieLikeCount}</Text.Body3>
                                         </Block.RowBox>
                                         <Block.RowBox
                                             width="91px"
                                             height="29px"
                                             border="1px solid #fff"
                                             borderRadius="5px"
-                                            padding="0 16px"
-                                            justifyContent="space-between"
+                                            justifyContent="center"
                                             alignItems="center"
                                         >
                                             <img src="/icons/empty_star.svg" alt="별" />
-                                            <Text.Body3 color="white"> {singleMovie.avgStarScore}점</Text.Body3>
+                                            <Text.Body3 color="white"> {singleMovie.movie.avgStarScore}점</Text.Body3>
                                         </Block.RowBox>
                                     </Block.RowBox>
                                 </Block.ColumnBox>
@@ -93,7 +82,7 @@ export default function SingleMovie() {
                                             bgColor="white"
                                             margin="0 13px 0 0"
                                         />
-                                        <Block.ColumnBox width="39px" justifyContent="space-between">
+                                        <Block.ColumnBox width="59px" justifyContent="space-between">
                                             {infoList.map((info, index) => (
                                                 <Text.Body6 key={index} color="white">
                                                     {info}
@@ -101,41 +90,43 @@ export default function SingleMovie() {
                                             ))}
                                         </Block.ColumnBox>
                                         <Block.ColumnBox
-                                            width="100%"
+                                            width="500px"
                                             height="107px"
                                             padding="0 0 0 13px"
                                             justifyContent="space-between"
                                         >
-                                            <Text.Body6 color="white">{singleMovie.movieGenre}</Text.Body6>
-                                            <Text.Body6 color="white">개요</Text.Body6>
-                                            <Text.Body6 color="white"> {singleMovie.movieReleasedate}</Text.Body6>
-                                            <Text.Body6 color="white">{singleMovie.movieDirector}</Text.Body6>
-                                            <Text.Body6 color="white"> {singleMovie.movieActor}</Text.Body6>
+                                            <Text.Body6 color="white">{singleMovie.movie.movieGenre}</Text.Body6>
+                                            <Text.Body6 color="white">
+                                                {singleMovie.movie.movieAge} | {singleMovie.movie.movieRunningTime}분
+                                            </Text.Body6>
+                                            <Text.Body6 color="white">{singleMovie.movie.movieReleasedate}</Text.Body6>
+                                            <Text.Body6 color="white">{singleMovie.movie.movieDirector}</Text.Body6>
+                                            <Text.Body6 color="white"> {singleMovie.movie.movieActor}</Text.Body6>
                                         </Block.ColumnBox>
                                         {isDetailHovered && (
                                             <Block.AbsoluteBox
                                                 width="363px"
                                                 height="136px"
                                                 borderRadius="20px"
-                                                zIndex="999999999"
+                                                zIndex="999"
                                                 left="50%"
-                                                border="10px solid black"
+                                                border="1px solid rgba(255, 255, 255, 0.41)"
+                                                background="rgba(0, 0, 0, 0.25)"
+                                                boxShadow="4px 4px 10px 0px rgba(204, 204, 204, 0.47)"
                                             >
-                                                {singleMovie.movieDetail}
+                                                <S.DetailWrapper>
+                                                    <Text.Body4 color="white" lineHeight="1.3">
+                                                        {singleMovie.movie.movieDetail}
+                                                    </Text.Body4>
+                                                </S.DetailWrapper>
                                             </Block.AbsoluteBox>
                                         )}
                                     </Block.RowBox>
 
                                     <Block.RowBox width="100%" height="30px" alignItems="center">
-                                        <Text.Body3 color="gray">
-                                            # {singleMovie.top3HasFeature?.top1feature}
-                                        </Text.Body3>
-                                        <Text.Body3 color="gray">
-                                            # {singleMovie.top3HasFeature?.top2feature}
-                                        </Text.Body3>
-                                        <Text.Body3 color="gray">
-                                            # {singleMovie.top3HasFeature?.top3feature}
-                                        </Text.Body3>
+                                        {singleMovie.movie.top3HasFeature.topKeywordList.map((item, i) => (
+                                            <Text.Body3 color="white"># {item} </Text.Body3>
+                                        ))}
                                     </Block.RowBox>
                                 </Block.ColumnBox>
                             </Block.ColumnBox>
@@ -145,14 +136,14 @@ export default function SingleMovie() {
                     {/* 리뷰 정보 */}
                     <Block.ColumnBox width="882px">
                         <Block.RowBox width="100%" height="80px" padding="47px 0 0 0">
-                            <Text.Body1>
-                                리뷰
-                                <Text.Body1 color="main">{reviewCount!.toLocaleString()}</Text.Body1>
-                            </Text.Body1>
+                            <Text.Body1>리뷰</Text.Body1>
+                            <Block.RowBox width="100px" padding="0 0 0 10px">
+                                <Text.Body1 color="main">{singleMovie.reviewAndUserInfoList.length}</Text.Body1>
+                            </Block.RowBox>
                         </Block.RowBox>
                         <Block.RowBox
                             width="882px"
-                            height="91px"
+                            height="75px"
                             borderRadius="13px"
                             border="1px solid rgba(154, 154, 154, 0.75)"
                             padding="0 0 0 304px"
@@ -169,17 +160,14 @@ export default function SingleMovie() {
                                 <Text.Body1 color="white">리뷰작성</Text.Body1>
                             </S.Button>
                         </Block.RowBox>
-                        {/* {reviewList.length === 0 ? (
+
+                        {singleMovie.reviewAndUserInfoList.length === 0 ? (
                             <>리뷰가 없어요</>
                         ) : (
-                            <>
-                                {reviewList.map(review => {
-                                    <Review key={review.reviewId} />;
-                                })}
-                            </>
-                        )} */}
-
-                        <Review />
+                            singleMovie.reviewAndUserInfoList.map((item, i) => (
+                                <ReviewAndUserInfo reviewAndInfo={singleMovie.reviewAndUserInfoList[i]} />
+                            ))
+                        )}
                     </Block.ColumnBox>
                 </>
             )}
