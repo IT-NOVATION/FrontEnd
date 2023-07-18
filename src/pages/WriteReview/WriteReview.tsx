@@ -11,6 +11,8 @@ import { WriteReviewApi } from "@apis/writeReviewApi";
 import { IWriteReviewMovie } from "@interfaces/movies";
 import { createContext } from "react";
 import { IMutateReview } from "@interfaces/review";
+import CancelModal from "@components/WriteReview/CancelModal/CancelModal";
+import SaveModal from "@components/WriteReview/SaveModal/SaveModal";
 
 export const ReviewDataContext = createContext<{
   reviewData: IMutateReview;
@@ -36,14 +38,18 @@ function WriteReview() {
       return { ...prev, hasSpoiler: !prev.hasSpoiler };
     });
 
+  const [isSaveModalOn, setIsSaveModalOn] = useState<boolean | string>(false);
+
   const handleSubmit = async () => {
     //서버에 제출
     try {
+      if (!reviewData.reviewTitle) throw new Error("제목을 정해주세요.");
       if (!reviewData.star) throw new Error("별점을 매겨주세요.");
       if (!reviewData.reviewMainText.length)
         throw new Error("내용을 입력해주세요.");
       await mutateReview();
-      navigate(-1);
+      // 서버 응답으로 부터 작성된 리뷰의 아이디를 받아와야함...
+      setIsSaveModalOn("3");
     } catch (error) {
       alert(String(error).split(":")[1]);
       console.log(error);
@@ -69,6 +75,11 @@ function WriteReview() {
   });
   const [isPosterLoading, setIsPosterLoading] = useState(true);
   const handlePosterLoaded = () => setIsPosterLoading(false);
+
+  const [isCancelModalOn, setIsCancelModalOn] = useState(false);
+  const handleCancelClick = () => {
+    setIsCancelModalOn(true);
+  };
   return (
     <>
       <ReviewDataContext.Provider value={{ reviewData, setReviewData }}>
@@ -154,6 +165,7 @@ function WriteReview() {
                 bgColor="white"
                 border=".5px solid #5F5F5F"
                 borderRadius="4px"
+                onClick={handleCancelClick}
               >
                 <Text.Body4>취소</Text.Body4>
               </Button.Button>
@@ -171,6 +183,10 @@ function WriteReview() {
           </Block.PageLayout>
         </Block.PageWrapper>
       </ReviewDataContext.Provider>
+      {isCancelModalOn && (
+        <CancelModal setIsCancelModalOn={setIsCancelModalOn} />
+      )}
+      {isSaveModalOn && <SaveModal reviewId={isSaveModalOn} />}
     </>
   );
 }
