@@ -1,5 +1,5 @@
 import { IReadReviewMovie } from "./movies";
-import { IReadReviewUser } from "./user";
+import { IReadReviewLoginUser, IReadReviewUser } from "./user";
 
 export interface IReviewPreview {
   reviewId: number;
@@ -51,8 +51,9 @@ export interface IReadReview {
     hasSpoiler: boolean;
     watchDate: string;
     star: number;
-    reviewLikeNum?: number;
+    reviewLikeNum: number;
   };
   movie: IReadReviewMovie;
   user: IReadReviewUser;
+  loginUser: IReadReviewLoginUser;
 }

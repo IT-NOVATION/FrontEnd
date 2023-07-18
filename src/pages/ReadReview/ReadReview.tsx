@@ -142,7 +142,11 @@ export default function ReadReview() {
                 ),
               }}
             />
-            <Like reviewId={Number(reviewId)} />
+            <Like
+              reviewId={Number(reviewId)}
+              reviewLikeNum={reviewData.review.reviewLikeNum}
+              pushedReviewLike={reviewData.loginUser.pushedReviewLike}
+            />
             <UserInfo user={reviewData.user} />
           </>
         )}
