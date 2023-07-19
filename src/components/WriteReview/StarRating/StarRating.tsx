@@ -1,13 +1,11 @@
 import { Block } from "@styles/UI";
 import * as S from "./style";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { FaStar, FaStarHalfAlt } from "react-icons/fa";
+import { ReviewDataContext } from "@pages/WriteReview/WriteReview";
+import { IMutateReview } from "@interfaces/review";
 
-function StarRating({
-  setParentScore,
-}: {
-  setParentScore: React.Dispatch<React.SetStateAction<number>>;
-}) {
+function StarRating() {
   const [score, setScore] = useState<number>(0);
   const [scoreFixed, setScoreFixed] = useState(score);
 
@@ -25,8 +23,12 @@ function StarRating({
     }
   };
 
+  const reviewDataContext = useContext(ReviewDataContext);
+
   useEffect(() => {
-    setParentScore(scoreFixed);
+    reviewDataContext?.setReviewData((prev) => {
+      return { ...prev, star: scoreFixed };
+    });
   }, [scoreFixed]);
 
   return (

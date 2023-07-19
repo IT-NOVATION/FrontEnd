@@ -1,7 +1,7 @@
 import { AccountApi } from "@apis/accountApi";
 import useIsAbled from "@hooks/useIsAbled";
 import { IAccountInfo, IFindPassword } from "@interfaces/forms";
-import { modalStateAtom } from "@recoil/atoms";
+import { ModalState, modalStateAtom } from "@recoil/modalAtom";
 import { Block, Button, Input, Text } from "@styles/UI";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
@@ -25,7 +25,7 @@ function GetCodeForm() {
     emailSent
       ? await AccountApi.codeCheck(data).then(() => {
           localStorage.setItem("passwordFind-email", data.email);
-          setModalState(8);
+          setModalState(ModalState.ChangePasswordForm);
         })
       : await AccountApi.sendCode(data.email).then(() => setEmailSent(true));
   };

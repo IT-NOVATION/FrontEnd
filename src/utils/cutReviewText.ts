@@ -6,6 +6,7 @@ function cutReviewText(text: string) {
     return text
       .replace(/<[^>]*>?/g, "")
       .replace(/\n?/g, "")
+      .replace(/&nbsp;/g, "")
       .slice(0, MAX_REVIEW_LENGTH)
       .concat("...");
   } else return text.replace(/<[^>]*>?/g, "");

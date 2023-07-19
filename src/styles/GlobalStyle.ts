@@ -60,5 +60,13 @@ a{
 }
 *{
 }
+.ql-align-right{
+	display: flex;
+	justify-content: flex-end;
+}
+.ql-align-center{
+	display: flex;
+	justify-content: center;
+}
 `;
 export default GlobalStyle;

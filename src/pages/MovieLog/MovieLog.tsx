@@ -3,11 +3,11 @@ import ProfileImg from "@components/User/ProfileImg/ProfileImg";
 import { Block, Text, Button } from "@styles/UI";
 import { useState } from "react";
 import * as S from "./style";
-import Reviews from "@components/MovieLog/Reviews/Reviews";
 import Movies from "@components/MovieLog/Movies/Movies";
 import EditProfileModal from "@components/MovieLog/EditProfileModal/EditProfileModal";
 import FollowModal from "@components/MovieLog/FollowModal/FollowModal";
 import { IFollowUser } from "@interfaces/followUser";
+import ReviewPreviews from "@components/ReviewPreviews/ReviewPreviews";
 
 const User = {
   userProfile: {
@@ -135,9 +135,9 @@ const User = {
   reviews: [
     {
       reviewId: 1,
-      title: "기쁨은 공포보다 강하다",
+      reviewTitle: "기쁨은 공포보다 강하다",
       star: 4.5,
-      text: `<p><img src="https://itsmovietime.s3.ap-northeast-2.amazonaws.com/reviewImgs/1688122269834"></p><p>드디어 그들의 벽장 문이 열렸다! 애니메이션 <몬스터 주식회사>입니다. 독특한 세계관에서 독특한 소재를 활용하여 펼쳐지는 몬스터들의 활약이 인상적인 작품입니다. 2001년 작품이라는 것이 믿겨지지 않을 정도로 개성 강한 몬스터들과 어색함 없이 자연스러운 스토리 전개가 너무 좋았습니다. 그리고 뛰어난 그래픽까지 더해져 복잡하지 않은 스토리를 더 몰입하여 볼 수 있었습니다.
+      reviewMainText: `<p><img src="https://itsmovietime.s3.ap-northeast-2.amazonaws.com/reviewImgs/1688122269834"></p><p>드디어 그들의 벽장 문이 열렸다! 애니메이션 <몬스터 주식회사>입니다. 독특한 세계관에서 독특한 소재를 활용하여 펼쳐지는 몬스터들의 활약이 인상적인 작품입니다. 2001년 작품이라는 것이 믿겨지지 않을 정도로 개성 강한 몬스터들과 어색함 없이 자연스러운 스토리 전개가 너무 좋았습니다. 그리고 뛰어난 그래픽까지 더해져 복잡하지 않은 스토리를 더 몰입하여 볼 수 있었습니다.
 
 
 
@@ -156,9 +156,8 @@ const User = {
      
      
       이 애니메이션 <몬스터 주식회사>에는 많은 몬스터들이 등장하지만 주요 몬스터들은 몇 되지 않습니다. 하지만 적절한 비중과 역할 배분으로 스토리 전개에 딱 필요한 만큼의 몬스터들이 등장하는 것 같습니다. 소모성 짙은 몬스터도 없고 없어도 되는 몬스터도 없었습니다. 이 애니메이션이 진행되는데 딱 필요한 만큼의 역할을 가진 몬스터들과 주요 몬스터들의 호흡도 좋았고 그들이 펼치는 소동도 너무 좋았습니다.</p>`,
-      date: "2023.03.15",
-      likes: 12,
-      comments: 10,
+      createdDate: "2023.03.15",
+      reviewLikeCount: 12,
       movie: {
         movieId: 1,
         movieImg:
@@ -167,12 +166,11 @@ const User = {
     },
     {
       reviewId: 2,
-      title: "기쁨은 공포보다 강하다",
+      reviewTitle: "기쁨은 공포보다 강하다",
       star: 4.5,
-      text: `<p><img src="https://itsmovietime.s3.ap-northeast-2.amazonaws.com/reviewImgs/1688122269834"></p><p>안녕하세요!</p><p>이번 영화는...</p>`,
-      date: "2023.03.15",
-      likes: 12,
-      comments: 10,
+      reviewMainText: `<p><img src="https://itsmovietime.s3.ap-northeast-2.amazonaws.com/reviewImgs/1688122269834"></p><p>안녕하세요!</p><p>이번 영화는...</p>`,
+      createdDate: "2023.03.15",
+      reviewLikeCount: 12,
       movie: {
         movieId: 1,
         movieImg:
@@ -181,12 +179,11 @@ const User = {
     },
     {
       reviewId: 3,
-      title: "기쁨은 공포보다 강하다",
+      reviewTitle: "기쁨은 공포보다 강하다",
       star: 4.5,
-      text: `<p><img src="https://itsmovietime.s3.ap-northeast-2.amazonaws.com/reviewImgs/1688122269834"></p><p>안녕하세요!</p><p>이번 영화는...</p>`,
-      date: "2023.03.15",
-      likes: 12,
-      comments: 10,
+      reviewMainText: `<p><img src="https://itsmovietime.s3.ap-northeast-2.amazonaws.com/reviewImgs/1688122269834"></p><p>안녕하세요!</p><p>이번 영화는...</p>`,
+      createdDate: "2023.03.15",
+      reviewLikeCount: 12,
       movie: {
         movieId: 1,
         movieImg:
@@ -195,12 +192,11 @@ const User = {
     },
     {
       reviewId: 4,
-      title: "기쁨은 공포보다 강하다",
+      reviewTitle: "기쁨은 공포보다 강하다",
       star: 4.5,
-      text: `<p><img src="https://itsmovietime.s3.ap-northeast-2.amazonaws.com/reviewImgs/1688122269834"></p><p>안녕하세요!</p><p>이번 영화는...</p>`,
-      date: "2023.03.15",
-      likes: 12,
-      comments: 10,
+      reviewMainText: `<p><img src="https://itsmovietime.s3.ap-northeast-2.amazonaws.com/reviewImgs/1688122269834"></p><p>안녕하세요!</p><p>이번 영화는...</p>`,
+      createdDate: "2023.03.15",
+      reviewLikeCount: 12,
       movie: {
         movieId: 1,
         movieImg:
@@ -209,12 +205,11 @@ const User = {
     },
     {
       reviewId: 5,
-      title: "기쁨은 공포보다 강하다",
+      reviewTitle: "기쁨은 공포보다 강하다",
       star: 4.5,
-      text: `<p><img src="https://itsmovietime.s3.ap-northeast-2.amazonaws.com/reviewImgs/1688122269834"></p><p>안녕하세요!</p><p>이번 영화는...</p>`,
-      date: "2023.03.15",
-      likes: 12,
-      comments: 10,
+      reviewMainText: `<p><img src="https://itsmovietime.s3.ap-northeast-2.amazonaws.com/reviewImgs/1688122269834"></p><p>안녕하세요!</p><p>이번 영화는...</p>`,
+      createdDate: "2023.03.15",
+      reviewLikeCount: 12,
       movie: {
         movieId: 1,
         movieImg:
@@ -223,12 +218,11 @@ const User = {
     },
     {
       reviewId: 6,
-      title: "기쁨은 공포보다 강하다",
+      reviewTitle: "기쁨은 공포보다 강하다",
       star: 4.5,
-      text: `<p><img src="https://itsmovietime.s3.ap-northeast-2.amazonaws.com/reviewImgs/1688122269834"></p><p>안녕하세요!</p><p>이번 영화는...</p>`,
-      date: "2023.03.15",
-      likes: 12,
-      comments: 10,
+      reviewMainText: `<p><img src="https://itsmovietime.s3.ap-northeast-2.amazonaws.com/reviewImgs/1688122269834"></p><p>안녕하세요!</p><p>이번 영화는...</p>`,
+      createdDate: "2023.03.15",
+      reviewLikeCount: 12,
       movie: {
         movieId: 1,
         movieImg:
@@ -376,7 +370,7 @@ function MovieLog() {
             </Button.Button>
           </Block.RowBox>
           <Block.RowBox width="100%" margin="30px 0 0 0" alignItems="center">
-            <Badge grade="VIP" size="29px" />
+            {/* <Badge grade={User.grade} /> */}
             <Block.RowBox
               width="auto"
               margin="0 0 0 12px"
@@ -428,7 +422,7 @@ function MovieLog() {
             </S.ContentLabel>
           </Block.RowBox>
           {contents === "Reviews" ? (
-            <Reviews reviews={User.reviews} />
+            <ReviewPreviews reviews={User.reviews} width="900px" />
           ) : (
             <Block.RowBox
               margin="35px 0 70px 0"

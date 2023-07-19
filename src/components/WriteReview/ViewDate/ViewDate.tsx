@@ -1,11 +1,10 @@
 import * as S from "./style";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Block, Text } from "@styles/UI";
-function ViewDate({
-  setViewDate,
-}: {
-  setViewDate: React.Dispatch<React.SetStateAction<number[]>>;
-}) {
+import { ReviewDataContext } from "@pages/WriteReview/WriteReview";
+import { convertDateToString } from "@utils/convertDateToString";
+function ViewDate() {
+  const reviewDataContext = useContext(ReviewDataContext);
   const [checked, setChecked] = useState(false);
   const [year, setYear] = useState(0);
   const [month, setMonth] = useState(0);
@@ -25,7 +24,14 @@ function ViewDate({
     setDay(Number(e.currentTarget.value));
 
   useEffect(() => {
-    setViewDate([year, month, day]);
+    reviewDataContext?.setReviewData((prev) => {
+      return { ...prev, hasCheckDate: checked };
+    });
+  }, [checked]);
+  useEffect(() => {
+    reviewDataContext?.setReviewData((prev) => {
+      return { ...prev, watchDate: convertDateToString([year, month, day]) };
+    });
   }, [year, month, day]);
 
   return (
@@ -49,8 +55,8 @@ function ViewDate({
           {Array(30)
             .fill(0)
             .map((i, idx) => (
-              <option key={idx + 1993} value={idx + 1993}>
-                {idx + 1993}
+              <option key={idx + 1994} value={idx + 1994}>
+                {idx + 1994}
               </option>
             ))}
         </S.Select>
