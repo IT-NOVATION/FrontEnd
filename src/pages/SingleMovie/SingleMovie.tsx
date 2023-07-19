@@ -36,22 +36,25 @@ export default function SingleMovie() {
     keywordsMap.set("hasGoodDiction", "대사 전달이 정확해요");
 
     const [isHeartClicked, setIsHeartClicked] = useState<boolean>(false);
-    // const [movieLikeCount, setMovieLikeCount] = useState<number>(singleMovie?.movie.movieLikeCount);
+    const [movieLikeCount, setMovieLikeCount] = useState<number>(0);
 
     const handleClickHeart = () => {
         setIsHeartClicked(prev => !prev);
     };
 
-    // useEffect(() => {
-    //     if (isHeartClicked === true) {
-    //         // count +1 하면서 api 하트개수 전송
-    //         setMovieLikeCount(isHeartClicked + 1);
-    //     } //
-    //     else {
-    //         // count -1 하면서 api 최종하트개수 전송
-    //         setMovieLikeCount(isHeartClicked - 1);
-    //     }
-    // }, [isHeartClicked]);
+    useEffect(() => {
+        if (isHeartClicked === true) {
+            // count +1 함수
+            console.log(Number(`${singleMovie?.movie.movieLikeCount}`) + 1);
+
+            //api 하트개수 전송 함수
+        } //
+        else {
+            // count -1 하면서 api 최종하트개수 전송
+            // setMovieLikeCount(movieLikeCount - 1);
+            console.log(Number(`${singleMovie?.movie.movieLikeCount}`) - 1);
+        }
+    }, [isHeartClicked]);
 
     return (
         <Block.ColumnBox width="100vw" alignItems="center">
@@ -84,7 +87,7 @@ export default function SingleMovie() {
                                     </Block.ColumnBox>
 
                                     <Block.ColumnBox width="850px" padding="0 0 0 30px" justifyContent="space-between">
-                                        <Block.ColumnBox width="100%" height="90px" justifyContent="space-between">
+                                        <S.TitleBox>
                                             <Text.Title1 color="white">{singleMovie.movie.title}</Text.Title1>
                                             <Block.RowBox width="191px" justifyContent="space-between">
                                                 <Block.RowBox
@@ -116,7 +119,7 @@ export default function SingleMovie() {
                                                     </Text.Body3>
                                                 </Block.RowBox>
                                             </Block.RowBox>
-                                        </Block.ColumnBox>
+                                        </S.TitleBox>
 
                                         <Block.ColumnBox
                                             width="100%"

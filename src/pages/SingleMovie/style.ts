@@ -1,3 +1,4 @@
+import { Block } from "@styles/UI";
 import styled from "styled-components";
 
 export const Button = styled.div<{ isHovered: boolean }>`
@@ -30,4 +31,11 @@ export const AbsolutePosterImg = styled.img`
     width: 1286px;
     height: 450px;
     opacity: 0.3;
+`;
+
+export const TitleBox = styled(Block.ColumnBox)`
+    width: 100%;
+    height: 90px;
+    justify-content: space-between;
+    min-width: 850px;
 `;
