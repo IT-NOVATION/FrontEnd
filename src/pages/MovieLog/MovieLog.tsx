@@ -440,7 +440,7 @@ function MovieLog() {
               </Text.Body1>
             </S.ContentLabel>
           </Block.RowBox>
-          {contents === "Reviews" ? (
+          {/* {contents === "Reviews" ? (
             <ReviewPreviews reviews={User.reviews} width="900px" />
           ) : (
             <Block.RowBox
@@ -450,7 +450,7 @@ function MovieLog() {
             >
               <Movies movies={User.interestedMovies} />
             </Block.RowBox>
-          )}
+          )} */}
         </Block.PageLayout>
       </Block.PageWrapper>
     </>

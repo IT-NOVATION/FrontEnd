@@ -8,6 +8,7 @@ export interface IReviewPreview {
   reviewMainText: string;
   createdDate: string;
   reviewLikeCount: number;
+  hasSpoiler: boolean;
   movie: {
     movieId: number;
     movieImg: string;
