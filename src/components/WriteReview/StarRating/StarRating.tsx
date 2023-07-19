@@ -4,74 +4,65 @@ import { useContext, useEffect, useState } from "react";
 import { FaStar, FaStarHalfAlt } from "react-icons/fa";
 import { ReviewDataContext } from "@pages/WriteReview/WriteReview";
 import { IMutateReview } from "@interfaces/review";
+import { SingleMovieApi } from "@apis/singleMovieApi";
+import { useLocation, useParams } from "react-router-dom";
 
 function StarRating() {
-  const [score, setScore] = useState<number>(0);
-  const [scoreFixed, setScoreFixed] = useState(score);
+    const { pathname } = useLocation();
+    const { movieId } = useParams();
 
-  const handleLeftHalfEnter = (idx: number) => setScore(idx + 0.5);
+    const [score, setScore] = useState<number>(0);
+    const [scoreFixed, setScoreFixed] = useState(score);
 
-  const handleRightHalfEnter = (idx: number) => setScore(idx + 1);
+    const handleLeftHalfEnter = (idx: number) => setScore(idx + 0.5);
 
-  const handleStarClick = () => {
-    setScoreFixed(score);
-  };
+    const handleRightHalfEnter = (idx: number) => setScore(idx + 1);
 
-  const handleStarLeave = () => {
-    if (score !== scoreFixed) {
-      setScore(scoreFixed);
-    }
-  };
+    const handleStarClick = () => {
+        setScoreFixed(score);
+    };
 
-  const reviewDataContext = useContext(ReviewDataContext);
+    const handleStarLeave = () => {
+        if (score !== scoreFixed) {
+            setScore(scoreFixed);
+        }
+    };
 
-  useEffect(() => {
-    reviewDataContext?.setReviewData((prev) => {
-      return { ...prev, star: scoreFixed };
-    });
-  }, [scoreFixed]);
+    const reviewDataContext = useContext(ReviewDataContext);
 
-  return (
-    <Block.RowBox>
-      {Array(5)
-        .fill(0)
-        .map((i, idx) => (
-          <S.StarDiv key={idx} onClick={handleStarClick}>
-            {score - Math.floor(score) === 0.5 && Math.floor(score) === idx ? (
-              <FaStarHalfAlt
-                key={idx}
-                style={{ position: "absolute" }}
-                size={32}
-                color="gold"
-              />
-            ) : idx + 1 > score ? (
-              <FaStar
-                key={idx}
-                style={{ position: "absolute" }}
-                size={32}
-                color="lightGray"
-              />
-            ) : (
-              <FaStar
-                key={idx}
-                color="gold"
-                style={{ position: "absolute" }}
-                size={32}
-              />
-            )}
-            <S.Left
-              key={idx + "left"}
-              onMouseEnter={() => handleLeftHalfEnter(idx)}
-              onMouseLeave={handleStarLeave}
-            />
-            <S.Right
-              key={idx + "right"}
-              onMouseEnter={() => handleRightHalfEnter(idx)}
-              onMouseLeave={handleStarLeave}
-            />
-          </S.StarDiv>
-        ))}
-    </Block.RowBox>
-  );
+    useEffect(() => {
+        reviewDataContext?.setReviewData(prev => {
+            return { ...prev, star: scoreFixed };
+        });
+        if (pathname.includes("/singleMovie")) SingleMovieApi.postStarEvaluate(Number(movieId), scoreFixed);
+    }, [scoreFixed]);
+
+    return (
+        <Block.RowBox>
+            {Array(5)
+                .fill(0)
+                .map((i, idx) => (
+                    <S.StarDiv key={idx} onClick={handleStarClick}>
+                        {score - Math.floor(score) === 0.5 && Math.floor(score) === idx ? (
+                            <FaStarHalfAlt key={idx} style={{ position: "absolute" }} size={32} color="gold" />
+                        ) : idx + 1 > score ? (
+                            <FaStar key={idx} style={{ position: "absolute" }} size={32} color="lightGray" />
+                        ) : (
+                            <FaStar key={idx} color="gold" style={{ position: "absolute" }} size={32} />
+                        )}
+                        <S.Left
+                            key={idx + "left"}
+                            onMouseEnter={() => handleLeftHalfEnter(idx)}
+                            onMouseLeave={handleStarLeave}
+                        />
+                        <S.Right
+                            key={idx + "right"}
+                            onMouseEnter={() => handleRightHalfEnter(idx)}
+                            onMouseLeave={handleStarLeave}
+                        />
+                    </S.StarDiv>
+                ))}
+        </Block.RowBox>
+    );
 }
 export default StarRating;

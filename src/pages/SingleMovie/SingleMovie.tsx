@@ -34,6 +34,8 @@ export default function SingleMovie() {
     keywordsMap.set("hasGoodCharterCharming", "캐릭터가 매력적이에요");
     keywordsMap.set("hasGoodDiction", "대사 전달이 정확해요");
 
+    const [scoreFixed, setScoreFixed] = useState(score);
+
     return (
         <Block.ColumnBox width="100vw" alignItems="center">
             {/* 영화 정보 */}
