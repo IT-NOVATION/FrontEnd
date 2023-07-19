@@ -7,6 +7,10 @@ import useHovered from "@hooks/useHovered";
 import StarRating from "@components/WriteReview/StarRating/StarRating";
 import { useState } from "react";
 import { useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { loginStateAtom } from "@recoil/loginStateAtom";
+import { modalStateAtom } from "@recoil/modalAtom";
+import { useRecoilValue, useSetRecoilState } from "recoil";
 
 export default function SingleMovie() {
     const [score, setScore] = useState<number>(0);
@@ -45,6 +49,16 @@ export default function SingleMovie() {
         } catch (error) {
             console.log(error);
         }
+    };
+
+    const setModalState = useSetRecoilState(modalStateAtom);
+
+    const { loginState } = useRecoilValue(loginStateAtom);
+    const navigate = useNavigate();
+    const goToWriteReview = () => {
+        if (loginState === false) {
+            setModalState(1);
+        } else navigate("/write-review/" + movieId);
     };
 
     return (
@@ -217,8 +231,10 @@ export default function SingleMovie() {
                                 isHovered={isBtnHovered}
                                 onMouseEnter={handleBtnHover}
                                 onMouseLeave={handleBtnLeave}
+                                onClick={goToWriteReview}
                             >
                                 <img src="/icons/brush.svg" alt="연필" />
+
                                 <Block.RowBox width="90px" justifyContent="flex-end">
                                     <Text.Body1 color="white">리뷰 작성</Text.Body1>
                                 </Block.RowBox>
