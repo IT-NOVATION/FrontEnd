@@ -5,11 +5,12 @@ import { useQuery } from "@tanstack/react-query";
 import { SingleMovieApi } from "@apis/singleMovieApi";
 import useHovered from "@hooks/useHovered";
 import StarRating from "@components/WriteReview/StarRating/StarRating";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
 export default function SingleMovie() {
     const [score, setScore] = useState<number>(0);
+    const [scoreFixed, setScoreFixed] = useState(score);
 
     const { movieId } = useParams();
 
@@ -34,7 +35,23 @@ export default function SingleMovie() {
     keywordsMap.set("hasGoodCharterCharming", "캐릭터가 매력적이에요");
     keywordsMap.set("hasGoodDiction", "대사 전달이 정확해요");
 
-    const [scoreFixed, setScoreFixed] = useState(score);
+    const [isHeartClicked, setIsHeartClicked] = useState<boolean>(false);
+    // const [movieLikeCount, setMovieLikeCount] = useState<number>(singleMovie?.movie.movieLikeCount);
+
+    const handleClickHeart = () => {
+        setIsHeartClicked(prev => !prev);
+    };
+
+    // useEffect(() => {
+    //     if (isHeartClicked === true) {
+    //         // count +1 하면서 api 하트개수 전송
+    //         setMovieLikeCount(isHeartClicked + 1);
+    //     } //
+    //     else {
+    //         // count -1 하면서 api 최종하트개수 전송
+    //         setMovieLikeCount(isHeartClicked - 1);
+    //     }
+    // }, [isHeartClicked]);
 
     return (
         <Block.ColumnBox width="100vw" alignItems="center">
@@ -77,6 +94,8 @@ export default function SingleMovie() {
                                                     borderRadius="5px"
                                                     justifyContent="center"
                                                     alignItems="center"
+                                                    pointer
+                                                    onClick={handleClickHeart}
                                                 >
                                                     <img src="/icons/empty_heart.svg" alt="하트" />
                                                     <Text.Body3 color="white">
@@ -149,7 +168,7 @@ export default function SingleMovie() {
                                                         height="136px"
                                                         borderRadius="20px"
                                                         zIndex="999"
-                                                        right="0%"
+                                                        right="0px"
                                                         border="1px solid rgba(255, 255, 255, 0.41)"
                                                         background="rgba(0, 0, 0, 0.25)"
                                                         boxShadow="4px 4px 10px 0px rgba(204, 204, 204, 0.47)"
@@ -195,7 +214,7 @@ export default function SingleMovie() {
                             height="75px"
                             borderRadius="13px"
                             border="1px solid rgba(154, 154, 154, 0.75)"
-                            padding="0 0 0 304px"
+                            padding="0 20px 0 300px"
                             alignItems="center"
                         >
                             <StarRating />
@@ -206,17 +225,11 @@ export default function SingleMovie() {
                                 onMouseLeave={handleBtnLeave}
                             >
                                 <img src="/icons/brush.svg" alt="연필" />
-                                <Text.Body1 color="white">리뷰작성</Text.Body1>
+                                <Block.RowBox width="90px" justifyContent="flex-end">
+                                    <Text.Body1 color="white">리뷰 작성</Text.Body1>
+                                </Block.RowBox>
                             </S.Button>
                         </Block.RowBox>
-                        {/* 
-                        {singleMovie.reviewAndUserInfoList.length === 0 ? (
-                            <>리뷰가 없어요</>
-                        ) : (
-                            singleMovie.reviewAndUserInfoList.map((item, i) => (
-                                <ReviewAndUserInfo reviewAndInfo={singleMovie.reviewAndUserInfoList[i]} />
-                            ))
-                        )} */}
                     </Block.ColumnBox>
                 </>
             )}
