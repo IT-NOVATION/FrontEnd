@@ -14,9 +14,20 @@ export const Button = styled.div<{ isHovered: boolean }>`
 `;
 
 export const DetailWrapper = styled.div`
-    padding: 14px;
     width: 100%;
     height: 100%;
     display: flex;
     flex-wrap: wrap;
+    overflow: scroll;
+    padding: 14px 20px;
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.41);
+    background: rgba(0, 0, 0, 0.25);
+    /* box-shadow: 4px 4px 10px 0px rgba(204, 204, 204, 0.47); */
+`;
+
+export const AbsolutePosterImg = styled.img`
+    width: 1286px;
+    height: 450px;
+    opacity: 0.3;
 `;
