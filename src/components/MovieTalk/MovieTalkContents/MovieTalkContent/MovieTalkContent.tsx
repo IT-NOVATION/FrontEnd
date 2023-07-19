@@ -4,6 +4,12 @@ import { Block, Button, Text } from "@styles/UI";
 import { IMovieTalkUser } from "@interfaces/user";
 
 function MovieTalkContent({ content }: { content: IMovieTalkUser }) {
+  const handleReviewClick = (reviewId: number) => {
+    window.location.href = `/review/${reviewId}`;
+  };
+  const handleUserClick = (userId: number) => {
+    window.location.href = `/movieLog/${userId}`;
+  };
   return (
     <S.ContentContainer>
       <ProfileImg img={content.profileImg} size="118px" />
@@ -14,7 +20,9 @@ function MovieTalkContent({ content }: { content: IMovieTalkUser }) {
           justifyContent="space-between"
           alignItems="center"
         >
-          <Text.Title4>{content.nickName}</Text.Title4>
+          <Text.Title4 pointer onClick={() => handleUserClick(content.userId)}>
+            {content.nickName}
+          </Text.Title4>
           <Button.Button
             width="94px"
             height="33px"
@@ -33,7 +41,13 @@ function MovieTalkContent({ content }: { content: IMovieTalkUser }) {
       </Block.ColumnBox>
       <Block.RowBox width="auto" margin="0 0 0 48px">
         {content.reviews.slice(0, 2).map((v) => (
-          <Block.ColumnBox width="auto" margin="0 20px 0 0" key={v.reviewId}>
+          <Block.ColumnBox
+            width="auto"
+            margin="0 20px 0 0"
+            key={v.reviewId}
+            onClick={() => handleReviewClick(v.reviewId)}
+            pointer
+          >
             <S.Poster img={v.movie.movieImg} />
             <Block.RowBox justifyContent="center">
               <Text.Body3 margin="10px 0 0 0" color="lightBlack">
