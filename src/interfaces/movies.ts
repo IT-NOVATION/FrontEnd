@@ -37,3 +37,8 @@ export interface IReadReviewMovie extends IMovieBase {
   movieGenre: string;
   movieCountry: string;
 }
+
+export interface IMovieTalkMovie {
+  movieId: number;
+  movieImg: string;
+}

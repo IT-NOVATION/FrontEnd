@@ -1,4 +1,4 @@
-import { IReadReviewMovie } from "./movies";
+import { IMovieTalkMovie, IReadReviewMovie } from "./movies";
 import { IReadReviewLoginUser, IReadReviewUser } from "./user";
 
 export interface IReviewPreview {
@@ -56,4 +56,10 @@ export interface IReadReview {
   movie: IReadReviewMovie;
   user: IReadReviewUser;
   loginUser: IReadReviewLoginUser;
+}
+
+export interface IMovieTalkReview {
+  reviewId: number;
+  reviewTitle: string;
+  movie: IMovieTalkMovie;
 }

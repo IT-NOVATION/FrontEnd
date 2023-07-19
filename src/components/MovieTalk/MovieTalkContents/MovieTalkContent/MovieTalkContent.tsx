@@ -1,12 +1,12 @@
-import ProfileImg from "@components/User/ProfileImg/ProfileImg";
-import { IBestReview } from "@interfaces/bestReview";
-import { Block, Button, Text } from "@styles/UI";
 import * as S from "./style";
+import ProfileImg from "@components/User/ProfileImg/ProfileImg";
+import { Block, Button, Text } from "@styles/UI";
+import { IMovieTalkUser } from "@interfaces/user";
 
-function BestReview({ bestReview }: { bestReview: IBestReview }) {
+function MovieTalkContent({ content }: { content: IMovieTalkUser }) {
   return (
-    <S.BestReviewContainer>
-      <ProfileImg img={bestReview.profileImg} size="118px" />
+    <S.ContentContainer>
+      <ProfileImg img={content.profileImg} size="118px" />
       <Block.ColumnBox width="auto" margin="0 0 0 10px">
         <Block.RowBox
           margin="5px 0 0 0"
@@ -14,7 +14,7 @@ function BestReview({ bestReview }: { bestReview: IBestReview }) {
           justifyContent="space-between"
           alignItems="center"
         >
-          <Text.Title4>{bestReview.nickName}</Text.Title4>
+          <Text.Title4>{content.nickName}</Text.Title4>
           <Button.Button
             width="94px"
             height="33px"
@@ -27,12 +27,12 @@ function BestReview({ bestReview }: { bestReview: IBestReview }) {
         </Block.RowBox>
         <Block.RowBox margin="24px 0 0 0" alignItems="center">
           <Text.Body3 lineHeight="1.2" color="lightBlack">
-            {bestReview.introduction}
+            {content.introduction}
           </Text.Body3>
         </Block.RowBox>
       </Block.ColumnBox>
       <Block.RowBox width="auto" margin="0 0 0 48px">
-        {bestReview.reviews.map((v) => (
+        {content.reviews.slice(0, 2).map((v) => (
           <Block.ColumnBox width="auto" margin="0 20px 0 0" key={v.reviewId}>
             <S.Poster img={v.movie.movieImg} />
             <Block.RowBox justifyContent="center">
@@ -43,7 +43,7 @@ function BestReview({ bestReview }: { bestReview: IBestReview }) {
           </Block.ColumnBox>
         ))}
       </Block.RowBox>
-    </S.BestReviewContainer>
+    </S.ContentContainer>
   );
 }
-export default BestReview;
+export default MovieTalkContent;

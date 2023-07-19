@@ -1,4 +1,4 @@
-import { IReviewPreview } from "./review";
+import { IMovieTalkReview, IReviewPreview } from "./review";
 
 export interface IUserBase {
   userId: number;
@@ -24,6 +24,12 @@ export interface IReadReviewUser extends IUserBase {
 export interface IReadReviewLoginUser {
   pushedFollow: boolean;
   pushedReviewLike?: boolean;
+}
+export interface IMovieTalkUser extends IUserBase {
+  profileImg: string;
+  nickName: string;
+  introduction: string;
+  reviews: IMovieTalkReview[];
 }
 
 export enum Grade {

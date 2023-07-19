@@ -1,7 +1,7 @@
 import { Block } from "@styles/UI";
 import styled from "styled-components";
 
-export const BestReviewContainer = styled(Block.RowBox)`
+export const ContentContainer = styled(Block.RowBox)`
   padding: 40px 0;
   border-bottom: 1px solid rgba(204, 204, 204, 1);
 `;

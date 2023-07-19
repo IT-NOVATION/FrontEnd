@@ -2,11 +2,9 @@ import { Block, Text } from "@styles/UI";
 import * as S from "./style";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
-import BestReviews from "@components/MovieTalk/BestReviews/BestReviews";
-import TopFollowers from "@components/MovieTalk/TopFollowers/TopFollowers";
-import Updates from "@components/MovieTalk/Updates/Updates";
+import MovieTalkContents from "@components/MovieTalk/MovieTalkContents/MovieTalkContents";
 
-type ContentsType = "BestReviews" | "TopFollowers" | "Updates";
+export type ContentsType = "BestReviews" | "PopularUsers" | "Updates";
 
 export default function MovieTalk() {
   const [contents, setContents] = useState<ContentsType>("BestReviews");
@@ -61,8 +59,8 @@ export default function MovieTalk() {
             베스트 리뷰
           </S.ContentLabel>
           <S.ContentLabel
-            onClick={() => handleLabelClick("TopFollowers")}
-            selected={checkSelected("TopFollowers")}
+            onClick={() => handleLabelClick("PopularUsers")}
+            selected={checkSelected("PopularUsers")}
           >
             팔로워 인기
           </S.ContentLabel>
@@ -74,13 +72,7 @@ export default function MovieTalk() {
           </S.ContentLabel>
         </Block.RowBox>
         <Block.ColumnBox margin="25px 0 0 0">
-          {contents === "BestReviews" ? (
-            <BestReviews />
-          ) : contents === "TopFollowers" ? (
-            <TopFollowers />
-          ) : (
-            <Updates />
-          )}
+          <MovieTalkContents contents={contents} />
         </Block.ColumnBox>
       </Block.PageLayout>
     </Block.PageWrapper>
