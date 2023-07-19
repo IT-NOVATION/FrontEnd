@@ -6,10 +6,16 @@ import { ReviewDataContext } from "@pages/WriteReview/WriteReview";
 import { IMutateReview } from "@interfaces/review";
 import { SingleMovieApi } from "@apis/singleMovieApi";
 import { useLocation, useParams } from "react-router-dom";
+import { loginStateAtom } from "@recoil/loginStateAtom";
+import { useRecoilValue, useSetRecoilState } from "recoil";
+import { modalStateAtom } from "@recoil/modalAtom";
 
 function StarRating() {
     const { pathname } = useLocation();
     const { movieId } = useParams();
+
+    const { loginState } = useRecoilValue(loginStateAtom);
+    const setModalState = useSetRecoilState(modalStateAtom);
 
     const [score, setScore] = useState<number>(0);
     const [scoreFixed, setScoreFixed] = useState(score);
@@ -19,7 +25,9 @@ function StarRating() {
     const handleRightHalfEnter = (idx: number) => setScore(idx + 1);
 
     const handleStarClick = () => {
-        setScoreFixed(score);
+        if (loginState === false) {
+            setModalState(1);
+        } else setScoreFixed(score);
     };
 
     const handleStarLeave = () => {
@@ -34,7 +42,10 @@ function StarRating() {
         reviewDataContext?.setReviewData(prev => {
             return { ...prev, star: scoreFixed };
         });
-        if (pathname.includes("/singleMovie")) SingleMovieApi.postStarEvaluate(Number(movieId), scoreFixed);
+
+        if (loginState && pathname.includes("/singleMovie")) {
+            SingleMovieApi.postStarEvaluate(Number(movieId), scoreFixed);
+        }
     }, [scoreFixed]);
 
     return (

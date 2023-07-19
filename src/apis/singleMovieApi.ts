@@ -4,6 +4,7 @@ const GET_Single_MOVIE_URI = "/single/moviePage";
 const GET_REVIEW_COUNT_URI = "/single/movie/reviewCount";
 const GET_TOP_FEATURES_URI = "/top/moviekeyword";
 const POST_STAR_EVALUATE = "/single/starEvaluate";
+const POST_MOVIE_LIKE = "/push/movieLike";
 
 export const SingleMovieApi = {
     getSinglelMovie: async (movieId: number) =>
@@ -14,5 +15,8 @@ export const SingleMovieApi = {
         await baseApi.get(GET_TOP_FEATURES_URI + "/" + movieId).then(res => res.data),
     postStarEvaluate: async (movieId: number, starScore: number) => {
         await baseApi.post(POST_STAR_EVALUATE, { movieId, starScore });
+    },
+    postMovieLike: async (movieId: number) => {
+        await baseApi.post(POST_MOVIE_LIKE, { movieId });
     },
 };

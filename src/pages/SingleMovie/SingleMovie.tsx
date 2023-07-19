@@ -1,11 +1,11 @@
 import { Block, Text } from "@styles/UI";
 import * as S from "./style";
 import { ISingleMovie } from "@interfaces/singleMovie";
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { SingleMovieApi } from "@apis/singleMovieApi";
 import useHovered from "@hooks/useHovered";
 import StarRating from "@components/WriteReview/StarRating/StarRating";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useParams } from "react-router-dom";
 
 export default function SingleMovie() {
@@ -35,26 +35,17 @@ export default function SingleMovie() {
     keywordsMap.set("hasGoodCharterCharming", "캐릭터가 매력적이에요");
     keywordsMap.set("hasGoodDiction", "대사 전달이 정확해요");
 
-    const [isHeartClicked, setIsHeartClicked] = useState<boolean>(false);
-    const [movieLikeCount, setMovieLikeCount] = useState<number>(0);
+    const queryClient = useQueryClient();
 
-    const handleClickHeart = () => {
-        setIsHeartClicked(prev => !prev);
-    };
-
-    useEffect(() => {
-        if (isHeartClicked === true) {
-            // count +1 함수
-            console.log(Number(`${singleMovie?.movie.movieLikeCount}`) + 1);
-
-            //api 하트개수 전송 함수
-        } //
-        else {
-            // count -1 하면서 api 최종하트개수 전송
-            // setMovieLikeCount(movieLikeCount - 1);
-            console.log(Number(`${singleMovie?.movie.movieLikeCount}`) - 1);
+    const handleHeartCount = async () => {
+        try {
+            //
+            await SingleMovieApi.postMovieLike(Number(movieId));
+            await queryClient.invalidateQueries(["movieId", movieId]);
+        } catch (error) {
+            console.log(error);
         }
-    }, [isHeartClicked]);
+    };
 
     return (
         <Block.ColumnBox width="100vw" alignItems="center">
@@ -98,7 +89,7 @@ export default function SingleMovie() {
                                                     justifyContent="center"
                                                     alignItems="center"
                                                     pointer
-                                                    onClick={handleClickHeart}
+                                                    onClick={handleHeartCount}
                                                 >
                                                     <img src="/icons/empty_heart.svg" alt="하트" />
                                                     <Text.Body3 color="white">
