@@ -33,19 +33,11 @@ export const router = createBrowserRouter([
       { path: "movietalk", element: <MovieTalk /> },
       {
         path: "movieLog/:userId",
-        element: (
-          <Suspense fallback={<Loading />}>
-            <MovieLog />
-          </Suspense>
-        ),
+        element: <MovieLog />,
       },
       {
         path: "review/:reviewId",
-        element: (
-          <Suspense fallback={<Loading />}>
-            <ReadReview />
-          </Suspense>
-        ),
+        element: <ReadReview />,
       },
       { path: "/search-result", element: <SearchResult /> },
     ],
