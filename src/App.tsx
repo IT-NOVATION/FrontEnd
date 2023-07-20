@@ -6,6 +6,8 @@ import { AccountApi } from "@apis/accountApi";
 import { ILoginState } from "@interfaces/loginState";
 import { useSetRecoilState } from "recoil";
 import { loginStateAtom } from "@recoil/loginStateAtom";
+import { Suspense } from "react";
+import Loading from "@components/Home/Loading/Loading";
 
 function App() {
   const setLoginState = useSetRecoilState(loginStateAtom);
@@ -22,7 +24,9 @@ function App() {
     <>
       <NavigationBar />
       <Modal />
-      <Outlet />
+      <Suspense fallback={<Loading />}>
+        <Outlet />
+      </Suspense>
     </>
   );
 }

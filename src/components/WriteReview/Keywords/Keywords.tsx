@@ -34,7 +34,6 @@ function Keywords() {
       };
     });
   }, [selected]);
-
   return (
     <Block.RowBox margin="10px 0 0 0">
       <Block.ColumnBox width="183px" margin="0 36px 0 0">

@@ -41,15 +41,13 @@ function WriteReview() {
   const [isSaveModalOn, setIsSaveModalOn] = useState<boolean | string>(false);
 
   const handleSubmit = async () => {
-    //서버에 제출
     try {
       if (!reviewData.reviewTitle) throw new Error("제목을 정해주세요.");
       if (!reviewData.star) throw new Error("별점을 매겨주세요.");
       if (!reviewData.reviewMainText.length)
         throw new Error("내용을 입력해주세요.");
-      await mutateReview();
-      // 서버 응답으로 부터 작성된 리뷰의 아이디를 받아와야함...
-      setIsSaveModalOn("3");
+      const reviewId = await mutateReview();
+      setIsSaveModalOn(reviewId);
     } catch (error) {
       alert(String(error).split(":")[1]);
       console.log(error);

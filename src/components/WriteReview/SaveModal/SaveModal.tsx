@@ -1,13 +1,15 @@
 import { Block, Button, Text } from "@styles/UI";
 import theme from "@styles/theme";
+import { useNavigate } from "react-router-dom";
 
 type Props = {
   reviewId: boolean | string;
 };
 
 export default function SaveModal({ reviewId }: Props) {
+  const navigate = useNavigate();
   const handleConfirmClick = () => {
-    window.location.href = `/review/${reviewId}`;
+    navigate(`/review/${reviewId}`);
   };
   return (
     <Block.ModalLayout>
