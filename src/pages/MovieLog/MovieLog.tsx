@@ -14,6 +14,7 @@ import { IMovieLogData } from "@interfaces/movieLog";
 import { loginStateAtom } from "@recoil/loginStateAtom";
 import { useRecoilValue } from "recoil";
 import Badge from "@components/User/Badge/Badge";
+import FollowBtn from "@pages/FollowBtn/FollowBtn";
 
 type ContentType = "Reviews" | "InterestedMovies";
 export type FollowModalType = null | IFollowUser[];
@@ -142,20 +143,23 @@ function MovieLog() {
                   {movieLogData.nowUser.introduction}
                 </Text.Body1>
                 <Block.AbsoluteBox width="auto" top="-5px" right="0">
-                  <Button.Button
-                    width="94px"
-                    height="33px"
-                    border=" 1px solid #CCC"
-                    borderRadius="16.5px"
-                    bgColor="white"
-                    onClick={handleFollow}
-                  >
-                    {loginUserId === Number(userId)
-                      ? "프로필 편집"
-                      : movieLogData.isLoginedUserFollowsNowUser
-                      ? "팔로잉"
-                      : "팔로우"}
-                  </Button.Button>
+                  {loginUserId === Number(userId) ? (
+                    <Button.Button
+                      width="94px"
+                      height="33px"
+                      border=" 1px solid #CCC"
+                      borderRadius="16.5px"
+                      bgColor="white"
+                      onClick={handleButtonClick}
+                    >
+                      프로필 편집
+                    </Button.Button>
+                  ) : (
+                    <FollowBtn
+                      userId={userId}
+                      isFollowing={movieLogData.isLoginedUserFollowsNowUser}
+                    />
+                  )}
                 </Block.AbsoluteBox>
               </Block.RowBox>
               <Block.RowBox
