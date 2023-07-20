@@ -1,6 +1,6 @@
 import ProfileImg from "@components/User/ProfileImg/ProfileImg";
 import { Block, Text, Button } from "@styles/UI";
-import { useState } from "react";
+import { Suspense, useState } from "react";
 import * as S from "./style";
 import Movies from "@components/MovieLog/Movies/Movies";
 import EditProfileModal from "@components/MovieLog/EditProfileModal/EditProfileModal";
@@ -31,6 +31,7 @@ function MovieLog() {
       });
       return { ...response, reviews: temp };
     },
+    suspense: true,
   });
   const { loginState, userId: loginUserId } = useRecoilValue(loginStateAtom);
   const [isOwnProfile, setIsOwnProfile] = useState(false);
@@ -72,7 +73,7 @@ function MovieLog() {
               position="fixed"
               justifyContent="center"
               alignItems="center"
-              zIndex="2"
+              zIndex="99"
             >
               <S.Background onClick={handleBgClick}></S.Background>
               <FollowModal

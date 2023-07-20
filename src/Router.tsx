@@ -9,6 +9,8 @@ import Film from "@pages/Film/Film";
 import MovieTalk from "@pages/MovieTalk/MovieTalk";
 import SearchResult from "@pages/Search/SearchResult";
 import ReadReview from "@pages/ReadReview/ReadReview";
+import Loading from "@components/Home/Loading/Loading";
+import { Suspense } from "react";
 
 export const router = createBrowserRouter([
   {
@@ -31,11 +33,19 @@ export const router = createBrowserRouter([
       { path: "movietalk", element: <MovieTalk /> },
       {
         path: "movieLog/:userId",
-        element: <MovieLog />,
+        element: (
+          <Suspense fallback={<Loading />}>
+            <MovieLog />
+          </Suspense>
+        ),
       },
       {
         path: "review/:reviewId",
-        element: <ReadReview />,
+        element: (
+          <Suspense fallback={<Loading />}>
+            <ReadReview />
+          </Suspense>
+        ),
       },
       { path: "/search-result", element: <SearchResult /> },
     ],
