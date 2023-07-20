@@ -153,7 +153,9 @@ function MovieLog() {
                   >
                     {loginUserId === Number(userId)
                       ? "프로필 편집"
-                      : "팔로우 하기"}
+                      : movieLogData.isLoginedUserFollowsNowUser
+                      ? "팔로잉"
+                      : "팔로우"}
                   </Button.Button>
                 </Block.AbsoluteBox>
               </Block.RowBox>

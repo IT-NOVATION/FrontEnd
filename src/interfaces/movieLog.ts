@@ -8,6 +8,6 @@ export interface IMovieLogData {
   followers: IFollowUser[];
   followings: IFollowUser[];
   reviews: IMovieLogReviewPreview[];
-
   interestedMovie: IInterstedMovie[];
+  isLoginedUserFollowsNowUser: boolean;
 }
