@@ -50,6 +50,7 @@ function EditProfileModal({ userProfile, setIsEditing }: Props) {
       setNicknameErrorMsg(true);
     }
   };
+
   return (
     <Block.ColumnBox
       width="530px"
@@ -61,7 +62,7 @@ function EditProfileModal({ userProfile, setIsEditing }: Props) {
     >
       {userProfile && (
         <>
-          <Block.Form>
+          <Block.Form onSubmit={handleProfileSubmit}>
             <Block.RowBox>
               <Text.Body1>프로필 편집</Text.Body1>
             </Block.RowBox>
@@ -129,6 +130,7 @@ function EditProfileModal({ userProfile, setIsEditing }: Props) {
                 bgColor="white"
                 margin="0 7px 0 0"
                 onClick={handleCancelClick}
+                type="button"
               >
                 취소
               </Button.Button>
@@ -140,7 +142,7 @@ function EditProfileModal({ userProfile, setIsEditing }: Props) {
                 borderRadius="34.5px"
                 bgColor="white"
                 margin="0 7px 0 0"
-                onClick={handleProfileSubmit}
+                type="submit"
               >
                 저장
               </Button.Button>
