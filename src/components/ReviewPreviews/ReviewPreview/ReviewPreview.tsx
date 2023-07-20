@@ -1,10 +1,19 @@
-import * as S from './style';
-import { IReviewPreview } from '@interfaces/review';
-import { Block, Text } from '@styles/UI';
-import theme from '@styles/theme';
-import cutReviewText from '@utils/cutReviewText';
-import { cutDateString } from '../../../utils/cutDateString';
+import * as S from "./style";
+import { IMovieLogReviewPreview, IReviewPreview } from "@interfaces/review";
+import { Block, Text } from "@styles/UI";
+import theme from "@styles/theme";
+import cutReviewText from "@utils/cutReviewText";
+import { cutDateString } from "../../../utils/cutDateString";
+import { useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
 function ReviewPreview({ review }: { review: IReviewPreview }) {
+  const { pathname } = useLocation();
+  const [movieImg, setMovieImg] = useState<string>("");
+
+  useEffect(() => {
+    if (pathname.includes("/movieLog")) {
+    }
+  }, []);
   return (
     <Block.RowBox relative margin="0 0 23px 0">
       <S.PosterContainer img={review.movie.movieImg} />

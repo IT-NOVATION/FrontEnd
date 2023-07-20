@@ -1,23 +1,13 @@
+import { IFollowUser } from "./followUser";
 import { IInterstedMovie } from "./movies";
+import { IMovieLogReviewPreview, IReviewPreview } from "./review";
 import { Grade, IMovieLogUser } from "./user";
 
 export interface IMovieLogData {
   nowUser: IMovieLogUser;
-  followers: [];
-  followings: [];
-  reviews: {
-    reviewId: number;
-    reviewTitle: string;
-    star: number;
-    reviewMainText: string;
-    createdDate: string;
-    likeCount: number;
-    comments: number;
-    movieLogMovieofReviewsInfoDtoList: {
-      movieId: number;
-      movieImg: string;
-    };
-  }[];
+  followers: IFollowUser[];
+  followings: IFollowUser[];
+  reviews: IMovieLogReviewPreview[];
 
   interestedMovie: IInterstedMovie[];
 }

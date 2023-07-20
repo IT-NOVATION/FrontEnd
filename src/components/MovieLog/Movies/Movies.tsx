@@ -3,7 +3,6 @@ import { Block } from "@styles/UI";
 import Movie from "./Movie/Movie";
 import * as S from "./style";
 import { useEffect, useState } from "react";
-import { AnimatePresence } from "framer-motion";
 function Movies({ movies }: { movies: IInterstedMovie[] }) {
   const [idx, setIdx] = useState(0);
   const [maxIdx, setMaxIdx] = useState(0);

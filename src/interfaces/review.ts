@@ -14,6 +14,23 @@ export interface IReviewPreview {
     movieImg: string;
   };
 }
+export interface IMovieLogReviewPreview {
+  reviewId: number;
+  reviewTitle: string;
+  star: number;
+  reviewMainText: string;
+  createdDate: string;
+  reviewLikeCount: number;
+  hasSpoiler: boolean;
+  movie: {
+    movieId: number;
+    movieImg: string;
+  };
+  movieofReview: {
+    movieId: number;
+    movieImg: string;
+  };
+}
 
 export interface IMutateReview {
   movieId: number;
