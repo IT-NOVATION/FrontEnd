@@ -1,6 +1,6 @@
 import ProfileImg from "@components/User/ProfileImg/ProfileImg";
 import { Block, Text, Button } from "@styles/UI";
-import { Suspense, useState } from "react";
+import { useState } from "react";
 import * as S from "./style";
 import Movies from "@components/MovieLog/Movies/Movies";
 import EditProfileModal from "@components/MovieLog/EditProfileModal/EditProfileModal";
@@ -9,7 +9,7 @@ import { IFollowUser } from "@interfaces/followUser";
 import { MovieLogApi } from "@apis/movieLogApi";
 import { useParams } from "react-router-dom";
 import ReviewPreviews from "@components/ReviewPreviews/ReviewPreviews";
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { IMovieLogData } from "@interfaces/movieLog";
 import { loginStateAtom } from "@recoil/loginStateAtom";
 import { useRecoilValue } from "recoil";
@@ -20,6 +20,7 @@ export type FollowModalType = null | IFollowUser[];
 
 function MovieLog() {
   const { userId } = useParams();
+  const queryClient = useQueryClient();
   const { data: movieLogData } = useQuery<IMovieLogData>({
     queryKey: ["movieLog", userId],
     queryFn: async () => {
@@ -34,7 +35,6 @@ function MovieLog() {
     suspense: true,
   });
   const { loginState, userId: loginUserId } = useRecoilValue(loginStateAtom);
-  const [isOwnProfile, setIsOwnProfile] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
   const [followModal, setFollowModal] = useState<FollowModalType>(null);
   const [contents, setContents] = useState<ContentType>("Reviews");
@@ -47,11 +47,10 @@ function MovieLog() {
     setFollowModal(null);
   };
   const handleFollow = async () => {
-    const response = await MovieLogApi.follow({
-      pushUserId: 1,
+    await MovieLogApi.follow({
       targetUserId: Number(userId),
     });
-    console.log(response);
+    await queryClient.invalidateQueries(["movieLog"]);
   };
   const handleButtonClick = async () => {
     loginUserId === Number(userId) ? setIsEditing(true) : await handleFollow();
@@ -149,7 +148,7 @@ function MovieLog() {
                     border=" 1px solid #CCC"
                     borderRadius="16.5px"
                     bgColor="white"
-                    onClick={handleButtonClick}
+                    onClick={handleFollow}
                   >
                     {loginUserId === Number(userId)
                       ? "프로필 편집"
