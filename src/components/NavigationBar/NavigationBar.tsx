@@ -27,7 +27,7 @@ export default function NavigationBar() {
   };
 
   const goToMain = () => {
-    navigate("/home");
+    navigate("/");
   };
 
   const goToFilm = async () => {
@@ -56,7 +56,7 @@ export default function NavigationBar() {
   }, [position]);
 
   useEffect(() => {
-    setTextColor(pathname === "/home" && !isSearchClick ? "white" : "black");
+    setTextColor(pathname === "/" && !isSearchClick ? "white" : "black");
   }, [pathname, isSearchClick]);
 
   return (
@@ -71,7 +71,7 @@ export default function NavigationBar() {
             key="nav"
             transition={{ type: "linear", duration: 0.5 }}
             isSearchClick={isSearchClick}
-            isHome={pathname === "/home"}
+            isHome={pathname === "/"}
           >
             <Block.RowBox justifyContent="space-between">
               <Block.RowBox
