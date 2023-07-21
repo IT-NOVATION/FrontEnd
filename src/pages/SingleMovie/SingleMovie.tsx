@@ -11,6 +11,7 @@ import { loginStateAtom } from "@recoil/loginStateAtom";
 import { modalStateAtom } from "@recoil/modalAtom";
 import { useRecoilValue, useSetRecoilState } from "recoil";
 import theme from "@styles/theme";
+import ReviewPreview from "@components/ReviewPreviews/ReviewPreview/ReviewPreview";
 
 export default function SingleMovie() {
     const infoList = ["장르", "개요", "개봉", "감독", "출연", "줄거리"];
@@ -258,6 +259,10 @@ export default function SingleMovie() {
                             </S.Button>
                         </Block.RowBox>
                     </Block.ColumnBox>
+
+                    {singleMovie.reviewAndUserInfoList.map((item, i) => {
+                        return <ReviewPreview review={item.review} user={item.user} />;
+                    })}
                 </>
             )}
         </Block.ColumnBox>

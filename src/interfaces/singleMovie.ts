@@ -1,7 +1,9 @@
+import { IReviewPreview } from "./review";
+
 export interface ISingleMovie {
     movie: IMovieInformation;
     loginUserInfoDto: ILoginUserInfoDto;
-    reviewAndUserInfoList: IReviewAndUserInfo[];
+    reviewAndUserInfoList: { review: IReviewPreview; user: IUser }[];
 }
 
 export interface IMovieInformation {
