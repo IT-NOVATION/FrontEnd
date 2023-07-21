@@ -2,6 +2,7 @@ import { useQueryClient } from "@tanstack/react-query";
 import * as S from "./style";
 import { Block, Text } from "@styles/UI";
 import { useState } from "react";
+import { AccountApi } from "@apis/accountApi";
 
 export default function Dropdown({
   setDropdownOn,
@@ -15,8 +16,9 @@ export default function Dropdown({
   const handleBackgroundClick = () => setDropdownOn(false);
   const handleLogout = async () => {
     // 로그아웃 api 추가하기...
-    localStorage.removeItem("accessToken");
-    localStorage.removeItem("refreshToken");
+    // localStorage.removeItem("accessToken");
+    // localStorage.removeItem("refreshToken");
+    await AccountApi.logout();
     await queryClient.invalidateQueries();
     setDropdownOn(false);
   };
