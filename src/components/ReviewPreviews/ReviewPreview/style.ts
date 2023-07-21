@@ -1,4 +1,5 @@
-import styled from "styled-components";
+import theme from "@styles/theme";
+import styled, { css } from "styled-components";
 
 export const PosterContainer = styled.div<{ img: string }>`
   width: 108px;
@@ -6,4 +7,27 @@ export const PosterContainer = styled.div<{ img: string }>`
   background-image: ${({ img }) => `url(${img})`};
   background-size: cover;
   margin-right: 23px;
+`;
+export const ReviewMainText = styled.div<{ hasSpoiler: boolean }>`
+  display: inline-block;
+  font-size: 15px;
+  font-weight: 400;
+  color: ${theme.colors.lightBlack};
+  line-height: 1.3;
+  margin: 0 20px 0 0;
+  ${({ hasSpoiler }) =>
+    hasSpoiler &&
+    css`
+      filter: blur(5px);
+    `}
+`;
+export const SpoilerText = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
 `;

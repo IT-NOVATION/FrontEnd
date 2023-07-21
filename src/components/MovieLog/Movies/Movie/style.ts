@@ -5,7 +5,6 @@ import styled from "styled-components";
 export const MovieContainer = styled.div<{ img: string }>`
   width: 220px;
   height: 330px;
-  margin: 0 20px;
   background-image: ${({ img }) => `url(${img})`};
   background-size: cover;
   display: flex;

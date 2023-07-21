@@ -80,7 +80,11 @@ function FollowModal({
       {/* 유저 나열 */}
       <S.UserLayout>
         {selected?.map((v) => (
-          <UserContainer key={v.userId} user={v} />
+          <UserContainer
+            key={v.userId}
+            user={v}
+            setFollowModal={setFollowModal}
+          />
         ))}
       </S.UserLayout>
     </Block.ColumnBox>
