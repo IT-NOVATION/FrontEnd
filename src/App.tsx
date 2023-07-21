@@ -24,7 +24,7 @@ function App() {
     <>
       <NavigationBar />
       <Modal />
-      <Suspense fallback={<Loading />}>
+      <Suspense fallback={<></>}>
         <Outlet />
       </Suspense>
     </>
