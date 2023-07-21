@@ -4,10 +4,10 @@ import { useEffect, useState } from "react";
 import { FaStar, FaStarHalfAlt } from "react-icons/fa";
 import { SingleMovieApi } from "@apis/singleMovieApi";
 import { useParams } from "react-router-dom";
-import { loginStateAtom } from "@recoil/loginStateAtom";
-import { useRecoilValue, useSetRecoilState } from "recoil";
+import { useSetRecoilState } from "recoil";
 import { modalStateAtom } from "@recoil/modalAtom";
 import { useQueryClient } from "@tanstack/react-query";
+import { ILoginState } from "@interfaces/loginState";
 
 type Props = {
     avgStarScore: number;
@@ -16,18 +16,19 @@ type Props = {
 function StarRating({ avgStarScore }: Props) {
     const { movieId } = useParams();
 
-    const { loginState } = useRecoilValue(loginStateAtom);
     const setModalState = useSetRecoilState(modalStateAtom);
 
     const [score, setScore] = useState<number>(avgStarScore);
     const [scoreFixed, setScoreFixed] = useState(score);
 
     const handleLeftHalfEnter = (idx: number) => setScore(idx + 0.5);
-
     const handleRightHalfEnter = (idx: number) => setScore(idx + 1);
 
+    const queryClient = useQueryClient();
+    const loginState = queryClient.getQueryData<ILoginState>(["loginState"]);
+
     const handleStarClick = async () => {
-        if (loginState === false) {
+        if (loginState?.loginState === false) {
             setModalState(1);
         } else {
             setScoreFixed(score);
@@ -39,8 +40,6 @@ function StarRating({ avgStarScore }: Props) {
             setScore(scoreFixed);
         }
     };
-
-    const queryClient = useQueryClient();
 
     const handleStar = async () => {
         await SingleMovieApi.postStarEvaluate(Number(movieId), scoreFixed);

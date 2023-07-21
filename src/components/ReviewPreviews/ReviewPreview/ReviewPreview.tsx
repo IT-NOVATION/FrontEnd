@@ -3,9 +3,9 @@ import { IReviewPreview } from "@interfaces/review";
 import { Block, Text } from "@styles/UI";
 import theme from "@styles/theme";
 import cutReviewText from "@utils/cutReviewText";
-import { cutDateString } from "../../../utils/cutDateString";
 import { useLocation, useNavigate } from "react-router-dom";
-import { IReviewAndUserInfo, IUser } from "@interfaces/singleMovie";
+import { IUser } from "@interfaces/singleMovie";
+import ProfileImg from "@components/User/ProfileImg/ProfileImg";
 
 type Props = {
     review: IReviewPreview;
@@ -24,11 +24,27 @@ function ReviewPreview({ review, user }: Props) {
 
     return (
         <>
-            <Block.RowBox relative margin="0 0 23px 0">
-                {singleMovie ? <>리뷰</> : <S.PosterContainer img={review?.movie?.movieImg as string} />}
+            <S.Wrapper>
+                {singleMovie ? (
+                    <S.ProfileContainer>
+                        {user?.userProfileImg === "" ? (
+                            <ProfileImg size="65px" />
+                        ) : (
+                            <Block.RowBox justifyContent="center">
+                                <S.EachProfileImg src={user?.userProfileImg} alt="프로필" />
+                            </Block.RowBox>
+                        )}
+
+                        <Block.RowBox width="100%" justifyContent="center" margin="10px 0 0 0">
+                            <Text.Body1>{user?.nickname}</Text.Body1>
+                        </Block.RowBox>
+                    </S.ProfileContainer>
+                ) : (
+                    <S.PosterContainer img={review?.movie?.movieImg as string} />
+                )}
 
                 <Block.ColumnBox onClick={() => handleTitleClick(review.reviewId)} pointer>
-                    <Block.RowBox>
+                    <Block.RowBox alignItems="center">
                         <Text.Title5 color="lightBlack" margin="0 20px 0 0">
                             {review.reviewTitle}
                         </Text.Title5>
@@ -40,7 +56,7 @@ function ReviewPreview({ review, user }: Props) {
                             justifyContent="center"
                             alignItems="center"
                         >
-                            <img src="/icons/star_purple.svg" />
+                            <img src="/icons/star_purple.svg" alt="별점" />
                             <Text.Body5 margin="0 0 0 3px">4.5</Text.Body5>
                         </Block.RowBox>
                     </Block.RowBox>
@@ -55,16 +71,16 @@ function ReviewPreview({ review, user }: Props) {
                         )}
                     </Block.RowBox>
                     <Block.AbsoluteBox bottom="0">
-                        <Block.RowBox width="auto" justifyContent="flex-start" alignItems="center">
-                            <Text.Body5 color="lightBlack">{cutDateString(review.createdDate)}</Text.Body5>
+                        <Block.RowBox width="auto" justifyContent="flex-start" alignItems="center" margin="0 0 24px 0">
+                            <Text.Body5 color="lightBlack">{review.createdDate.replaceAll("-", ".")}</Text.Body5>
                             <Block.RowBox width="auto" margin="0 0 0 12px">
-                                <img src="/icons/heart_purple.svg" />
+                                <img src="/icons/heart_purple.svg" alt="하트" />
                                 <Text.Body5 color="lightBlack" margin="0 0 0 3px">
                                     {review.reviewLikeCount}
                                 </Text.Body5>
                             </Block.RowBox>
                             <Block.RowBox width="auto" margin="0 0 0 12px">
-                                <img src="/icons/message_purple.svg" />
+                                <img src="/icons/message_purple.svg" alt="댓글" />
                                 <Text.Body5 color="lightBlack" margin="0 0 0 3px">
                                     0
                                 </Text.Body5>
@@ -72,7 +88,7 @@ function ReviewPreview({ review, user }: Props) {
                         </Block.RowBox>
                     </Block.AbsoluteBox>
                 </Block.ColumnBox>
-            </Block.RowBox>
+            </S.Wrapper>
         </>
     );
 }

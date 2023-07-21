@@ -7,11 +7,11 @@ import useHovered from "@hooks/useHovered";
 import StarRating from "@components/SingleMovie/StarRating";
 import { useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-import { loginStateAtom } from "@recoil/loginStateAtom";
 import { modalStateAtom } from "@recoil/modalAtom";
-import { useRecoilValue, useSetRecoilState } from "recoil";
+import { useSetRecoilState } from "recoil";
 import theme from "@styles/theme";
 import ReviewPreview from "@components/ReviewPreviews/ReviewPreview/ReviewPreview";
+import { ILoginState } from "@interfaces/loginState";
 
 export default function SingleMovie() {
     const infoList = ["장르", "개요", "개봉", "감독", "출연", "줄거리"];
@@ -32,17 +32,19 @@ export default function SingleMovie() {
         queryFn: () => SingleMovieApi.getSinglelMovie(Number(movieId)),
         suspense: true,
     });
-    const queryClient = useQueryClient();
+
     const { isHovered: isDetailHovered, handleHover: handleDetailHover, handleLeave: handleDetailLeave } = useHovered();
     const { isHovered: isBtnHovered, handleHover: handleBtnHover, handleLeave: handleBtnLeave } = useHovered();
 
     const navigate = useNavigate();
 
-    const { loginState } = useRecoilValue(loginStateAtom);
+    const queryClient = useQueryClient();
+    const loginState = queryClient.getQueryData<ILoginState>(["loginState"]);
+
     const setModalState = useSetRecoilState(modalStateAtom);
 
     const handleHeartCount = async () => {
-        if (loginState === false) {
+        if (loginState?.loginState === false) {
             setModalState(1);
         } else
             try {
@@ -54,7 +56,7 @@ export default function SingleMovie() {
     };
 
     const goToWriteReview = () => {
-        if (loginState === false) {
+        if (loginState?.loginState === false) {
             setModalState(1);
         } else navigate("/write-review/" + movieId);
     };
@@ -259,10 +261,13 @@ export default function SingleMovie() {
                             </S.Button>
                         </Block.RowBox>
                     </Block.ColumnBox>
-
-                    {singleMovie.reviewAndUserInfoList.map((item, i) => {
-                        return <ReviewPreview review={item.review} user={item.user} />;
-                    })}
+                    <Block.ColumnBox justifyContent="center" alignItems="center">
+                        <Block.ColumnBox width="882px" justifyContent="center" alignItems="center" padding="24px 0 0 0">
+                            {singleMovie.reviewAndUserInfoList.map((item, i) => {
+                                return <ReviewPreview review={item.review} user={item.user} />;
+                            })}
+                        </Block.ColumnBox>
+                    </Block.ColumnBox>
                 </>
             )}
         </Block.ColumnBox>
