@@ -1,8 +1,6 @@
 import { Block, Text } from "@styles/UI";
-import Poster from "./PostersContainer/Poster/Poster";
-import { Suspense, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import * as S from "./style";
-import { BsArrowLeftCircle, BsArrowRightCircle } from "react-icons/bs";
 import { AnimatePresence, motion } from "framer-motion";
 import { useQuery } from "@tanstack/react-query";
 import { MainPageApi } from "@apis/mainPageApi";
