@@ -23,7 +23,6 @@ export default function NavigationBar() {
   const [navTheme, setNavTheme] = useState<"white" | "dark">("dark");
   const [isVisible, setIsVisible] = useState<boolean>(true);
   const [isSearchClick, setIsSearchClick] = useState<boolean>(false);
-  const [textColor, setTextColor] = useState<DefaultThemeColorKey>("black");
   const [movieLogHovered, setMovieLogHovered] = useState(false);
   const [dropdownOn, setDropdownOn] = useState(false);
 
@@ -52,7 +51,6 @@ export default function NavigationBar() {
 
   useEffect(() => {
     setNavTheme(pathname === "/" && !isSearchClick ? "dark" : "white");
-    setTextColor(pathname === "/" && !isSearchClick ? "white" : "black");
   }, [isSearchClick, pathname]);
 
   useEffect(() => {
@@ -68,9 +66,7 @@ export default function NavigationBar() {
     });
   }, [position]);
 
-  useEffect(() => {
-    setTextColor(pathname === "/" && !isSearchClick ? "white" : "black");
-  }, [pathname, isSearchClick]);
+  useEffect(() => {}, [pathname, isSearchClick]);
 
   return (
     <>
@@ -95,14 +91,10 @@ export default function NavigationBar() {
                     src="/icons/logo.svg"
                     alt="home-logo"
                   />
-                  <Text.Title5 onClick={goToFilm} color={textColor} pointer>
+                  <Text.Title5 onClick={goToFilm} pointer>
                     무비서치
                   </Text.Title5>
-                  <Text.Title5
-                    onClick={goToMovieTalk}
-                    color={textColor}
-                    pointer
-                  >
+                  <Text.Title5 onClick={goToMovieTalk} pointer>
                     무비토크
                   </Text.Title5>
                 </Block.RowBox>
@@ -117,9 +109,7 @@ export default function NavigationBar() {
                       src={
                         isSearchClick
                           ? "/icons/close.svg"
-                          : navTheme === "white"
-                          ? "/icons/search_dark.svg"
-                          : "/icons/search_white.svg"
+                          : "/icons/search_dark.svg"
                       }
                       onClick={handleSearchBtnClick}
                     />
@@ -127,14 +117,7 @@ export default function NavigationBar() {
 
                   {loginState?.loginState ? (
                     <>
-                      <S.AlarmLogo
-                        src={
-                          navTheme === "white"
-                            ? "/icons/alarm_dark.svg"
-                            : "/icons/alarm_white.svg"
-                        }
-                        alt="alarm"
-                      />
+                      <S.AlarmLogo src={"/icons/alarm_dark.svg"} alt="alarm" />
                       <S.MovieLogBtn
                         width="107px"
                         height="43px"
@@ -145,7 +128,6 @@ export default function NavigationBar() {
                         onMouseEnter={handleMovieLogMouseEnter}
                         onMouseLeave={handleMovieLogMouseLeave}
                         hovered={movieLogHovered}
-                        navTheme={navTheme}
                       >
                         <Text.Body3 color="black" pointer>
                           무비로그

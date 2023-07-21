@@ -13,7 +13,7 @@ export const Nav = styled(motion.nav)<{
   padding: 20px 50px;
   position: fixed;
   background-color: ${({ navTheme }) =>
-    navTheme === "dark" ? "rgba(154, 154, 154, 0.40)" : "white"};
+    navTheme === "dark" ? "rgba(255,255,255, 0.40)" : "white"};
   display: flex;
   flex-direction: column;
 `;
@@ -33,11 +33,10 @@ export const AlarmLogo = styled.img`
 
 export const MovieLogBtn = styled(Button.Button)<{
   hovered: boolean;
-  navTheme: "white" | "dark";
 }>`
   box-shadow: ${({ hovered }) =>
     hovered && "0px 4px 4px 0px rgba(0, 0, 0, 0.25) inset"};
-  border: ${({ navTheme }) => navTheme === "white" && "1px solid #5f5f5f"};
+  border: 1px solid #5f5f5f;
 `;
 
 export const variants = {
