@@ -8,12 +8,6 @@ import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 function ReviewPreview({ review }: { review: IReviewPreview }) {
   const navigate = useNavigate();
-  const { pathname } = useLocation();
-
-  useEffect(() => {
-    if (pathname.includes("/movieLog")) {
-    }
-  }, []);
 
   const handleTitleClick = (reviewId: number) => {
     navigate(`/review/${reviewId}`);
@@ -34,11 +28,11 @@ function ReviewPreview({ review }: { review: IReviewPreview }) {
             height="27px"
             borderRadius="15px"
             border={`1px solid ${theme.colors.gray}`}
-            justifyContent="center"
+            padding="0 0 0 7px"
             alignItems="center"
           >
             <img src="/icons/star_purple.svg" />
-            <Text.Body5 margin="0 0 0 3px">4.5</Text.Body5>
+            <Text.Body5 margin="0 0 0 3px">{review.star}</Text.Body5>
           </Block.RowBox>
         </Block.RowBox>
         <Block.RowBox position="relative" margin="5px 0 0 0">
