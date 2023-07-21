@@ -4,11 +4,27 @@ import { Block, Text } from "@styles/UI";
 import theme from "@styles/theme";
 import cutReviewText from "@utils/cutReviewText";
 import { cutDateString } from "../../../utils/cutDateString";
+import { useEffect, useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 function ReviewPreview({ review }: { review: IReviewPreview }) {
+  const navigate = useNavigate();
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    if (pathname.includes("/movieLog")) {
+    }
+  }, []);
+
+  const handleTitleClick = (reviewId: number) => {
+    navigate(`/review/${reviewId}`);
+  };
   return (
     <Block.RowBox relative margin="0 0 23px 0">
       <S.PosterContainer img={review.movie.movieImg} />
-      <Block.ColumnBox>
+      <Block.ColumnBox
+        onClick={() => handleTitleClick(review.reviewId)}
+        pointer
+      >
         <Block.RowBox>
           <Text.Title5 color="lightBlack" margin="0 20px 0 0">
             {review.reviewTitle}
@@ -25,10 +41,15 @@ function ReviewPreview({ review }: { review: IReviewPreview }) {
             <Text.Body5 margin="0 0 0 3px">4.5</Text.Body5>
           </Block.RowBox>
         </Block.RowBox>
-        <Block.RowBox margin="5px 0 0 0">
-          <Text.Body4 color="lightBlack" lineHeight="1.3" margin="0 20px 0 0">
+        <Block.RowBox position="relative" margin="5px 0 0 0">
+          <S.ReviewMainText hasSpoiler={review.hasSpoiler}>
             {cutReviewText(review.reviewMainText)}
-          </Text.Body4>
+          </S.ReviewMainText>
+          {review.hasSpoiler && (
+            <S.SpoilerText>
+              <Text.Body4>스포일러 포함</Text.Body4>
+            </S.SpoilerText>
+          )}
         </Block.RowBox>
         <Block.AbsoluteBox bottom="0">
           <Block.RowBox

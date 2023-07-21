@@ -2,7 +2,7 @@ import { IAccountInfo, IFindPassword } from "@interfaces/forms";
 import { BASE_URL, baseApi } from "./instance";
 
 const SIGNUP_URI = "/signup";
-const ADD_PROFILE_URI = "/userProfileInfo";
+const ADD_PROFILE_URI = "/userProfile";
 const LOGIN_URI = "/login";
 const SEND_CODE_URI = "/passwordfind/emailSend";
 const CODE_CHECK_URI = "/passwordfind/finalCheck";
@@ -18,7 +18,7 @@ export const AccountApi = {
   signup: async (signupForm: IAccountInfo) =>
     await baseApi.post(SIGNUP_URI, signupForm),
   addProfile: async (profileForm: IAccountInfo) =>
-    await baseApi.post(ADD_PROFILE_URI, profileForm),
+    await baseApi.put(ADD_PROFILE_URI, profileForm),
   login: async (loginForm: IAccountInfo) =>
     await baseApi.post(LOGIN_URI, loginForm).then((res) => res.data),
   kakaoRedirect: async (code: string) =>
