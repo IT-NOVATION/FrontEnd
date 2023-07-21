@@ -1,5 +1,5 @@
 import { Block, Text } from "@styles/UI";
-import { useEffect, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 import * as S from "./style";
 import { AnimatePresence, motion } from "framer-motion";
 import { useQuery } from "@tanstack/react-query";
