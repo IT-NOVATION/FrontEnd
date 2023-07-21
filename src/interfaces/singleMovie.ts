@@ -8,7 +8,7 @@ export interface IMovieInformation {
     title: string;
     movieBgImg: string;
     movieGenre: string;
-    movieReleasedate: string;
+    movieReleasedDate: string;
     movieDetail: string;
     movieActor: string;
     movieDirector: string;

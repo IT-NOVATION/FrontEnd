@@ -42,6 +42,10 @@ export default function SingleMovie() {
     const queryClient = useQueryClient();
 
     const handleHeartCount = async () => {
+        if (loginState === false) {
+            setModalState(1);
+        }
+
         try {
             //
             await SingleMovieApi.postMovieLike(Number(movieId));
@@ -157,11 +161,11 @@ export default function SingleMovie() {
                                                         {singleMovie.movie.movieGenre}
                                                     </Text.Body6>
                                                     <Text.Body6 color="white">
-                                                        {singleMovie.movie.movieAge} |{" "}
+                                                        {/* {singleMovie.movie.movieAge} |{" "} 관람등급 매끄럽게 가져올 수 있을 때 추가*/}
                                                         {singleMovie.movie.movieRunningTime}분
                                                     </Text.Body6>
                                                     <Text.Body6 color="white">
-                                                        {singleMovie.movie.movieReleasedate}
+                                                        {singleMovie.movie.movieReleasedDate.replaceAll("-", ".")}
                                                     </Text.Body6>
                                                     <Text.Body6 color="white">
                                                         {singleMovie.movie.movieDirector}
@@ -231,11 +235,10 @@ export default function SingleMovie() {
                                 isHovered={isBtnHovered}
                                 onMouseEnter={handleBtnHover}
                                 onMouseLeave={handleBtnLeave}
-                                onClick={goToWriteReview}
                             >
                                 <img src="/icons/brush.svg" alt="연필" />
 
-                                <Block.RowBox width="90px" justifyContent="flex-end">
+                                <Block.RowBox width="90px" justifyContent="flex-end" onClick={goToWriteReview}>
                                     <Text.Body1 color="white">리뷰 작성</Text.Body1>
                                 </Block.RowBox>
                             </S.Button>
