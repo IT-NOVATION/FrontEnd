@@ -1,5 +1,12 @@
 import styled from "styled-components";
 
+export const MoviesLayout = styled.div`
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  justify-items: center;
+  position: relative;
+  width: 100%;
+`;
 export const ArrowBtn = styled.button`
   width: 30px;
   height: 30px;

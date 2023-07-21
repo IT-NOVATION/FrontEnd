@@ -244,6 +244,7 @@ export const Block = {
     flex-direction: column;
     align-items: center;
     background-color: ${(props) => props.bgColor};
+    position: ${(props) => props.position};
   `,
   PageLayout: styled.div<StyleBlock>`
     width: 900px;

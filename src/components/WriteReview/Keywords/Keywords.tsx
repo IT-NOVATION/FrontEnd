@@ -1,8 +1,9 @@
 import { Block, Text } from "@styles/UI";
 import KeywordBox from "./KeywordBox/KeywordBox";
-import { useState } from "react";
+import { useContext, useEffect, useState } from "react";
+import { ReviewDataContext } from "@pages/WriteReview/WriteReview";
 
-enum KeywordsEnum {
+export enum KeywordsEnum {
   "스토리가 좋아요",
   "작품성이 높아요",
   "시나리오 소재가 참신해요",
@@ -14,12 +15,26 @@ enum KeywordsEnum {
   "대사 전달이 정확해요",
 }
 
-type Props = {
-  selected: boolean[];
-  setSelected: React.Dispatch<React.SetStateAction<any[]>>;
-};
+function Keywords() {
+  const reviewDataContext = useContext(ReviewDataContext);
+  const [selected, setSelected] = useState(Array(9).fill(false));
+  useEffect(() => {
+    reviewDataContext?.setReviewData((prev) => {
+      return {
+        ...prev,
+        hasGoodStory: selected[0],
+        hasGoodProduction: selected[1],
+        hasGoodScenario: selected[2],
+        hasGoodDirecting: selected[3],
+        hasGoodOst: selected[4],
+        hasGoodVisual: selected[5],
+        hasGoodActing: selected[6],
+        hasGoodCharterCharming: selected[7],
+        hasGoodDiction: selected[8],
+      };
+    });
+  }, [selected]);
 
-function Keywords({ selected, setSelected }: Props) {
   return (
     <Block.RowBox margin="10px 0 0 0">
       <Block.ColumnBox width="183px" margin="0 36px 0 0">

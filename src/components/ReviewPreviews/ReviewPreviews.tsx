@@ -1,4 +1,4 @@
-import { IReviewPreview } from "@interfaces/review";
+import { IMovieLogReviewPreview, IReviewPreview } from "@interfaces/review";
 import { Block } from "@styles/UI";
 import ReviewPreview from "./ReviewPreview/ReviewPreview";
 
@@ -6,7 +6,7 @@ function ReviewPreviews({
   reviews,
   width,
 }: {
-  reviews: IReviewPreview[];
+  reviews: IReviewPreview[] | IMovieLogReviewPreview[];
   width: string;
 }) {
   return (
