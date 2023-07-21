@@ -136,6 +136,7 @@ type StyleButton = {
   bgColor?: DefaultThemeColorKey;
   opacity?: string;
   backdropFilter?: string;
+  filter?: string;
 };
 
 export const Button = {
