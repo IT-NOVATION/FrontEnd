@@ -8,6 +8,7 @@ const SEND_CODE_URI = "/passwordfind/emailSend";
 const CODE_CHECK_URI = "/passwordfind/finalCheck";
 const CHANGE_PW_URI = "/passwordfind/rewritePw";
 const LOGIN_STATE_URI = "/loginState";
+const LOGOUT_URI = "/custom-logout";
 export const GOOGLE_LOGIN_URI =
   "http://localhost:8080/oauth2/authorization/google";
 export const NAVER_LOGIN_URI =
@@ -39,4 +40,5 @@ export const AccountApi = {
         },
       })
       .then((res) => res.data),
+  logout: async () => await baseApi.get(LOGOUT_URI).then((res) => res.data),
 };

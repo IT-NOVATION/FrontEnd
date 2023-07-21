@@ -11,10 +11,9 @@ import { useParams } from "react-router-dom";
 import ReviewPreviews from "@components/ReviewPreviews/ReviewPreviews";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { IMovieLogData } from "@interfaces/movieLog";
-import { loginStateAtom } from "@recoil/loginStateAtom";
-import { useRecoilValue } from "recoil";
 import Badge from "@components/User/Badge/Badge";
 import FollowBtn from "@pages/FollowBtn/FollowBtn";
+import { ILoginState } from "@interfaces/loginState";
 
 type ContentType = "Reviews" | "InterestedMovies";
 export type FollowModalType = null | IFollowUser[];
@@ -35,7 +34,8 @@ function MovieLog() {
     },
     suspense: true,
   });
-  const { loginState, userId: loginUserId } = useRecoilValue(loginStateAtom);
+
+  const loginState = queryClient.getQueryData<ILoginState>(["loginState"]);
   const [isEditing, setIsEditing] = useState(false);
   const [followModal, setFollowModal] = useState<FollowModalType>(null);
   const [contents, setContents] = useState<ContentType>("Reviews");
@@ -54,7 +54,9 @@ function MovieLog() {
     await queryClient.invalidateQueries(["movieLog"]);
   };
   const handleButtonClick = async () => {
-    loginUserId === Number(userId) ? setIsEditing(true) : await handleFollow();
+    loginState?.userId === Number(userId)
+      ? setIsEditing(true)
+      : await handleFollow();
   };
   const handleFollowersClick = () =>
     setFollowModal(movieLogData?.followers as IFollowUser[]);
@@ -143,7 +145,7 @@ function MovieLog() {
                   {movieLogData.nowUser.introduction}
                 </Text.Body1>
                 <Block.AbsoluteBox width="auto" top="-5px" right="0">
-                  {loginUserId === Number(userId) ? (
+                  {loginState?.userId === Number(userId) ? (
                     <Button.Button
                       width="94px"
                       height="33px"
