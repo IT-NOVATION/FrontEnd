@@ -12,7 +12,6 @@ const colors = {
   red: "#FF5047",
   bgColor: "rgba(50, 50, 50, 0.56)",
 };
-
 const theme: DefaultTheme = {
   colors,
 };

@@ -48,7 +48,7 @@ export default function LoginForm() {
       const { accessToken, refreshToken } = await AccountApi.login(data);
       localStorage.setItem("accessToken", accessToken);
       localStorage.setItem("refreshToken", refreshToken);
-      queryClient.invalidateQueries(["loginState"]);
+      queryClient.invalidateQueries();
       setModalState(ModalState.Off);
     } catch (err) {
       alert("이메일 혹은 비밀번호가 일치하지 않습니다.");

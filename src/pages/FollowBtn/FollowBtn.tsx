@@ -1,9 +1,9 @@
-import { loginStateAtom } from "@recoil/loginStateAtom";
 import { useRecoilValue } from "recoil";
 import * as S from "./style";
 import { Button } from "@styles/UI";
 import { useQueryClient } from "@tanstack/react-query";
 import { MovieLogApi } from "@apis/movieLogApi";
+import { ILoginState } from "@interfaces/loginState";
 
 type Props = {
   isFollowing: boolean;
@@ -19,11 +19,11 @@ export default function FollowBtn({ isFollowing, userId }: Props) {
     await queryClient.invalidateQueries(["movieLog"]);
   };
 
-  const { loginState, userId: loginUserId } = useRecoilValue(loginStateAtom);
+  const loginState = queryClient.getQueryData<ILoginState>(["loginState"]);
   return (
     <S.Button isFollowing={isFollowing} onClick={handleClick}>
       <S.Text>
-        {loginUserId === Number(userId)
+        {loginState?.userId === Number(userId)
           ? "프로필 편집"
           : isFollowing
           ? "팔로잉"
