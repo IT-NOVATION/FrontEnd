@@ -45,7 +45,9 @@ function Poster({ movie, rank, loadingFinished, onLoad }: Props) {
             >
               <Text.Body3 color="white">평점 </Text.Body3>{" "}
               <AiFillStar color="#F8B319" />{" "}
-              <Text.Body3 color="white">{movie.starScore}</Text.Body3>
+              <Text.Body3 color="white">
+                {movie.starScore.toFixed(1)}
+              </Text.Body3>
             </Block.RowBox>
             <Button.Button
               margin="90px 0 0 0"
