@@ -1,4 +1,4 @@
-import { useRecoilValue, useSetRecoilState } from "recoil";
+import { useSetRecoilState } from "recoil";
 import * as S from "./style";
 import { modalStateAtom } from "@recoil/modalAtom";
 import { useEffect, useState } from "react";
@@ -7,13 +7,14 @@ import { useNavigate, useLocation } from "react-router-dom";
 import { AnimatePresence } from "framer-motion";
 import Search from "@components/Search/Search";
 import { DefaultThemeColorKey } from "styled-components";
-import { loginStateAtom } from "@recoil/loginStateAtom";
 import ProfileImg from "@components/User/ProfileImg/ProfileImg";
 import Dropdown from "./Dropdown/Dropdown";
+import { useQueryClient } from "@tanstack/react-query";
+import { ILoginState } from "@interfaces/loginState";
 
 export default function NavigationBar() {
-  const { loginState, userId, nickname, profileImg } =
-    useRecoilValue(loginStateAtom);
+  const queryClient = useQueryClient();
+  const loginState = queryClient.getQueryData<ILoginState>(["loginState"]);
   const navigate = useNavigate();
   const { pathname } = useLocation();
   const handleLoginClick = () => setModalState(1);
@@ -45,7 +46,7 @@ export default function NavigationBar() {
   };
 
   const goToMovieLog = () => {
-    navigate("/movieLog/" + userId);
+    navigate("/movieLog/" + loginState?.userId);
   };
   const handleProfileClick = () => setDropdownOn(true);
 
@@ -101,7 +102,6 @@ export default function NavigationBar() {
                     무비토크
                   </Text.Title5>
                 </Block.RowBox>
-
                 <Block.RowBox
                   alignItems="center"
                   justifyContent="flex-end"
@@ -121,7 +121,7 @@ export default function NavigationBar() {
                     />
                   )}
 
-                  {loginState ? (
+                  {loginState?.loginState ? (
                     <>
                       <S.AlarmLogo
                         src={
@@ -154,8 +154,8 @@ export default function NavigationBar() {
                       >
                         <ProfileImg
                           img={
-                            profileImg
-                              ? profileImg
+                            loginState?.profileImg
+                              ? loginState?.profileImg
                               : "/images/default_profile.png "
                           }
                           size="42px"
