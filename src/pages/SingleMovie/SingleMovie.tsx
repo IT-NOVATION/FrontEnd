@@ -4,8 +4,7 @@ import { ISingleMovie } from "@interfaces/singleMovie";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { SingleMovieApi } from "@apis/singleMovieApi";
 import useHovered from "@hooks/useHovered";
-import StarRating from "@components/WriteReview/StarRating/StarRating";
-import { useEffect, useState } from "react";
+import StarRating from "@components/SingleMovie/StarRating";
 import { useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { loginStateAtom } from "@recoil/loginStateAtom";
@@ -14,9 +13,6 @@ import { useRecoilValue, useSetRecoilState } from "recoil";
 import theme from "@styles/theme";
 
 export default function SingleMovie() {
-    const [score, setScore] = useState<number>(0);
-    const [scoreFixed, setScoreFixed] = useState(score);
-
     const { movieId } = useParams();
 
     const { data: singleMovie } = useQuery<ISingleMovie>({
@@ -243,7 +239,7 @@ export default function SingleMovie() {
                         </Block.RowBox>
                         <Block.RowBox
                             width="882px"
-                            height="75px"
+                            height="91px"
                             borderRadius="13px"
                             border="1px solid rgba(154, 154, 154, 0.75)"
                             padding="0 20px 0 300px"

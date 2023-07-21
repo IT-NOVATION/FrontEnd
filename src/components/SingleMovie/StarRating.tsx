@@ -1,10 +1,21 @@
 import { Block } from "@styles/UI";
 import * as S from "./style";
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { FaStar, FaStarHalfAlt } from "react-icons/fa";
-import { ReviewDataContext } from "@pages/WriteReview/WriteReview";
+
+import { SingleMovieApi } from "@apis/singleMovieApi";
+import { useParams } from "react-router-dom";
+import { loginStateAtom } from "@recoil/loginStateAtom";
+import { useRecoilValue, useSetRecoilState } from "recoil";
+import { modalStateAtom } from "@recoil/modalAtom";
+import { useQueryClient } from "@tanstack/react-query";
 
 function StarRating() {
+    const { movieId } = useParams();
+
+    const { loginState } = useRecoilValue(loginStateAtom);
+    const setModalState = useSetRecoilState(modalStateAtom);
+
     const [score, setScore] = useState<number>(0);
     const [scoreFixed, setScoreFixed] = useState(score);
 
@@ -13,7 +24,11 @@ function StarRating() {
     const handleRightHalfEnter = (idx: number) => setScore(idx + 1);
 
     const handleStarClick = async () => {
-        setScoreFixed(score);
+        if (loginState === false) {
+            setModalState(1);
+        } else {
+            setScoreFixed(score);
+        }
     };
 
     const handleStarLeave = () => {
@@ -22,12 +37,15 @@ function StarRating() {
         }
     };
 
-    const reviewDataContext = useContext(ReviewDataContext);
+    const queryClient = useQueryClient();
+
+    const handleStar = async () => {
+        await SingleMovieApi.postStarEvaluate(Number(movieId), scoreFixed);
+        await queryClient.invalidateQueries(["movie", movieId]);
+    };
 
     useEffect(() => {
-        reviewDataContext?.setReviewData(prev => {
-            return { ...prev, star: scoreFixed };
-        });
+        handleStar();
     }, [scoreFixed]);
 
     return (
@@ -37,11 +55,11 @@ function StarRating() {
                 .map((i, idx) => (
                     <S.StarDiv key={idx} onClick={handleStarClick}>
                         {score - Math.floor(score) === 0.5 && Math.floor(score) === idx ? (
-                            <FaStarHalfAlt key={idx} style={{ position: "absolute" }} size={32} color="gold" />
+                            <FaStarHalfAlt key={idx} style={{ position: "absolute" }} size={50} color="gold" />
                         ) : idx + 1 > score ? (
-                            <FaStar key={idx} style={{ position: "absolute" }} size={32} color="lightGray" />
+                            <FaStar key={idx} style={{ position: "absolute" }} size={50} color="lightGray" />
                         ) : (
-                            <FaStar key={idx} color="gold" style={{ position: "absolute" }} size={32} />
+                            <FaStar key={idx} color="gold" style={{ position: "absolute" }} size={50} />
                         )}
                         <S.Left
                             key={idx + "left"}
