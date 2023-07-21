@@ -13,18 +13,7 @@ import { useRecoilValue, useSetRecoilState } from "recoil";
 import theme from "@styles/theme";
 
 export default function SingleMovie() {
-    const { movieId } = useParams();
-
-    const { data: singleMovie } = useQuery<ISingleMovie>({
-        queryKey: ["movie", movieId],
-        queryFn: () => SingleMovieApi.getSinglelMovie(Number(movieId)),
-    });
-
     const infoList = ["장르", "개요", "개봉", "감독", "출연", "줄거리"];
-
-    const { isHovered: isDetailHovered, handleHover: handleDetailHover, handleLeave: handleDetailLeave } = useHovered();
-    const { isHovered: isBtnHovered, handleHover: handleBtnHover, handleLeave: handleBtnLeave } = useHovered();
-
     const keywordsMap = new Map();
     keywordsMap.set("hasGoodStory", "스토리가 좋아요");
     keywordsMap.set("hasGoodProduction", "작품성이 높아요");
@@ -36,7 +25,20 @@ export default function SingleMovie() {
     keywordsMap.set("hasGoodCharterCharming", "캐릭터가 매력적이에요");
     keywordsMap.set("hasGoodDiction", "대사 전달이 정확해요");
 
+    const { movieId } = useParams();
+    const { data: singleMovie } = useQuery<ISingleMovie>({
+        queryKey: ["movie", movieId],
+        queryFn: () => SingleMovieApi.getSinglelMovie(Number(movieId)),
+        suspense: true,
+    });
     const queryClient = useQueryClient();
+    const { isHovered: isDetailHovered, handleHover: handleDetailHover, handleLeave: handleDetailLeave } = useHovered();
+    const { isHovered: isBtnHovered, handleHover: handleBtnHover, handleLeave: handleBtnLeave } = useHovered();
+
+    const navigate = useNavigate();
+
+    const { loginState } = useRecoilValue(loginStateAtom);
+    const setModalState = useSetRecoilState(modalStateAtom);
 
     const handleHeartCount = async () => {
         if (loginState === false) {
@@ -50,10 +52,6 @@ export default function SingleMovie() {
             }
     };
 
-    const setModalState = useSetRecoilState(modalStateAtom);
-
-    const { loginState } = useRecoilValue(loginStateAtom);
-    const navigate = useNavigate();
     const goToWriteReview = () => {
         if (loginState === false) {
             setModalState(1);

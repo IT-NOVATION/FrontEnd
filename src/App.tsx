@@ -6,29 +6,28 @@ import { AccountApi } from "@apis/accountApi";
 import { ILoginState } from "@interfaces/loginState";
 import { useSetRecoilState } from "recoil";
 import { loginStateAtom } from "@recoil/loginStateAtom";
-import Loading from "@components/Home/Loading/Loading";
 import { Suspense } from "react";
 
 function App() {
-  const setLoginState = useSetRecoilState(loginStateAtom);
-  useQuery<ILoginState>({
-    queryKey: ["loginState"],
-    queryFn: async () => {
-      const data = await AccountApi.loginState();
-      setLoginState(data);
-      return data;
-    },
-  });
+    const setLoginState = useSetRecoilState(loginStateAtom);
+    useQuery<ILoginState>({
+        queryKey: ["loginState"],
+        queryFn: async () => {
+            const data = await AccountApi.loginState();
+            setLoginState(data);
+            return data;
+        },
+    });
 
-  return (
-    <>
-      <NavigationBar />
-      <Modal />
-      <Suspense fallback={<Loading />}>
-        <Outlet />
-      </Suspense>
-    </>
-  );
+    return (
+        <>
+            <NavigationBar />
+            <Modal />
+            <Suspense fallback={<></>}>
+                <Outlet />
+            </Suspense>
+        </>
+    );
 }
 
 export default App;
