@@ -2,7 +2,6 @@ import { Block } from "@styles/UI";
 import * as S from "./style";
 import { useEffect, useState } from "react";
 import { FaStar, FaStarHalfAlt } from "react-icons/fa";
-
 import { SingleMovieApi } from "@apis/singleMovieApi";
 import { useParams } from "react-router-dom";
 import { loginStateAtom } from "@recoil/loginStateAtom";
@@ -10,13 +9,17 @@ import { useRecoilValue, useSetRecoilState } from "recoil";
 import { modalStateAtom } from "@recoil/modalAtom";
 import { useQueryClient } from "@tanstack/react-query";
 
-function StarRating() {
+type Props = {
+    avgStarScore: number;
+};
+
+function StarRating({ avgStarScore }: Props) {
     const { movieId } = useParams();
 
     const { loginState } = useRecoilValue(loginStateAtom);
     const setModalState = useSetRecoilState(modalStateAtom);
 
-    const [score, setScore] = useState<number>(0);
+    const [score, setScore] = useState<number>(avgStarScore);
     const [scoreFixed, setScoreFixed] = useState(score);
 
     const handleLeftHalfEnter = (idx: number) => setScore(idx + 0.5);
@@ -55,11 +58,11 @@ function StarRating() {
                 .map((i, idx) => (
                     <S.StarDiv key={idx} onClick={handleStarClick}>
                         {score - Math.floor(score) === 0.5 && Math.floor(score) === idx ? (
-                            <FaStarHalfAlt key={idx} style={{ position: "absolute" }} size={50} color="gold" />
+                            <FaStarHalfAlt key={idx} style={{ position: "absolute" }} size={40} color="gold" />
                         ) : idx + 1 > score ? (
-                            <FaStar key={idx} style={{ position: "absolute" }} size={50} color="lightGray" />
+                            <FaStar key={idx} style={{ position: "absolute" }} size={40} color="lightGray" />
                         ) : (
-                            <FaStar key={idx} color="gold" style={{ position: "absolute" }} size={50} />
+                            <FaStar key={idx} color="gold" style={{ position: "absolute" }} size={40} />
                         )}
                         <S.Left
                             key={idx + "left"}

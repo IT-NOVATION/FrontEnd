@@ -1,8 +1,8 @@
 import styled from "styled-components";
 
 export const StarDiv = styled.div`
-    width: 60px;
-    height: 50px;
+    width: 45px;
+    height: 40px;
     position: relative;
     display: flex;
     cursor: pointer;

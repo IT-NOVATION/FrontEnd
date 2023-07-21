@@ -245,7 +245,7 @@ export default function SingleMovie() {
                             padding="0 20px 0 300px"
                             alignItems="center"
                         >
-                            <StarRating />
+                            <StarRating avgStarScore={singleMovie.loginUserInfoDto.movieStar} />
 
                             <S.Button
                                 isHovered={isBtnHovered}
