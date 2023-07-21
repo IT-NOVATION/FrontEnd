@@ -32,12 +32,12 @@ export default function Banner() {
 
   useEffect(() => {
     setDirection(1);
-    const timer = setInterval(() => {
-      setSlide((prev) => (prev === IMG.length - 1 ? 0 : prev + 1));
-    }, 3000);
-    return () => {
-      clearInterval(timer);
-    };
+    // const timer = setInterval(() => {
+    //   setSlide((prev) => (prev === IMG.length - 1 ? 0 : prev + 1));
+    // }, 3000);
+    // return () => {
+    //   clearInterval(timer);
+    // };
   }, [slide]);
 
   return (
