@@ -5,12 +5,13 @@ import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { SingleMovieApi } from "@apis/singleMovieApi";
 import useHovered from "@hooks/useHovered";
 import StarRating from "@components/WriteReview/StarRating/StarRating";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { loginStateAtom } from "@recoil/loginStateAtom";
 import { modalStateAtom } from "@recoil/modalAtom";
 import { useRecoilValue, useSetRecoilState } from "recoil";
+import theme from "@styles/theme";
 
 export default function SingleMovie() {
     const [score, setScore] = useState<number>(0);
@@ -44,15 +45,13 @@ export default function SingleMovie() {
     const handleHeartCount = async () => {
         if (loginState === false) {
             setModalState(1);
-        }
-
-        try {
-            //
-            await SingleMovieApi.postMovieLike(Number(movieId));
-            await queryClient.invalidateQueries(["movieId", movieId]);
-        } catch (error) {
-            console.log(error);
-        }
+        } else
+            try {
+                await SingleMovieApi.postMovieLike(Number(movieId));
+                await queryClient.invalidateQueries(["movie", movieId]);
+            } catch (error) {
+                console.log(error);
+            }
     };
 
     const setModalState = useSetRecoilState(modalStateAtom);
@@ -102,18 +101,38 @@ export default function SingleMovie() {
                                                 <Block.RowBox
                                                     width="91px"
                                                     height="29px"
-                                                    border="1px solid #fff"
+                                                    border={
+                                                        singleMovie.loginUserInfoDto.pushedMovieLike
+                                                            ? `1px solid ${theme.colors.main}`
+                                                            : "1px solid white"
+                                                    }
                                                     borderRadius="5px"
                                                     justifyContent="center"
                                                     alignItems="center"
                                                     pointer
                                                     onClick={handleHeartCount}
+                                                    gap="5px"
                                                 >
-                                                    <img src="/icons/empty_heart.svg" alt="하트" />
-                                                    <Text.Body3 color="white">
+                                                    <img
+                                                        src={
+                                                            singleMovie.loginUserInfoDto.pushedMovieLike
+                                                                ? "/icons/heart_purple.svg"
+                                                                : "/icons/empty_heart.svg"
+                                                        }
+                                                        alt="하트"
+                                                    />
+
+                                                    <Text.Body3
+                                                        color={
+                                                            singleMovie.loginUserInfoDto.pushedMovieLike
+                                                                ? "main"
+                                                                : "white"
+                                                        }
+                                                    >
                                                         {singleMovie.movie.movieLikeCount}
                                                     </Text.Body3>
                                                 </Block.RowBox>
+
                                                 <Block.RowBox
                                                     width="91px"
                                                     height="29px"
@@ -121,10 +140,11 @@ export default function SingleMovie() {
                                                     borderRadius="5px"
                                                     justifyContent="center"
                                                     alignItems="center"
+                                                    gap="5px"
                                                 >
                                                     <img src="/icons/empty_star.svg" alt="별" />
                                                     <Text.Body3 color="white">
-                                                        {singleMovie.movie.avgStarScore}점
+                                                        {singleMovie.movie.avgStarScore} 점
                                                     </Text.Body3>
                                                 </Block.RowBox>
                                             </Block.RowBox>

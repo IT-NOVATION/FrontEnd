@@ -1,5 +1,6 @@
 export interface ISingleMovie {
     movie: IMovieInformation;
+    loginUserInfoDto: ILoginUserInfoDto;
     reviewAndUserInfoList: IReviewAndUserInfo[];
 }
 
@@ -17,6 +18,12 @@ export interface IMovieInformation {
     top3HasFeature: { topKeywordList: string[] };
     movieLikeCount: number;
     avgStarScore: number;
+}
+
+export interface ILoginUserInfoDto {
+    reviewStart: number;
+    movieStar: number;
+    pushedMovieLike: boolean;
 }
 
 export interface IReviewAndUserInfo {
