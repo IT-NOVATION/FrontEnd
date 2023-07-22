@@ -38,3 +38,24 @@ export enum Grade {
   "VIP",
   "SPECIAL",
 }
+export interface IMovieLogUser extends IUserBase {
+  bgImg?: string;
+  nickname: string;
+  introduction?: string;
+  grade: Grade;
+  profileImg?: string;
+}
+export interface IMovieLogFollowUser extends IUserBase {
+  nickname: string;
+  profileImg: string;
+}
+export interface IMutateProfileUpdate {
+  nickname: string;
+  introduction: string;
+  profileImg: string;
+  bgImg: string;
+}
+export interface ICommentUser extends IUserBase {
+  nickname: string;
+  profileImg: string;
+}

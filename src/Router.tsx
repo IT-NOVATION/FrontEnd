@@ -5,10 +5,11 @@ import NotFound from "@pages/NotFound/NotFound";
 import WriteReview from "@pages/WriteReview/WriteReview";
 import KakaoLoginRedirect from "@pages/SocialLoginRedirect/SocialLoginRedirect";
 import MovieLog from "@pages/MovieLog/MovieLog";
-import Film from "@pages/Film/Film";
+import EntireMovie from "@pages/EntireMovie/EntireMovie";
 import MovieTalk from "@pages/MovieTalk/MovieTalk";
 import SearchResult from "@pages/Search/SearchResult";
 import ReadReview from "@pages/ReadReview/ReadReview";
+import SingleMovie from "@pages/SingleMovie/SingleMovie";
 
 export const router = createBrowserRouter([
   {
@@ -16,7 +17,7 @@ export const router = createBrowserRouter([
     element: <App />,
     children: [
       {
-        path: "/home",
+        path: "",
         element: <Home />,
       },
       {
@@ -27,8 +28,9 @@ export const router = createBrowserRouter([
         path: "/kakao-redirect/:accessToken/:refreshToken",
         element: <KakaoLoginRedirect />,
       },
-      { path: "film", element: <Film /> },
+      { path: "entireMovie", element: <EntireMovie /> },
       { path: "movietalk", element: <MovieTalk /> },
+      { path: "singleMovie/:movieId", element: <SingleMovie /> },
       {
         path: "movieLog/:userId",
         element: <MovieLog />,

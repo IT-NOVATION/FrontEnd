@@ -20,7 +20,7 @@ function ImageInput({ type, img, setImg }: Props) {
       ) : (
         <BgImg img={img} />
       )}
-      <S.Label htmlFor={img}>
+      <S.Label htmlFor={type}>
         <Block.ColumnBox
           width="23px"
           height="23px"
@@ -33,7 +33,7 @@ function ImageInput({ type, img, setImg }: Props) {
           <S.CameraIcon src="/icons/camera.svg" />
         </Block.ColumnBox>
       </S.Label>
-      <S.Input type="file" accept="image/*" onChange={uploadImg} id={img} />
+      <S.Input type="file" accept="image/*" onChange={uploadImg} id={type} />
     </Block.ColumnBox>
   );
 }

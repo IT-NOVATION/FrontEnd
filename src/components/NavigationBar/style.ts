@@ -1,31 +1,42 @@
-import theme from "@styles/theme";
+import { Button } from "@styles/UI";
 import { motion } from "framer-motion";
 import styled from "styled-components";
 
-export const Nav = styled(motion.div)<{
+export const Nav = styled(motion.nav)<{
   isSearchClick: boolean;
-  isHome: boolean;
+  navTheme: "white" | "dark";
 }>`
   width: 100vw;
-  min-width: 900px;
+  min-width: 1100px;
   height: ${({ isSearchClick }) => (isSearchClick ? "351px" : "85px")};
   z-index: 90;
   padding: 20px 50px;
   position: fixed;
-  background-color: ${({ isHome, isSearchClick }) =>
-    isHome && !isSearchClick ? theme.colors.bgColor : "white"};
+  background-color: ${({ navTheme }) =>
+    navTheme === "dark" ? "rgba(255,255,255, 0.40)" : "white"};
+  display: flex;
+  flex-direction: column;
 `;
 
 export const HomeLogo = styled.img`
   width: 185px;
   cursor: pointer;
 `;
-export const Icons = styled.img`
-  width: 28px;
-  border-radius: 100px;
+export const SearchLogo = styled.img`
   cursor: pointer;
-  filter: invert(60%);
-  margin-right: 20px;
+  margin-right: 32px;
+`;
+export const AlarmLogo = styled.img`
+  cursor: pointer;
+  margin-right: 24px;
+`;
+
+export const MovieLogBtn = styled(Button.Button)<{
+  hovered: boolean;
+}>`
+  box-shadow: ${({ hovered }) =>
+    hovered && "0px 4px 4px 0px rgba(0, 0, 0, 0.25) inset"};
+  border: 1px solid #5f5f5f;
 `;
 
 export const variants = {
