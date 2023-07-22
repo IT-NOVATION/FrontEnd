@@ -11,6 +11,7 @@ export interface IReviewTimeUser extends IUserBase {
   followers: number;
   followings: number;
   reviews: IReviewPreview[];
+  isLoginedUserFollowsNowUser: boolean;
 }
 export interface IReadReviewUser extends IUserBase {
   bgImg: string;
