@@ -4,10 +4,10 @@ import { IMovieLogReviewPreview, IReviewPreview } from "./review";
 import { Grade, IMovieLogUser } from "./user";
 
 export interface IMovieLogData {
-  nowUser: IMovieLogUser;
-  followers: IFollowUser[];
-  followings: IFollowUser[];
-  reviews: IMovieLogReviewPreview[];
-  interestedMovie: IInterstedMovie[];
-  isLoginedUserFollowsNowUser: boolean;
+    nowUser: IMovieLogUser;
+    followers: IFollowUser[];
+    followings: IFollowUser[];
+    reviews: IMovieLogReviewPreview[];
+    interestedMovie: IInterstedMovie[];
+    isLoginedUserFollowsNowUser: boolean;
 }
