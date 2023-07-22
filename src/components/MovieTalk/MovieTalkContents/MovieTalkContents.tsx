@@ -5,7 +5,11 @@ import { IMovieTalkUser } from "@interfaces/user";
 import MovieTalkContent from "./MovieTalkContent/MovieTalkContent";
 import { ContentsType } from "@pages/MovieTalk/MovieTalk";
 function MovieTalkContents({ contents }: { contents: ContentsType }) {
-  const [{ data: bestReviews }, { data: popularUsers }] = useQueries({
+  const [
+    { data: bestReviews },
+    { data: popularUsers },
+    { data: latestReviews },
+  ] = useQueries({
     queries: [
       {
         queryKey: ["BestReviews"],
@@ -17,7 +21,11 @@ function MovieTalkContents({ contents }: { contents: ContentsType }) {
         queryFn: MovieTalkApi.popularUsers,
         staleTime: Infinity,
       },
-      // { queryKey: ["BestReviews"], queryFn: MovieTalkApi.bestReviews },
+      {
+        queryKey: ["LatestReviews"],
+        queryFn: MovieTalkApi.latestReviews,
+        staleTime: Infinity,
+      },
     ],
   });
 
@@ -31,7 +39,7 @@ function MovieTalkContents({ contents }: { contents: ContentsType }) {
         ? popularUsers.map((v: IMovieTalkUser) => (
             <MovieTalkContent content={v} />
           ))
-        : bestReviews?.map((v: IMovieTalkUser) => (
+        : latestReviews?.map((v: IMovieTalkUser) => (
             <MovieTalkContent content={v} />
           ))}
     </Block.ColumnBox>
