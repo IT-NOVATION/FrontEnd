@@ -1,4 +1,4 @@
-const MAX_REVIEW_LENGTH = 250;
+const MAX_REVIEW_LENGTH = 200;
 
 function cutReviewText(text: string) {
   // 리뷰 미리보기 시 html 태그들을 자르고, 250자가 넘어가면 뒷부분을 자르고, '...'채우기

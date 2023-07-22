@@ -18,7 +18,7 @@ export const HoveredPoster = styled(Block.ColumnBox)`
   width: 200px;
   height: 280px;
   border-radius: 10px;
-  z-index: 99;
+  z-index: 2;
 `;
 
 export const Rank = styled(Block.ColumnBox)`
@@ -41,4 +41,15 @@ export const Image = styled.img`
   top: 0;
   left: 0;
   border-radius: 10px;
+`;
+export const DetailBtn = styled.button`
+  outline: none;
+  width: 135px;
+  height: 55px;
+  margin-top: 90px;
+  border: none;
+  border-radius: 15px;
+  backdrop-filter: blur(5px);
+  background: var(--low-op-btn, rgba(249, 249, 249, 0.2));
+  cursor: pointer;
 `;

@@ -58,7 +58,19 @@ a{
   text-decoration:none;
   color:inherit;
 }
-*{
+*::-webkit-scrollbar {
+    width: 8px;  /* 스크롤바의 너비 */
+}
+*::-webkit-scrollbar-thumb {
+    height: 30%; /* 스크롤바의 길이 */
+    background: gray; /* 스크롤바의 색상 */
+    border-radius: 10px;
+}
+*::-webkit-scrollbar-track {
+    background: rgba(33, 122, 244, .1);  /*스크롤바 뒷 배경 색상*/
+}
+*::-webkit-scrollbar-corner{
+	background: transparent;
 }
 .ql-align-right{
 	display: flex;
