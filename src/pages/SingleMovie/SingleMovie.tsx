@@ -15,8 +15,6 @@ import { ILoginState } from "@interfaces/loginState";
 import { keywordsMap } from "./keywords";
 
 export default function SingleMovie() {
-  const infoList = ["장르", "개요", "개봉", "감독", "출연"];
-
   const { movieId } = useParams();
   const { data: singleMovie } = useQuery<ISingleMovie>({
     queryKey: ["movie", movieId],
