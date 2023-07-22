@@ -10,3 +10,8 @@ export interface IComment {
   commentText: string;
   createDate: string;
 }
+
+export interface IMutateComment {
+  reviewId: number;
+  commentText: string;
+}

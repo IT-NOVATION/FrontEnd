@@ -30,6 +30,7 @@ export const router = createBrowserRouter([
       },
       { path: "entireMovie", element: <EntireMovie /> },
       { path: "movietalk", element: <MovieTalk /> },
+      { path: "singleMovie/:movieId", element: <SingleMovie /> },
       {
         path: "movieLog/:userId",
         element: <MovieLog />,

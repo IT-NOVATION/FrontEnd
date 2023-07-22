@@ -12,4 +12,5 @@ export const CommentText = styled.div`
   font-weight: 300;
   color: ${theme.colors.lightBlack};
   line-height: 1.6;
+  white-space: pre-line;
 `;
