@@ -26,6 +26,8 @@ export interface IReadReviewLoginUser {
   pushedReviewLike?: boolean;
 }
 export interface IMovieTalkUser extends IUserBase {
+  isMyProfile: boolean;
+  isNowUserFollowThisUser: boolean;
   profileImg: string;
   nickName: string;
   introduction: string;

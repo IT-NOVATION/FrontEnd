@@ -1,7 +1,7 @@
 import { baseApi } from "./instance";
 
 const BEST_REVIEWS_URI = "/today/bestReview";
-const POPULAR_USERS_URI = "/test/today/popularUser";
+const POPULAR_USERS_URI = "/today/popularUser";
 const LATEST_REVIEWS_URI = "/today/latestReview";
 
 export const MovieTalkApi = {
