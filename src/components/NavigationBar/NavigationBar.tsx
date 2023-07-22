@@ -37,7 +37,7 @@ export default function NavigationBar() {
   };
 
   const goToFilm = async () => {
-    navigate("/film");
+    navigate("/movie-search");
   };
 
   const goToMovieTalk = () => {
