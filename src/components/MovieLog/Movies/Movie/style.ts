@@ -31,6 +31,7 @@ export const MinusBtn = styled.button`
   align-items: center;
   justify-content: center;
   margin-right: 9px;
+  cursor: pointer;
 `;
 export const MinusBox = styled.div`
   width: 22px;
