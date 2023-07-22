@@ -153,32 +153,32 @@ export default function SingleMovie() {
                                             </S.InfoWrapper>
 
                                             <S.DetailInfoWrapper>
-                                                <Block.RowBox width="100%" height="100%">
+                                                <Block.RowBox width="100%" height="20px">
                                                     <Text.Body6 color="white">
                                                         {singleMovie.movie.movieGenre}
                                                     </Text.Body6>
                                                 </Block.RowBox>
 
-                                                <Block.RowBox width="100%" height="100%">
+                                                <Block.RowBox width="100%" height="20px">
                                                     <Text.Body6 color="white">
                                                         {/* {singleMovie.movie.movieAge} | {" "} 관람등급 매끄럽게 가져올 수 있을 때 추가  */}
                                                         {singleMovie.movie.movieRunningTime}분
                                                     </Text.Body6>
                                                 </Block.RowBox>
 
-                                                <Block.RowBox width="100%" height="100%">
+                                                <Block.RowBox width="100%" height="20px">
                                                     <Text.Body6 color="white">
                                                         {singleMovie.movie.movieReleasedDate.replaceAll("-", ".")}
                                                     </Text.Body6>
                                                 </Block.RowBox>
 
-                                                <Block.RowBox width="100%" height="100%">
+                                                <Block.RowBox width="100%" height="20px">
                                                     <Text.Body6 color="white">
                                                         {singleMovie.movie.movieDirector}
                                                     </Text.Body6>
                                                 </Block.RowBox>
 
-                                                <Block.RowBox width="100%" height="100%">
+                                                <Block.RowBox width="100%" height="20px">
                                                     <Text.Body6 color="white">
                                                         {singleMovie.movie.movieActor}
                                                     </Text.Body6>
