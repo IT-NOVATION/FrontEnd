@@ -22,14 +22,20 @@ export const ReviewDataContext = createContext<{
 function WriteReview() {
   const navigate = useNavigate();
   const { movieId } = useParams();
-  const { data: movieInfo } = useQuery<IWriteReviewMovie>({
+  const { data: movieInfo, isError } = useQuery<IWriteReviewMovie>({
     queryKey: ["movie"],
     queryFn: async () => await WriteReviewApi.movieInfo(Number(movieId)),
+    retry: false,
   });
-
+  const handleError = () => {
+    alert("이미 작성한 리뷰입니다");
+    navigate(-1);
+  };
   const { mutateAsync: mutateReview } = useMutation(() => {
     return WriteReviewApi.mutateReview(reviewData);
   });
+
+  isError && handleError();
 
   const handleTitleChange = (e: React.ChangeEvent<HTMLInputElement>) =>
     setReviewData({ ...reviewData, reviewTitle: e.currentTarget.value });

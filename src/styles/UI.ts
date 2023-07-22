@@ -121,6 +121,16 @@ export const Text = {
     line-height: ${(props) => props.lineHeight};
     cursor: ${(props) => props.pointer && "pointer"};
   `,
+  Body7: styled.div<StyleText>`
+    font-weight: 500;
+    font-size: 14px;
+    white-space: pre-line;
+    margin: ${(props) => props.margin};
+    color: ${({ color }) => (color ? theme.colors[color] : theme.colors)};
+    display: inline-block;
+    line-height: ${(props) => props.lineHeight};
+    cursor: ${(props) => props.pointer && "pointer"};
+  `,
 };
 //${({ color, theme }) => (color ? theme.colors[color] : theme.colors.black)};
 
@@ -343,8 +353,8 @@ export const Block = {
     margin: ${(props) => props.margin};
   `,
   ModalBox: styled.div<StyleBlock>`
-    width: 420px;
-    height: 168px;
+    width: ${(props) => (props.width ? props.width : "420px")};
+    height: ${(props) => (props.height ? props.height : "168px")};
     background-color: white;
     z-index: 100;
     border-radius: 20px;

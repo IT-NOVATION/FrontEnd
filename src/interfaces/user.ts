@@ -49,3 +49,7 @@ export interface IMutateProfileUpdate {
   profileImg: string;
   bgImg: string;
 }
+export interface ICommentUser extends IUserBase {
+  nickname: string;
+  profileImg: string;
+}

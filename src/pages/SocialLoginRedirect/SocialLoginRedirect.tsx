@@ -12,7 +12,7 @@ function SocialLoginRedirect() {
       localStorage.setItem("refreshToken", refreshToken);
     }
     queryClient.invalidateQueries();
-    navigate("/");
+    navigate(-1);
   }, []);
   return <></>;
 }
