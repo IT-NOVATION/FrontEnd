@@ -1,7 +1,7 @@
 import { baseApi } from "./instance";
 
-const GET_MOVIE_RESULT_URI = "/single/movie";
-const GET_USER_RESULT_URI = "/single/user";
+const GET_MOVIE_RESULT_URI = "/search/movie";
+const GET_USER_RESULT_URI = "/search/user";
 
 export const SearchResultApi = {
     getMovieResult: async (movieNm: string) =>
