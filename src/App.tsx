@@ -4,27 +4,22 @@ import NavigationBar from "@components/NavigationBar/NavigationBar";
 import { useQuery } from "@tanstack/react-query";
 import { AccountApi } from "@apis/accountApi";
 import { ILoginState } from "@interfaces/loginState";
-import { useSetRecoilState } from "recoil";
-import { loginStateAtom } from "@recoil/loginStateAtom";
 import { Suspense } from "react";
-import Loading from "@components/Home/Loading/Loading";
 
 function App() {
-  const setLoginState = useSetRecoilState(loginStateAtom);
   useQuery<ILoginState>({
     queryKey: ["loginState"],
-    queryFn: async () => {
-      const data = await AccountApi.loginState();
-      setLoginState(data);
-      return data;
-    },
+    queryFn: async () => await AccountApi.loginState(),
+    suspense: true,
   });
 
   return (
     <>
-      <NavigationBar />
+      <Suspense fallback={<></>}>
+        <NavigationBar />
+      </Suspense>
       <Modal />
-      <Suspense fallback={<Loading />}>
+      <Suspense fallback={<></>}>
         <Outlet />
       </Suspense>
     </>

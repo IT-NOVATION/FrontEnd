@@ -13,6 +13,7 @@ export const ContentLabel = styled.div<{ selected: boolean }>`
     ${({ selected }) => (selected ? theme.colors.gray : "#F5F5F7")};
   cursor: pointer;
 `;
+
 export const Background = styled.div`
   width: 100vw;
   height: 100vh;

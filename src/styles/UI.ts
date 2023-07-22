@@ -59,6 +59,7 @@ export const Text = {
     margin: ${(props) => props.margin};
     color: ${({ color }) => (color ? theme.colors[color] : theme.colors)};
     line-height: ${(props) => props.lineHeight};
+    cursor: ${(props) => props.pointer && "pointer"};
   `,
   Body1: styled.div<StyleText>`
     font-weight: 400;
@@ -317,6 +318,7 @@ export const Block = {
     position: ${(props) => props.position};
     box-shadow: ${(props) => props.boxShadow};
     padding: ${(props) => props.padding};
+    gap: ${(props) => props.gap};
   `,
   AbsoluteBox: styled.div<StyleBlock>`
     width: ${(props) => (props.width ? props.width : "100%")};
@@ -328,6 +330,9 @@ export const Block = {
     bottom: ${(props) => props.bottom};
     left: ${(props) => props.left};
     z-index: ${(props) => props.zIndex};
+    background-color: ${(props) => props.bgColor};
+    border-radius: ${(props) => props.borderRadius};
+    border: ${(props) => props.border};
   `,
   Bar: styled.div<StyleBlock>`
     width: ${(props) => props.width};

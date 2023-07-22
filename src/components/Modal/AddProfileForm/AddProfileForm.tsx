@@ -12,6 +12,7 @@ function AddProfileForm() {
     register,
     handleSubmit,
     trigger,
+    setError,
     formState: { errors },
     watch,
   } = useForm<IAccountInfo>({
@@ -37,7 +38,7 @@ function AddProfileForm() {
       alert("It's Movie Time의 회원이 되신 걸 축하드립니다!");
       setModalState(ModalState.Off);
     } catch (error) {
-      alert("이미 사용중인 닉네임입니다.");
+      setError("nickname", { message: "이미 사용중인 닉네임입니다." });
     }
   };
   return (
