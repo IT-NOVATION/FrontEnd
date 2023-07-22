@@ -353,8 +353,8 @@ export const Block = {
     margin: ${(props) => props.margin};
   `,
   ModalBox: styled.div<StyleBlock>`
-    width: 420px;
-    height: 168px;
+    width: ${(props) => (props.width ? props.width : "420px")};
+    height: ${(props) => (props.height ? props.height : "168px")};
     background-color: white;
     z-index: 100;
     border-radius: 20px;

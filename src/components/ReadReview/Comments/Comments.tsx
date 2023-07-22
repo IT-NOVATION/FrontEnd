@@ -1,7 +1,7 @@
 import * as S from "./style";
 import { ReadReviewApi } from "@apis/readReviewApi";
 import { IComments } from "@interfaces/comments";
-import { Block, Text } from "@styles/UI";
+import { Block, Button, Text } from "@styles/UI";
 import {
   InfiniteData,
   useInfiniteQuery,
@@ -11,10 +11,10 @@ import Comment from "./Comment/Comment";
 import CommentInput from "./CommentInput/CommentInput";
 import CommentPage from "./CommentPage/CommentPage";
 import { useEffect, useState } from "react";
+import theme from "@styles/theme";
 
 export default function Comments({ reviewId }: { reviewId: number }) {
   const queryClient = useQueryClient();
-  const [scrollLoc, setScrollLoc] = useState(window.scrollY);
   const { data, fetchNextPage, hasNextPage } = useInfiniteQuery<IComments>({
     queryKey: ["comments", reviewId],
     queryFn: ({ pageParam = 1 }) =>
@@ -43,7 +43,7 @@ export default function Comments({ reviewId }: { reviewId: number }) {
       <Block.ColumnBox margin="13px 0 0 0">
         <Block.RowBox margin="0 0 10px 0">
           <Text.Body4 margin="0 0 0 3px" color="lightBlack">
-            댓글 21
+            댓글 {data?.pages[0].totalCommentCount}
           </Text.Body4>
         </Block.RowBox>
         {hasNextPage && (
