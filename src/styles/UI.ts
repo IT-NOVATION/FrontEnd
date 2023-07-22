@@ -342,6 +342,37 @@ export const Block = {
       bgColor ? theme.colors[bgColor] : theme.colors};
     margin: ${(props) => props.margin};
   `,
+  ModalBox: styled.div<StyleBlock>`
+    width: 420px;
+    height: 168px;
+    background-color: white;
+    z-index: 100;
+    border-radius: 20px;
+    border: 0.7px solid #ccc;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+    padding: 33px 0 0 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  `,
+  ModalLayout: styled.div<StyleBlock>`
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    z-index: 99;
+    top: 0;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  `,
+  ModalBg: styled.div<StyleBlock>`
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+  `,
 };
 
 //영화 포스터
