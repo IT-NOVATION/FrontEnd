@@ -8,23 +8,23 @@ import Loading from "@components/Home/Loading/Loading";
 import { Suspense } from "react";
 
 function App() {
-  useQuery<ILoginState>({
-    queryKey: ["loginState"],
-    queryFn: async () => await AccountApi.loginState(),
-    suspense: true,
-  });
+    useQuery<ILoginState>({
+        queryKey: ["loginState"],
+        queryFn: async () => await AccountApi.loginState(),
+        suspense: true,
+    });
 
-  return (
-    <>
-      <Suspense fallback={<Loading />}>
-        <NavigationBar />
-      </Suspense>
-      <Modal />
-      <Suspense fallback={<Loading />}>
-        <Outlet />
-      </Suspense>
-    </>
-  );
+    return (
+        <>
+            <Suspense fallback={<Loading />}>
+                <NavigationBar />
+            </Suspense>
+            <Modal />
+            <Suspense fallback={<Loading />}>
+                <Outlet />
+            </Suspense>
+        </>
+    );
 }
 
 export default App;
