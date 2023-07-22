@@ -41,7 +41,7 @@ export default function Comments({ reviewId }: { reviewId: number }) {
   return (
     <>
       <Block.ColumnBox margin="13px 0 0 0">
-        <Block.RowBox>
+        <Block.RowBox margin="0 0 10px 0">
           <Text.Body4 margin="0 0 0 3px" color="lightBlack">
             댓글 21
           </Text.Body4>

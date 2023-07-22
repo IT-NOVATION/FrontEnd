@@ -1,3 +1,5 @@
+import { ICommentUser } from "./user";
+
 export interface IComments {
   lastPage: number;
   firstPage: number;
@@ -9,6 +11,7 @@ export interface IComment {
   commentId: number;
   commentText: string;
   createDate: string;
+  commentUserInfo: ICommentUser;
 }
 
 export interface IMutateComment {
