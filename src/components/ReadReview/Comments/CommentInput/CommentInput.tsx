@@ -6,9 +6,11 @@ import { ModalState, modalStateAtom } from "@recoil/modalAtom";
 import { Block, Text } from "@styles/UI";
 import theme from "@styles/theme";
 import { useQueryClient } from "@tanstack/react-query";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useSetRecoilState } from "recoil";
 import { useParams } from "react-router-dom";
+
+const MAX_COMMENT_LENGTH = 500;
 
 export default function CommentInput() {
   const { reviewId } = useParams();
@@ -22,7 +24,13 @@ export default function CommentInput() {
   const handleBoxClick = () => {
     !loginState?.loginState && setModalState(ModalState.LoginForm);
   };
+  const handleMaxLengthOver = () => {
+    alert("댓글 500자 이내로 작성 부탁드립니다.");
+  };
   const handleMutateComment = async () => {
+    if (value.length > MAX_COMMENT_LENGTH) {
+      return handleMaxLengthOver();
+    }
     if (loginState?.loginState) {
       try {
         await ReadReviewApi.mutateComment({
@@ -67,7 +75,7 @@ export default function CommentInput() {
       <Block.AbsoluteBox width="auto" bottom="20px" right="35px">
         <Block.RowBox alignItems="center">
           <Text.Body7 color="lightGray" margin="0 12px 0 0">
-            {value.length}/500
+            {value.length}/{MAX_COMMENT_LENGTH}
           </Text.Body7>
           <S.Icon
             disabled={!loginState?.loginState}
