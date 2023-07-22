@@ -1,11 +1,4 @@
-import { IReviewPreview } from "./review";
-
-export enum Grade {
-  "STANDARD",
-  "PREMIUM",
-  "VIP",
-  "SPECIAL",
-}
+import { IMovieTalkReview, IReviewPreview } from "./review";
 
 export interface IUserBase {
   userId: number;
@@ -32,6 +25,21 @@ export interface IReadReviewLoginUser {
   pushedFollow: boolean;
   pushedReviewLike?: boolean;
 }
+export interface IMovieTalkUser extends IUserBase {
+  isMyProfile: boolean;
+  isNowUserFollowThisUser: boolean;
+  profileImg: string;
+  nickName: string;
+  introduction: string;
+  reviews: IMovieTalkReview[];
+}
+
+export enum Grade {
+  "STANDARD",
+  "PREMIUM",
+  "VIP",
+  "SPECIAL",
+}
 export interface IMovieLogUser extends IUserBase {
   bgImg?: string;
   nickname: string;
@@ -48,4 +56,8 @@ export interface IMutateProfileUpdate {
   introduction: string;
   profileImg: string;
   bgImg: string;
+}
+export interface ICommentUser extends IUserBase {
+  nickname: string;
+  profileImg: string;
 }

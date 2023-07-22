@@ -5,6 +5,7 @@ import { AiFillStar } from "react-icons/ai";
 import { IPopularMovie, IRecommendedMovie } from "@interfaces/movies";
 import cutMovieTitle from "@utils/cutMovieTitle";
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
 type Props = {
   movie: IPopularMovie | IRecommendedMovie;
@@ -14,12 +15,16 @@ type Props = {
 };
 
 function Poster({ movie, rank, loadingFinished, onLoad }: Props) {
+  const navigate = useNavigate();
   const [hovered, setHovered] = useState(false);
   const handleMouseEnter = () => {
     setHovered(true);
   };
   const handleMouseLeave = () => {
     setHovered(false);
+  };
+  const handleDetailClick = () => {
+    navigate(`/singleMovie/${movie.movieId}`);
   };
   return (
     <>
@@ -45,18 +50,13 @@ function Poster({ movie, rank, loadingFinished, onLoad }: Props) {
             >
               <Text.Body3 color="white">평점 </Text.Body3>{" "}
               <AiFillStar color="#F8B319" />{" "}
-              <Text.Body3 color="white">{movie.starScore}</Text.Body3>
+              <Text.Body3 color="white">
+                {movie.starScore.toFixed(1)}
+              </Text.Body3>
             </Block.RowBox>
-            <Button.Button
-              margin="90px 0 0 0"
-              bgColor="lightBlack"
-              width="135px"
-              height="55px"
-              borderRadius="15px"
-              backdropFilter="blur(5px)"
-            >
+            <S.DetailBtn onClick={handleDetailClick}>
               <Text.Body3 color="white">상세정보</Text.Body3>
-            </Button.Button>
+            </S.DetailBtn>
           </S.HoveredPoster>
         )}
         <S.Rank>{rank}</S.Rank>

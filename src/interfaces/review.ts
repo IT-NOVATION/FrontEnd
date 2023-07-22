@@ -1,19 +1,22 @@
-import { IReadReviewMovie } from "./movies";
+import { IMovieTalkMovie, IReadReviewMovie } from "./movies";
+import { IReviewAndUserInfo } from "./singleMovie";
 import { IReadReviewLoginUser, IReadReviewUser } from "./user";
 
 export interface IReviewPreview {
   reviewId: number;
   reviewTitle: string;
-  star: number;
+  star?: number;
+  starScore?: number;
   reviewMainText: string;
   createdDate: string;
   reviewLikeCount: number;
   hasSpoiler: boolean;
-  movie: {
+  movie?: {
     movieId: number;
     movieImg: string;
   };
 }
+
 export interface IMovieLogReviewPreview {
   reviewId: number;
   reviewTitle: string;
@@ -74,4 +77,10 @@ export interface IReadReview {
   movie: IReadReviewMovie;
   user: IReadReviewUser;
   loginUser: IReadReviewLoginUser;
+}
+
+export interface IMovieTalkReview {
+  reviewId: number;
+  reviewTitle: string;
+  movie: IMovieTalkMovie;
 }
