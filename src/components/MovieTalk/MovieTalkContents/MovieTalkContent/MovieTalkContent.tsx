@@ -2,6 +2,7 @@ import * as S from "./style";
 import ProfileImg from "@components/User/ProfileImg/ProfileImg";
 import { Block, Button, Text } from "@styles/UI";
 import { IMovieTalkUser } from "@interfaces/user";
+import FollowBtn from "@components/FollowBtn/FollowBtn";
 
 function MovieTalkContent({ content }: { content: IMovieTalkUser }) {
   const handleReviewClick = (reviewId: number) => {
@@ -23,15 +24,12 @@ function MovieTalkContent({ content }: { content: IMovieTalkUser }) {
           <Text.Title4 pointer onClick={() => handleUserClick(content.userId)}>
             {content.nickName}
           </Text.Title4>
-          <Button.Button
-            width="94px"
-            height="33px"
-            border="1px solid #CCC"
-            borderRadius="16.5px"
-            bgColor="white"
-          >
-            <Text.Body4 color="lightBlack">팔로우 하기</Text.Body4>
-          </Button.Button>
+          {!content.isMyProfile && (
+            <FollowBtn
+              isFollowing={content.isNowUserFollowThisUser}
+              userId={String(content.userId)}
+            />
+          )}
         </Block.RowBox>
         <Block.RowBox margin="24px 0 0 0" alignItems="center">
           <Text.Body3 lineHeight="1.2" color="lightBlack">

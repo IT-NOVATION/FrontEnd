@@ -5,14 +5,14 @@ import styled from "styled-components";
 export const PageTitle = styled.h1`
   font-size: 64px;
   font-weight: 500;
-  color: ${theme.colors.main};
+  color: #323232;
 `;
 
 export const GoWriteReviewBox = styled.div`
   width: 100vw;
   height: 85px;
   position: absolute;
-  top: 260px;
+  top: 305px;
   left: 0;
   display: flex;
   justify-content: center;

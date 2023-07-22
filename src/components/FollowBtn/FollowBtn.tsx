@@ -1,6 +1,4 @@
-import { useRecoilValue } from "recoil";
 import * as S from "./style";
-import { Button } from "@styles/UI";
 import { useQueryClient } from "@tanstack/react-query";
 import { MovieLogApi } from "@apis/movieLogApi";
 import { ILoginState } from "@interfaces/loginState";
@@ -16,7 +14,7 @@ export default function FollowBtn({ isFollowing, userId }: Props) {
     await MovieLogApi.follow({
       targetUserId: Number(userId),
     });
-    await queryClient.invalidateQueries(["movieLog"]);
+    await queryClient.invalidateQueries();
   };
 
   const loginState = queryClient.getQueryData<ILoginState>(["loginState"]);

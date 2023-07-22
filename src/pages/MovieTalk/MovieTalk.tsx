@@ -10,7 +10,7 @@ export default function MovieTalk() {
   const [contents, setContents] = useState<ContentsType>("BestReviews");
   const navigate = useNavigate();
   const handleGoWriteReview = () => {
-    // 영화 조회 페이지로 이동...
+    navigate("/movie-search");
   };
   const checkSelected = (selected: ContentsType) => {
     if (contents === selected) return true;
@@ -25,9 +25,11 @@ export default function MovieTalk() {
         <Block.RowBox margin="117px 0 0 0">
           <S.PageTitle>오늘의 무비토크</S.PageTitle>
         </Block.RowBox>
-        <Block.RowBox margin="22px 0 0 0 ">
-          <Text.Title4 color="lightBlack">
-            매일 좋은 리뷰를 쓰는 잇츠무비타임의 베스트 유저들을 소개합니다.
+        <Block.RowBox margin="20px 0 0 0 ">
+          <Text.Title4 lineHeight="1.4" color="lightBlack">
+            잇츠무비타임의 무비스타를 소개합니다.{"\n"}
+            무비토크는 다양한 취향을 가진 유저들을 만나고, 리뷰를 읽을 수 있는
+            공간입니다.
           </Text.Title4>
         </Block.RowBox>
         <S.GoWriteReviewBox>
@@ -59,16 +61,16 @@ export default function MovieTalk() {
             베스트 리뷰
           </S.ContentLabel>
           <S.ContentLabel
-            onClick={() => handleLabelClick("PopularUsers")}
-            selected={checkSelected("PopularUsers")}
-          >
-            팔로워 인기
-          </S.ContentLabel>
-          <S.ContentLabel
             onClick={() => handleLabelClick("Updates")}
             selected={checkSelected("Updates")}
           >
-            NEW 업데이트
+            최신 리뷰
+          </S.ContentLabel>
+          <S.ContentLabel
+            onClick={() => handleLabelClick("PopularUsers")}
+            selected={checkSelected("PopularUsers")}
+          >
+            인기 유저
           </S.ContentLabel>
         </Block.RowBox>
         <Block.ColumnBox margin="25px 0 0 0">

@@ -12,7 +12,7 @@ import ReviewPreviews from "@components/ReviewPreviews/ReviewPreviews";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { IMovieLogData } from "@interfaces/movieLog";
 import Badge from "@components/User/Badge/Badge";
-import FollowBtn from "@pages/FollowBtn/FollowBtn";
+import FollowBtn from "@components/FollowBtn/FollowBtn";
 import { ILoginState } from "@interfaces/loginState";
 
 type ContentType = "Reviews" | "InterestedMovies";
