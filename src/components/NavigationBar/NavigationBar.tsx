@@ -37,7 +37,7 @@ export default function NavigationBar() {
   };
 
   const goToFilm = async () => {
-    navigate("/film");
+    navigate("/movie-search");
   };
 
   const goToMovieTalk = () => {
@@ -57,7 +57,6 @@ export default function NavigationBar() {
     const prev = position;
     window.addEventListener("scroll", () => {
       setPosition(window.scrollY);
-      console.log(prev, window.scrollY);
       if (prev > window.scrollY) {
         setIsVisible(true);
       } else {
