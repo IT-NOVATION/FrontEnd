@@ -23,4 +23,4 @@ export default function SearchResult() {
     );
 }
 
-// 기본적으로 영화가 보여지기
+// 영화결과, 유저결과 가져와서 뿌려주기만 하는 곳
