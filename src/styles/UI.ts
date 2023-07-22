@@ -121,6 +121,16 @@ export const Text = {
     line-height: ${(props) => props.lineHeight};
     cursor: ${(props) => props.pointer && "pointer"};
   `,
+  Body7: styled.div<StyleText>`
+    font-weight: 500;
+    font-size: 14px;
+    white-space: pre-line;
+    margin: ${(props) => props.margin};
+    color: ${({ color }) => (color ? theme.colors[color] : theme.colors)};
+    display: inline-block;
+    line-height: ${(props) => props.lineHeight};
+    cursor: ${(props) => props.pointer && "pointer"};
+  `,
 };
 //${({ color, theme }) => (color ? theme.colors[color] : theme.colors.black)};
 
