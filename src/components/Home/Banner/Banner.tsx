@@ -5,8 +5,9 @@ import { Block } from "@styles/UI";
 
 const IMG = [
   "/images/banners/banner1.png",
-  "https://c.wallhere.com/photos/76/71/bridge_canon_michael_long_exposure_5d_boyet_1740mml-619369.jpg!d",
-  "https://c.wallhere.com/photos/fe/a6/lugo_galicia_espa_a_spain_marina_seascape_mar_airelibre-528469.jpg!d",
+  "/images/banners/banner2.png",
+  "/images/banners/banner3.png",
+  "/images/banners/banner4.png",
 ];
 
 export default function Banner() {
@@ -15,29 +16,26 @@ export default function Banner() {
 
   const handleIndicatorClick = (idx: number) => {
     const prev = slide;
-    if (prev === 0) {
-      if (idx === 1) setDirection(1);
-      if (idx === 2) setDirection(-1);
-    }
-    if (prev === 1) {
-      if (idx === 0) setDirection(-1);
-      if (idx === 2) setDirection(1);
-    }
-    if (prev === 2) {
-      if (idx === 0) setDirection(1);
-      if (idx === 1) setDirection(-1);
+    if (prev === 0 && idx === 3) {
+      setDirection(-1);
+    } else if (prev === 3 && idx === 0) {
+      setDirection(1);
+    } else if (prev < idx) {
+      setDirection(1);
+    } else {
+      setDirection(-1);
     }
     setSlide(idx);
   };
 
   useEffect(() => {
     setDirection(1);
-    // const timer = setInterval(() => {
-    //   setSlide((prev) => (prev === IMG.length - 1 ? 0 : prev + 1));
-    // }, 3000);
-    // return () => {
-    //   clearInterval(timer);
-    // };
+    const timer = setInterval(() => {
+      setSlide((prev) => (prev === IMG.length - 1 ? 0 : prev + 1));
+    }, 3000);
+    return () => {
+      clearInterval(timer);
+    };
   }, [slide]);
 
   return (

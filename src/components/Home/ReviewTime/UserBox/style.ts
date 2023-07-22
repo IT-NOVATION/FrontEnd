@@ -15,4 +15,5 @@ export const NicknameBox = styled.div`
   font-weight: 500;
   font-size: 20px;
   text-align: center;
+  cursor: pointer;
 `;
