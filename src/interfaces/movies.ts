@@ -42,3 +42,10 @@ export interface IMovieTalkMovie {
   movieId: number;
   movieImg: string;
 }
+
+export interface IMovieSearchMovie extends IMovieBase {
+  movieImg: string;
+  movieTitle: string;
+  starScore: number;
+  reviewCount: number;
+}
