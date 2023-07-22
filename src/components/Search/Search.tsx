@@ -2,13 +2,9 @@ import { Block, Text } from "@styles/UI";
 import * as S from "./style";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
-import { IMovieResult } from "@interfaces/movieResult";
-import { IUserResult } from "@interfaces/userResult";
-import { useQuery } from "@tanstack/react-query";
 import { SearchResultApi } from "@apis/searchResultApi";
 import { ChangeEvent, KeyboardEvent, useRef } from "react";
 import useHovered from "@hooks/useHovered";
-import { useParams } from "react-router-dom";
 
 import queryString from "query-string";
 
@@ -52,15 +48,11 @@ export default function Search() {
 
     // 유저 검색하고 싶을 때 함수
     const UserRequestCase = (word: string) => {
-        if (word === nickname) console.log("해당 유저 있음");
-        // 입력한 단어 word 가 USER 목록 안에 있다면
-        // SearchResultApi.getUserResult(word);
+        SearchResultApi.getUserResult(word);
     };
 
     const MovieRequestCase = (word: string) => {
-        if (word === movieTitle) console.log("해당 영화 있음");
-        // 입력한 단어 word 가 MOVIE 목록 안에 있다면
-        // SearchResultApi.getMovieResult(word);
+        SearchResultApi.getMovieResult(word);
     };
 
     // 영화 검색하고 싶을 때 함수
@@ -87,19 +79,6 @@ export default function Search() {
             handleSubmit();
         }
     };
-
-    const { nickname } = useParams();
-    const { movieTitle } = useParams();
-
-    const { data: userResult } = useQuery<IUserResult>({
-        queryKey: ["userResult"],
-        queryFn: async () => await SearchResultApi.getUserResult(word),
-    });
-
-    const { data: movieResult } = useQuery<IMovieResult>({
-        queryKey: ["movieResult"],
-        queryFn: async () => await SearchResultApi.getMovieResult(word),
-    });
 
     const query = queryString.parse(window.location.search);
 
