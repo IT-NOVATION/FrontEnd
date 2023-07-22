@@ -27,7 +27,7 @@ function Movie({ movie }: { movie: IInterstedMovie }) {
     await queryClient.invalidateQueries(["movieLog", userId]);
   };
   const handleGoReadReview = () => {
-    // navigate("/")
+    navigate(`/review/${movie.reviewId}`);
   };
   const handleGoWriteReview = () => {
     navigate(`/write-review/${movie.movieId}`);
