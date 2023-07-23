@@ -7,7 +7,7 @@ import Badge from "@components/User/Badge/Badge";
 export default function UserInfo({ user }: { user: IReadReviewUser }) {
   return (
     <S.Layout>
-      <S.Banner>
+      <S.Banner img={user.bgImg}>
         <Block.ColumnBox position="relative" width="900px" height="100%">
           <Block.AbsoluteBox width="auto" top="-38px" right="0">
             <ProfileImg img={user.profileImg} size="130px" />

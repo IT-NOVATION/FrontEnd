@@ -23,6 +23,7 @@ export default function ReadReview() {
     suspense: true,
   });
   const { fullStar, halfStar } = useCalcStar(reviewData?.review.star as number);
+
   return (
     <Block.PageWrapper position="relative">
       <Block.PageLayout>

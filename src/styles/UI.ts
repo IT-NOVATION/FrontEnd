@@ -375,6 +375,7 @@ export const Block = {
     display: flex;
     justify-content: center;
     align-items: center;
+    background-attachment: fixed;
   `,
   ModalBg: styled.div<StyleBlock>`
     width: 100vw;

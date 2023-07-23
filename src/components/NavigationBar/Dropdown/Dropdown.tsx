@@ -15,10 +15,10 @@ export default function Dropdown({
   const queryClient = useQueryClient();
   const handleBackgroundClick = () => setDropdownOn(false);
   const handleLogout = async () => {
-    localStorage.removeItem("accessToken");
-    localStorage.removeItem("refreshToken");
     await AccountApi.logout();
     await queryClient.invalidateQueries();
+    localStorage.removeItem("accessToken");
+    localStorage.removeItem("refreshToken");
     window.location.reload();
     setDropdownOn(false);
   };

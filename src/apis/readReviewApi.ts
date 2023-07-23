@@ -1,4 +1,3 @@
-import { IMutateReview } from "@interfaces/review";
 import { baseApi } from "./instance";
 import { IMutateComment } from "@interfaces/comments";
 
@@ -7,6 +6,7 @@ const PUSH_REVIEW_LIKE_URI = "/push/reviewlike";
 const GET_COMMENTS_URI = "/comment/read";
 const MUTATE_COMMENT_URI = "/comment/write";
 const DELETE_COMMENT_URI = "/comment/delete";
+const GET_LIKE_USER_URI = "/review/Info/likeUser";
 export const ReadReviewApi = {
   getReview: async (reviewId: number) =>
     await baseApi.get(GET_REVIEW_URI + reviewId).then((res) => res.data),
@@ -24,4 +24,6 @@ export const ReadReviewApi = {
     await baseApi
       .get(DELETE_COMMENT_URI + "/" + commentId)
       .then((res) => res.data),
+  getLikeList: async (reviewId: number) =>
+    baseApi.get(GET_LIKE_USER_URI + "/" + reviewId).then((res) => res.data),
 };
