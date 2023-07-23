@@ -4,6 +4,9 @@ import { Block, Button, Text } from "@styles/UI";
 import theme from "@styles/theme";
 import { useState } from "react";
 import { useQueryClient } from "@tanstack/react-query";
+import useLoginState from "@hooks/useLoginState";
+import { useSetRecoilState } from "recoil";
+import { ModalState, modalStateAtom } from "@recoil/modalAtom";
 
 type Props = {
   reviewId: number;
@@ -17,8 +20,10 @@ export default function Like({
   reviewLikeNum,
 }: Props) {
   const queryClient = useQueryClient();
+  const setModalState = useSetRecoilState(modalStateAtom);
+  const { loginState, userId } = useLoginState();
   const [activateAni, setActivateAni] = useState(false);
-  const handleLikeClick = async () => {
+  const mutateLike = async () => {
     try {
       await ReadReviewApi.pushReviewLike(reviewId);
       await queryClient.invalidateQueries(["review", `${reviewId}`]);
@@ -26,8 +31,13 @@ export default function Like({
     } catch (error) {
       console.log(error);
     }
-
-    //좋아요 누르기 처리..
+  };
+  const handleLikeClick = async () => {
+    if (!loginState) {
+      setModalState(ModalState.LoginForm);
+    } else {
+      await mutateLike();
+    }
   };
   const handleViewLikeList = () => {
     // 좋아요 누른 사람들의 목록 보여주기
