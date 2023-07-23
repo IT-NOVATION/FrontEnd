@@ -3,13 +3,17 @@ import ProfileImg from "@components/User/ProfileImg/ProfileImg";
 import useLoginState from "@hooks/useLoginState";
 import { ILikeListUser } from "@interfaces/user";
 import { Block, Text } from "@styles/UI";
+import { useNavigate } from "react-router-dom";
 
 type Props = {
   user: ILikeListUser;
 };
 
 export default function UserBox({ user }: Props) {
-  const { loginState, userId } = useLoginState();
+  const navigate = useNavigate();
+  const handleNicknameClick = () => {
+    navigate(`/movieLog/${user.userId}`);
+  };
   return (
     <Block.RowBox
       margin="0 0 15px 0"
@@ -18,9 +22,11 @@ export default function UserBox({ user }: Props) {
     >
       <Block.RowBox alignItems="center">
         <ProfileImg img={user.profileImg} size="45px" />
-        <Text.Body4 margin="0 0 0 9px">{user.nickname}</Text.Body4>
+        <Text.Body4 pointer onClick={handleNicknameClick} margin="0 0 0 9px">
+          {user.nickname}
+        </Text.Body4>
       </Block.RowBox>
-      {userId !== user.userId && (
+      {!user.isMyProfile && (
         <FollowBtn
           isFollowing={user.isLoginUserFollowed}
           userId={String(user.userId)}

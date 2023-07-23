@@ -20,21 +20,13 @@ export default function LikeList({ setIsLikeListModalOn }: Props) {
   return (
     <Block.ModalLayout>
       <Block.ModalBg onClick={handleBgClick} />
-      <Block.ColumnBox
-        width="355px"
-        height="440px"
-        padding="20px 20px 20px 20px"
-        border="1px solid #F8F8F8"
-        boxShadow="4px 4px 10px 0px rgba(204, 204, 204, 0.47)"
-        bgColor="white"
-        borderRadius="20px"
-        zIndex="2"
-        alignItems="flex-start"
-      >
-        {likeList?.map((v) => (
-          <UserBox key={v.userId} user={v} />
-        ))}
-      </Block.ColumnBox>
+      <S.Modal>
+        <S.ContentsBox>
+          {likeList?.map((v) => (
+            <UserBox key={v.userId} user={v} />
+          ))}
+        </S.ContentsBox>
+      </S.Modal>
     </Block.ModalLayout>
   );
 }
