@@ -62,3 +62,9 @@ export interface ICommentUser extends IUserBase {
   nickname: string;
   profileImg: string;
 }
+export interface ILikeListUser extends IUserBase {
+  isMyProfile: boolean;
+  profileImg: string;
+  nickname: string;
+  isLoginUserFollowed: boolean;
+}
