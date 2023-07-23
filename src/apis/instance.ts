@@ -5,7 +5,7 @@ export const REAL_BASE_URL =
   "http://ec2-43-201-196-249.ap-northeast-2.compute.amazonaws.com:8080/";
 
 const axiosConfig: AxiosRequestConfig = {
-  baseURL: BASE_URL,
+  baseURL: REAL_BASE_URL,
   headers: {
     Authorization: `Bearer ${
       localStorage.getItem("accessToken")

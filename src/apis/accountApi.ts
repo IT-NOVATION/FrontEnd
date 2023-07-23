@@ -1,5 +1,5 @@
 import { IAccountInfo, IFindPassword } from "@interfaces/forms";
-import { BASE_URL, baseApi } from "./instance";
+import { REAL_BASE_URL, baseApi } from "./instance";
 
 const SIGNUP_URI = "/signup";
 const ADD_PROFILE_URI = "/userProfile";
@@ -9,11 +9,9 @@ const CODE_CHECK_URI = "/passwordfind/finalCheck";
 const CHANGE_PW_URI = "/passwordfind/rewritePw";
 const LOGIN_STATE_URI = "/loginState";
 const LOGOUT_URI = "/custom-logout";
-export const GOOGLE_LOGIN_URI =
-  "http://localhost:8080/oauth2/authorization/google";
-export const NAVER_LOGIN_URI =
-  "http://localhost:8080/oauth2/authorization/naver";
-export const KAKAO_LOGIN_URI = `http://localhost:8080/oauth2/authorization/kakao`;
+export const GOOGLE_LOGIN_URI = `${REAL_BASE_URL}/oauth2/authorization/google`;
+export const NAVER_LOGIN_URI = `${REAL_BASE_URL}/oauth2/authorization/naver`;
+export const KAKAO_LOGIN_URI = `${REAL_BASE_URL}/oauth2/authorization/kakao`;
 
 export const AccountApi = {
   signup: async (signupForm: IAccountInfo) =>
