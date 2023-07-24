@@ -47,7 +47,6 @@ table {
 *{
   box-sizing: border-box;
   font-family: "Pretendard";
-
 }
 body{
 	width:100vw;
@@ -80,5 +79,6 @@ a{
 	display: flex;
 	justify-content: center;
 }
+
 `;
 export default GlobalStyle;
