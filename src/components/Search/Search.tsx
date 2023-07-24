@@ -1,12 +1,13 @@
 import { Block, Text } from "@styles/UI";
 import * as S from "./style";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { SearchResultApi } from "@apis/searchResultApi";
 import { ChangeEvent, KeyboardEvent, useRef } from "react";
 import useHovered from "@hooks/useHovered";
-
 import queryString from "query-string";
+import MovieResult from "@components/Search/MovieResult/MovieResult";
+import UserResult from "@components/Search/UserResult/UserResult";
 
 type SearchType = "USER" | "MOVIE";
 
@@ -82,94 +83,107 @@ export default function Search() {
 
     const query = queryString.parse(window.location.search);
 
+    const { pathname } = useLocation();
+
     return (
         <>
-            <Block.ColumnBox width="100%" height="200px" alignItems="center">
-                <S.SearchBox>
-                    {/* {SelectOption 파일 가져온 부분, 여기부터} */}
+            <Block.ColumnBox alignItems="center">
+                <Block.ColumnBox width="100%" height="200px" alignItems="center">
+                    <S.SearchBox>
+                        {/* {SelectOption 파일 가져온 부분, 여기부터} */}
+                        <>
+                            <S.DropdownMenuWrapper onClick={handleShowDropdownMenu}>
+                                {isOpen ? (
+                                    <>
+                                        <S.OpenDropdown>
+                                            <Block.ColumnBox
+                                                height="120px"
+                                                justifyContent="space-evenly"
+                                                alignItems="center"
+                                                bgColor="white"
+                                            >
+                                                <S.HoverMenu
+                                                    isHovered={isMovieHovered}
+                                                    onMouseEnter={handleMovieHover}
+                                                    onMouseLeave={handleMovieLeave}
+                                                    onClick={() => handleSelectOption("MOVIE")}
+                                                >
+                                                    <Text.Body1>영화</Text.Body1>
+                                                </S.HoverMenu>
+                                                <S.HoverMenu
+                                                    isHovered={isUserHovered}
+                                                    onMouseEnter={handleUserHover}
+                                                    onMouseLeave={handleUserLeave}
+                                                    onClick={() => handleSelectOption("USER")}
+                                                >
+                                                    <Text.Body1>유저</Text.Body1>
+                                                </S.HoverMenu>
+                                            </Block.ColumnBox>
+                                        </S.OpenDropdown>
+                                    </>
+                                ) : (
+                                    <Block.RowBox justifyContent="center">
+                                        <Text.Body1>{isSelected === "MOVIE" ? "영화" : "유저"}</Text.Body1>
+                                    </Block.RowBox>
+                                )}
+                                <S.DropBtn onClick={handleShowDropdownMenu}>
+                                    <S.DropdownImg
+                                        src="/icons/dropdown-arrow.svg"
+                                        alt="dropdown-icon"
+                                        onClick={handleShowDropdownMenu}
+                                        onMouseEnter={handleUserHover}
+                                        onMouseLeave={handleUserLeave}
+                                    />
+                                </S.DropBtn>
+                            </S.DropdownMenuWrapper>
+                        </>
+
+                        {/* {SelectOption 파일 가져온 부분, 여기까지} */}
+
+                        <S.SearchInput
+                            placeholder={isSelected === "USER" ? "닉네임을 입력해보세요." : "영화 제목을 입력해보세요."}
+                            onChange={onChange}
+                            ref={inputRef}
+                            onKeyUp={handleKeyPress}
+                        />
+                        <Block.RowBox width="48px" justifyContent="center" alignItems="center">
+                            <S.Icons src="/icons/search_dark.svg" alt="search" onClick={handleSubmit} />
+                        </Block.RowBox>
+                    </S.SearchBox>
+
+                    <Block.RowBox width="850px" height="148px" margin="20px 0 0 0">
+                        <Block.RowBox
+                            width="120px"
+                            height="39px"
+                            bgColor="gray"
+                            borderRadius="20px"
+                            justifyContent="center"
+                            alignItems="center"
+                        >
+                            인기 검색어
+                        </Block.RowBox>
+                        <S.KeywordsWrapper>
+                            {Keywords.map((e, idx) => {
+                                return (
+                                    <S.Keyword>
+                                        <Text.Body2 key={idx} color="darkGray">
+                                            # {e.title}
+                                        </Text.Body2>
+                                    </S.Keyword>
+                                );
+                            })}
+                        </S.KeywordsWrapper>
+                    </Block.RowBox>
+                </Block.ColumnBox>
+
+                {pathname === "/search-result" && (
                     <>
-                        <S.DropdownMenuWrapper onClick={handleShowDropdownMenu}>
-                            {isOpen ? (
-                                <>
-                                    <S.OpenDropdown>
-                                        <Block.ColumnBox
-                                            height="120px"
-                                            justifyContent="space-evenly"
-                                            alignItems="center"
-                                            bgColor="white"
-                                        >
-                                            <S.HoverMenu
-                                                isHovered={isMovieHovered}
-                                                onMouseEnter={handleMovieHover}
-                                                onMouseLeave={handleMovieLeave}
-                                                onClick={() => handleSelectOption("MOVIE")}
-                                            >
-                                                <Text.Body1>영화</Text.Body1>
-                                            </S.HoverMenu>
-                                            <S.HoverMenu
-                                                isHovered={isUserHovered}
-                                                onMouseEnter={handleUserHover}
-                                                onMouseLeave={handleUserLeave}
-                                                onClick={() => handleSelectOption("USER")}
-                                            >
-                                                <Text.Body1>유저</Text.Body1>
-                                            </S.HoverMenu>
-                                        </Block.ColumnBox>
-                                    </S.OpenDropdown>
-                                </>
-                            ) : (
-                                <Block.RowBox justifyContent="center">
-                                    <Text.Body1>{isSelected === "MOVIE" ? "영화" : "유저"}</Text.Body1>
-                                </Block.RowBox>
-                            )}
-                            <S.DropBtn onClick={handleShowDropdownMenu}>
-                                <S.DropdownImg
-                                    src="/icons/dropdown-arrow.svg"
-                                    alt="dropdown-icon"
-                                    onClick={handleShowDropdownMenu}
-                                    onMouseEnter={handleUserHover}
-                                    onMouseLeave={handleUserLeave}
-                                />
-                            </S.DropBtn>
-                        </S.DropdownMenuWrapper>
+                        <Block.Bar width="900px" height="1px" bgColor="gray" />
+
+                        <MovieResult word={word} />
+                        {/* <UserResult word={word} /> */}
                     </>
-
-                    {/* {SelectOption 파일 가져온 부분, 여기까지} */}
-
-                    <S.SearchInput
-                        placeholder={isSelected === "USER" ? "닉네임을 입력해보세요." : "영화 제목을 입력해보세요."}
-                        onChange={onChange}
-                        ref={inputRef}
-                        onKeyUp={handleKeyPress}
-                    />
-                    <Block.RowBox width="48px" justifyContent="center" alignItems="center">
-                        <S.Icons src="/icons/search_dark.svg" alt="search" onClick={handleSubmit} />
-                    </Block.RowBox>
-                </S.SearchBox>
-
-                <Block.RowBox width="850px" height="148px" margin="20px 0 0 0">
-                    <Block.RowBox
-                        width="120px"
-                        height="39px"
-                        bgColor="gray"
-                        borderRadius="20px"
-                        justifyContent="center"
-                        alignItems="center"
-                    >
-                        인기 검색어
-                    </Block.RowBox>
-                    <S.KeywordsWrapper>
-                        {Keywords.map((e, idx) => {
-                            return (
-                                <S.Keyword>
-                                    <Text.Body2 key={idx} color="darkGray">
-                                        # {e.title}
-                                    </Text.Body2>
-                                </S.Keyword>
-                            );
-                        })}
-                    </S.KeywordsWrapper>
-                </Block.RowBox>
+                )}
             </Block.ColumnBox>
         </>
     );
