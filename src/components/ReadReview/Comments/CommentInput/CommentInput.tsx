@@ -9,6 +9,7 @@ import { useQueryClient } from "@tanstack/react-query";
 import React, { useEffect, useState } from "react";
 import { useSetRecoilState } from "recoil";
 import { useParams } from "react-router-dom";
+import { error } from "console";
 
 const MAX_COMMENT_LENGTH = 500;
 
@@ -24,6 +25,9 @@ export default function CommentInput() {
   const handleBoxClick = () => {
     !loginState?.loginState && setModalState(ModalState.LoginForm);
   };
+  const handleNoValue = () => {
+    throw new Error("내용을 입력해주세요.");
+  };
   const handleMaxLengthOver = () => {
     alert("댓글 500자 이내로 작성 부탁드립니다.");
   };
@@ -33,6 +37,9 @@ export default function CommentInput() {
     }
     if (loginState?.loginState) {
       try {
+        if (!value.length) {
+          handleNoValue();
+        }
         await ReadReviewApi.mutateComment({
           reviewId: Number(reviewId),
           commentText: value,
@@ -40,7 +47,7 @@ export default function CommentInput() {
         await queryClient.invalidateQueries(["comments", Number(reviewId)]);
         setValue("");
       } catch (error) {
-        console.log(error);
+        alert(String(error).split("Error:")[1]);
       }
     }
   };
