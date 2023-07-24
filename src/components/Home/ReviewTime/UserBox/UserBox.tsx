@@ -7,8 +7,11 @@ import ReviewPreviews from "@components/ReviewPreviews/ReviewPreviews";
 import { cutIntroText } from "@utils/cutIntroText";
 import { useNavigate } from "react-router-dom";
 import FollowBtn from "@components/FollowBtn/FollowBtn";
+import useLoginState from "@hooks/useLoginState";
+import { ILoginState } from "@interfaces/loginState";
 
 function UserBox({ user }: { user: IReviewTimeUser }) {
+  const { loginState, userId }: ILoginState = useLoginState();
   const navigate = useNavigate();
   const handleNicknameClick = () => {
     navigate(`/movieLog/${user.userId}`);
@@ -49,10 +52,12 @@ function UserBox({ user }: { user: IReviewTimeUser }) {
           </Block.ColumnBox>
         </Block.RowBox>
         <Block.RowBox margin="46px 0 0 0" justifyContent="center">
-          <FollowBtn
-            isFollowing={user.isLoginedUserFollowsNowUser}
-            userId={String(user.userId)}
-          />
+          {userId !== user.userId && (
+            <FollowBtn
+              isFollowing={user.isLoginedUserFollowsNowUser}
+              userId={String(user.userId)}
+            />
+          )}
         </Block.RowBox>
       </Block.ColumnBox>
       <Block.ColumnBox width="840px" margin="37px 0 0 36px">
