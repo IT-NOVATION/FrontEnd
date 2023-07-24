@@ -11,7 +11,31 @@
     />
     <style>
       @import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css");
-      @import url("mobile.css");
+      @media screen and (max-width: 500px) {
+        #mobile {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          text-align: center;
+          position: fixed;
+          top: 30vh;
+          left: 0;
+          width: 100vw;
+          height: 100vh;
+          line-height: 1.6;
+          font-size: 10px;
+         }
+        #root {
+          display: none;
+        }
+}
+
+@media screen and (min-width: 500px) {
+  #mobile {
+    display: none;
+  }
+}
+
     </style>
     <title>It's Movie Time</title>
   </head>
