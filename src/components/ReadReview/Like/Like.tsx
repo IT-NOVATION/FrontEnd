@@ -3,11 +3,12 @@ import * as S from "./style";
 import { Block, Button, Text } from "@styles/UI";
 import theme from "@styles/theme";
 import { useState } from "react";
-import { useQueryClient } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import useLoginState from "@hooks/useLoginState";
 import { useSetRecoilState } from "recoil";
 import { ModalState, modalStateAtom } from "@recoil/modalAtom";
 import LikeList from "./LikeList/LikeList";
+import { IReadReview } from "@interfaces/review";
 
 type Props = {
   reviewId: number;
@@ -20,6 +21,31 @@ export default function Like({
   pushedReviewLike,
   reviewLikeNum,
 }: Props) {
+  const { mutate } = useMutation({
+    mutationFn: () => ReadReviewApi.pushReviewLike(reviewId),
+    onMutate: async () => {
+      // Cancel any outgoing refetches
+      // (so they don't overwrite our optimistic update)
+      await queryClient.cancelQueries({ queryKey: ["review", `${reviewId}`] });
+
+      const prev: IReadReview | undefined = queryClient.getQueryData([
+        "review",
+        `${reviewId}`,
+      ]);
+      const updateData = () => {
+        if (prev?.loginUser.pushedReviewLike) {
+          // 이미 좋아요 누른적이 있는 경우
+        }
+        // ...prev,
+        // review: {
+        //   ...prev?.review,
+        //   reviewLikeNum: (prev?.review.reviewLikeNum as number) + 1,
+        // },
+      };
+
+      queryClient.setQueryData(["review", `${reviewId}`], updateData);
+    },
+  });
   const queryClient = useQueryClient();
   const setModalState = useSetRecoilState(modalStateAtom);
   const { loginState, userId } = useLoginState();
@@ -27,8 +53,7 @@ export default function Like({
   const [isLikeListModalOn, setIsLikeListModalOn] = useState(false);
   const mutateLike = async () => {
     try {
-      await ReadReviewApi.pushReviewLike(reviewId);
-      await queryClient.invalidateQueries(["review", `${reviewId}`]);
+      mutate();
       setActivateAni(true);
     } catch (error) {
       console.log(error);
