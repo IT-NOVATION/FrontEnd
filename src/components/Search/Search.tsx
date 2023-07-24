@@ -8,6 +8,9 @@ import useHovered from "@hooks/useHovered";
 import queryString from "query-string";
 import MovieResult from "@components/Search/MovieResult/MovieResult";
 import UserResult from "@components/Search/UserResult/UserResult";
+import { useQuery } from "@tanstack/react-query";
+import { IMovieResult } from "@interfaces/movieResult";
+import { IUserResult } from "@interfaces/userResult";
 
 type SearchType = "USER" | "MOVIE";
 
@@ -21,9 +24,6 @@ const Keywords = [
 ];
 
 export default function Search() {
-    // 영화나 유저 중 선택 -> input 창에 검색어 입력
-    // 검색 클릭 시 위의 내용 전달하고 그에 대한 정보 요청하기
-
     const navigate = useNavigate();
 
     const [isOpen, setIsOpen] = useState<boolean>(false);
@@ -48,13 +48,19 @@ export default function Search() {
     };
 
     // 유저 검색하고 싶을 때 함수
-    const UserRequestCase = (word: string) => {
-        SearchResultApi.getUserResult(word);
-    };
+    // const UserRequestCase = (word: string) => {
+    //     SearchResultApi.getMovieResult(word);
+    // };
 
-    const MovieRequestCase = (word: string) => {
-        SearchResultApi.getMovieResult(word);
-    };
+    const movieResultData = useQuery<IMovieResult>({
+        queryKey: ["movieResult"],
+        queryFn: async () => await SearchResultApi.getMovieResult(word),
+    });
+
+    const userResultData = useQuery<IUserResult>({
+        queryKey: ["userResult"],
+        queryFn: async () => await SearchResultApi.getMovieResult(word),
+    });
 
     // 영화 검색하고 싶을 때 함수
 
@@ -63,15 +69,6 @@ export default function Search() {
         if (word === "") {
             handleInputEmpty();
             console.log(query);
-        } else {
-            if (isSelected === "USER") {
-                UserRequestCase(word);
-                console.log(query);
-            }
-            if (isSelected === "MOVIE") {
-                MovieRequestCase(word);
-                console.log(query);
-            }
         }
     };
 
@@ -180,8 +177,11 @@ export default function Search() {
                     <>
                         <Block.Bar width="900px" height="1px" bgColor="gray" />
 
-                        <MovieResult word={word} />
-                        {/* <UserResult word={word} /> */}
+                        {isSelected === "MOVIE" ? (
+                            <MovieResult word={word} movieResult={movieResultData} />
+                        ) : (
+                            <UserResult word={word} userResult={userResultData} />
+                        )}
                     </>
                 )}
             </Block.ColumnBox>

@@ -1,6 +1,9 @@
 export interface IMovieResult {
-    movieId: number;
-    movieTitle: string;
-    movieImg: string;
-    star: number;
+    movieSearchResult: {
+        movieId: number;
+        movieTitle: string;
+        movieImg: string;
+        star: number;
+    };
+    totalSize: number;
 }
