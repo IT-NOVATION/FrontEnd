@@ -183,7 +183,7 @@ export const Button = {
     backdrop-filter: ${(props) => props.backdropFilter};
     cursor: pointer;
     &:active {
-      box-shadow: 0 0 0 3px ${theme.colors.main};
+      transform: scale(1.09);
     }
   `,
 };

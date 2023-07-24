@@ -21,30 +21,47 @@ export default function Like({
   pushedReviewLike,
   reviewLikeNum,
 }: Props) {
-  const { mutate } = useMutation({
+  const { mutateAsync: mutateReviewLike, mutate } = useMutation({
     mutationFn: () => ReadReviewApi.pushReviewLike(reviewId),
-    onMutate: async () => {
-      // Cancel any outgoing refetches
-      // (so they don't overwrite our optimistic update)
-      await queryClient.cancelQueries({ queryKey: ["review", `${reviewId}`] });
-
-      const prev: IReadReview | undefined = queryClient.getQueryData([
-        "review",
-        `${reviewId}`,
-      ]);
-      const updateData = () => {
-        if (prev?.loginUser.pushedReviewLike) {
-          // 이미 좋아요 누른적이 있는 경우
-        }
-        // ...prev,
-        // review: {
-        //   ...prev?.review,
-        //   reviewLikeNum: (prev?.review.reviewLikeNum as number) + 1,
-        // },
-      };
-
-      queryClient.setQueryData(["review", `${reviewId}`], updateData);
-    },
+    // onMutate: async () => {
+    //   await queryClient.cancelQueries({ queryKey: ["review", `${reviewId}`] });
+    //   const prev: IReadReview | undefined = queryClient.getQueryData([
+    //     "review",
+    //     `${reviewId}`,
+    //   ]);
+    //   const updateData = () => {
+    //     if (prev?.loginUser.pushedReviewLike) {
+    //       // 이미 좋아요 누른적이 있는 경우
+    //       // 취소한 상황 미리 보여주기
+    //       return {
+    //         ...prev,
+    //         loginUser: {
+    //           ...prev?.loginUser,
+    //           pushedReviewLike: false,
+    //         },
+    //         review: {
+    //           ...prev?.review,
+    //           reviewLikeNum: (prev?.review.reviewLikeNum as number) - 1,
+    //         },
+    //       };
+    //     } else {
+    //       // 좋아요 누른 적 없는 경우
+    //       // 좋아요 처리한 상황 미리 보여주기
+    //       return {
+    //         ...prev,
+    //         loginUser: {
+    //           ...prev?.loginUser,
+    //           pushedReviewLike: true,
+    //         },
+    //         review: {
+    //           ...prev?.review,
+    //           reviewLikeNum: (prev?.review.reviewLikeNum as number) + 1,
+    //         },
+    //       };
+    //     }
+    //   };
+    //   queryClient.setQueryData(["review", `${reviewId}`], updateData());
+    // },
   });
   const queryClient = useQueryClient();
   const setModalState = useSetRecoilState(modalStateAtom);
@@ -53,7 +70,8 @@ export default function Like({
   const [isLikeListModalOn, setIsLikeListModalOn] = useState(false);
   const mutateLike = async () => {
     try {
-      mutate();
+      await mutateReviewLike();
+      await queryClient.invalidateQueries(["review", `${reviewId}`]);
       setActivateAni(true);
     } catch (error) {
       console.log(error);

@@ -33,7 +33,7 @@ export const Indicators = styled.span`
   bottom: 1rem;
 `;
 
-export const IndicatorOn = styled.button`
+export const IndicatorOn = styled.button<{ isAnimating: boolean }>`
   background-color: white;
   width: 0.5rem;
   height: 0.7rem;
@@ -44,7 +44,7 @@ export const IndicatorOn = styled.button`
   cursor: pointer;
 `;
 
-export const IndicatorOff = styled.button`
+export const IndicatorOff = styled.button<{ isAnimating: boolean }>`
   background-color: gray;
   width: 0.5rem;
   height: 0.7rem;
