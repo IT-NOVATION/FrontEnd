@@ -19,11 +19,11 @@ export const SlideImg = styled(motion.div)<{ img: string }>`
 
 export const variants = {
   initial: (direction: number) => {
-    return { x: direction > 0 ? "100%" : "-100%", opacity: 1 };
+    return { x: direction > 0 ? "100%" : "-100%" };
   },
   animate: { x: 0, opacity: 1 },
   exit: (direction: number) => {
-    return { x: direction > 0 ? "-100%" : "100%", opacity: 1 };
+    return { x: direction > 0 ? "-100%" : "100%" };
   },
 };
 

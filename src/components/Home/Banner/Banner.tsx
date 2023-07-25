@@ -54,8 +54,6 @@ function Banner() {
               custom={direction}
               onAnimationStart={() => setIsAnimating(true)}
               onAnimationComplete={() => setIsAnimating(false)}
-              // onAnimationStart={() => setIsAnimating(true)}
-              // onAnimationComplete={() => setIsAnimating(false)}
             />
           ) : slide === 1 ? (
             <S.SlideImg
@@ -105,12 +103,7 @@ function Banner() {
           return (
             <>
               {slide === idx ? (
-                <S.IndicatorOn
-                  key={idx}
-                  // onClick={() => !isAnimating && handleIndicatorClick(idx)}
-                  isAnimating={isAnimating}
-                  // disabled={isAnimating}
-                />
+                <S.IndicatorOn key={idx} isAnimating={isAnimating} />
               ) : (
                 <S.IndicatorOff
                   key={idx}
