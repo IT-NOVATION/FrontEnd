@@ -6,11 +6,11 @@ import { SearchResultApi } from "@apis/searchResultApi";
 import { ChangeEvent, KeyboardEvent, useRef } from "react";
 import useHovered from "@hooks/useHovered";
 import queryString from "query-string";
-import MovieResult from "@components/Search/MovieResult/MovieResult";
-import UserResult from "@components/Search/UserResult/UserResult";
 import { useQuery } from "@tanstack/react-query";
 import { IMovieResult } from "@interfaces/movieResult";
 import { IUserResult } from "@interfaces/userResult";
+import MovieResult from "@components/Search/MovieResult/MovieResult";
+import UserResult from "@components/Search/UserResult/UserResult";
 
 type SearchType = "USER" | "MOVIE";
 
@@ -48,9 +48,14 @@ export default function Search() {
     };
 
     // 유저 검색하고 싶을 때 함수
-    // const UserRequestCase = (word: string) => {
-    //     SearchResultApi.getMovieResult(word);
-    // };
+    const UserRequestCase = (word: string) => {
+        SearchResultApi.getUserResult(word);
+    };
+
+    // 영화 검색하고 싶을 때 함수
+    const MovieRequestCase = (word: string) => {
+        SearchResultApi.getMovieResult(word);
+    };
 
     const movieResultData = useQuery<IMovieResult>({
         queryKey: ["movieResult"],
@@ -59,7 +64,7 @@ export default function Search() {
 
     const userResultData = useQuery<IUserResult>({
         queryKey: ["userResult"],
-        queryFn: async () => await SearchResultApi.getMovieResult(word),
+        queryFn: async () => await SearchResultApi.getUserResult(word),
     });
 
     // 영화 검색하고 싶을 때 함수
@@ -69,6 +74,9 @@ export default function Search() {
         if (word === "") {
             handleInputEmpty();
             console.log(query);
+        } else {
+            if (isSelected === "MOVIE") MovieRequestCase(word);
+            if (isSelected === "USER") UserRequestCase(word);
         }
     };
 
@@ -178,9 +186,9 @@ export default function Search() {
                         <Block.Bar width="900px" height="1px" bgColor="gray" />
 
                         {isSelected === "MOVIE" ? (
-                            <MovieResult word={word} movieResult={movieResultData} />
+                            <MovieResult word={word} result={movieResultData} />
                         ) : (
-                            <UserResult word={word} userResult={userResultData} />
+                            <UserResult word={word} result={userResultData} />
                         )}
                     </>
                 )}
