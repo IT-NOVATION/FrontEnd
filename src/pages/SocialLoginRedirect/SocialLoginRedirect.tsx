@@ -16,7 +16,7 @@ function SocialLoginRedirect() {
     }
     queryClient.invalidateQueries();
     setModalState(ModalState.Off);
-    navigate("/");
+    window.location.href = "/";
   }, []);
   return <></>;
 }
