@@ -1,4 +1,4 @@
-import { Block } from "@styles/UI";
+import { Block, Text } from "@styles/UI";
 import * as S from "./style";
 import UserBox from "./UserBox/UserBox";
 import { IReviewTimeUser } from "@interfaces/user";
@@ -8,9 +8,10 @@ import { useState } from "react";
 import { AnimatePresence } from "framer-motion";
 
 function ReviewTime() {
-  const { data: users } = useQuery<IReviewTimeUser[]>({
+  const { data: users, isError } = useQuery<IReviewTimeUser[]>({
     queryKey: ["mainPage", "user"],
     queryFn: MainPageApi.getTodayReviewer,
+    retry: false,
   });
   const [[page, direction], setPage] = useState([0, 0]);
   const [animate, setAnimate] = useState(false);
@@ -36,30 +37,42 @@ function ReviewTime() {
         <S.MovieTimeTitle>REVIEW TIME</S.MovieTimeTitle>
       </Block.RowBox>
       <Block.RowBox justifyContent="center">
-        <S.Icon
-          src="/icons/MainPage/left_arrow.svg"
-          onClick={handlePrevClick}
-        />
         {users && (
-          <AnimatePresence custom={{ direction, animate }} mode="popLayout">
-            <Block.RowBox
-              width="auto"
-              custom={{ direction, animate }}
-              key={page}
-              variants={S.variants}
-              initial="enter"
-              animate="center"
-              exit="exit"
-              transition={{ type: "linear", duration: animate ? 0.5 : 0 }}
-            >
-              <UserBox user={users[Math.abs(page % 3)]} />
-            </Block.RowBox>
-          </AnimatePresence>
+          <>
+            <S.Icon
+              src="/icons/MainPage/left_arrow.svg"
+              onClick={handlePrevClick}
+            />
+            <AnimatePresence custom={{ direction, animate }} mode="popLayout">
+              <Block.RowBox
+                width="auto"
+                custom={{ direction, animate }}
+                key={page}
+                variants={S.variants}
+                initial="enter"
+                animate="center"
+                exit="exit"
+                transition={{ type: "linear", duration: animate ? 0.5 : 0 }}
+              >
+                <UserBox user={users?.[Math.abs(page % users.length)]} />
+              </Block.RowBox>
+            </AnimatePresence>
+            <S.Icon
+              src="/icons/MainPage/right_arrow.svg"
+              onClick={handleNextClick}
+            />
+          </>
         )}
-        <S.Icon
-          src="/icons/MainPage/right_arrow.svg"
-          onClick={handleNextClick}
-        />
+        {isError && (
+          <Block.RowBox
+            width="auto"
+            alignItems="center"
+            justifyContent="center"
+            margin="40px 0 0 0"
+          >
+            <Text.Title5 color="main">준비중입니다.</Text.Title5>
+          </Block.RowBox>
+        )}
       </Block.RowBox>
     </Block.ColumnBox>
   );

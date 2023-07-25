@@ -1,7 +1,6 @@
 import styled from "styled-components";
 
-export const Layout = styled.div`
-  width: 100vw;
+export const Layout = styled.div<{ isModalOn: boolean }>`
   width: 100vw;
   height: 100vh;
   position: fixed;
@@ -10,6 +9,9 @@ export const Layout = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  background-color: ${({ isModalOn }) => isModalOn && "rgba(0,0,0,0.6)"};
+  z-index: 98;
+  overflow: hidden;
 `;
 
 export const Background = styled.div`
@@ -78,4 +80,20 @@ export const ServiceIntroText = styled.div`
   font-weight: 500;
   white-space: pre-line;
   line-height: 23px;
+`;
+export const InquireImg = styled.div<{ img: string }>`
+  width: 874px;
+  height: 473px;
+  z-index: 100;
+  background-image: ${({ img }) => `url(${img})`};
+  background-size: cover;
+  position: absolute;
+`;
+export const ServiceIntroImage = styled.div<{ img: string }>`
+  width: 899px;
+  height: 586px;
+  z-index: 100;
+  background-image: ${({ img }) => `url(${img})`};
+  background-size: cover;
+  position: absolute;
 `;

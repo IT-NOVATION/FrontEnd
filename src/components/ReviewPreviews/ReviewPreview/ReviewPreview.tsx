@@ -65,7 +65,11 @@ function ReviewPreview({ review, user, isLast }: Props) {
               alignItems="center"
             >
               <img src="/icons/star_purple.svg" alt="별점" />
-              <Text.Body5 margin="0 0 0 3px">4.5</Text.Body5>
+              <Text.Body5 margin="0 0 0 3px">
+                {review.starScore
+                  ? review.starScore.toFixed(1)
+                  : review.star?.toFixed(1)}
+              </Text.Body5>
             </Block.RowBox>
           </Block.RowBox>
           <Block.RowBox position="relative" margin="5px 0 0 0">
