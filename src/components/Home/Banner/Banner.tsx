@@ -1,8 +1,9 @@
-import { useEffect, useLayoutEffect, useState } from "react";
+import { useState } from "react";
 import * as S from "./style";
 import { AnimatePresence, useMotionValue } from "framer-motion";
 import { Block } from "@styles/UI";
 import React from "react";
+import useInterval from "@hooks/useFetchInterval";
 
 const IMG = [
   "/images/banners/banner1.png",
@@ -29,14 +30,9 @@ function Banner() {
     setSlide(idx);
   };
 
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setSlide((prev) => (prev === IMG.length - 1 ? 0 : prev + 1));
-    }, 3000);
-    return () => {
-      clearInterval(timer);
-    };
-  }, [slide]);
+  useInterval(() => {
+    setSlide((prev) => (prev === IMG.length - 1 ? 0 : prev + 1));
+  }, 3000);
 
   return (
     <S.Wrapper>
