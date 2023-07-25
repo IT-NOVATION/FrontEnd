@@ -182,6 +182,9 @@ export const Button = {
     margin: ${(props) => props.margin};
     backdrop-filter: ${(props) => props.backdropFilter};
     cursor: pointer;
+    &:active {
+      transform: scale(1.09);
+    }
   `,
 };
 

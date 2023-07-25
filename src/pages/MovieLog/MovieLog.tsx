@@ -9,17 +9,21 @@ import { IFollowUser } from "@interfaces/followUser";
 import { MovieLogApi } from "@apis/movieLogApi";
 import { useParams } from "react-router-dom";
 import ReviewPreviews from "@components/ReviewPreviews/ReviewPreviews";
-import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { IMovieLogData } from "@interfaces/movieLog";
 import Badge from "@components/User/Badge/Badge";
 import FollowBtn from "@components/FollowBtn/FollowBtn";
 import { ILoginState } from "@interfaces/loginState";
+import useFollow from "@hooks/useFollow";
+import { IMovieLogFollowUser, IMovieLogUser } from "@interfaces/user";
+import useLoginState from "@hooks/useLoginState";
 
 type ContentType = "Reviews" | "InterestedMovies";
 export type FollowModalType = null | IFollowUser[];
 
 function MovieLog() {
   const { userId } = useParams();
+  const { userId: loginUserId, nickname, profileImg } = useLoginState();
   const queryClient = useQueryClient();
   const { data: movieLogData } = useQuery<IMovieLogData>({
     queryKey: ["movieLog", userId],
@@ -34,6 +38,38 @@ function MovieLog() {
     },
     suspense: true,
   });
+  const { mutate: mutateFollow } = useMutation({
+    mutationFn: () =>
+      MovieLogApi.follow({
+        targetUserId: movieLogData?.nowUser.userId as number,
+      }),
+    onMutate: async () => {
+      const prevMovieLogData = queryClient.getQueryData([
+        "movieLog",
+        userId,
+      ]) as IMovieLogData;
+      const updateData = () => {
+        const temp = { ...prevMovieLogData };
+
+        if (prevMovieLogData.isLoginedUserFollowsNowUser) {
+          temp.isLoginedUserFollowsNowUser = false;
+          temp.followers = [...temp.followers].filter(
+            (v) => v.userId !== loginUserId
+          );
+        } else {
+          temp.isLoginedUserFollowsNowUser = true;
+          temp.followers.push({
+            userId: loginUserId,
+            nickname,
+            profileImg,
+          } as IMovieLogFollowUser);
+        }
+        return temp;
+      };
+      queryClient.setQueryData(["movieLog", userId], updateData());
+    },
+  });
+  const handleFollowClick = useFollow(mutateFollow);
 
   const loginState = queryClient.getQueryData<ILoginState>(["loginState"]);
   const [isEditing, setIsEditing] = useState(false);
@@ -157,10 +193,12 @@ function MovieLog() {
                       프로필 편집
                     </Button.Button>
                   ) : (
-                    <FollowBtn
-                      userId={userId}
-                      isFollowing={movieLogData.isLoginedUserFollowsNowUser}
-                    />
+                    <Block.RowBox onClick={handleFollowClick} width="auto">
+                      <FollowBtn
+                        isFollowing={movieLogData.isLoginedUserFollowsNowUser}
+                        userId={String(movieLogData.nowUser.userId)}
+                      />
+                    </Block.RowBox>
                   )}
                 </Block.AbsoluteBox>
               </Block.RowBox>

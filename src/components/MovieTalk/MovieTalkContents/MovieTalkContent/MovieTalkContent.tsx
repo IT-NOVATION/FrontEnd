@@ -3,14 +3,59 @@ import ProfileImg from "@components/User/ProfileImg/ProfileImg";
 import { Block, Button, Text } from "@styles/UI";
 import { IMovieTalkUser } from "@interfaces/user";
 import FollowBtn from "@components/FollowBtn/FollowBtn";
+import { useNavigate } from "react-router-dom";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { MovieLogApi } from "@apis/movieLogApi";
+import { ContentsType } from "@pages/MovieTalk/MovieTalk";
+import useFollow from "@hooks/useFollow";
 
-function MovieTalkContent({ content }: { content: IMovieTalkUser }) {
+type Props = {
+  content: IMovieTalkUser;
+  type: ContentsType;
+};
+
+function MovieTalkContent({ content, type }: Props) {
+  const navigate = useNavigate();
   const handleReviewClick = (reviewId: number) => {
-    window.location.href = `/review/${reviewId}`;
+    navigate(`/review/${reviewId}`);
   };
   const handleUserClick = (userId: number) => {
-    window.location.href = `/movieLog/${userId}`;
+    navigate(`/movieLog/${userId}`);
   };
+  const queryClient = useQueryClient();
+  const { mutate: mutateFollow } = useMutation({
+    mutationFn: () => MovieLogApi.follow({ targetUserId: content.userId }),
+    onMutate: async () => {
+      const prevContentData = queryClient.getQueryData([
+        `${type}`,
+      ]) as IMovieTalkUser[];
+      const updateData = () => {
+        const temp = [...prevContentData];
+        let targetUser: IMovieTalkUser = prevContentData?.filter(
+          (v) => v.userId === content.userId
+        )[0];
+        let targetIndex = prevContentData.findIndex(
+          (v) => v.userId === content.userId
+        );
+        if (targetUser?.isNowUserFollowThisUser) {
+          // 이미 팔로우중인 경우
+          targetUser = {
+            ...targetUser,
+            isNowUserFollowThisUser: false,
+          };
+        } else {
+          targetUser = {
+            ...targetUser,
+            isNowUserFollowThisUser: true,
+          };
+        }
+        temp[targetIndex] = targetUser;
+        return temp;
+      };
+      queryClient.setQueryData([`${type}`], updateData());
+    },
+  });
+  const handleFollowClick = useFollow(mutateFollow);
   return (
     <S.ContentContainer>
       <ProfileImg img={content.profileImg} size="118px" />
@@ -25,10 +70,12 @@ function MovieTalkContent({ content }: { content: IMovieTalkUser }) {
             {content.nickName}
           </Text.Title4>
           {!content.isMyProfile && (
-            <FollowBtn
-              isFollowing={content.isNowUserFollowThisUser}
-              userId={String(content.userId)}
-            />
+            <Block.RowBox onClick={handleFollowClick} width="auto">
+              <FollowBtn
+                isFollowing={content.isNowUserFollowThisUser}
+                userId={String(content.userId)}
+              />
+            </Block.RowBox>
           )}
         </Block.RowBox>
         <Block.RowBox margin="24px 0 0 0" alignItems="center">

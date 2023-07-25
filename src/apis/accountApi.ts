@@ -38,5 +38,12 @@ export const AccountApi = {
         },
       })
       .then((res) => res.data),
-  logout: async () => await baseApi.get(LOGOUT_URI).then((res) => res.data),
+  logout: async () =>
+    await baseApi
+      .get(LOGOUT_URI, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+        },
+      })
+      .then((res) => res.data),
 };
