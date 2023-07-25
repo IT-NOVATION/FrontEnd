@@ -12,15 +12,18 @@ import { KeywordsEnum } from "@components/WriteReview/Keywords/Keywords";
 import DOMPurify from "dompurify";
 import Like from "@components/ReadReview/Like/Like";
 import UserInfo from "@components/ReadReview/UserInfo/UserInfo";
+import Comments from "@components/ReadReview/Comments/Comments";
 
 export default function ReadReview() {
   const { reviewId } = useParams();
+
   const { data: reviewData } = useQuery<IReadReview>({
     queryKey: ["review", reviewId],
     queryFn: async () => await ReadReviewApi.getReview(Number(reviewId)),
     suspense: true,
   });
   const { fullStar, halfStar } = useCalcStar(reviewData?.review.star as number);
+
   return (
     <Block.PageWrapper position="relative">
       <Block.PageLayout>
@@ -147,6 +150,7 @@ export default function ReadReview() {
               reviewLikeNum={reviewData.review.reviewLikeNum}
               pushedReviewLike={reviewData.loginUser.pushedReviewLike}
             />
+            <Comments reviewId={Number(reviewId)} />
             <UserInfo user={reviewData.user} />
           </>
         )}

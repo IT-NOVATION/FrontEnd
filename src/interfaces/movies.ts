@@ -8,7 +8,8 @@ export interface IInterstedMovie {
   movieImg: string;
   star: number;
   title: string;
-  hasReviewed: boolean;
+  hasReviewdByLoginedUser: boolean;
+  reviewId?: number;
 }
 
 export interface IPopularMovie extends IMovieBase {
@@ -36,4 +37,16 @@ export interface IReadReviewMovie extends IMovieBase {
   movieImg: string;
   movieGenre: string;
   movieCountry: string;
+}
+
+export interface IMovieTalkMovie {
+  movieId: number;
+  movieImg: string;
+}
+
+export interface IMovieSearchMovie extends IMovieBase {
+  movieImg: string;
+  movieTitle: string;
+  starScore: number;
+  reviewCount: number;
 }

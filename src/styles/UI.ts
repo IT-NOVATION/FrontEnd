@@ -121,6 +121,16 @@ export const Text = {
     line-height: ${(props) => props.lineHeight};
     cursor: ${(props) => props.pointer && "pointer"};
   `,
+  Body7: styled.div<StyleText>`
+    font-weight: 500;
+    font-size: 14px;
+    white-space: pre-line;
+    margin: ${(props) => props.margin};
+    color: ${({ color }) => (color ? theme.colors[color] : theme.colors)};
+    display: inline-block;
+    line-height: ${(props) => props.lineHeight};
+    cursor: ${(props) => props.pointer && "pointer"};
+  `,
 };
 //${({ color, theme }) => (color ? theme.colors[color] : theme.colors.black)};
 
@@ -341,6 +351,38 @@ export const Block = {
     background-color: ${({ bgColor }) =>
       bgColor ? theme.colors[bgColor] : theme.colors};
     margin: ${(props) => props.margin};
+  `,
+  ModalBox: styled.div<StyleBlock>`
+    width: ${(props) => (props.width ? props.width : "420px")};
+    height: ${(props) => (props.height ? props.height : "168px")};
+    background-color: white;
+    z-index: 100;
+    border-radius: 20px;
+    border: 0.7px solid #ccc;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+    padding: 33px 0 0 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  `,
+  ModalLayout: styled.div<StyleBlock>`
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    z-index: 99;
+    top: 0;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-attachment: fixed;
+  `,
+  ModalBg: styled.div<StyleBlock>`
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
   `,
 };
 

@@ -14,7 +14,7 @@ export const Banner = styled.div<{ img?: string }>`
   height: 225px;
   background-image: ${(props) => props.img && `url(${props.img})`};
   background-color: ${(props) => !props.img && "#F8F8F8"};
-  background-size: cover;
+  background-size: 100%;
   display: flex;
   justify-content: center;
   align-items: center;

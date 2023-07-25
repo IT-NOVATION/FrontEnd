@@ -5,8 +5,17 @@ import ProfileImg from "@components/User/ProfileImg/ProfileImg";
 import Badge from "@components/User/Badge/Badge";
 import ReviewPreviews from "@components/ReviewPreviews/ReviewPreviews";
 import { cutIntroText } from "@utils/cutIntroText";
+import { useNavigate } from "react-router-dom";
+import FollowBtn from "@components/FollowBtn/FollowBtn";
+import useLoginState from "@hooks/useLoginState";
+import { ILoginState } from "@interfaces/loginState";
 
 function UserBox({ user }: { user: IReviewTimeUser }) {
+  const { loginState, userId }: ILoginState = useLoginState();
+  const navigate = useNavigate();
+  const handleNicknameClick = () => {
+    navigate(`/movieLog/${user.userId}`);
+  };
   return (
     <S.Box>
       <Block.ColumnBox
@@ -20,7 +29,7 @@ function UserBox({ user }: { user: IReviewTimeUser }) {
           justifyContent="center"
           position="relative"
         >
-          <S.NicknameBox>
+          <S.NicknameBox onClick={handleNicknameClick}>
             {user.nickName}
             <Block.AbsoluteBox width="auto" top="-7px" right="-39px">
               <Badge grade={user.grade} />
@@ -43,15 +52,12 @@ function UserBox({ user }: { user: IReviewTimeUser }) {
           </Block.ColumnBox>
         </Block.RowBox>
         <Block.RowBox margin="46px 0 0 0" justifyContent="center">
-          <Button.Button
-            width="91px"
-            height="27px"
-            border="1px solid #CCC"
-            borderRadius="16.5px"
-            bgColor="white"
-          >
-            <Text.Body5>팔로우 하기</Text.Body5>
-          </Button.Button>
+          {userId !== user.userId && (
+            <FollowBtn
+              isFollowing={user.isLoginedUserFollowsNowUser}
+              userId={String(user.userId)}
+            />
+          )}
         </Block.RowBox>
       </Block.ColumnBox>
       <Block.ColumnBox width="840px" margin="37px 0 0 36px">
