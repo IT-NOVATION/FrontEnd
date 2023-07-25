@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import MovieTalkContents from "@components/MovieTalk/MovieTalkContents/MovieTalkContents";
 
-export type ContentsType = "BestReviews" | "PopularUsers" | "Updates";
+export type ContentsType = "BestReviews" | "PopularUsers" | "LatestReviews";
 
 export default function MovieTalk() {
   const [contents, setContents] = useState<ContentsType>("BestReviews");
@@ -61,8 +61,8 @@ export default function MovieTalk() {
             베스트 리뷰
           </S.ContentLabel>
           <S.ContentLabel
-            onClick={() => handleLabelClick("Updates")}
-            selected={checkSelected("Updates")}
+            onClick={() => handleLabelClick("LatestReviews")}
+            selected={checkSelected("LatestReviews")}
           >
             최신 리뷰
           </S.ContentLabel>

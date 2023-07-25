@@ -24,10 +24,10 @@ export default function Like({
   const { mutateAsync: mutateReviewLike, mutate } = useMutation({
     mutationFn: () => ReadReviewApi.pushReviewLike(reviewId),
     onMutate: async () => {
-      const prev: IReadReview | undefined = queryClient.getQueryData([
+      const prev: IReadReview = queryClient.getQueryData([
         "review",
         `${reviewId}`,
-      ]);
+      ]) as IReadReview;
       const updateData = () => {
         if (prev?.loginUser.pushedReviewLike) {
           return {

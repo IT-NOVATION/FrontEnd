@@ -19,6 +19,9 @@ export const Button = styled.div<{ isFollowing: boolean }>`
   justify-content: center;
   align-items: center;
   cursor: pointer;
+  &:active {
+    scale: 1.1;
+  }
 `;
 export const Text = styled.div`
   display: inline-block;

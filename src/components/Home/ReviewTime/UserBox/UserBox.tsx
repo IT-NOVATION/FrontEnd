@@ -1,4 +1,4 @@
-import { Block, Text, Button } from "@styles/UI";
+import { Block, Text } from "@styles/UI";
 import * as S from "./style";
 import { IReviewTimeUser } from "@interfaces/user";
 import ProfileImg from "@components/User/ProfileImg/ProfileImg";
@@ -9,13 +9,57 @@ import { useNavigate } from "react-router-dom";
 import FollowBtn from "@components/FollowBtn/FollowBtn";
 import useLoginState from "@hooks/useLoginState";
 import { ILoginState } from "@interfaces/loginState";
+import { modalStateAtom } from "@recoil/modalAtom";
+import { useSetRecoilState } from "recoil";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { MovieLogApi } from "@apis/movieLogApi";
+import useFollow from "@hooks/useFollow";
 
 function UserBox({ user }: { user: IReviewTimeUser }) {
   const { loginState, userId }: ILoginState = useLoginState();
+  const queryClient = useQueryClient();
+  const setModalState = useSetRecoilState(modalStateAtom);
   const navigate = useNavigate();
+
+  const { mutate: mutateFollow } = useMutation({
+    mutationFn: () => MovieLogApi.follow({ targetUserId: Number(userId) }),
+    onMutate: async () => {
+      const prevReviewTime: IReviewTimeUser[] = queryClient.getQueryData([
+        "mainPage",
+        "user",
+      ]) as IReviewTimeUser[];
+      const updateData = () => {
+        const temp = [...prevReviewTime];
+        let targetUser: IReviewTimeUser = prevReviewTime?.filter(
+          (v) => v.userId === user.userId
+        )[0];
+        let targetIndex = prevReviewTime.findIndex(
+          (v) => v.userId === user.userId
+        );
+        if (targetUser?.isLoginedUserFollowsNowUser) {
+          // 이미 팔로우중인 경우
+          targetUser = {
+            ...targetUser,
+            followers: targetUser.followers - 1,
+            isLoginedUserFollowsNowUser: false,
+          };
+        } else {
+          targetUser = {
+            ...targetUser,
+            followers: targetUser.followers + 1,
+            isLoginedUserFollowsNowUser: true,
+          };
+        }
+        temp[targetIndex] = targetUser;
+        return temp;
+      };
+      queryClient.setQueryData(["mainPage", "user"], updateData());
+    },
+  });
   const handleNicknameClick = () => {
     navigate(`/movieLog/${user.userId}`);
   };
+  const handleFollowClick = useFollow(mutateFollow);
   return (
     <S.Box>
       {user && (
@@ -55,10 +99,12 @@ function UserBox({ user }: { user: IReviewTimeUser }) {
             </Block.RowBox>
             <Block.RowBox margin="46px 0 0 0" justifyContent="center">
               {userId !== user.userId && (
-                <FollowBtn
-                  isFollowing={user.isLoginedUserFollowsNowUser}
-                  userId={String(user.userId)}
-                />
+                <Block.RowBox onClick={handleFollowClick} width="auto">
+                  <FollowBtn
+                    isFollowing={user.isLoginedUserFollowsNowUser}
+                    userId={String(user.userId)}
+                  />
+                </Block.RowBox>
               )}
             </Block.RowBox>
           </Block.ColumnBox>
