@@ -14,7 +14,9 @@ function Home() {
             <Block.RowBox>
               <Banner />
             </Block.RowBox>
-            <Block.RowBox>{/* <Posters /> */}</Block.RowBox>
+            <Block.RowBox>
+              <Posters />
+            </Block.RowBox>
             <Block.RowBox>
               <ReviewTime />
             </Block.RowBox>
