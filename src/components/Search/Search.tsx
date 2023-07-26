@@ -2,7 +2,6 @@ import { Block, Text } from "@styles/UI";
 import * as S from "./style";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
-import { SearchResultApi } from "@apis/searchResultApi";
 import { ChangeEvent, KeyboardEvent, useRef } from "react";
 import useHovered from "@hooks/useHovered";
 
