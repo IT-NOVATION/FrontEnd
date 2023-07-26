@@ -5,12 +5,13 @@ import { useQuery } from "@tanstack/react-query";
 import { AccountApi } from "@apis/accountApi";
 import { ILoginState } from "@interfaces/loginState";
 import { Suspense } from "react";
+import Footer from "@components/Footer/Footer";
+import { Block } from "@styles/UI";
 
 function App() {
   useQuery<ILoginState>({
     queryKey: ["loginState"],
     queryFn: async () => await AccountApi.loginState(),
-    suspense: true,
   });
 
   return (

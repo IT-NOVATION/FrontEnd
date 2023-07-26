@@ -11,7 +11,8 @@ declare module "styled-components" {
     | "darkGray"
     | "red"
     | "darkWhite"
-    | "bgColor";
+    | "bgColor"
+    | "modalBg";
 
   export interface DefaultTheme {
     colors: {

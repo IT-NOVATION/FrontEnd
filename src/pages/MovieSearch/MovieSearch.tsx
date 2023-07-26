@@ -48,7 +48,7 @@ export default function MovieSearch() {
             </Block.RowBox>
           </Block.RowBox>
         </S.GoWriteReviewBox>
-        <Block.RowBox margin="210px 0 0 0" width="auto" gap="60px">
+        <Block.RowBox margin="150px 0 0 0" width="auto" gap="60px">
           <S.ContentLabel
             onClick={() => handleLabelClick("Reviews")}
             selected={checkSelected("Reviews")}
