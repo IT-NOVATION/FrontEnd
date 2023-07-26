@@ -1,11 +1,11 @@
 import * as S from "./style";
 import { Block } from "@styles/UI";
 import { useInfiniteQuery, useQueries } from "@tanstack/react-query";
-import MovieSearchContent from "./MovieSearchContent/MovieSearchContent";
 import { MovieSearchContentsType } from "@pages/MovieSearch/MovieSearch";
 import { MovieSearchApi } from "@apis/movieSearchApi";
-import { useEffect, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 import { IMovieSearchMovies } from "@interfaces/movieSearch";
+import MovieSearchPage from "./MovieSearchPage/MovieSearchPage";
 function MovieSearchContents({
   contents,
 }: {
@@ -42,15 +42,11 @@ function MovieSearchContents({
   return (
     <Block.ColumnBox margin="0 0 70px 0 ">
       <S.Grid>
-        {data?.pages.map((v, i) => {
-          return v.moiveSearchDtoList.map((v2, i2) => (
-            <MovieSearchContent
-              rank={i * 16 + i2}
-              key={v2.movieId}
-              movie={v2}
-            />
-          ));
-        })}
+        {data?.pages.map((v, i) => (
+          <Suspense fallback={<div>Loading</div>}>
+            <MovieSearchPage key={i} v={v} i={i} />
+          </Suspense>
+        ))}
       </S.Grid>
     </Block.ColumnBox>
   );

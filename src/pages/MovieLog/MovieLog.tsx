@@ -15,7 +15,7 @@ import Badge from "@components/User/Badge/Badge";
 import FollowBtn from "@components/FollowBtn/FollowBtn";
 import { ILoginState } from "@interfaces/loginState";
 import useFollow from "@hooks/useFollow";
-import { IMovieLogFollowUser, IMovieLogUser } from "@interfaces/user";
+import { IMovieLogFollowUser } from "@interfaces/user";
 import useLoginState from "@hooks/useLoginState";
 
 type ContentType = "Reviews" | "InterestedMovies";
