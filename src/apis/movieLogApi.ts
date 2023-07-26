@@ -10,7 +10,11 @@ export const MovieLogApi = {
     await baseApi
       .get(GET_MOVIELOG_URI + "/" + userId, {
         headers: {
-          Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+          Authorization: `Bearer ${
+            localStorage.getItem("accessToken")
+              ? localStorage.getItem("accessToken")
+              : ""
+          }`,
         },
       })
       .then((res) => res.data),
