@@ -4,7 +4,7 @@ export function cutIntroText(introduction: string) {
 
 const MAX_MOVIE_TALK_INTRO_LINE_LENGTH = 24;
 export function cutMovieTalkIntroText(introduction: string) {
-  return introduction.length > MAX_MOVIE_TALK_INTRO_LINE_LENGTH
+  return introduction?.length > MAX_MOVIE_TALK_INTRO_LINE_LENGTH
     ? `${introduction.slice(
         0,
         MAX_MOVIE_TALK_INTRO_LINE_LENGTH
