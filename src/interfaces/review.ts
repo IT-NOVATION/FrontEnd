@@ -82,5 +82,6 @@ export interface IReadReview {
 export interface IMovieTalkReview {
   reviewId: number;
   reviewTitle: string;
-  movie: IMovieTalkMovie;
+  movieImg?: string;
+  movie?: IMovieTalkMovie;
 }

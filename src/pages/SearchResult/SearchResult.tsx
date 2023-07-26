@@ -32,6 +32,12 @@ export default function SearchResult() {
         <Block.RowBox height="100%" padding="120px 0 0 0">
           <Search />
         </Block.RowBox>
+        <Block.Bar
+          margin="20px 0 0 0"
+          width="900px"
+          height="1px"
+          bgColor="gray"
+        />
         <Block.RowBox justifyContent="center" margin="54px 0 20px 0">
           <Text.Title5>
             '<Text.Title5 color="main">{searchValue}</Text.Title5>'에 대한검색
