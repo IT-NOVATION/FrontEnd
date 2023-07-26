@@ -378,7 +378,7 @@ export const Block = {
     display: flex;
     justify-content: center;
     align-items: center;
-    background-attachment: fixed;
+    overflow: hidden;
   `,
   ModalBg: styled.div<StyleBlock>`
     width: 100vw;
@@ -386,6 +386,7 @@ export const Block = {
     position: fixed;
     top: 0;
     left: 0;
+    overflow: hidden;
   `,
 };
 
