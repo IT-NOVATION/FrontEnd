@@ -6,10 +6,11 @@ import { IPopularMovie, IRecommendedMovie } from "@interfaces/movies";
 import cutMovieTitle from "@utils/cutMovieTitle";
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import { IMovieSearchResult } from "@interfaces/movieResult";
 
 type Props = {
-  movie: IPopularMovie | IRecommendedMovie;
-  rank: number;
+  movie: IPopularMovie | IRecommendedMovie | IMovieSearchResult;
+  rank?: number;
   loadingFinished: boolean;
   onLoad: React.ReactEventHandler<HTMLImageElement>;
 };

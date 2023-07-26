@@ -54,6 +54,10 @@ export default function NavigationBar() {
   }, [isSearchClick, pathname]);
 
   useEffect(() => {
+    setIsSearchClick(false);
+  }, [pathname]);
+
+  useEffect(() => {
     const prev = position;
     window.addEventListener("scroll", () => {
       setPosition(window.scrollY);

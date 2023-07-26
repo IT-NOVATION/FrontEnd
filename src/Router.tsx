@@ -6,7 +6,7 @@ import WriteReview from "@pages/WriteReview/WriteReview";
 import KakaoLoginRedirect from "@pages/SocialLoginRedirect/SocialLoginRedirect";
 import MovieLog from "@pages/MovieLog/MovieLog";
 import MovieTalk from "@pages/MovieTalk/MovieTalk";
-import SearchResult from "@pages/Search/SearchResult";
+import SearchResult from "@pages/SearchResult/SearchResult";
 import ReadReview from "@pages/ReadReview/ReadReview";
 import SingleMovie from "@pages/SingleMovie/SingleMovie";
 import MovieSearch from "@pages/MovieSearch/MovieSearch";
@@ -30,16 +30,16 @@ export const router = createBrowserRouter([
       },
       { path: "movie-search", element: <MovieSearch /> },
       { path: "movietalk", element: <MovieTalk /> },
-      { path: "singleMovie/:movieId", element: <SingleMovie /> },
       {
         path: "movieLog/:userId",
         element: <MovieLog />,
       },
+      { path: "singleMovie/:movieId", element: <SingleMovie /> },
       {
         path: "review/:reviewId",
         element: <ReadReview />,
       },
-      { path: "/search-result", element: <SearchResult /> },
+      { path: "/search-result/:type/:searchValue", element: <SearchResult /> },
     ],
     errorElement: <NotFound />,
   },
