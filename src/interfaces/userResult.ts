@@ -1,16 +1,16 @@
+import { IMovieTalkReview } from "./review";
+
 export interface IUserResult {
-    userSearchResponseDtoList: IUserSearchResponseDtoList[];
-    totalSize: number;
+  userSearchResponseDtoList: IUserSearchResponseDtoList[];
+  totalSize: number;
 }
 
 export interface IUserSearchResponseDtoList {
-    userId: number;
-    nickname: string;
-    userImg: string;
-    introduction: string;
-    reviews: {
-        reviewId: number;
-        movieImg: string;
-        reviewTitle: string;
-    };
+  userId: number;
+  isMyProfile: boolean;
+  isNowUserFollowThisUser: boolean;
+  profileImg: string;
+  nickName: string;
+  introduction: string;
+  reviews: IMovieTalkReview[];
 }

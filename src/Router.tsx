@@ -12,35 +12,35 @@ import SingleMovie from "@pages/SingleMovie/SingleMovie";
 import MovieSearch from "@pages/MovieSearch/MovieSearch";
 
 export const router = createBrowserRouter([
-    {
-        path: "/",
-        element: <App />,
-        children: [
-            {
-                path: "",
-                element: <Home />,
-            },
-            {
-                path: "write-review/:movieId",
-                element: <WriteReview />,
-            },
-            {
-                path: "/kakao-redirect/:accessToken/:refreshToken",
-                element: <KakaoLoginRedirect />,
-            },
-            { path: "movie-search", element: <MovieSearch /> },
-            { path: "movietalk", element: <MovieTalk /> },
-            {
-                path: "movieLog/:userId",
-                element: <MovieLog />,
-            },
-            { path: "singleMovie/:movieId", element: <SingleMovie /> },
-            {
-                path: "review/:reviewId",
-                element: <ReadReview />,
-            },
-            { path: "/search-result", element: <SearchResult /> },
-        ],
-        errorElement: <NotFound />,
-    },
+  {
+    path: "/",
+    element: <App />,
+    children: [
+      {
+        path: "",
+        element: <Home />,
+      },
+      {
+        path: "write-review/:movieId",
+        element: <WriteReview />,
+      },
+      {
+        path: "/kakao-redirect/:accessToken/:refreshToken",
+        element: <KakaoLoginRedirect />,
+      },
+      { path: "movie-search", element: <MovieSearch /> },
+      { path: "movietalk", element: <MovieTalk /> },
+      {
+        path: "movieLog/:userId",
+        element: <MovieLog />,
+      },
+      { path: "singleMovie/:movieId", element: <SingleMovie /> },
+      {
+        path: "review/:reviewId",
+        element: <ReadReview />,
+      },
+      { path: "/search-result/:type/:searchValue", element: <SearchResult /> },
+    ],
+    errorElement: <NotFound />,
+  },
 ]);

@@ -8,10 +8,11 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { MovieLogApi } from "@apis/movieLogApi";
 import { ContentsType } from "@pages/MovieTalk/MovieTalk";
 import useFollow from "@hooks/useFollow";
+import { IUserSearchResponseDtoList } from "@interfaces/userResult";
 
 type Props = {
-  content: IMovieTalkUser;
-  type: ContentsType;
+  content: IMovieTalkUser | IUserSearchResponseDtoList;
+  type?: ContentsType;
 };
 
 function MovieTalkContent({ content, type }: Props) {
