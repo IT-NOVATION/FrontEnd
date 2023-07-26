@@ -3,11 +3,12 @@ import * as S from "./style";
 import { Block, Button, Text } from "@styles/UI";
 import theme from "@styles/theme";
 import { useState } from "react";
-import { useQueryClient } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import useLoginState from "@hooks/useLoginState";
 import { useSetRecoilState } from "recoil";
 import { ModalState, modalStateAtom } from "@recoil/modalAtom";
 import LikeList from "./LikeList/LikeList";
+import { IReadReview } from "@interfaces/review";
 
 type Props = {
   reviewId: number;
@@ -20,6 +21,43 @@ export default function Like({
   pushedReviewLike,
   reviewLikeNum,
 }: Props) {
+  const { mutateAsync: mutateReviewLike, mutate } = useMutation({
+    mutationFn: () => ReadReviewApi.pushReviewLike(reviewId),
+    onMutate: async () => {
+      const prev: IReadReview = queryClient.getQueryData([
+        "review",
+        `${reviewId}`,
+      ]) as IReadReview;
+      const updateData = () => {
+        if (prev?.loginUser.pushedReviewLike) {
+          return {
+            ...prev,
+            loginUser: {
+              ...prev?.loginUser,
+              pushedReviewLike: false,
+            },
+            review: {
+              ...prev?.review,
+              reviewLikeNum: (prev?.review.reviewLikeNum as number) - 1,
+            },
+          };
+        } else {
+          return {
+            ...prev,
+            loginUser: {
+              ...prev?.loginUser,
+              pushedReviewLike: true,
+            },
+            review: {
+              ...prev?.review,
+              reviewLikeNum: (prev?.review.reviewLikeNum as number) + 1,
+            },
+          };
+        }
+      };
+      queryClient.setQueryData(["review", `${reviewId}`], updateData());
+    },
+  });
   const queryClient = useQueryClient();
   const setModalState = useSetRecoilState(modalStateAtom);
   const { loginState, userId } = useLoginState();
@@ -27,7 +65,7 @@ export default function Like({
   const [isLikeListModalOn, setIsLikeListModalOn] = useState(false);
   const mutateLike = async () => {
     try {
-      await ReadReviewApi.pushReviewLike(reviewId);
+      await mutateReviewLike();
       await queryClient.invalidateQueries(["review", `${reviewId}`]);
       setActivateAni(true);
     } catch (error) {

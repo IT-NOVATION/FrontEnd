@@ -1,8 +1,11 @@
 import { useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useQueryClient } from "@tanstack/react-query";
+import { useSetRecoilState } from "recoil";
+import { ModalState, modalStateAtom } from "@recoil/modalAtom";
 
 function SocialLoginRedirect() {
+  const setModalState = useSetRecoilState(modalStateAtom);
   const queryClient = useQueryClient();
   const { accessToken, refreshToken } = useParams();
   const navigate = useNavigate();
@@ -12,7 +15,8 @@ function SocialLoginRedirect() {
       localStorage.setItem("refreshToken", refreshToken);
     }
     queryClient.invalidateQueries();
-    navigate(-1);
+    setModalState(ModalState.Off);
+    window.location.href = "/";
   }, []);
   return <></>;
 }

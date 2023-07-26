@@ -33,14 +33,14 @@ function MovieTalkContents({ contents }: { contents: ContentsType }) {
     <Block.ColumnBox margin="0 0 70px 0 ">
       {contents === "BestReviews"
         ? bestReviews?.map((v: IMovieTalkUser) => (
-            <MovieTalkContent content={v} />
+            <MovieTalkContent type={contents} content={v} />
           ))
         : contents === "PopularUsers"
         ? popularUsers.map((v: IMovieTalkUser) => (
-            <MovieTalkContent content={v} />
+            <MovieTalkContent type={contents} content={v} />
           ))
         : latestReviews?.map((v: IMovieTalkUser) => (
-            <MovieTalkContent content={v} />
+            <MovieTalkContent type={contents} content={v} />
           ))}
     </Block.ColumnBox>
   );

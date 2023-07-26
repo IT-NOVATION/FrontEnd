@@ -7,16 +7,22 @@ const POST_STAR_EVALUATE = "/single/starEvaluate";
 const POST_MOVIE_LIKE = "/push/movieLike";
 
 export const SingleMovieApi = {
-    getSinglelMovie: async (movieId: number) =>
-        await baseApi.get(GET_Single_MOVIE_URI + "/" + movieId).then(res => res.data),
-    getReviewCount: async (movieId: number) =>
-        await baseApi.get(GET_REVIEW_COUNT_URI + "/" + movieId).then(res => res.data),
-    getTop3HasFeature: async (movieId: number) =>
-        await baseApi.get(GET_TOP_FEATURES_URI + "/" + movieId).then(res => res.data),
-    postStarEvaluate: async (movieId: number, starScore: number) => {
-        await baseApi.post(POST_STAR_EVALUATE, { movieId, starScore });
-    },
-    postMovieLike: async (movieId: number) => {
-        await baseApi.post(POST_MOVIE_LIKE, { movieId });
-    },
+  getSinglelMovie: async (movieId: number) =>
+    await baseApi
+      .get(GET_Single_MOVIE_URI + "/" + movieId)
+      .then((res) => res.data),
+  getReviewCount: async (movieId: number) =>
+    await baseApi
+      .get(GET_REVIEW_COUNT_URI + "/" + movieId)
+      .then((res) => res.data),
+  getTop3HasFeature: async (movieId: number) =>
+    await baseApi
+      .get(GET_TOP_FEATURES_URI + "/" + movieId)
+      .then((res) => res.data),
+  postStarEvaluate: async (movieId: number, starScore: number) => {
+    await baseApi.post(POST_STAR_EVALUATE, { movieId, starScore });
+  },
+  postMovieLike: async (movieId: number) => {
+    await baseApi.post(POST_MOVIE_LIKE, { movieId });
+  },
 };

@@ -8,10 +8,11 @@ import { IMainPageMovie } from "@interfaces/movies";
 import PostersContainer from "./PostersContainer/PostersContainer";
 
 function Posters() {
-  const { data: movies } = useQuery<IMainPageMovie>({
+  const { data: movies, isError } = useQuery<IMainPageMovie>({
     queryKey: ["mainPage", "movies"],
     queryFn: MainPageApi.getMovies,
     suspense: true,
+    retry: false,
   });
   const [showPopular, setShowPopular] = useState(true);
   const [[page, direction], setPage] = useState([0, 0]);
@@ -46,89 +47,104 @@ function Posters() {
       bgColor="white"
       alignItems="center"
     >
-      <Block.RowBox
-        width="277px"
-        justifyContent="center"
-        margin="70px 0 0 0"
-        position="relative"
-      >
-        <S.Ellipse src="/icons/MainPage/ellipse.svg" />
-        <S.MovieTimeTitle>MOVIE TIME</S.MovieTimeTitle>
-      </Block.RowBox>
-      <Block.RowBox justifyContent="center" margin="25px 0 50px 0">
-        <S.PosterTitle
-          onClick={handlePopularClick}
-          color="lightBlack"
-          margin="0 40px 0 0"
-          pointer
-          selected={showPopular}
-        >
-          무비타임 인기
-        </S.PosterTitle>
-        <S.PosterTitle
-          onClick={handleRecommendedClick}
-          color="lightBlack"
-          margin="0 0 0 40px"
-          pointer
-          selected={!showPopular}
-        >
-          무비타임 추천
-        </S.PosterTitle>
-      </Block.RowBox>
-      <Block.RowBox alignItems="center" justifyContent="center">
-        <Block.RowBox alignItems="center" justifyContent="center">
-          <S.Icon
-            onClick={handlePrevClick}
-            style={{ marginRight: "20px", cursor: "pointer", zIndex: "2" }}
-            src="/icons/MainPage/left_arrow.svg"
-          />
-          <AnimatePresence
-            custom={{ direction, animate }}
-            mode="popLayout"
-            initial={false}
+      {movies && (
+        <>
+          <Block.RowBox
+            width="277px"
+            justifyContent="center"
+            margin="70px 0 0 0"
+            position="relative"
           >
-            <Block.RowBox
-              custom={{ direction, animate }}
-              key={page}
-              variants={S.variants}
-              initial="enter"
-              animate="center"
-              exit="exit"
-              transition={{ type: "linear", duration: animate ? 0.5 : 0 }}
-              width="1100px"
-              height="300px"
-              justifyContent="center"
+            <S.Ellipse src="/icons/MainPage/ellipse.svg" />
+            <S.MovieTimeTitle>MOVIE TIME</S.MovieTimeTitle>
+          </Block.RowBox>
+
+          <Block.RowBox justifyContent="center" margin="25px 0 50px 0">
+            <S.PosterTitle
+              onClick={handlePopularClick}
+              color="lightBlack"
+              margin="0 40px 0 0"
+              pointer
+              selected={showPopular}
             >
-              {showPopular
-                ? movies && (
-                    <PostersContainer
-                      key={page + "popular"}
-                      movies={movies.popular.slice(
-                        Math.abs(page % 2) * 5,
-                        Math.abs(page % 2) * 5 + 5
+              무비타임 인기
+            </S.PosterTitle>
+            <S.PosterTitle
+              onClick={handleRecommendedClick}
+              color="lightBlack"
+              margin="0 0 0 40px"
+              pointer
+              selected={!showPopular}
+            >
+              무비타임 추천
+            </S.PosterTitle>
+          </Block.RowBox>
+          <Block.RowBox alignItems="center" justifyContent="center">
+            <Block.RowBox alignItems="center" justifyContent="center">
+              <S.Icon
+                onClick={handlePrevClick}
+                style={{ marginRight: "20px", cursor: "pointer", zIndex: "2" }}
+                src="/icons/MainPage/left_arrow.svg"
+              />
+              <AnimatePresence
+                custom={{ direction, animate }}
+                mode="popLayout"
+                initial={false}
+              >
+                <Block.RowBox
+                  custom={{ direction, animate }}
+                  key={page}
+                  variants={S.variants}
+                  initial="enter"
+                  animate="center"
+                  exit="exit"
+                  transition={{ type: "linear", duration: animate ? 0.5 : 0 }}
+                  width="1100px"
+                  height="300px"
+                  justifyContent="center"
+                >
+                  {showPopular
+                    ? movies && (
+                        <PostersContainer
+                          key={page + "popular"}
+                          movies={movies.popular.slice(
+                            Math.abs(page % 2) * 5,
+                            Math.abs(page % 2) * 5 + 5
+                          )}
+                          page={page}
+                        />
+                      )
+                    : movies && (
+                        <PostersContainer
+                          key={page + "recommended"}
+                          movies={movies.recommended.slice(
+                            Math.abs(page % 2) * 5,
+                            Math.abs(page % 2) * 5 + 5
+                          )}
+                          page={page}
+                        />
                       )}
-                      page={page}
-                    />
-                  )
-                : movies && (
-                    <PostersContainer
-                      key={page + "recommended"}
-                      movies={movies.recommended.slice(
-                        Math.abs(page % 2) * 5,
-                        Math.abs(page % 2) * 5 + 5
-                      )}
-                      page={page}
-                    />
-                  )}
+                </Block.RowBox>
+              </AnimatePresence>
+              <S.Icon
+                onClick={handleNextClick}
+                style={{ marginLeft: "20px", cursor: "pointer", zIndex: "2" }}
+                src="/icons/MainPage/right_arrow.svg"
+              />
             </Block.RowBox>
-          </AnimatePresence>
-          <S.Icon
-            onClick={handleNextClick}
-            style={{ marginLeft: "20px", cursor: "pointer", zIndex: "2" }}
-            src="/icons/MainPage/right_arrow.svg"
-          />
+          </Block.RowBox>
+        </>
+      )}
+      {isError && (
+        <Block.RowBox
+          width="auto"
+          alignItems="center"
+          justifyContent="center"
+          margin="40px 0 0 0"
+        >
+          <Text.Title5 color="main">준비중입니다.</Text.Title5>
         </Block.RowBox>
-      </Block.RowBox>
+      )}
     </Block.ColumnBox>
   );
 }

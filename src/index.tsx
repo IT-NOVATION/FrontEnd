@@ -11,6 +11,9 @@ const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
 );
 const queryClient = new QueryClient();
+queryClient.defaultQueryOptions({
+  refetchOnWindowFocus: false,
+});
 root.render(
   <>
     <RecoilRoot>

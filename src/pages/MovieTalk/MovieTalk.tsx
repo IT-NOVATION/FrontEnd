@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import MovieTalkContents from "@components/MovieTalk/MovieTalkContents/MovieTalkContents";
 
-export type ContentsType = "BestReviews" | "PopularUsers" | "Updates";
+export type ContentsType = "BestReviews" | "PopularUsers" | "LatestReviews";
 
 export default function MovieTalk() {
   const [contents, setContents] = useState<ContentsType>("BestReviews");
@@ -35,8 +35,8 @@ export default function MovieTalk() {
         <S.GoWriteReviewBox>
           <Block.RowBox width="900px" alignItems="center">
             <Text.Title5 color="lightBlack" margin="0 59px 0 0 ">
-              오늘의 무비스타가 되고싶다면, 자신만의 무비로그를 완성하러
-              가보세요
+              오늘의 무비스타가 되고싶다면, 재밌게 봤던 영화를 찾아 리뷰를
+              작성해보세요
             </Text.Title5>
             <Block.RowBox
               onClick={handleGoWriteReview}
@@ -44,7 +44,7 @@ export default function MovieTalk() {
               width="auto"
               alignItems="center"
             >
-              <Text.Title5 color="main">리뷰쓰러 가기</Text.Title5>
+              <Text.Title5 color="main">무비서치 가기</Text.Title5>
               <S.RightChevronIcon src="/icons/MovieTalk/chevron_right_purple.svg" />
             </Block.RowBox>
           </Block.RowBox>
@@ -61,8 +61,8 @@ export default function MovieTalk() {
             베스트 리뷰
           </S.ContentLabel>
           <S.ContentLabel
-            onClick={() => handleLabelClick("Updates")}
-            selected={checkSelected("Updates")}
+            onClick={() => handleLabelClick("LatestReviews")}
+            selected={checkSelected("LatestReviews")}
           >
             최신 리뷰
           </S.ContentLabel>
