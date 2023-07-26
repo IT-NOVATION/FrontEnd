@@ -8,6 +8,8 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { MovieLogApi } from "@apis/movieLogApi";
 import { ContentsType } from "@pages/MovieTalk/MovieTalk";
 import useFollow from "@hooks/useFollow";
+import cutReviewTitle from "@utils/cutReviewTitle";
+import { cutMovieTalkIntroText } from "@utils/cutIntroText";
 import { IUserResult } from "@interfaces/userResult";
 
 type Props = {
@@ -120,11 +122,11 @@ function MovieTalkContent({ content, type }: Props) {
             </Block.RowBox>
           )}
         </Block.RowBox>
-        <Block.RowBox margin="24px 0 0 0" alignItems="center">
-          <Text.Body3 lineHeight="1.2" color="lightBlack">
-            {content.introduction}
+        <Block.ColumnBox margin="12px 0 0 0" justifyContent="center">
+          <Text.Body3 lineHeight="1.8" color="lightBlack">
+            {cutMovieTalkIntroText(content.introduction)}
           </Text.Body3>
-        </Block.RowBox>
+        </Block.ColumnBox>
       </Block.ColumnBox>
       <Block.RowBox width="auto" margin="0 0 0 48px">
         {content.reviews.slice(0, 2).map((v) => (
@@ -144,7 +146,7 @@ function MovieTalkContent({ content, type }: Props) {
             />
             <Block.RowBox justifyContent="center">
               <Text.Body3 margin="10px 0 0 0" color="lightBlack">
-                {v.reviewTitle}
+                {cutReviewTitle(v.reviewTitle)}
               </Text.Body3>
             </Block.RowBox>
           </Block.ColumnBox>

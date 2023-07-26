@@ -14,7 +14,7 @@ export const SlideImg = styled(motion.div)<{ img: string }>`
   height: 480px;
   background-image: ${(props) => `url(${props.img})`};
   background-position: center;
-  background-size: auto 100%;
+  background-size: 1920px 100%;
 `;
 
 export const variants = {

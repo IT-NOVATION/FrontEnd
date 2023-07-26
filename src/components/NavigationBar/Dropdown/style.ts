@@ -1,3 +1,4 @@
+import { Block } from "@styles/UI";
 import styled from "styled-components";
 
 export const Layout = styled.div<{ isModalOn: boolean }>`
@@ -9,9 +10,8 @@ export const Layout = styled.div<{ isModalOn: boolean }>`
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: ${({ isModalOn }) => isModalOn && "rgba(0,0,0,0.6)"};
   z-index: 98;
-  overflow: hidden;
+  display: ${({ isModalOn }) => isModalOn && "none"};
 `;
 
 export const Background = styled.div`
@@ -62,25 +62,6 @@ export const Bubble = styled.div`
   }
 `;
 export const Icon = styled.img``;
-export const Modal = styled.div`
-  background-color: white;
-  width: 543px;
-  height: auto;
-  border-radius: 20px;
-  display: flex;
-  flex-direction: column;
-  padding: 20px 25px;
-  border: 1px solid #5f5f5f;
-  z-index: 100;
-  position: relative;
-`;
-export const ServiceIntroText = styled.div`
-  text-align: center;
-  font-size: 15px;
-  font-weight: 500;
-  white-space: pre-line;
-  line-height: 23px;
-`;
 export const InquireImg = styled.div<{ img: string }>`
   width: 874px;
   height: 473px;
@@ -96,4 +77,10 @@ export const ServiceIntroImage = styled.div<{ img: string }>`
   background-image: ${({ img }) => `url(${img})`};
   background-size: cover;
   position: absolute;
+`;
+
+export const ModalBg = styled(Block.ModalBg)`
+  z-index: 100;
+  background-color: rgba(0, 0, 0, 0.6);
+  overflow: hidden;
 `;

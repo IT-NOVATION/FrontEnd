@@ -30,7 +30,7 @@ export default function SearchResult() {
     <>
       <Block.ColumnBox width="100vw" alignItems="center">
         <Block.RowBox height="100%" padding="120px 0 0 0">
-          <Search />
+          <Search initialType={type} />
         </Block.RowBox>
         <Block.Bar
           margin="20px 0 0 0"

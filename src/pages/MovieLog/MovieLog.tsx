@@ -15,7 +15,7 @@ import Badge from "@components/User/Badge/Badge";
 import FollowBtn from "@components/FollowBtn/FollowBtn";
 import { ILoginState } from "@interfaces/loginState";
 import useFollow from "@hooks/useFollow";
-import { IMovieLogFollowUser, IMovieLogUser } from "@interfaces/user";
+import { IMovieLogFollowUser } from "@interfaces/user";
 import useLoginState from "@hooks/useLoginState";
 
 type ContentType = "Reviews" | "InterestedMovies";
@@ -177,7 +177,7 @@ function MovieLog() {
                 <Text.Title3 color="lightBlack" margin="0 16px 0 0">
                   {movieLogData.nowUser.nickname}
                 </Text.Title3>
-                <Text.Body1 color="lightBlack" margin="0 410px 0 0">
+                <Text.Body1 color="lightBlack">
                   {movieLogData.nowUser.introduction}
                 </Text.Body1>
                 <Block.AbsoluteBox width="auto" top="-5px" right="0">

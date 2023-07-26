@@ -50,7 +50,7 @@ export default function MovieTalk() {
           </Block.RowBox>
         </S.GoWriteReviewBox>
         <Block.RowBox
-          margin="210px 0 0 0"
+          margin="180px 0 0 0"
           width="490px"
           justifyContent="space-between"
         >

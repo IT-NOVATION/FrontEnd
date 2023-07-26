@@ -106,7 +106,7 @@ export default function NavigationBar() {
                   justifyContent="flex-end"
                   height="43px"
                 >
-                  {pathname !== "/search-result" && (
+                  {!pathname.includes("/search-result") && (
                     <S.SearchLogo
                       alt="close"
                       src={
@@ -167,7 +167,7 @@ export default function NavigationBar() {
               </Block.RowBox>
               {isSearchClick && (
                 <Block.RowBox margin="40px 0 0 0">
-                  <Search />
+                  <Search initialType="MOVIE" />
                 </Block.RowBox>
               )}
             </S.Nav>
