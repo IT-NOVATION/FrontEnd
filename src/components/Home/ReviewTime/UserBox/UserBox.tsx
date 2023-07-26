@@ -22,7 +22,7 @@ function UserBox({ user }: { user: IReviewTimeUser }) {
   const navigate = useNavigate();
 
   const { mutate: mutateFollow } = useMutation({
-    mutationFn: () => MovieLogApi.follow({ targetUserId: Number(userId) }),
+    mutationFn: () => MovieLogApi.follow({ targetUserId: Number(user.userId) }),
     onMutate: async () => {
       const prevReviewTime: IReviewTimeUser[] = queryClient.getQueryData([
         "mainPage",
