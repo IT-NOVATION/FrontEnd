@@ -1,5 +1,5 @@
 import { IMutateProfileUpdate } from "@interfaces/user";
-import { BASE_URL, baseApi } from "./instance";
+import { baseApi } from "./instance";
 
 const GET_MOVIELOG_URI = "/movielog";
 const FOLLOW_URI = "/push/follow?targetUserId=";
