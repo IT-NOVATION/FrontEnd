@@ -17,11 +17,11 @@ const Keywords = [
   { idx: 6, title: "더 퍼스트 슬램덩크" },
 ];
 
-export default function Search() {
+export default function Search({ initialType }: { initialType: SearchType }) {
   const navigate = useNavigate();
 
   const [isOpen, setIsOpen] = useState<boolean>(false);
-  const [isSelected, setIsSelected] = useState<SearchType>("MOVIE");
+  const [isSelected, setIsSelected] = useState<SearchType>(initialType);
   const {
     isHovered: isUserHovered,
     handleHover: handleUserHover,
@@ -121,8 +121,6 @@ export default function Search() {
               </S.DropdownMenuWrapper>
             </>
 
-            {/* {SelectOption 파일 가져온 부분, 여기까지} */}
-
             <S.SearchInput
               placeholder={
                 isSelected === "USER"
@@ -170,21 +168,6 @@ export default function Search() {
             </S.KeywordsWrapper>
           </Block.RowBox>
         </Block.ColumnBox>
-        {/* 
-        {pathname === "/search-result" && (
-          <>
-            <Block.Bar width="900px" height="1px" bgColor="gray" /> */}
-
-        {/* {isSelected === "MOVIE" ? (
-              <MovieResult
-                word={word}
-                result={movieResultData && movieResultData}
-              />
-            ) : (
-              <UserResult word={word} result={userResultData} />
-            )}
-          </>
-        )} */}
       </Block.ColumnBox>
     </>
   );
