@@ -10,7 +10,7 @@ export const PageTitle = styled.h1`
 
 export const GoWriteReviewBox = styled.div`
   width: 100vw;
-  height: 105px;
+  height: 85px;
   position: absolute;
   top: 300px;
   left: 0;
