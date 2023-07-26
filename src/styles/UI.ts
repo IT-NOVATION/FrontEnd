@@ -251,8 +251,15 @@ type StyleBlock = {
   boxShadow?: string;
 };
 export const Block = {
+  AppWrapper: styled.div`
+    width: 100vw;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+  `,
   PageWrapper: styled.div<StyleBlock>`
     width: 100vw;
+    min-height: 100vh;
     height: auto;
     display: flex;
     flex-direction: column;
