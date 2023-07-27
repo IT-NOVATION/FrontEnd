@@ -11,6 +11,7 @@ export interface IReviewPreview {
   createdDate: string;
   reviewLikeCount: number;
   hasSpoiler: boolean;
+  commentCount?: number;
   movie?: {
     movieId: number;
     movieImg: string;
@@ -73,6 +74,7 @@ export interface IReadReview {
     watchDate: string;
     star: number;
     reviewLikeNum: number;
+    createdDate?: string;
   };
   movie: IReadReviewMovie;
   user: IReadReviewUser;

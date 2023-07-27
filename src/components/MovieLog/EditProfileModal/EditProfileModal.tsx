@@ -1,11 +1,13 @@
 import { Block, Button, Input, Text } from "@styles/UI";
 import * as S from "./style";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import theme from "@styles/theme";
 import ImageInput from "./ImageInput/ImageInput";
 import { IMovieLogUser } from "@interfaces/user";
 import { MovieLogApi } from "@apis/movieLogApi";
 import { useQueryClient } from "@tanstack/react-query";
+
+const MAX_INTRO_LENGTH = 40;
 
 type Props = {
   userProfile: IMovieLogUser;
@@ -19,6 +21,7 @@ function EditProfileModal({ userProfile, setIsEditing }: Props) {
   const [introduction, setIntroduction] = useState(
     userProfile.introduction as string
   );
+  const [introErrorMsg, setIntroErrorMsg] = useState(false);
   const [profileImg, setProfileImg] = useState(
     userProfile.profileImg as string
   );
@@ -51,10 +54,16 @@ function EditProfileModal({ userProfile, setIsEditing }: Props) {
     }
   };
 
+  useEffect(() => {
+    introduction.length > MAX_INTRO_LENGTH
+      ? setIntroErrorMsg(true)
+      : setIntroErrorMsg(false);
+  }, [introduction]);
+
   return (
     <Block.ColumnBox
       width="530px"
-      height="390px"
+      height="415px"
       borderRadius="20px"
       padding="19px"
       bgColor="white"
@@ -108,8 +117,14 @@ function EditProfileModal({ userProfile, setIsEditing }: Props) {
                 </Text.Body5>
               </Block.AbsoluteBox>
             </Block.FormInputSection>
-            <Block.RowBox margin="25px 0 0 0">
+            <Block.RowBox margin="25px 0 0 0" position="relative">
               <Text.Body4>한 줄 소개</Text.Body4>
+              <Block.AbsoluteBox left="3px" top="90px">
+                <Text.Body5 color="red">
+                  {introErrorMsg &&
+                    `한줄소개가 너무 깁니다. ${MAX_INTRO_LENGTH}글자 이내로 작성해주세요.`}
+                </Text.Body5>
+              </Block.AbsoluteBox>
             </Block.RowBox>
             <S.Textarea
               value={introduction}
@@ -117,7 +132,7 @@ function EditProfileModal({ userProfile, setIsEditing }: Props) {
             />
             <Block.RowBox
               width="100%"
-              margin="22px 0 0 0"
+              margin="35px 0 0 0"
               justifyContent="center"
               alignItems="center"
             >

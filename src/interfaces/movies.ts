@@ -29,6 +29,7 @@ export interface IMainPageMovie {
 export interface IWriteReviewMovie extends IMovieBase {
   title: string;
   movieImg: string;
+  releaseDate: string;
 }
 
 export interface IReadReviewMovie extends IMovieBase {
