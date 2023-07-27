@@ -2,7 +2,7 @@ import { IMutateProfileUpdate } from "@interfaces/user";
 import { baseApi } from "./instance";
 
 const GET_MOVIELOG_URI = "/movielog";
-const FOLLOW_URI = "/push/follow?targetUserId=";
+const FOLLOW_URI = "/push/follow";
 const MUTATE_PROFILE_UPDATE_URI = "/userProfile/me";
 
 export const MovieLogApi = {
