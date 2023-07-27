@@ -43,7 +43,7 @@ function MovieSearchContents({
     <Block.ColumnBox margin="0 0 70px 0 ">
       <S.Grid>
         {data?.pages.map((v, i) => (
-          <Suspense fallback={<div>Loading</div>}>
+          <Suspense fallback={<></>}>
             <MovieSearchPage key={i} v={v} i={i} />
           </Suspense>
         ))}

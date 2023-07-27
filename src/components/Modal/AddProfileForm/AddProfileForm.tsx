@@ -67,7 +67,7 @@ function AddProfileForm() {
         <Block.FormInputSection>
           <Input.FormInput
             {...register("introduction", {
-              maxLength: { value: 50, message: "한줄소개가 너무 깁니다" },
+              maxLength: { value: 40, message: "한줄소개가 너무 깁니다" },
               onChange: () => trigger("introduction"),
             })}
             placeholder="한줄 소개 (50자 이내)"

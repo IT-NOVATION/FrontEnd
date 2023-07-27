@@ -11,7 +11,6 @@ import { modalStateAtom } from "@recoil/modalAtom";
 import { useSetRecoilState } from "recoil";
 import theme from "@styles/theme";
 import ReviewPreview from "@components/ReviewPreviews/ReviewPreview/ReviewPreview";
-import { ILoginState } from "@interfaces/loginState";
 import { keywordsMap } from "./keywords";
 import useLoginState from "@hooks/useLoginState";
 
