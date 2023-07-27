@@ -72,7 +72,7 @@ function ReviewPreview({ review, user, isLast }: Props) {
               </Text.Body5>
             </Block.RowBox>
           </Block.RowBox>
-          <Block.RowBox position="relative" margin="5px 0 0 0">
+          <Block.RowBox margin="5px 0 0 0">
             <S.ReviewMainText hasSpoiler={review.hasSpoiler}>
               {cutReviewText(review.reviewMainText)}
             </S.ReviewMainText>
@@ -82,7 +82,7 @@ function ReviewPreview({ review, user, isLast }: Props) {
               </S.SpoilerText>
             )}
           </Block.RowBox>
-          <Block.AbsoluteBox bottom="0">
+          <Block.AbsoluteBox bottom="-10px">
             <Block.RowBox
               width="auto"
               justifyContent="flex-start"
@@ -92,13 +92,21 @@ function ReviewPreview({ review, user, isLast }: Props) {
               <Text.Body5 color="lightBlack">
                 {review.createdDate.replaceAll("-", ".")}
               </Text.Body5>
-              <Block.RowBox width="auto" margin="0 0 0 12px">
+              <Block.RowBox
+                width="auto"
+                margin="0 0 0 12px"
+                alignItems="center"
+              >
                 <img src="/icons/heart_purple.svg" alt="하트" />
                 <Text.Body5 color="lightBlack" margin="0 0 0 3px">
                   {review.reviewLikeCount}
                 </Text.Body5>
               </Block.RowBox>
-              <Block.RowBox width="auto" margin="0 0 0 12px">
+              <Block.RowBox
+                width="auto"
+                margin="0 0 0 12px"
+                alignItems="center"
+              >
                 <img src="/icons/message_purple.svg" alt="댓글" />
                 <Text.Body5 color="lightBlack" margin="0 0 0 3px">
                   {review.commentCount}
