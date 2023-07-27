@@ -4,6 +4,7 @@ import { IMovieTalkUser } from "@interfaces/user";
 import { useNavigate } from "react-router-dom";
 import { IMovieSearchMovie } from "@interfaces/movies";
 import cutMovieTitle from "@utils/cutMovieTitle";
+import { useQuery } from "@tanstack/react-query";
 
 function MovieSearchContent({
   movie,
@@ -16,9 +17,25 @@ function MovieSearchContent({
   const handlePosterClick = () => {
     navigate(`/singleMovie/${movie.movieId}`);
   };
+  const loadImage = async (src: string) =>
+    await new Promise((resolve, reject) => {
+      const img = new Image();
+      img.src = src;
+      img.onload = () => {
+        resolve(src);
+      };
+      img.onerror = (e) => {
+        reject(e);
+      };
+    });
+  const { data } = useQuery({
+    queryFn: () => loadImage(movie.movieImg),
+    queryKey: ["poster", movie.movieId],
+    suspense: true,
+  });
   return (
     <S.MovieContainer>
-      <S.Poster img={movie.movieImg} onClick={handlePosterClick}>
+      <S.Poster img={data as string} onClick={handlePosterClick}>
         {rank + 1 <= 10 && (
           <S.RankBadge>
             <S.RankText>{rank + 1}</S.RankText>
