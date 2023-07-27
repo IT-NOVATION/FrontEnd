@@ -152,14 +152,14 @@ export default function NavigationBar() {
                     </>
                   ) : (
                     <>
-                      <Button.Button
+                      <S.LoginBtn
                         onClick={handleLoginClick}
                         width="170px"
                         height="43px"
                         borderRadius="15px"
                       >
                         <Text.Body3 color="black">로그인 / 회원가입</Text.Body3>
-                      </Button.Button>
+                      </S.LoginBtn>
                     </>
                   )}
                 </Block.RowBox>

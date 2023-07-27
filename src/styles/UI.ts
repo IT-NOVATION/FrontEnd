@@ -146,6 +146,7 @@ type StyleButton = {
   opacity?: string;
   backdropFilter?: string;
   filter?: string;
+  boxShadow?: string;
 };
 
 export const Button = {
@@ -181,6 +182,7 @@ export const Button = {
     border-radius: ${(props) => props.borderRadius};
     margin: ${(props) => props.margin};
     backdrop-filter: ${(props) => props.backdropFilter};
+    box-shadow: ${(props) => props.boxShadow};
     cursor: pointer;
     &:active {
       transform: scale(1.09);
