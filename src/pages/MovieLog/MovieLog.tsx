@@ -17,6 +17,7 @@ import { ILoginState } from "@interfaces/loginState";
 import useFollow from "@hooks/useFollow";
 import { IMovieLogFollowUser } from "@interfaces/user";
 import useLoginState from "@hooks/useLoginState";
+import axios from "axios";
 
 type ContentType = "Reviews" | "InterestedMovies";
 export type FollowModalType = null | IFollowUser[];
@@ -99,6 +100,20 @@ function MovieLog() {
   const handleFollowingClick = () =>
     setFollowModal(movieLogData?.followings as IFollowUser[]);
 
+  const subscribe = async () =>
+    await axios
+      .get("http://localhost:8080/notifications/subscribe/2", {
+        headers: {
+          "Content-Type": "text/event-stream",
+          Authorization: `Bearer ${
+            localStorage.getItem("accessToken")
+              ? localStorage.getItem("accessToken")
+              : ""
+          }`,
+        },
+      })
+      .then((res) => console.log(res.data));
+  const handleSubscribe = async () => {};
   return (
     <>
       {movieLogData && (
@@ -190,6 +205,13 @@ function MovieLog() {
                       bgColor="white"
                       onClick={handleButtonClick}
                     >
+                      <Button.Button
+                        onClick={handleSubscribe}
+                        width="300px"
+                        height="300px"
+                      >
+                        구독
+                      </Button.Button>
                       프로필 편집
                     </Button.Button>
                   ) : (

@@ -15,3 +15,18 @@ const axiosConfig: AxiosRequestConfig = {
   },
 };
 export const baseApi = axios.create(axiosConfig);
+
+export const sse = new EventSource(
+  "http://localhost:8080/notifications/subscribe/2"
+);
+sse.addEventListener("connect", (e) => {
+  const { data: receivedConnectData } = e;
+  console.log("connect event data: ", receivedConnectData); // "connected!"
+});
+
+const subscribe = () =>
+  axios.get("http://localhost:8080/notifications/subscribe/2", {
+    headers: {
+      Accept: "text / event - stream",
+    },
+  });
