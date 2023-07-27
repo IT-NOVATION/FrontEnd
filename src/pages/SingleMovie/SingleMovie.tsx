@@ -189,7 +189,7 @@ export default function SingleMovie() {
                           </Text.Body4>
                         </S.GridRow>
                         <S.GridRow>
-                          <S.InfoText>장르</S.InfoText>
+                          <S.InfoText>개봉</S.InfoText>
                           <Text.Body4 color="white">
                             {singleMovie.movie.movieReleasedDate.replaceAll(
                               "-",
@@ -206,7 +206,7 @@ export default function SingleMovie() {
                         <S.GridRow>
                           <S.InfoText>출연</S.InfoText>
                           <Text.Body4 color="white">
-                            {singleMovie.movie.movieActor}
+                            {singleMovie.movie.movieActor.join(", ")}
                           </Text.Body4>
                         </S.GridRow>
                       </S.Grid>
