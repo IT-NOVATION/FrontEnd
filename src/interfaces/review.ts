@@ -74,6 +74,7 @@ export interface IReadReview {
     watchDate: string;
     star: number;
     reviewLikeNum: number;
+    createdDate?: string;
   };
   movie: IReadReviewMovie;
   user: IReadReviewUser;
