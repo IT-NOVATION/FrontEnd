@@ -112,7 +112,7 @@ export default function NavigationBar() {
                       src={
                         isSearchClick
                           ? "/icons/close.svg"
-                          : "/icons/search_dark.svg"
+                          : "/icons/search_white.svg"
                       }
                       onClick={handleSearchBtnClick}
                     />
@@ -124,8 +124,7 @@ export default function NavigationBar() {
                       <S.MovieLogBtn
                         width="107px"
                         height="43px"
-                        borderRadius="15px"
-                        bgColor="white"
+                        borderRadius="20px"
                         onClick={goToMovieLog}
                         margin="0 15px 0 0"
                         onMouseEnter={handleMovieLogMouseEnter}

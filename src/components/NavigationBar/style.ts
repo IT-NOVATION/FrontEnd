@@ -25,6 +25,7 @@ export const HomeLogo = styled.img`
 export const SearchLogo = styled.img`
   cursor: pointer;
   margin-right: 32px;
+  width: auto;
 `;
 export const AlarmLogo = styled.img`
   cursor: pointer;
@@ -34,9 +35,8 @@ export const AlarmLogo = styled.img`
 export const MovieLogBtn = styled(Button.Button)<{
   hovered: boolean;
 }>`
-  box-shadow: ${({ hovered }) =>
-    hovered && "0px 4px 4px 0px rgba(0, 0, 0, 0.25) inset"};
-  border: 1px solid #5f5f5f;
+  box-shadow: 3px 4px 2px 0px rgba(0, 0, 0, 0.1), 0px 4px 4px 0px #f6f6f6 inset;
+  background: rgba(255, 255, 255, 0.01);
 `;
 
 export const variants = {

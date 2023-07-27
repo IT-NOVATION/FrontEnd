@@ -101,7 +101,7 @@ function ReviewPreview({ review, user, isLast }: Props) {
               <Block.RowBox width="auto" margin="0 0 0 12px">
                 <img src="/icons/message_purple.svg" alt="댓글" />
                 <Text.Body5 color="lightBlack" margin="0 0 0 3px">
-                  0
+                  {review.commentCount}
                 </Text.Body5>
               </Block.RowBox>
             </Block.RowBox>

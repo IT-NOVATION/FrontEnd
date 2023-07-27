@@ -37,7 +37,7 @@ export default function ReadReview() {
                 {reviewData.movie.title}
               </Text.Body4>
               <Text.Body4 color="darkGray">
-                {reviewData.movie.movieReleaseDate}
+                {reviewData.review.createdDate}
               </Text.Body4>
             </Block.RowBox>
             <Block.RowBox margin="59px 0 0 0">

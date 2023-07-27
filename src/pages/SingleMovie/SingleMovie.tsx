@@ -11,11 +11,12 @@ import { modalStateAtom } from "@recoil/modalAtom";
 import { useSetRecoilState } from "recoil";
 import theme from "@styles/theme";
 import ReviewPreview from "@components/ReviewPreviews/ReviewPreview/ReviewPreview";
-import { ILoginState } from "@interfaces/loginState";
 import { keywordsMap } from "./keywords";
+import useLoginState from "@hooks/useLoginState";
 
 export default function SingleMovie() {
   const { movieId } = useParams();
+  const { loginState, userId } = useLoginState();
   const { data: singleMovie } = useQuery<ISingleMovie>({
     queryKey: ["movie", movieId],
     queryFn: () => SingleMovieApi.getSinglelMovie(Number(movieId)),
@@ -50,14 +51,10 @@ export default function SingleMovie() {
   } = useHovered();
 
   const navigate = useNavigate();
-
-  const queryClient = useQueryClient();
-  const loginState = queryClient.getQueryData<ILoginState>(["loginState"]);
-
   const setModalState = useSetRecoilState(modalStateAtom);
-
+  const queryClient = useQueryClient();
   const handleHeartCount = async () => {
-    if (loginState?.loginState === false) {
+    if (!loginState) {
       setModalState(1);
     } else
       try {
@@ -69,7 +66,7 @@ export default function SingleMovie() {
   };
 
   const goToWriteReview = () => {
-    if (loginState?.loginState === false) {
+    if (!loginState) {
       setModalState(1);
     } else navigate("/write-review/" + movieId);
   };
@@ -191,7 +188,7 @@ export default function SingleMovie() {
                           </Text.Body4>
                         </S.GridRow>
                         <S.GridRow>
-                          <S.InfoText>장르</S.InfoText>
+                          <S.InfoText>개봉</S.InfoText>
                           <Text.Body4 color="white">
                             {singleMovie.movie.movieReleasedDate.replaceAll(
                               "-",
@@ -208,7 +205,7 @@ export default function SingleMovie() {
                         <S.GridRow>
                           <S.InfoText>출연</S.InfoText>
                           <Text.Body4 color="white">
-                            {singleMovie.movie.movieActor}
+                            {singleMovie.movie.movieActor.join(", ")}
                           </Text.Body4>
                         </S.GridRow>
                       </S.Grid>
@@ -271,19 +268,15 @@ export default function SingleMovie() {
               <StarRating
                 avgStarScore={singleMovie.loginUserInfoDto.movieStar}
               />
-
               <S.Button
                 isHovered={isBtnHovered}
                 onMouseEnter={handleBtnHover}
                 onMouseLeave={handleBtnLeave}
+                onClick={goToWriteReview}
               >
                 <img src="/icons/brush.svg" alt="연필" />
 
-                <Block.RowBox
-                  width="90px"
-                  justifyContent="flex-end"
-                  onClick={goToWriteReview}
-                >
+                <Block.RowBox width="90px" justifyContent="flex-end">
                   <Text.Body1 color="white">리뷰 작성</Text.Body1>
                 </Block.RowBox>
               </S.Button>
