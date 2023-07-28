@@ -55,7 +55,7 @@ function EditProfileModal({ userProfile, setIsEditing }: Props) {
   };
 
   useEffect(() => {
-    introduction.length > MAX_INTRO_LENGTH
+    introduction && introduction.length > MAX_INTRO_LENGTH
       ? setIntroErrorMsg(true)
       : setIntroErrorMsg(false);
   }, [introduction]);
