@@ -47,7 +47,7 @@ function StarRating({ avgStarScore }: Props) {
   };
 
   useEffect(() => {
-    if (!scoreFixed) handleStar();
+    if (scoreFixed) handleStar();
   }, [scoreFixed]);
 
   return (
