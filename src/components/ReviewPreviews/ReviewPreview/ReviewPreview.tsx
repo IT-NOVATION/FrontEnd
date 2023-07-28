@@ -41,7 +41,7 @@ function ReviewPreview({ review, user, isLast }: Props) {
               justifyContent="center"
               margin="10px 0 0 0"
             >
-              <Text.Body1>{user?.nickname}</Text.Body1>
+              <Text.Body1>{user?.nickName}</Text.Body1>
             </Block.RowBox>
           </S.ProfileContainer>
         ) : (

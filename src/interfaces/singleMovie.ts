@@ -45,7 +45,8 @@ export interface ISingleMoviePageReview {
 
 export interface IUser {
   userId: number;
-  nickname: string;
+  nickname?: string;
+  nickName?: string;
   userProfileImg: string;
 }
 
