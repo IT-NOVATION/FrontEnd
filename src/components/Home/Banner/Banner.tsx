@@ -36,63 +36,61 @@ function Banner() {
 
   return (
     <S.Wrapper>
-      <Block.RowBox width="100vw" justifyContent="center">
-        <AnimatePresence initial={false} custom={direction} mode="popLayout">
-          {slide === 0 ? (
-            <S.SlideImg
-              variants={S.variants}
-              animate="animate"
-              initial="initial"
-              transition={{ type: "linear", duration: 0.5 }}
-              exit="exit"
-              img={IMG[0]}
-              key={slide}
-              custom={direction}
-              onAnimationStart={() => setIsAnimating(true)}
-              onAnimationComplete={() => setIsAnimating(false)}
-            />
-          ) : slide === 1 ? (
-            <S.SlideImg
-              variants={S.variants}
-              animate="animate"
-              initial="initial"
-              transition={{ type: "linear", duration: 0.5 }}
-              exit="exit"
-              img={IMG[1]}
-              key={slide}
-              onAnimationStart={() => setIsAnimating(true)}
-              onAnimationComplete={() => setIsAnimating(false)}
-              custom={direction}
-            />
-          ) : slide === 2 ? (
-            <S.SlideImg
-              variants={S.variants}
-              animate="animate"
-              initial="initial"
-              transition={{ type: "linear", duration: 0.5 }}
-              exit="exit"
-              img={IMG[2]}
-              key={slide}
-              onAnimationStart={() => setIsAnimating(true)}
-              onAnimationComplete={() => setIsAnimating(false)}
-              custom={direction}
-            />
-          ) : (
-            <S.SlideImg
-              variants={S.variants}
-              animate="animate"
-              initial="initial"
-              transition={{ type: "linear", duration: 0.5 }}
-              exit="exit"
-              img={IMG[3]}
-              key={slide}
-              onAnimationStart={() => setIsAnimating(true)}
-              onAnimationComplete={() => setIsAnimating(false)}
-              custom={direction}
-            />
-          )}
-        </AnimatePresence>
-      </Block.RowBox>
+      <AnimatePresence initial={false} custom={direction} mode="popLayout">
+        {slide === 0 ? (
+          <S.SlideImg
+            variants={S.variants}
+            animate="animate"
+            initial="initial"
+            transition={{ type: "linear", duration: 0.5 }}
+            exit="exit"
+            img={IMG[0]}
+            key={slide}
+            custom={direction}
+            onAnimationStart={() => setIsAnimating(true)}
+            onAnimationComplete={() => setIsAnimating(false)}
+          />
+        ) : slide === 1 ? (
+          <S.SlideImg
+            variants={S.variants}
+            animate="animate"
+            initial="initial"
+            transition={{ type: "linear", duration: 0.5 }}
+            exit="exit"
+            img={IMG[1]}
+            key={slide}
+            onAnimationStart={() => setIsAnimating(true)}
+            onAnimationComplete={() => setIsAnimating(false)}
+            custom={direction}
+          />
+        ) : slide === 2 ? (
+          <S.SlideImg
+            variants={S.variants}
+            animate="animate"
+            initial="initial"
+            transition={{ type: "linear", duration: 0.5 }}
+            exit="exit"
+            img={IMG[2]}
+            key={slide}
+            onAnimationStart={() => setIsAnimating(true)}
+            onAnimationComplete={() => setIsAnimating(false)}
+            custom={direction}
+          />
+        ) : (
+          <S.SlideImg
+            variants={S.variants}
+            animate="animate"
+            initial="initial"
+            transition={{ type: "linear", duration: 0.5 }}
+            exit="exit"
+            img={IMG[3]}
+            key={slide}
+            onAnimationStart={() => setIsAnimating(true)}
+            onAnimationComplete={() => setIsAnimating(false)}
+            custom={direction}
+          />
+        )}
+      </AnimatePresence>
 
       <S.Indicators>
         {IMG.map((_, idx) => {
