@@ -19,7 +19,7 @@ jobs:
       - name: Npm Install
         run: |
           npm install
-      - name: Generate Environment Variables File for Production
+      - name: Env 파일 추가
         run: |
           echo "REACT_APP_AWS_S3_BUCKET_REGION=$REACT_APP_AWS_S3_BUCKET_REGION" >> .env
           echo "REACT_APP_AWS_S3_BUCKET_ACCESS_KEY_ID=$REACT_APP_AWS_S3_BUCKET_ACCESS_KEY_ID" >> .env
