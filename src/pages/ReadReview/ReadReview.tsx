@@ -13,6 +13,7 @@ import DOMPurify from "dompurify";
 import Like from "@components/ReadReview/Like/Like";
 import UserInfo from "@components/ReadReview/UserInfo/UserInfo";
 import Comments from "@components/ReadReview/Comments/Comments";
+import { Helmet } from "react-helmet";
 
 export default function ReadReview() {
   const { reviewId } = useParams();
@@ -29,6 +30,9 @@ export default function ReadReview() {
       <Block.PageLayout>
         {reviewData && (
           <>
+            <Helmet>
+              <title>{reviewData.review.reviewTitle}</title>
+            </Helmet>
             <Block.RowBox margin="150px 0 0 0" justifyContent="flex-start">
               <S.Title>{reviewData.review.reviewTitle}</S.Title>
             </Block.RowBox>

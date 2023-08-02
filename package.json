@@ -21,6 +21,7 @@
     "quill-image-resize": "^3.0.9",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-helmet": "^6.1.0",
     "react-hook-form": "^7.43.9",
     "react-icons": "^4.8.0",
     "react-quill": "^2.0.0",
@@ -58,6 +59,7 @@
   "devDependencies": {
     "@craco/craco": "^7.1.0",
     "@craco/types": "^7.1.0",
+    "@types/react-helmet": "^6.1.6",
     "@types/styled-components": "^5.1.26"
   }
 }

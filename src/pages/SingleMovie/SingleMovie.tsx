@@ -13,6 +13,7 @@ import theme from "@styles/theme";
 import ReviewPreview from "@components/ReviewPreviews/ReviewPreview/ReviewPreview";
 import { keywordsMap } from "./keywords";
 import useLoginState from "@hooks/useLoginState";
+import { Helmet } from "react-helmet";
 
 export default function SingleMovie() {
   const { movieId } = useParams();
@@ -77,6 +78,9 @@ export default function SingleMovie() {
 
       {singleMovie && (
         <>
+          <Helmet>
+            <title>{singleMovie.movie.title}</title>
+          </Helmet>
           <Block.RowBox
             width="100%"
             height="450px"

@@ -4,11 +4,14 @@ import Banner from "@components/Home/Banner/Banner";
 import Posters from "@components/Home/Posters/Posters";
 import ReviewTime from "@components/Home/ReviewTime/ReviewTime";
 import { Block } from "@styles/UI";
-import { Suspense } from "react";
+import { Helmet } from "react-helmet";
 
 function Home() {
   return (
     <>
+      <Helmet>
+        <title>It's Movie Time</title>
+      </Helmet>
       <Block.PageLayout>
         <Block.PageWrapper>
           <Block.RowBox>
