@@ -21,11 +21,13 @@
     "quill-image-resize": "^3.0.9",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-helmet": "^6.1.0",
     "react-hook-form": "^7.43.9",
     "react-icons": "^4.8.0",
     "react-quill": "^2.0.0",
     "react-router-dom": "^6.10.0",
     "react-scripts": "5.0.1",
+    "react-snap": "^1.23.0",
     "recoil": "^0.7.7",
     "styled-components": "^5.3.10",
     "typescript": "^4.9.5",
@@ -35,7 +37,16 @@
     "start": "craco start",
     "build": "GENERATE_SOURCEMAP=false npx craco build",
     "test": "craco test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "postbuild": "react-snap"
+  },
+  "reactSnap": {
+    "include": [
+      "/",
+      "/movieSearch",
+      "/movieLog",
+      "/movieTalk"
+    ]
   },
   "eslintConfig": {
     "extends": [
@@ -58,6 +69,7 @@
   "devDependencies": {
     "@craco/craco": "^7.1.0",
     "@craco/types": "^7.1.0",
+    "@types/react-helmet": "^6.1.6",
     "@types/styled-components": "^5.1.26"
   }
 }

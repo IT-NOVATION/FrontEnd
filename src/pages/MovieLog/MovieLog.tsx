@@ -1,6 +1,6 @@
 import ProfileImg from "@components/User/ProfileImg/ProfileImg";
 import { Block, Text, Button } from "@styles/UI";
-import { useState } from "react";
+import { Suspense, useState } from "react";
 import * as S from "./style";
 import Movies from "@components/MovieLog/Movies/Movies";
 import EditProfileModal from "@components/MovieLog/EditProfileModal/EditProfileModal";
@@ -17,6 +17,7 @@ import { ILoginState } from "@interfaces/loginState";
 import useFollow from "@hooks/useFollow";
 import { IMovieLogFollowUser } from "@interfaces/user";
 import useLoginState from "@hooks/useLoginState";
+import { Helmet } from "react-helmet";
 
 type ContentType = "Reviews" | "InterestedMovies";
 export type FollowModalType = null | IFollowUser[];
@@ -25,7 +26,7 @@ function MovieLog() {
   const { userId } = useParams();
   const { userId: loginUserId, nickname, profileImg } = useLoginState();
   const queryClient = useQueryClient();
-  const { data: movieLogData } = useQuery<IMovieLogData>({
+  const { isFetched, data: movieLogData } = useQuery<IMovieLogData>({
     queryKey: ["movieLog", userId],
     queryFn: async () => {
       const response: IMovieLogData = await MovieLogApi.getMovieLog(
@@ -103,6 +104,15 @@ function MovieLog() {
     <>
       {movieLogData && (
         <>
+          <Helmet>
+            <title>{movieLogData?.nowUser.nickname}의 무비로그</title>
+            <meta name="author" content={movieLogData?.nowUser.nickname} />
+            <meta name="keywords" content="무비로그" />
+            <meta
+              name="description"
+              content={`${movieLogData?.nowUser.nickname}님의 취향을 확인해보세요`}
+            />
+          </Helmet>
           {/* 팔로우/팔로잉 모달 */}
           {followModal && (
             <Block.ColumnBox
