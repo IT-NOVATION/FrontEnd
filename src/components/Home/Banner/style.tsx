@@ -10,11 +10,11 @@ export const Wrapper = styled.div`
 `;
 
 export const SlideImg = styled(motion.div)<{ img: string }>`
-  width: 100vw;
+  width: 1920px;
   height: 480px;
   background-image: ${(props) => `url(${props.img})`};
   background-position: center;
-  background-size: 1920px 100%;
+  background-size: 1920px 480px;
 `;
 
 export const variants = {

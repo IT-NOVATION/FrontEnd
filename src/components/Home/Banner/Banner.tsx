@@ -1,9 +1,10 @@
-import { useState } from "react";
+import { Suspense, useLayoutEffect, useState } from "react";
 import * as S from "./style";
-import { AnimatePresence, useMotionValue } from "framer-motion";
-import { Block } from "@styles/UI";
+import { AnimatePresence } from "framer-motion";
 import React from "react";
 import useInterval from "@hooks/useFetchInterval";
+import { useQuery } from "@tanstack/react-query";
+import { loadImage } from "@utils/loadImage";
 
 const IMG = [
   "/images/banners/banner1.png",
@@ -29,6 +30,18 @@ function Banner() {
     }
     setSlide(idx);
   };
+
+  const imagePromise = async () =>
+    await Promise.all([
+      loadImage(IMG[0]),
+      loadImage(IMG[1]),
+      loadImage(IMG[2]),
+      loadImage(IMG[3]),
+    ]);
+
+  useLayoutEffect(() => {
+    imagePromise();
+  }, []);
 
   useInterval(() => {
     setSlide((prev) => (prev === IMG.length - 1 ? 0 : prev + 1));
