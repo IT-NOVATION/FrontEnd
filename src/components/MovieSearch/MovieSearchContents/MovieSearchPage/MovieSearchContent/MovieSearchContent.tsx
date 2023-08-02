@@ -1,10 +1,10 @@
 import * as S from "./style";
-import { Block, Button, Text } from "@styles/UI";
-import { IMovieTalkUser } from "@interfaces/user";
+import { Block, Text } from "@styles/UI";
 import { useNavigate } from "react-router-dom";
 import { IMovieSearchMovie } from "@interfaces/movies";
 import cutMovieTitle from "@utils/cutMovieTitle";
 import { useQuery } from "@tanstack/react-query";
+import { loadImage } from "@utils/loadImage";
 
 function MovieSearchContent({
   movie,
@@ -17,17 +17,7 @@ function MovieSearchContent({
   const handlePosterClick = () => {
     navigate(`/singleMovie/${movie.movieId}`);
   };
-  const loadImage = async (src: string) =>
-    await new Promise((resolve, reject) => {
-      const img = new Image();
-      img.src = src;
-      img.onload = () => {
-        resolve(src);
-      };
-      img.onerror = (e) => {
-        reject(e);
-      };
-    });
+
   const { data } = useQuery({
     queryFn: () => loadImage(movie.movieImg),
     queryKey: ["poster", movie.movieId],

@@ -5,7 +5,7 @@ export default function useInterval(callback: () => void, delay: number) {
   useLayoutEffect(() => {
     savedCallback.current = callback as any;
   }, [callback]);
-  useEffect(() => {
+  useLayoutEffect(() => {
     function tick() {
       savedCallback.current() as any;
     }
