@@ -8,6 +8,7 @@ import { useQuery } from "@tanstack/react-query";
 import { SearchResultApi } from "@apis/searchResultApi";
 import MovieResult from "@components/Search/MovieResult/MovieResult";
 import UserResult from "@components/Search/UserResult/UserResult";
+import { Helmet } from "react-helmet";
 
 type Params = {
   type: SearchType;
@@ -28,6 +29,9 @@ export default function SearchResult() {
   });
   return (
     <>
+      <Helmet>
+        <title>검색결과: {searchValue}</title>
+      </Helmet>
       <Block.ColumnBox width="100vw" alignItems="center">
         <Block.RowBox height="100%" padding="120px 0 0 0">
           <Search initialType={type} />
