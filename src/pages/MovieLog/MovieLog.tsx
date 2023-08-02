@@ -106,6 +106,12 @@ function MovieLog() {
         <>
           <Helmet>
             <title>{movieLogData?.nowUser.nickname}의 무비로그</title>
+            <meta name="author" content={movieLogData?.nowUser.nickname} />
+            <meta name="keywords" content="무비로그" />
+            <meta
+              name="description"
+              content={`${movieLogData?.nowUser.nickname}님의 취향을 확인해보세요`}
+            />
           </Helmet>
           {/* 팔로우/팔로잉 모달 */}
           {followModal && (

@@ -80,6 +80,8 @@ export default function SingleMovie() {
         <>
           <Helmet>
             <title>{singleMovie.movie.title}</title>
+            <meta name="keywords" content={singleMovie.movie.title} />
+            <meta name="description" content={singleMovie.movie.title} />
           </Helmet>
           <Block.RowBox
             width="100%"

@@ -24,6 +24,11 @@ export default function MovieTalk() {
     <>
       <Helmet>
         <title>무비토크</title>
+        <meta name="keywords" content="무비토크" />
+        <meta
+          name="description"
+          content="더 많은 이야기를 쓰고, 만나고, 발견해 보세요"
+        />
       </Helmet>
       <Block.PageWrapper>
         <Block.PageLayout>

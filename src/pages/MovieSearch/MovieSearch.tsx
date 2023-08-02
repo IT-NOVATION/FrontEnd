@@ -25,6 +25,11 @@ export default function MovieSearch() {
     <>
       <Helmet>
         <title>무비서치</title>
+        <meta name="keywords" content="무비서치" />
+        <meta
+          name="description"
+          content="잊고있었던 인생영화를 찾고 싶던 당신을 위한"
+        />
       </Helmet>
       <Block.PageWrapper>
         <Block.PageLayout>
