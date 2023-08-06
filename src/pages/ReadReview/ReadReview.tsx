@@ -32,6 +32,24 @@ export default function ReadReview() {
           <>
             <Helmet>
               <title>{reviewData.review.reviewTitle}</title>
+              <meta
+                name="description"
+                content={reviewData.review.reviewMainText.slice(0, 100)}
+              />
+              <meta
+                property="og:url"
+                content={`http://its-movietime.com/review/${reviewData.review.reviewId}`}
+              />
+              <meta
+                property="og:title"
+                content={reviewData.review.reviewTitle}
+              />
+              <meta property="og:type" content="website" />
+              <meta property="og:image" content={reviewData.movie.movieImg} />
+              <meta
+                property="og:description"
+                content={reviewData.review.reviewMainText.slice(0, 100)}
+              />
             </Helmet>
             <Block.RowBox margin="150px 0 0 0" justifyContent="flex-start">
               <S.Title>{reviewData.review.reviewTitle}</S.Title>
