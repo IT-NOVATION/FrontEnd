@@ -1,7 +1,7 @@
 import { MainPageApi } from "@apis/mainPageApi";
 import Footer from "@components/Footer/Footer";
 import Banner from "@components/Home/Banner/Banner";
-import Posters from "@components/Home/Posters/Posters";
+import Posters from "@components/Home/MovieTime/Posters";
 import ReviewTime from "@components/Home/ReviewTime/ReviewTime";
 import { Block } from "@styles/UI";
 import { Helmet } from "react-helmet";
