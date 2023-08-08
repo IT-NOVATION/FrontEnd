@@ -44,7 +44,7 @@ export default function ReadReview() {
                 property="og:title"
                 content={reviewData.review.reviewTitle}
               />
-              <meta property="og:type" content="website" />
+              <meta property="og:type" content="article" />
               <meta property="og:image" content={reviewData.movie.movieImg} />
               <meta
                 property="og:description"

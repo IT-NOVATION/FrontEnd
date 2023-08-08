@@ -20,7 +20,10 @@ function Home() {
         <meta property="og:title" content="It's Movie Time" />
         <meta property="og:type" content="website" />
         <meta property="og:image" content={`/icons/logo.svg`} />
-        <meta property="og:description" content="나만의 영화를 기록하는 시간" />
+        <meta
+          property="og:description"
+          content="It's Movie Time: 나만의 영화를 기록하는 시간"
+        />
       </Helmet>
       <Block.PageLayout>
         <Block.PageWrapper>

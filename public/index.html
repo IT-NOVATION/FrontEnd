@@ -41,8 +41,38 @@
 
     </style>
     <title>It's Movie Time</title>
+ 
   </head>
   <body>
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "ItemList",
+        "itemListElement": [
+          {
+            "@type": "SiteNavigationElement",
+            "position": "1",
+            "name": "홈",
+            "description": "나만의 영화를 기록하는 시간",
+            "url": "http://its-movietime.com",
+          },
+          {
+            "@type": "SiteNavigationElement",
+            "position": "2",
+            "name": "무비서치",
+            "description": "잊고 있었던 인생 영화를 찾고 싶은 당신을 위한",
+            "url": "http://its-movietime.com/movie-search",
+          },
+          {
+            "@type": "SiteNavigationElement",
+            "position": "3",
+            "name": "무비토크",
+            "description": "더 많은 이야기를 쓰고, 만나고, 발견해 보세요",
+            "url": "http://its-movietime.com/movieTalk",
+          },
+        ],
+      }
+    </script>
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root"></div>
     <div id="mobile">

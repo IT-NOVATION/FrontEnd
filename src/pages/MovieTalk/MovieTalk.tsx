@@ -29,6 +29,13 @@ export default function MovieTalk() {
           name="description"
           content="더 많은 이야기를 쓰고, 만나고, 발견해 보세요"
         />
+        <meta property="og:url" content="http://its-movietime.com/movieTalk" />
+        <meta property="og:title" content="무비토크" />
+        <meta property="og:type" content="article" />
+        <meta
+          property="og:description"
+          content="당신의 이야기가 보다 많은 사람에게 주목 받도록 더 많은 이야기를 쓰고, 만나고, 발견해 보세요"
+        />
       </Helmet>
       <Block.PageWrapper>
         <Block.PageLayout>

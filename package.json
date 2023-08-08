@@ -42,14 +42,8 @@
   },
   "reactSnap": {
     "include": [
-      "/",
-      "/movieSearch",
-      "/movieLog",
+      "/movie-search",
       "/movieTalk"
-    ],
-    "puppeteerArgs": [
-      "--no-sandbox",
-      "--disable-setuid-sandbox"
     ]
   },
   "eslintConfig": {
