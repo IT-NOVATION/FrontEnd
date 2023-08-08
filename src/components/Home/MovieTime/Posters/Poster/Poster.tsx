@@ -7,6 +7,8 @@ import cutMovieTitle from "@utils/cutMovieTitle";
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { IMovieSearchResult } from "@interfaces/movieResult";
+import { useQuery } from "@tanstack/react-query";
+import { loadImage } from "@utils/loadImage";
 
 type Props = {
   movie: IPopularMovie | IRecommendedMovie | IMovieSearchResult;
@@ -27,6 +29,11 @@ function Poster({ movie, rank, loadingFinished, onLoad }: Props) {
   const handleDetailClick = () => {
     navigate(`/singleMovie/${movie.movieId}`);
   };
+  const { data } = useQuery({
+    queryKey: ["poster", `${movie.movieId}`],
+    queryFn: () => loadImage(movie.movieImg),
+    suspense: true,
+  });
   return (
     <>
       <S.PosterContainer
@@ -34,7 +41,7 @@ function Poster({ movie, rank, loadingFinished, onLoad }: Props) {
         onMouseLeave={handleMouseLeave}
         loadingFinished={loadingFinished}
       >
-        <S.Image key={movie.movieId} src={movie.movieImg} onLoad={onLoad} />
+        <S.Image key={movie.movieId} src={data} onLoad={onLoad} />
         {hovered && (
           <S.HoveredPoster alignItems="center">
             <Text.Title5 margin="40px 0 0 0" color="white">

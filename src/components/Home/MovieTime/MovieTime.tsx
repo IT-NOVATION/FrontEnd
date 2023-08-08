@@ -5,9 +5,9 @@ import { AnimatePresence, motion } from "framer-motion";
 import { useQuery } from "@tanstack/react-query";
 import { MainPageApi } from "@apis/mainPageApi";
 import { IMainPageMovie } from "@interfaces/movies";
-import PostersContainer from "./PostersContainer/PostersContainer";
+import PostersContainer from "./Posters/Posters";
 
-function Posters() {
+function MovieTime() {
   const { data: movies, isError } = useQuery<IMainPageMovie>({
     queryKey: ["mainPage", "movies"],
     queryFn: MainPageApi.getMovies,
@@ -148,4 +148,4 @@ function Posters() {
     </Block.ColumnBox>
   );
 }
-export default Posters;
+export default MovieTime;

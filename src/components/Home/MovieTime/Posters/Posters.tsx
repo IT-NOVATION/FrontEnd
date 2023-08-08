@@ -1,6 +1,6 @@
 import { IPopularMovie, IRecommendedMovie } from "@interfaces/movies";
 import Poster from "./Poster/Poster";
-import { useEffect, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 import Loading from "@components/Home/Loading/Loading";
 
 type Props = {
@@ -27,16 +27,17 @@ function Posters({ movies, page }: Props) {
 
   return (
     <>
-      {!loadingFinished && <Loading />}
-      {movies.map((movie, idx) => (
-        <Poster
-          key={movie.movieId}
-          movie={movie}
-          rank={idx + 1 + Math.abs(page % 2) * 5}
-          loadingFinished={loadingFinished}
-          onLoad={() => handleLoaded(idx)}
-        />
-      ))}
+      <Suspense fallback={<Loading />}>
+        {movies.map((movie, idx) => (
+          <Poster
+            key={movie.movieId}
+            movie={movie}
+            rank={idx + 1 + Math.abs(page % 2) * 5}
+            loadingFinished={loadingFinished}
+            onLoad={() => handleLoaded(idx)}
+          />
+        ))}
+      </Suspense>
     </>
   );
 }
