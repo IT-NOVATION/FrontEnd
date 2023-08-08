@@ -9,22 +9,6 @@ type Props = {
 };
 
 function Posters({ movies, page }: Props) {
-  const [isLoading, setIsLoading] = useState(Array(5).fill(true));
-  const [loadingFinished, setLoadingFinished] = useState(false);
-  useEffect(() => {
-    if (isLoading.every((v) => v === false)) {
-      setLoadingFinished(true);
-    }
-  }, [isLoading]);
-
-  const handleLoaded = (idx: number) => {
-    setIsLoading((prev) => {
-      const temp = [...prev];
-      temp[idx] = false;
-      return temp;
-    });
-  };
-
   return (
     <>
       <Suspense fallback={<Loading />}>
@@ -33,8 +17,6 @@ function Posters({ movies, page }: Props) {
             key={movie.movieId}
             movie={movie}
             rank={idx + 1 + Math.abs(page % 2) * 5}
-            loadingFinished={loadingFinished}
-            onLoad={() => handleLoaded(idx)}
           />
         ))}
       </Suspense>

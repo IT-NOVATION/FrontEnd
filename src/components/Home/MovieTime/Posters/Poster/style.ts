@@ -1,13 +1,12 @@
-import styled, { keyframes } from "styled-components";
+import styled from "styled-components";
 import { Block } from "@styles/UI";
 
-export const PosterContainer = styled.div<{ loadingFinished: boolean }>`
+export const PosterContainer = styled.div`
   margin: 0 10px 0 10px;
   width: 200px;
   height: 280px;
   border-radius: 10px;
   position: relative;
-  display: ${({ loadingFinished }) => (loadingFinished ? "" : "none")};
 `;
 
 export const HoveredPoster = styled(Block.ColumnBox)`

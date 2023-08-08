@@ -6,6 +6,7 @@ import { useQuery } from "@tanstack/react-query";
 import { MainPageApi } from "@apis/mainPageApi";
 import { IMainPageMovie } from "@interfaces/movies";
 import PostersContainer from "./Posters/Posters";
+import useMovieTime from "@hooks/useMovieTimeAni";
 
 function MovieTime() {
   const { data: movies, isError } = useQuery<IMainPageMovie>({
@@ -14,32 +15,16 @@ function MovieTime() {
     suspense: true,
     retry: false,
   });
-  const [showPopular, setShowPopular] = useState(true);
-  const [[page, direction], setPage] = useState([0, 0]);
-  const [animate, setAnimate] = useState(false);
-  const handlePopularClick = () => {
-    setAnimate(false);
-    setPage([0, 0]);
-    setShowPopular(true);
-  };
-  const handleRecommendedClick = () => {
-    setAnimate(false);
-    setPage([0, 0]);
-    setShowPopular(false);
-  };
-  const paginate = (newDirection: number) => {
-    setPage([page + newDirection, newDirection]);
-    setAnimate(true);
-  };
-  const handleNextClick = () => {
-    paginate(1);
-  };
-  const handlePrevClick = () => {
-    paginate(-1);
-  };
-  useEffect(() => {
-    console.log(animate);
-  }, []);
+  const {
+    showPopular,
+    page,
+    direction,
+    animate,
+    handlePopularClick,
+    handleRecommendedClick,
+    handleNextClick,
+    handlePrevClick,
+  } = useMovieTime();
   return (
     <Block.ColumnBox
       height="500px"
@@ -103,27 +88,25 @@ function MovieTime() {
                   height="300px"
                   justifyContent="center"
                 >
-                  {showPopular
-                    ? movies && (
-                        <PostersContainer
-                          key={page + "popular"}
-                          movies={movies.popular.slice(
-                            Math.abs(page % 2) * 5,
-                            Math.abs(page % 2) * 5 + 5
-                          )}
-                          page={page}
-                        />
-                      )
-                    : movies && (
-                        <PostersContainer
-                          key={page + "recommended"}
-                          movies={movies.recommended.slice(
-                            Math.abs(page % 2) * 5,
-                            Math.abs(page % 2) * 5 + 5
-                          )}
-                          page={page}
-                        />
+                  {showPopular ? (
+                    <PostersContainer
+                      key={page + "popular"}
+                      movies={movies.popular.slice(
+                        Math.abs(page % 2) * 5,
+                        Math.abs(page % 2) * 5 + 5
                       )}
+                      page={page}
+                    />
+                  ) : (
+                    <PostersContainer
+                      key={page + "recommended"}
+                      movies={movies.recommended.slice(
+                        Math.abs(page % 2) * 5,
+                        Math.abs(page % 2) * 5 + 5
+                      )}
+                      page={page}
+                    />
+                  )}
                 </Block.RowBox>
               </AnimatePresence>
               <S.Icon

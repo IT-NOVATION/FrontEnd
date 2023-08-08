@@ -1,10 +1,9 @@
-import { Block, Button, Text } from "@styles/UI";
+import { Block, Text } from "@styles/UI";
 import * as S from "./style";
-import { Suspense, useState } from "react";
+import { useState } from "react";
 import { AiFillStar } from "react-icons/ai";
 import { IPopularMovie, IRecommendedMovie } from "@interfaces/movies";
 import cutMovieTitle from "@utils/cutMovieTitle";
-import React from "react";
 import { useNavigate } from "react-router-dom";
 import { IMovieSearchResult } from "@interfaces/movieResult";
 import { useQuery } from "@tanstack/react-query";
@@ -13,11 +12,9 @@ import { loadImage } from "@utils/loadImage";
 type Props = {
   movie: IPopularMovie | IRecommendedMovie | IMovieSearchResult;
   rank?: number;
-  loadingFinished: boolean;
-  onLoad: React.ReactEventHandler<HTMLImageElement>;
 };
 
-function Poster({ movie, rank, loadingFinished, onLoad }: Props) {
+function Poster({ movie, rank }: Props) {
   const navigate = useNavigate();
   const [hovered, setHovered] = useState(false);
   const handleMouseEnter = () => {
@@ -39,9 +36,8 @@ function Poster({ movie, rank, loadingFinished, onLoad }: Props) {
       <S.PosterContainer
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
-        loadingFinished={loadingFinished}
       >
-        <S.Image key={movie.movieId} src={data} onLoad={onLoad} />
+        <S.Image key={movie.movieId} src={data} />
         {hovered && (
           <S.HoveredPoster alignItems="center">
             <Text.Title5 margin="40px 0 0 0" color="white">
