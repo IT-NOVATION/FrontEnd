@@ -1,19 +1,37 @@
-import { IAccountInfo, IFindPassword } from "@interfaces/forms";
-import { REAL_BASE_URL, baseApi } from "./instance";
+import { IAccountInfo, IFindPassword } from '@interfaces/forms';
+import { REAL_BASE_URL, baseApi } from './instance';
+import { ILoginState } from '@interfaces/loginState';
 
-const SIGNUP_URI = "/signup";
-const ADD_PROFILE_URI = "/userProfile";
-const LOGIN_URI = "/login";
-const SEND_CODE_URI = "/passwordfind/emailSend";
-const CODE_CHECK_URI = "/passwordfind/finalCheck";
-const CHANGE_PW_URI = "/passwordfind/rewritePw";
-const LOGIN_STATE_URI = "/loginState";
-const LOGOUT_URI = "/custom-logout";
-export const GOOGLE_LOGIN_URI = `${REAL_BASE_URL}/oauth2/authorization/google`;
-export const NAVER_LOGIN_URI = `${REAL_BASE_URL}/oauth2/authorization/naver`;
-export const KAKAO_LOGIN_URI = `${REAL_BASE_URL}/oauth2/authorization/kakao`;
+const SIGNUP_URI = '/account/signup';
+const ADD_PROFILE_URI = '/user/profile';
+const LOGIN_URI = '/account/login';
+const SEND_CODE_URI = '/email/password-find/email-send';
+const CODE_CHECK_URI = '/email/password-find/final-check';
+const CHANGE_PW_URI = '/email/password-find/rewrite-pw';
+const LOGIN_STATE_URI = '/user/state';
+const LOGOUT_URI = '/account/custom-logout';
+const SOCIAL_BASE_URL = 'http://api.its-movietime.com';
+export const GOOGLE_LOGIN_URI = `${SOCIAL_BASE_URL}/oauth2/authorization/google`;
+export const NAVER_LOGIN_URI = `${SOCIAL_BASE_URL}/oauth2/authorization/naver`;
+export const KAKAO_LOGIN_URI = `${SOCIAL_BASE_URL}/oauth2/authorization/kakao`;
 
 export const AccountApi = {
+  useRefreshToken: async () =>
+    await baseApi
+      .get(LOGIN_STATE_URI, {
+        headers: {
+          'Authorization-refresh': `Bearer ${localStorage.getItem(
+            'refreshToken'
+          )}`,
+        },
+      })
+      .then((res) => res.data)
+      .then((data) => {
+        const [accessToken, refreshToken] = data;
+        localStorage.setItem('accessToken', accessToken);
+        localStorage.setItem('accessToken', accessToken);
+      }),
+
   signup: async (signupForm: IAccountInfo) =>
     await baseApi.post(SIGNUP_URI, signupForm),
   addProfile: async (profileForm: IAccountInfo) =>
@@ -34,15 +52,21 @@ export const AccountApi = {
     await baseApi
       .get(LOGIN_STATE_URI, {
         headers: {
-          Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+          Authorization: `Bearer ${
+            localStorage.getItem('accessToken')
+              ? localStorage.getItem('accessToken')
+              : ''
+          }`,
         },
       })
-      .then((res) => res.data),
+      .then((res) => res.data)
+      .catch((err) => AccountApi.useRefreshToken()),
+
   logout: async () =>
     await baseApi
       .get(LOGOUT_URI, {
         headers: {
-          Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+          Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
         },
       })
       .then((res) => res.data),
