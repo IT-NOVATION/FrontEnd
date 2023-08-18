@@ -32,9 +32,6 @@ jobs:
         continue-on-error: true
         run: |
           npm run build
-      - name: Npm Postbuild
-        run: |
-          npm run postbuild
       - name: Deploy to S3
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
