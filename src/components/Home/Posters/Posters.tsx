@@ -1,15 +1,15 @@
-import { Block, Text } from "@styles/UI";
-import { Suspense, useEffect, useState } from "react";
-import * as S from "./style";
-import { AnimatePresence, motion } from "framer-motion";
-import { useQuery } from "@tanstack/react-query";
-import { MainPageApi } from "@apis/mainPageApi";
-import { IMainPageMovie } from "@interfaces/movies";
-import PostersContainer from "./PostersContainer/PostersContainer";
+import { Block, Text } from '@styles/UI';
+import { Suspense, useEffect, useState } from 'react';
+import * as S from './style';
+import { AnimatePresence, motion } from 'framer-motion';
+import { useQuery } from '@tanstack/react-query';
+import { MainPageApi } from '@apis/mainPageApi';
+import { IMainPageMovie } from '@interfaces/movies';
+import PostersContainer from './PostersContainer/PostersContainer';
 
 function Posters() {
   const { data: movies, isError } = useQuery<IMainPageMovie>({
-    queryKey: ["mainPage", "movies"],
+    queryKey: ['mainPage', 'movies'],
     queryFn: MainPageApi.getMovies,
     suspense: true,
     retry: false,
@@ -37,9 +37,8 @@ function Posters() {
   const handlePrevClick = () => {
     paginate(-1);
   };
-  useEffect(() => {
-    console.log(animate);
-  }, []);
+  console.log(movies);
+
   return (
     <Block.ColumnBox
       height="500px"
@@ -83,7 +82,7 @@ function Posters() {
             <Block.RowBox alignItems="center" justifyContent="center">
               <S.Icon
                 onClick={handlePrevClick}
-                style={{ marginRight: "20px", cursor: "pointer", zIndex: "2" }}
+                style={{ marginRight: '20px', cursor: 'pointer', zIndex: '2' }}
                 src="/icons/MainPage/left_arrow.svg"
               />
               <AnimatePresence
@@ -98,7 +97,7 @@ function Posters() {
                   initial="enter"
                   animate="center"
                   exit="exit"
-                  transition={{ type: "linear", duration: animate ? 0.5 : 0 }}
+                  transition={{ type: 'linear', duration: animate ? 0.5 : 0 }}
                   width="1100px"
                   height="300px"
                   justifyContent="center"
@@ -106,7 +105,7 @@ function Posters() {
                   {showPopular
                     ? movies && (
                         <PostersContainer
-                          key={page + "popular"}
+                          key={page + 'popular'}
                           movies={movies.popular.slice(
                             Math.abs(page % 2) * 5,
                             Math.abs(page % 2) * 5 + 5
@@ -116,7 +115,7 @@ function Posters() {
                       )
                     : movies && (
                         <PostersContainer
-                          key={page + "recommended"}
+                          key={page + 'recommended'}
                           movies={movies.recommended.slice(
                             Math.abs(page % 2) * 5,
                             Math.abs(page % 2) * 5 + 5
@@ -128,7 +127,7 @@ function Posters() {
               </AnimatePresence>
               <S.Icon
                 onClick={handleNextClick}
-                style={{ marginLeft: "20px", cursor: "pointer", zIndex: "2" }}
+                style={{ marginLeft: '20px', cursor: 'pointer', zIndex: '2' }}
                 src="/icons/MainPage/right_arrow.svg"
               />
             </Block.RowBox>
