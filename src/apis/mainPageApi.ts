@@ -1,13 +1,17 @@
-import { baseApi } from "./instance";
+import { baseApi } from './instance';
 
-const GET_MOVIES_URI = "/movies/popularAndRecommend";
-const TODAY_REVIEWER_URI = "/today/topUser";
+const GET_MOVIES_URI = '/top/yesterday/user';
+const TODAY_REVIEWER_URI = '/movies/popular-and-recommend';
 export const MainPageApi = {
   getMovies: async () =>
     await baseApi
       .get(GET_MOVIES_URI, {
         headers: {
-          Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+          Authorization: `Bearer ${
+            localStorage.getItem('accessToken')
+              ? localStorage.getItem('accessToken')
+              : ''
+          }`,
         },
       })
       .then((res) => res.data),
@@ -15,7 +19,11 @@ export const MainPageApi = {
     await baseApi
       .get(TODAY_REVIEWER_URI, {
         headers: {
-          Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+          Authorization: `Bearer ${
+            localStorage.getItem('accessToken')
+              ? localStorage.getItem('accessToken')
+              : ''
+          }`,
         },
       })
       .then((res) => res.data),

@@ -1,8 +1,8 @@
-import { baseApi } from "./instance";
+import { baseApi } from './instance';
 
-const BEST_REVIEWS_URI = "/today/bestReview";
-const POPULAR_USERS_URI = "/today/popularUser";
-const LATEST_REVIEWS_URI = "/today/latestReview";
+const BEST_REVIEWS_URI = '/movie-talk/best-review';
+const POPULAR_USERS_URI = '/movie-talk/popular-user';
+const LATEST_REVIEWS_URI = '/movie-talk/latest-review';
 
 export const MovieTalkApi = {
   bestReviews: async () =>
