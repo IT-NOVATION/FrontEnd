@@ -1,11 +1,12 @@
-import * as S from "./style";
-import { IReviewPreview } from "@interfaces/review";
-import { Block, Text } from "@styles/UI";
-import theme from "@styles/theme";
-import cutReviewText from "@utils/cutReviewText";
-import { useLocation, useNavigate } from "react-router-dom";
-import { IUser } from "@interfaces/singleMovie";
-import ProfileImg from "@components/User/ProfileImg/ProfileImg";
+import * as S from './style';
+import { IReviewPreview } from '@interfaces/review';
+import { Block, Text } from '@styles/UI';
+import theme from '@styles/theme';
+import cutReviewText from '@utils/cutReviewText';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { IUser } from '@interfaces/singleMovie';
+import ProfileImg from '@components/User/ProfileImg/ProfileImg';
+import cutNickname from '@utils/cutNickname';
 
 type Props = {
   review: IReviewPreview;
@@ -21,14 +22,14 @@ function ReviewPreview({ review, user, isLast }: Props) {
     navigate(`/review/${reviewId}`);
   };
 
-  const singleMovie = pathname.includes("/single");
+  const singleMovie = pathname.includes('/single');
 
   return (
     <>
       <S.Wrapper isLast={isLast}>
         {singleMovie ? (
           <S.ProfileContainer>
-            {user?.userProfileImg === "" ? (
+            {user?.userProfileImg === null ? (
               <ProfileImg size="65px" />
             ) : (
               <Block.RowBox justifyContent="center">
@@ -41,7 +42,9 @@ function ReviewPreview({ review, user, isLast }: Props) {
               justifyContent="center"
               margin="10px 0 0 0"
             >
-              <Text.Body1>{user?.nickName}</Text.Body1>
+              {user?.nickName && (
+                <Text.Body1>{cutNickname(user.nickName)}</Text.Body1>
+              )}
             </Block.RowBox>
           </S.ProfileContainer>
         ) : (
@@ -90,7 +93,7 @@ function ReviewPreview({ review, user, isLast }: Props) {
               margin="0 0 24px 0"
             >
               <Text.Body5 color="lightBlack">
-                {review.createdDate.replaceAll("-", ".")}
+                {review.createdDate.replaceAll('-', '.')}
               </Text.Body5>
               <Block.RowBox
                 width="auto"
