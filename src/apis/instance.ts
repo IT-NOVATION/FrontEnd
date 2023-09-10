@@ -1,8 +1,7 @@
 import axios, { AxiosRequestConfig, AxiosResponse } from 'axios';
 import { AccountApi } from './accountApi';
 
-export const BASE_URL = 'http://localhost:8080';
-export const REAL_BASE_URL = 'http://api.its-movietime.com:8080/api/v1';
+export const REAL_BASE_URL = 'https://api.its-movietime.com/api/v1';
 
 const axiosConfig: AxiosRequestConfig = {
   baseURL: REAL_BASE_URL,
