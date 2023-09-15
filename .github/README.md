@@ -1,7 +1,8 @@
 # 🛠️ 사용기술
 
 - HTML/CSS, Typescript
-- React, npm
+- npm, webpack
+- React 18
 - Styled-components, Tanstack Query, React Hook Form, Recoil, React Router Dom, Framer-motion, Axios
 - AWS- S3, Cloudfront, Lambda
 - Figma, Discord, Notion
