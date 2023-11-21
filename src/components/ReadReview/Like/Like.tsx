@@ -1,14 +1,14 @@
-import { ReadReviewApi } from "@apis/readReviewApi";
-import * as S from "./style";
-import { Block, Button, Text } from "@styles/UI";
-import theme from "@styles/theme";
-import { useState } from "react";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
-import useLoginState from "@hooks/useLoginState";
-import { useSetRecoilState } from "recoil";
-import { ModalState, modalStateAtom } from "@recoil/modalAtom";
-import LikeList from "./LikeList/LikeList";
-import { IReadReview } from "@interfaces/review";
+import { ReadReviewApi } from '@apis/readReviewApi';
+import * as S from './style';
+import { Block, Button, Text } from '@styles/UI';
+import theme from '@styles/theme';
+import { useState } from 'react';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
+import useLoginState from '@hooks/useLoginState';
+import { useSetRecoilState } from 'recoil';
+import { ModalState, modalStateAtom } from '@recoil/modalAtom';
+import LikeList from './LikeList/LikeList';
+import { IReadReview } from '@interfaces/review';
 
 type Props = {
   reviewId: number;
@@ -25,7 +25,7 @@ export default function Like({
     mutationFn: () => ReadReviewApi.pushReviewLike(reviewId),
     onMutate: async () => {
       const prev: IReadReview = queryClient.getQueryData([
-        "review",
+        'review',
         `${reviewId}`,
       ]) as IReadReview;
       const updateData = () => {
@@ -55,7 +55,7 @@ export default function Like({
           };
         }
       };
-      queryClient.setQueryData(["review", `${reviewId}`], updateData());
+      queryClient.setQueryData(['review', `${reviewId}`], updateData());
     },
   });
   const queryClient = useQueryClient();
@@ -66,7 +66,7 @@ export default function Like({
   const mutateLike = async () => {
     try {
       await mutateReviewLike();
-      await queryClient.invalidateQueries(["review", `${reviewId}`]);
+      await queryClient.invalidateQueries(['review', `${reviewId}`]);
       setActivateAni(true);
     } catch (error) {
       console.log(error);
